@@ -8,4 +8,5 @@ urlpatterns = [
 
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^', include("center.urls")),
+    url(r'^manage/', include("manageApp.urls")),
 ]
