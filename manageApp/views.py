@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from manageApp.dataService.upload_file import FileUpload, list_files, delete_file
 from manageApp.dataService.deal_xls import read_xls
 from manageApp.dataService.JSON_serial import json_serial
-
+from manageApp.dataService.dataImport import  StatementViewImport
 # Create your views here.
 
 def login(request):
@@ -53,10 +53,17 @@ def files_action(request):
             filename =  request.POST.get("filename", "")
             result = delete_file(filename)
             return HttpResponse(json.dumps(result))
+        elif request.POST.get("action_type", "") == "update_statement":
+            filename = request.POST.get("filename", "")
+            result = StatementViewImport([filename]).import_files_to_statement_view()
+            result = result[0]
+            return HttpResponse(json.dumps(result))
         else:
-            return HttpResponse(json.dumps({"statue": 0}))
+            return HttpResponse(json.dumps({"statue": -1, "msg":""}))
     else:
         return render(request, "file_list.html", locals())
+
+
 
 @login_required(login_url="/manage/user-login/")
 def list_fils_json(request):

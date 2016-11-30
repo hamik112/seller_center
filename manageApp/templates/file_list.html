@@ -80,12 +80,18 @@
         singleSelect: false,
     {#    sidePagination: "server",#}
         columns: [{
+            field: "id",
+            title: 'id',
+            align: 'center',
+            valign: 'middle'
+        },{
             field: 'filename',
             title: '文件名',
             align: 'center',
             valign:'middle',
             formatter: function (value, row, index) {
-                filename = value.split("__")[2]
+                fvalue = value.split("__");
+                filename = fvalue[fvalue.length-1];
                 return filename;
             }
         },{
@@ -94,11 +100,13 @@
             align: 'center',
             valign: 'middle'
         },{
-            field: "statement更新",
+            field: "file_path",
             title: 'statement更新',
             align: 'center',
             valign: 'middle',
             formatter:function (value, row, index) {
+                filename = value.split("/");
+                filename = filename[filename.length-1].replace(" ","");
                 html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>更新</button>";
                 return html_str;
             }
@@ -141,10 +149,27 @@
     }
 
     function  statement_update_file(filename) {
-        post_dict = {"filename": filename,
+        var post_dict = {"filename": filename,
             "action_type": "update_statement",
             "csrfmiddlewaretoken": csrf_token};
         console.log(post_dict);
+        $.ajax({
+           url: "/manage/files-list/",
+            type: "POST",
+            data: post_dict,
+            dataType: "json",
+            success: function (sdata) {
+                console.log(sdata)
+                if (sdata.statue == '0'){
+                    alert("更新成功!");
+                }else{
+                    alert("更新失败, "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                alert("更新失败!" + edata.msg);
+            }
+        });
     }
     
     </script>

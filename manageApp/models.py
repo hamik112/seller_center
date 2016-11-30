@@ -28,6 +28,7 @@ class StatementView(models.Model):
     sales_tax_collected = models.CharField( max_length=20, default="0", null=False)
     selling_fees     = models.CharField( max_length=20, default="0", null=False)
     fba_fees         = models.CharField( max_length=20, default="0", null=False)
+    other_transaction_fees = models.CharField( max_length=20, default='0', null=False)
     other            = models.CharField( max_length=20, default="0", null=False)
     total            = models.CharField( max_length=20, default="0", null=False)
     store_name       = models.CharField( max_length=30, default="", null=False)
