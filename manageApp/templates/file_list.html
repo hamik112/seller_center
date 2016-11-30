@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block links %}
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+
+{% endblock %}
+
+
+{% block active_list %}
+                <li ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a>
+                </li>
+
+                <li class="active">
+                    <a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span>
+                    </a>
+                </li>
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>上传的文件列表</h5>
+
+                </div>
+                <div class="ibox-content">
+
+                    <div class="project-list">
+                        {% csrf_token %}
+                        <table class="table table-hover" id="list-files-table-id">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+{% block footer %}
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+
+<!-- Latest compiled and minified Locales -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
+
+    <script>
+    var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
+    $('#list-files-table-id').bootstrapTable({
+        url: '/manage/list-files-json/',
+        toolbar: '#toolbar', //工具按钮用哪个容器
+        search: true,
+        strictSearch: true,
+        showRefresh: true,
+        showToggle: true,
+        striped: true, //是否显示行间隔色
+    {#    cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）#}
+        sortable: true, //是否启用排序
+        sortOrder: "trade_id", //排序方式
+        pageNumber: 1, //初始化加载第一页，默认第一页
+        pageSize: 12, //每页的记录行数（*）
+        pageList: [20, 50, 100, 150], //可供选择的每页的行数（*）
+        dataType: "json",
+        queryParams: {"is_query": "1", "platform":'amazon'},
+        pagination: true,
+        singleSelect: false,
+    {#    sidePagination: "server",#}
+        columns: [{
+            field: 'filename',
+            title: '文件名',
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                filename = value.split("__")[2]
+                return filename;
+            }
+        },{
+            field: 'uploadtime',
+            title: '上传时间',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: "statement更新",
+            title: 'statement更新',
+            align: 'center',
+            valign: 'middle',
+            formatter:function (value, row, index) {
+                html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>更新</button>";
+                return html_str;
+            }
+        }, {
+            field: 'file_path',
+            title: "操作",
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                filename = value.split("/");
+                filename = filename[filename.length-1].replace(" ","");
+                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file(\'"+filename+"\');>删除</button>";
+                return htm_str;
+            }
+        }],
+    });
+
+
+    function  delete_file(filename) {
+        post_dict = {"filename": filename,
+            "action_type": "delete",
+            "csrfmiddlewaretoken": csrf_token};
+        $.ajax({
+            url: "/manage/files-list/",
+            type: "POST",
+            data: post_dict,
+            dataType: "json",
+            success: function (sdata) {
+                console.log(sdata);
+                if (sdata.statue == '0'){
+                    alert("删除文件成功!");
+                    location.reload();
+                }else{
+                    alert("删除文件失败: " + sdata.msg);
+                }
+            }, error: function (edata) {
+                alert("删除文件失败" + edata);
+            }
+        });
+    }
+
+    function  statement_update_file(filename) {
+        post_dict = {"filename": filename,
+            "action_type": "update_statement",
+            "csrfmiddlewaretoken": csrf_token};
+        console.log(post_dict);
+    }
+    
+    </script>
+
+
+{% endblock %}

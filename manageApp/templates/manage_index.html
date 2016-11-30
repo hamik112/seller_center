@@ -12,11 +12,11 @@
 
 
 
-{% block LinkList %}
-                <li class="active"><a href="#" v-link="{ path: '/product' }"><i class="fa fa-link"></i> <span>产品</span></a>
+{% block active_list %}
+                <li class="active"><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a>
                 </li>
 
-                <li><a href="#" v-link="{ path: '/listing' }"  class="J_pro"><i class="fa fa-link"></i> <span>listing</span></a></li>
+                <li><a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span></a></li>
 {% endblock %}
 
 
@@ -66,7 +66,6 @@
                 </div>
 
             </div>
-
 {% endblock %}
 
 

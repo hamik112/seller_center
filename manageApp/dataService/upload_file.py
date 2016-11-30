@@ -18,7 +18,7 @@ class FileUpload(object):
     def write_file(self):
         file_list = []
         for fileobj in self.fileobj_list:
-            fname = fileobj.name
+            fname = fileobj.name.replace(" ", "")
             if self.username:
                 filename = str(self.username) +"__"+ str(time.time()).replace(".","")+"__" + fname
             else:
@@ -38,3 +38,35 @@ class FileUpload(object):
             ufr.save()
         except Exception,e:
             print e
+
+
+
+
+def list_files(**params):
+
+    file_list = UploadFileRecorde.objects.filter().values()
+    return  list(file_list)
+    tmp_file_list = []
+    for fn in file_list:
+        tmp_dict = {}
+        tmp_dict["filename"] = fn.filename.split("__")[-1]
+        tmp_dict["file_path"] = fn.file_path
+        tmp_dict["upload_date"] = fn.uploadtime
+        tmp_file_list.append(tmp_dict)
+    return list(tmp_file_list)
+
+
+
+def delete_file(filename):
+    statue = 0
+    msg = ""
+    try:
+        ffile= UploadFileRecorde.objects.filter(filename=filename)
+        file_path = ffile[0].file_path
+        os.remove(file_path)
+        ffile.delete()
+    except Exception, e:
+        print "delete file error: %s" %(e)
+        msg = str(e)
+        statue = -1
+    return {"statue": statue, "msg": msg }
