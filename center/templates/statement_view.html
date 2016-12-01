@@ -2448,7 +2448,10 @@ amznJQ.available('jQuery', function() {
                     <div class="pDetailLineValue">
 
 
-                            <a href="https://sellercentral.amazon.com/gp/payments-account/settlement-summary.html?ie=UTF8&amp;groupId=20162769VolwcM1S0WNGmOQ3mVwAw"><span class="negative">-$11.37</span></a>
+                            <a href="https://sellercentral.amazon.com/gp/payments-account/settlement-summary.html?ie=UTF8&amp;groupId=20162769VolwcM1S0WNGmOQ3mVwAw">
+{#                                <span class="negative">-$11.37 {{ result_dict.unsuccessful_charges }}</span>#}
+                                <span class="negative">-${{ result_dict.unsuccessful_charges }}</span>
+                            </a>
                     </div>
                     <div class="pDetailLineKey">
                         <span id="sellerpayments_myp_carryoverDebt_contextualhelp" class="pHelpAnchor">Unsuccessful charges</span><div style="display:none" id="sellerpayments_myp_carryoverDebt_contextualhelp_Div_Id"><strong>Unsuccessful charges</strong><br><br><div>Negative balance carried over from your previous statement periods.</div></div>
@@ -2457,7 +2460,8 @@ amznJQ.available('jQuery', function() {
 		<div class="pDetailSubtotal">
                      Subtotal
 		     <span class="pDetailSubtotalValue">
-				  <span class="negative">-$11.37</span>
+{#				  <span class="negative">-$11.37 </span>#}
+                 <span class="negative">-${{ result_dict.seller_repayment }}</span>
 		     </span>
                 </div> 
      </div>
@@ -3635,3 +3639,7 @@ _uec(88435);
         });
       });
     </script><div style="z-index:-1;position:absolute;"></div></body></html>
+
+
+
+

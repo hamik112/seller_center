@@ -1,5 +1,7 @@
 # encoding:utf-8
 from django.shortcuts import render
+from center.dataService.statement_view_data import StatementViewData
+
 
 # Create your views here.
 
@@ -43,4 +45,5 @@ def date_range_reports(request):
 
 
 def statement_view(request):
+    result_dict = StatementViewData().test_return()
     return  render(request, 'statement_view.html', locals())

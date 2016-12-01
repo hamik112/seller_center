@@ -32,6 +32,7 @@ class FileUpload(object):
         return file_list
 
     def write_recorde(self, file_path, filename):
+        print filename
         write_dict = {"filename":filename, "file_path": file_path}
         ufr = UploadFileRecorde(**write_dict)
         try:
