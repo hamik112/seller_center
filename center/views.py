@@ -45,10 +45,17 @@ def all_statements(request):
 def date_range_reports(request):
     if request.method == "POST":
         print request.POST
+        result = StatementViewData(request.POST).statement_data_read()
         return HttpResponse(json.dumps({}))
     return  render(request, "data_range_reports.html", locals())
 
 
 def statement_view(request):
-    result_dict = StatementViewData().test_return()
+    result_dict = StatementViewData(request.GET).test_return()
     return  render(request, 'statement_view.html', locals())
+
+
+
+
+def pdf_file_view(request):
+    return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())

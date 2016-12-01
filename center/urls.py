@@ -15,4 +15,6 @@ urlpatterns = patterns('',
             url(r'orders/$', 'center.views.orders', name='orders'),
             url(r'advertising/$', 'center.views.advertising', name='advertising'),
             url(r'performance/$', 'center.views.performance', name='performance'),
+
+            url(r'summary-pdf/$', 'center.views.pdf_file_view', name='pdf_file_view'),
                       )

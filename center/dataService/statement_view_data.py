@@ -6,10 +6,19 @@ from manageApp.models import StatementView
 
 
 class StatementViewData(object):
-    def __init__(self):
+    def __init__(self, post_dict):
+        self.post_dict = post_dict
         pass
 
+
+
     def statement_data_read(self):
+        if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf
+
+            pass
+        elif self.post_dict.get("reportType", "") == "Transaction":   #导出表格
+
+            pass
         statement_list = StatementView.objects.filter()
         return list(statement_list.values())
 
@@ -26,5 +35,6 @@ class StatementViewData(object):
                 "product_charges": "0.6",
                 "product_charges_subtotal": "0.7"
                 }
+
 
 

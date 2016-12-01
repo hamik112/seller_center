@@ -36,22 +36,29 @@ class StatementViewImport(object):
                 value_list = dt.get("values", [])
                 break
         header_list = value_list[7]
-        need_header_list = ['date/time', 'settlement id', 'type', 'order id','sku', 'description', 'quantity',
+        need_header_list = ['date_time', 'settlement id', 'type', 'order id','sku', 'description', 'quantity',
                             'marketplace','fulfillment', 'order city','order state','order postal',
                             'product sales', "shipping credits", "gift wrap credits", "promotional rebates",
                             "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                             "other", "total", u"店铺"]
-        header_dict = {}.fromkeys(need_header_list, "")
-        for name in header_list:
+        header_dict = {}
+        for name in need_header_list:
             try:
-                header_dict[name] = header_list.index(name)
+                if name == "date_time":
+                    header_dict[name] = header_list.index("date/time")
+                else:
+                    header_dict[name] = header_list.index(name)
             except Exception,e :
                 return {"statue": -1, "msg": u"没有找到字段:%s" % str(name)}
+        print header_dict
         for data_line in value_list[8:]:
             tmp_dict = {}
             for name in need_header_list:
                 if name == u"店铺" or name == "店铺":
                     tmp_dict["store_name"] = data_line[header_dict.get(name)]
+                elif name == "date_time":
+                    print name , header_dict.get("date_time")
+                    tmp_dict["date_time"] = data_line[header_dict.get("date_time")]
                 else:
                     dict_name = name.replace(" ", "_")
                     tmp_dict[dict_name] = data_line[header_dict.get(name)]
@@ -61,5 +68,4 @@ class StatementViewImport(object):
             except Exception, e:
                 return {"statue": -1, "msg": str(e)}
         return {"statue":0, "msg":""}
-
 

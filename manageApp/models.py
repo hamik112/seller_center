@@ -32,7 +32,7 @@ class StatementView(models.Model):
     marketplace     =  models.CharField( max_length=20, default="", null=False)
     fulfillment     =  models.CharField( max_length=20, default="", null=False)
     order_city      =  models.CharField( max_length=20, default="", null=False)
-    order_state     =  models.CharField( max_length=10, default="", null=False)
+    order_state     =  models.CharField( max_length=30, default="", null=False)
     order_postal    =  models.CharField( max_length=10, default="", null=False)
 
     product_sales   =  models.CharField( max_length= 20, default="0", null=False)
