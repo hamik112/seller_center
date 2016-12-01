@@ -36,7 +36,9 @@ class StatementViewImport(object):
                 value_list = dt.get("values", [])
                 break
         header_list = value_list[7]
-        need_header_list = ['product sales', "shipping credits", "gift wrap credits", "promotional rebates",
+        need_header_list = ['date/time', 'settlement id', 'type', 'order id','sku', 'description', 'quantity',
+                            'marketplace','fulfillment', 'order city','order state','order postal',
+                            'product sales', "shipping credits", "gift wrap credits", "promotional rebates",
                             "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                             "other", "total", u"店铺"]
         header_dict = {}.fromkeys(need_header_list, "")

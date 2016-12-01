@@ -21,6 +21,20 @@ class UploadFileRecorde(models.Model):
 
 class StatementView(models.Model):
     id              =  models.AutoField( primary_key=True, null=False)
+    date_time    =  models.CharField( max_length=30, default="", null=False)
+
+    settlement_id   =  models.CharField( max_length=30, default="", null=False)
+    type            =  models.CharField( max_length=20, default="", null=False)
+    order_id        =  models.CharField( max_length=20, default="", null=False)
+    sku             =  models.CharField( max_length=20, default="", null=False)
+    description     =  models.CharField( max_length=200, default="", null=False)
+    quantity        =  models.CharField( max_length=10 , default="", null=False)
+    marketplace     =  models.CharField( max_length=20, default="", null=False)
+    fulfillment     =  models.CharField( max_length=20, default="", null=False)
+    order_city      =  models.CharField( max_length=20, default="", null=False)
+    order_state     =  models.CharField( max_length=10, default="", null=False)
+    order_postal    =  models.CharField( max_length=10, default="", null=False)
+
     product_sales   =  models.CharField( max_length= 20, default="0", null=False)
     shipping_credits = models.CharField( max_length=20 , default="0", null=False)
     gift_wrap_credits= models.CharField( max_length=20, default="0", null=False)

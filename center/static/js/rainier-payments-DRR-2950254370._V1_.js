@@ -1,3 +1,4 @@
+var csrf_token = document.getElementsByName("csrfmiddlewaretoken");
 Date.CultureInfo = {
     name: "en-US",
     englishName: "English (United States)",
@@ -1715,6 +1716,7 @@ $.datepicker.regional["zh-CN"] = {
         $("#drrScheduleEndDate").datepicker("setDate", "");
     }
     function alertPopover(message, parameters) {
+        console.log(parameters)
         var popoverParams = {
             width: 350,
             position: "over",
@@ -1724,9 +1726,11 @@ $.datepicker.regional["zh-CN"] = {
         };
         if (null != parameters) {
             popoverParams["onHide"] = function() {
-                jQuery.post("/gp/payments-account/generate-date-range-report.html", parameters,
+                // jQuery.post("/gp/payments-account/generate-date-range-report.html", parameters,
+                jQuery.post("/date-range-reports/", parameters,
                 function(data) {
-                    window.location.reload();
+                    // window.location.reload();
+                    console.log("reload ...");
                 });
             };
         }
@@ -2276,7 +2280,9 @@ amznJQ.declareAvailable("date-range-report");
 jQuery(document).ready(function() {
     jQuery(".regenerateDateRangeButton").click(function() {
         jQuery(this).replaceWith(jQuery(".progressText").html());
-        jQuery.post("/gp/payments-account/generate-date-range-report.html", {
+        // jQuery.post("/gp/payments-account/generate-date-range-report.html", {
+        jQuery.post("/date-range-reports/", {
+            csrfmiddlewaretoken: csrf_token,
             reportRequestId: jQuery(this).attr("reportRequestId"),
             startDate: jQuery(this).attr("startDate"),
             endDate: jQuery(this).attr("endDate"),
@@ -2288,7 +2294,9 @@ jQuery(document).ready(function() {
     });
     jQuery(".cancelDateRangeLink").click(function() {
         jQuery("#" + jQuery(this).attr("reportRequestId")).replaceWith(jQuery(".cancelledText").html());
-        jQuery.post("/gp/payments-account/generate-date-range-report.html", {
+        // jQuery.post("/gp/payments-account/generate-date-range-report.html", {
+        jQuery.post("/date-range-reports/", {
+            csrfmiddlewaretoken: csrf_token,
             reportRequestId: jQuery(this).attr("reportRequestId"),
             startDate: jQuery(this).attr("startDate"),
             endDate: jQuery(this).attr("endDate"),

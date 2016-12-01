@@ -1,7 +1,8 @@
 # encoding:utf-8
-from django.shortcuts import render
+import  json
+from django.shortcuts import render, HttpResponse
 from center.dataService.statement_view_data import StatementViewData
-
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 
@@ -40,7 +41,11 @@ def all_statements(request):
     return render(request, 'all_statements.html', locals())
 
 
+@csrf_exempt
 def date_range_reports(request):
+    if request.method == "POST":
+        print request.POST
+        return HttpResponse(json.dumps({}))
     return  render(request, "data_range_reports.html", locals())
 
 

@@ -990,7 +990,8 @@ function() {
         $("button[name=Cancel]").hide();
         $('button[name="Submit payment"]').hide();
         var funct = function() {
-            jQuery.post("/gp/payments-account/submit-payment.html", {
+            // jQuery.post("/gp/payments-account/submit-payment.html", {
+            jQuery.post("/date-range-reports/", {
                 paymentInstrumentId: $paymentInstrumentId,
                 amount: $otherAmountValue
             },
