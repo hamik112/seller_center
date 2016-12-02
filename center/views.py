@@ -1,5 +1,7 @@
 # encoding:utf-8
 import  json
+
+
 from django.shortcuts import render, HttpResponse
 from center.dataService.statement_view_data import StatementViewData
 from django.views.decorators.csrf import csrf_exempt
@@ -45,13 +47,16 @@ def all_statements(request):
 def date_range_reports(request):
     if request.method == "POST":
         print request.POST
-        result = StatementViewData(request.POST).statement_data_read()
-        return HttpResponse(json.dumps({}))
-    return  render(request, "data_range_reports.html", locals())
+        result = StatementViewData(request).request_report()
+        return HttpResponse(json.dumps(result))
+    else:
+        recorde_list = StatementViewData(request).statement_data_read()
+        print recorde_list
+        return  render(request, "data_range_reports.html", locals())
 
 
 def statement_view(request):
-    result_dict = StatementViewData(request.GET).test_return()
+    result_dict = StatementViewData(request).test_return()
     return  render(request, 'statement_view.html', locals())
 
 
@@ -59,3 +64,6 @@ def statement_view(request):
 
 def pdf_file_view(request):
     return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
+
+
+

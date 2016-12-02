@@ -1602,6 +1602,7 @@ $.datepicker.regional["zh-CN"] = {
                     if ($rangeType === "Custom") {
                         var startDateLimit = 1325289600;
                         $startDate = $("#drrReportStartDate").datepicker("getDate");
+                        console.log($startDate)
                         $endDate = $("#drrReportEndDate").datepicker("getDate");
                         if ((validateEmptyOrUndefined($startDate) || validateEmptyOrUndefined($endDate)) && validateEmptyOrUndefined($reportType)) {
                             reportRangeError(DRR.strings.selectReportTypeValidation + "\n" + DRR.strings.selectCustomDateRangeValidation);
@@ -1729,7 +1730,7 @@ $.datepicker.regional["zh-CN"] = {
                 // jQuery.post("/gp/payments-account/generate-date-range-report.html", parameters,
                 jQuery.post("/date-range-reports/", parameters,
                 function(data) {
-                    // window.location.reload();
+                    window.location.reload();
                     console.log("reload ...");
                 });
             };
