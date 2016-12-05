@@ -169,11 +169,11 @@
                 if (sdata.statue == '0'){
                     showBody();
                     alert("删除文件成功!");
-                    location.reload();
                 }else{
                     showBody();
                     alert("删除文件失败: " + sdata.msg);
                 }
+                location.reload();
             }, error: function (edata) {
                 showBody();
                 alert("删除文件失败" + edata);

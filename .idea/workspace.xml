@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/dataService/dataImport.py" afterPath="$PROJECT_DIR$/manageApp/dataService/dataImport.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/dataService/upload_file.py" afterPath="$PROJECT_DIR$/manageApp/dataService/upload_file.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/templates/file_list.html" afterPath="$PROJECT_DIR$/manageApp/templates/file_list.html" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="upload_file.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="upload_file.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manageApp/dataService/upload_file.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="73" column="72" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+            <state relative-caret-position="457">
+              <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
               <folding />
             </state>
           </provider>
@@ -110,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="file_list.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="file_list.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manageApp/templates/file_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="736">
-              <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+            <state relative-caret-position="376">
+              <caret line="175" column="34" selection-start-line="175" selection-start-column="34" selection-end-line="175" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -178,9 +176,9 @@
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
         <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/center/dataService/create_xls.py" />
-        <option value="$PROJECT_DIR$/manageApp/templates/file_list.html" />
         <option value="$PROJECT_DIR$/manageApp/dataService/dataImport.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/upload_file.py" />
+        <option value="$PROJECT_DIR$/manageApp/templates/file_list.html" />
       </list>
     </option>
   </component>
@@ -1029,14 +1027,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manageApp/templates/file_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="183" column="0" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manageApp/dataService/dataImport.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="677">
@@ -1065,8 +1055,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manageApp/dataService/upload_file.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="73" column="72" selection-start-line="73" selection-start-column="72" selection-end-line="73" selection-end-column="72" />
+        <state relative-caret-position="457">
+          <caret line="71" column="19" selection-start-line="71" selection-start-column="19" selection-end-line="71" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/manageApp/templates/file_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="376">
+          <caret line="175" column="34" selection-start-line="175" selection-start-column="34" selection-end-line="175" selection-end-column="34" />
           <folding />
         </state>
       </provider>
