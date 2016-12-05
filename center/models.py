@@ -16,7 +16,8 @@ class GenerateReport(models.Model):
     month             =  models.CharField( max_length= 100, default="", null=False)     #月份
     timeRange         =  models.CharField( max_length=50, default="", null=False)
 
-    request_date      = models.DateTimeField(default=timezone.now())
+    # request_date      = models.DateTimeField(default=timezone.now())
+    request_date      =  models.CharField( max_length= 50, default="", null=False)
     action_statue     =  models.CharField( max_length= 20, default=0, null=False)
 
 

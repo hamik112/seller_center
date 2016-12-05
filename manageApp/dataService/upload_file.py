@@ -23,7 +23,7 @@ class FileUpload(object):
                 filename = str(self.username) +"__"+ str(time.time()).replace(".","")+"__" + fname
             else:
                 filename = str(time.time()).replace(".","")+"_" + fname
-            file_path = os.path.join(UPLOAD_PATH, filename)
+            file_path = os.path.join(get_path(UPLOAD_PATH), filename)
             with open(file_path, "wb+") as f:
                 for chunk in fileobj.chunks():
                     f.write(chunk)
@@ -58,6 +58,7 @@ def list_files(**params):
 
 
 
+
 def delete_file(filename):
     statue = 0
     msg = ""
@@ -71,3 +72,31 @@ def delete_file(filename):
         msg = str(e)
         statue = -1
     return {"statue": statue, "msg": msg }
+
+
+
+
+
+def get_path(root_path):
+    one_p_num = 1000
+    two_p_num = 200
+    i, j= 0, 0
+    while True:
+        one_path = os.path.join(root_path, str(i))
+        if not os.path.exists(one_path):
+            os.mkdir(one_path)
+        if len(os.listdir(one_path)) >= one_p_num:
+            i += 1
+            one_path = os.path.join(root_path, str(i))
+            if not os.path.exists(one_path):
+                os.mkdir(one_path)
+            else:
+                continue
+        else:
+            two_path = os.path.join(one_path, str(j))
+            if not os.path.exists(two_path):
+                os.mkdir(two_path)
+            if len(os.listdir(two_path)) >= two_p_num:
+                j+= 1
+            else:
+                return two_path

@@ -70,8 +70,9 @@ class StatementViewData(object):
             timeRange = str(current_month.get("day_begin", "")) + str(current_month.get("day_end", ""))
         else:
             timeRange = ""
+        request_date = datetime.datetime.now().strftime("%a %m, %Y")
         recorde_dict = {"reportType": reportType, "year": year, "is_custom": "custom", "timeRange": timeRange,
-                        "timeRangeType": timeRangeType, "month": month, "action_statue": 0}
+                        "timeRangeType": timeRangeType, "month": month, "action_statue": 0,"request_date":request_date}
         return_id = -1
         print "recorde_dict: ", recorde_dict
         gr = GenerateReport(**recorde_dict)
@@ -93,9 +94,10 @@ class StatementViewData(object):
 
     def get_current_month_day(self):
         day_now = time.localtime()
-        day_begin = '%d-%02d-01' % (day_now.tm_year, day_now.tm_mon)  # 月初肯定是1号
+        # day_begin = '%d-%02d-01' % (day_now.tm_year, day_now.tm_mon)  # 月初肯定是1号
+        day_begin = '%02d 1,%d' % (day_now.tm_mon, day_now.tm_year)  # 月初肯定是1号
         wday, monthRange = calendar.monthrange(day_now.tm_year, day_now.tm_mon)  # 得到本月的天数 第一返回为月第一日为星期几（0-6）, 第二返回为此月天数
-        day_end = '%d-%02d-%02d' % (day_now.tm_year, day_now.tm_mon, monthRange)
+        day_end = '%02d %02d,%d' % (day_now.tm_mon, monthRange, day_now.tm_year)
         return  {"day_begin": day_begin, "day_end": day_end}
 
 
