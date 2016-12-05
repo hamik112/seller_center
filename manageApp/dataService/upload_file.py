@@ -70,6 +70,8 @@ def delete_file(filename):
         print "delete file error: %s" %(e)
         msg = str(e)
         statue = -1
+        if "No such file or directory:" in str(e):
+            UploadFileRecorde.objects.filter(filename=filename).delete()
     return {"statue": statue, "msg": msg }
 
 

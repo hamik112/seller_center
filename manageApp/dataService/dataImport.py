@@ -38,9 +38,12 @@ class StatementViewImport(object):
             f_name = ""
             return {"statue":-1, "msg": "文件名错误!"}
         for dt in datas:
+            print "sheet name:", dt.get("name", "").replace(" ", ""), f_name.split(".")[0].replace(" ", "")
             if dt.get("name", "").lower() == "sheet1" or dt.get("name", "").lower() == "template" or dt.get("name", "").replace(" ","") == f_name.split(".")[0].replace(" ",""):
                 value_list = dt.get("values", [])
                 break
+        if not value_list:
+            return {"statue": -1, "msg": "表格无数据或请查看sheet名称是否正确"}
         header_list = value_list[7]
         need_header_list = ['date_time', 'settlement id', 'type', 'order id','sku', 'description', 'quantity',
                             'marketplace','fulfillment', 'order city','order state','order postal',
