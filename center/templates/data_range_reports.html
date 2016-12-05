@@ -2388,10 +2388,23 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
     {% for line in recorde_list %}
 
         <tr data-type="Monthly">
-            <td>{{ line.timeRangeType }} &nbsp; {{ line.reportType }} &nbsp;  Report &nbsp;  for &nbsp; {{ line.timeRange }}</td>
+            <td>{{ line.is_custom }}&nbsp;{{ line.reportType }}&nbsp;Report&nbsp;{{ line.timeRange }}</td>
             <td data-sort-date="2016/8/5">{{ line.request_date }}</td>
             <td data-sort-date="2016/5/1">{{ line.timeRange }}</td>
-            <td><div><span id="2016336s8PjZHd-QXexqVhAk2u4kA">Scheduled <span class="cancelDateRangeLink" reportrequestid="2016336s8PjZHd-QXexqVhAk2u4kA" timerangetype="Monthly" startdate="1477983600" month="11" year="2016" enddate="1480579199" reporttype="Transaction" rgfpublishinglogid="2016336ifvL7AY4TB27DSUAaLTwqA"><a href="#" class="cancelDRLink">Cancel</a></span></span><span class="cancelledText" style="display:none">Cancelled</span></div></td>
+            {% if line.action_statue == "1" %}
+                <td>
+                    <div>
+                    <a class="buttonImage" name="Download" href="/download-file/?file_name={{ line.report_file_path }}{% if line.reportType == 'Summary' %}&file_type=octet-stream{% else %}&file_type=vnd.ms-excel{% endif %}"><span class="awesomeButton buttonLarge primaryLargeButton inner_button"><span class="button_label">Download</span></span>
+                    </a>
+                    </div>
+                </td>
+            {% else %}
+
+                <td><div><span id="2016336s8PjZHd-QXexqVhAk2u4kA">Scheduled <span class="cancelDateRangeLink" reportrequestid="2016336s8PjZHd-QXexqVhAk2u4kA" timerangetype="Monthly" startdate="1477983600" month="11" year="2016" enddate="1480579199" reporttype="Transaction" rgfpublishinglogid="2016336ifvL7AY4TB27DSUAaLTwqA"><a href="#" class="cancelDRLink">Cancel</a></span></span>
+                    <span class="cancelledText" style="display:none">Cancelled</span>
+                    </div>
+                </td>
+            {% endif %}
         </tr>
 
     {% endfor %}

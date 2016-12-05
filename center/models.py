@@ -15,9 +15,10 @@ class GenerateReport(models.Model):
     timeRangeType     =  models.CharField(max_length= 100, default="", null=False)      #时间段
     month             =  models.CharField( max_length= 100, default="", null=False)     #月份
     timeRange         =  models.CharField( max_length=50, default="", null=False)
-
+    report_file_path  =  models.CharField( max_length=100, default="", null=False)      #生成的文件路径
     # request_date      = models.DateTimeField(default=timezone.now())
     request_date      =  models.CharField( max_length= 50, default="", null=False)
+
     action_statue     =  models.CharField( max_length= 20, default=0, null=False)
 
 

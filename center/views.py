@@ -1,11 +1,12 @@
 # encoding:utf-8
 import  json
 
-
+from django.http import StreamingHttpResponse
 from django.shortcuts import render, HttpResponse
 from center.dataService.statement_view_data import StatementViewData
 from django.views.decorators.csrf import csrf_exempt
 
+from center.dataService.data_format import file_iterator
 # Create your views here.
 
 
@@ -64,6 +65,20 @@ def statement_view(request):
 
 def pdf_file_view(request):
     return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
+
+
+
+
+
+
+def download_file(request):
+    file_type = request.GET.get("file_type", "octet-stream")    #vnd.ms-excel (.xls),  octet-stream(pdf) 下载文件
+    file_name = request.GET.get("file_name", "not_found_file_name")
+    the_file_name = file_name.split("/")[-1]
+    response = StreamingHttpResponse(file_iterator(file_name))
+    response['Content-Type'] = 'application/' + str(file_type)
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
+    return response
 
 
 

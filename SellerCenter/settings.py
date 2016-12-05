@@ -1,3 +1,4 @@
+# encoding:utf-8
 """
 Django settings for SellerCenter project.
 
@@ -117,7 +118,12 @@ STATIC_URL = '/static/'
 
 
 
-UPLOAD_PATH = os.path.join(BASE_DIR, "manageApp/UploadFilePath")
-
+UPLOAD_PATH = os.path.join(BASE_DIR, "manageApp/UploadFilePath")                #上传文件路径
 if not os.path.exists(UPLOAD_PATH):
     os.mkdir(UPLOAD_PATH)
+
+
+GENERATE_REPORT_PATH = os.path.join(BASE_DIR, "center/static/GENERATE_REPORT")  #生成的报表路径
+if not os.path.exists(GENERATE_REPORT_PATH):
+    os.mkdir(GENERATE_REPORT_PATH)
+
