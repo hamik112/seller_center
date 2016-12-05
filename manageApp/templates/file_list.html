@@ -161,6 +161,7 @@
             data: post_dict,
             dataType: "json",
             beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
               showMask();
             },
             success: function (sdata) {
