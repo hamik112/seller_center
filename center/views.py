@@ -2,7 +2,7 @@
 import  json
 
 from django.http import StreamingHttpResponse
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from center.dataService.statement_view_data import StatementViewData
 from django.views.decorators.csrf import csrf_exempt
 
@@ -19,7 +19,6 @@ def inventory(request):
 
 
 def pricing(request):
-
     return render(request, 'pricing.html', locals())
 
 
@@ -28,12 +27,12 @@ def orders(request):
 
 
 def advertising(request):
-
     return render(request, 'advertising-2.html', locals())
 
-def performance(request):
 
+def performance(request):
     return render(request, 'performance.html', locals())
+
 
 def transaction(request):
     return render(request, "transaction.html", locals())
@@ -74,6 +73,8 @@ def pdf_file_view(request):
 def download_file(request):
     file_type = request.GET.get("file_type", "octet-stream")    #vnd.ms-excel (.xls),  octet-stream(pdf) 下载文件
     file_name = request.GET.get("file_name", "not_found_file_name")
+    if not file_name:
+        return HttpResponseRedirect("/date-range-reports/")
     the_file_name = file_name.split("/")[-1]
     response = StreamingHttpResponse(file_iterator(file_name))
     response['Content-Type'] = 'application/' + str(file_type)

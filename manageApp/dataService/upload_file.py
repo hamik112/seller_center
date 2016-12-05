@@ -44,9 +44,8 @@ class FileUpload(object):
 
 
 def list_files(**params):
-
     file_list = UploadFileRecorde.objects.filter().values()
-    return  list(file_list)
+    return  list(file_list)[::-1]
     tmp_file_list = []
     for fn in file_list:
         tmp_dict = {}
@@ -54,7 +53,7 @@ def list_files(**params):
         tmp_dict["file_path"] = fn.file_path
         tmp_dict["upload_date"] = fn.uploadtime
         tmp_file_list.append(tmp_dict)
-    return list(tmp_file_list)
+    return list(tmp_file_list)[::-1]
 
 
 

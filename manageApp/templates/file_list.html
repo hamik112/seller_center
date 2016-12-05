@@ -6,6 +6,30 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
 
+<style type="text/css">
+.loading{
+{#    width:160px;#}
+{#    height:56px;#}
+    position: absolute;
+    top:50%;
+    left:45%;
+    margin-left:auto;margin-right:auto;
+    opacity: 0.7;
+    z-index:9999;
+    -moz-border-radius:20px;
+    -webkit-border-radius:20px;
+    border-radius:20px;
+    filter:progid:DXImageTransform.Microsoft.Alpha(opacity=70);
+}
+
+.cover {
+    position:fixed; top: 0px; right:0px; bottom:0px;filter: alpha(opacity=60); background-color: #777;
+    z-index: 1002; left: 0px; display:none;
+    opacity:0.5; -moz-opacity:0.5;
+}
+</style>
+
+
 {% endblock %}
 
 
@@ -23,8 +47,10 @@
 
 
 {% block content %}
+<div id="cover" class="cover"></div>
 
-<div class="row">
+<div class="loading" id="loading"></div>
+<div class="row" >
     <div class="col-lg-12">
         <div class="wrapper wrapper-content animated fadeInUp">
 
@@ -134,16 +160,25 @@
             type: "POST",
             data: post_dict,
             dataType: "json",
+            beforeSend:function(XMLHttpRequest){
+              $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+              showMask();
+            },
             success: function (sdata) {
                 console.log(sdata);
                 if (sdata.statue == '0'){
+                    showBody();
                     alert("删除文件成功!");
                     location.reload();
                 }else{
+                    showBody();
                     alert("删除文件失败: " + sdata.msg);
                 }
             }, error: function (edata) {
+                $("#loading").empty();
+                showBody();
                 alert("删除文件失败" + edata);
+
             }
         });
     }
@@ -158,20 +193,40 @@
             type: "POST",
             data: post_dict,
             dataType: "json",
+            beforeSend:function(XMLHttpRequest){
+              $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+            },
             success: function (sdata) {
                 console.log(sdata)
                 if (sdata.statue == '0'){
+                    $("#loading").empty();
+                    showBody();
                     alert("更新成功!");
                 }else{
+                    $("#loading").empty();
+                    showBody();
                     alert("更新失败, "+sdata.msg);
                 }
             }, error: function (edata) {
                 console.log(edata);
+                $("#loading").empty();
+                showBody();
                 alert("更新失败!" + edata.msg);
+
             }
         });
     }
-    
+
+    function showMask(){
+        $('body').css("overflow","hidden")
+        $("#cover").show();
+    }
+    function showBody() {
+        $('body').css("overflow","visible");
+        $("#cover").css("display", "None");
+{#        $("#cover").show();#}
+    }
     </script>
 
 

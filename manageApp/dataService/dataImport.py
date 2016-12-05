@@ -18,7 +18,8 @@ class StatementViewImport(object):
                     file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
                     print file_path
                     datas = read_xls(file_path)
-                    statue = self.import_one_file_to_statement_view(datas)
+                    print len(datas)
+                    statue = self.import_one_file_to_statement_view(datas, filename)
                     statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}
                 except Exception, e:
                     statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
@@ -28,11 +29,16 @@ class StatementViewImport(object):
             statue_list.append(statue_dict)
         return statue_list
 
-    def import_one_file_to_statement_view(self, datas):
+    def import_one_file_to_statement_view(self, datas, filename):
         datas = datas.get("data",[])
         value_list = []
+        try:
+            f_name = filename.split("__")[-1]
+        except Exception, e:
+            f_name = ""
+            return {"statue":-1, "msg": "文件名错误!"}
         for dt in datas:
-            if dt.get("name", "").lower() == "sheet1" or dt.get("name", "").lower() == "template":
+            if dt.get("name", "").lower() == "sheet1" or dt.get("name", "").lower() == "template" or dt.get("name", "").replace(" ","") == f_name.split(".")[0].replace(" ",""):
                 value_list = dt.get("values", [])
                 break
         header_list = value_list[7]
@@ -50,14 +56,12 @@ class StatementViewImport(object):
                     header_dict[name] = header_list.index(name)
             except Exception,e :
                 return {"statue": -1, "msg": u"没有找到字段:%s" % str(name)}
-        print header_dict
         for data_line in value_list[8:]:
             tmp_dict = {}
             for name in need_header_list:
                 if name == u"店铺" or name == "店铺":
                     tmp_dict["store_name"] = data_line[header_dict.get(name)]
                 elif name == "date_time":
-                    print name , header_dict.get("date_time")
                     tmp_dict["date_time"] = data_line[header_dict.get("date_time")]
                 else:
                     dict_name = name.replace(" ", "_")

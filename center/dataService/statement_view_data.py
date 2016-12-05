@@ -15,9 +15,8 @@ from center.models import  GenerateReport
 
 from manageApp.dataService.upload_file import get_path
 
-
-
 GenerateReport_PATH = settings.GENERATE_REPORT_PATH
+
 
 class StatementViewData(object):
     def __init__(self, request):
@@ -69,7 +68,7 @@ class StatementViewData(object):
         month = self.post_dict.get("month", "")
         print reportType, year, timeRangeType, month
         if timeRangeType == "Monthly":
-            current_month = self.get_current_month_day()
+            current_month = self.get_month_day(year, month)
             timeRange = str(current_month.get("day_begin", "")) +" - "+ str(current_month.get("day_end", ""))
         else:
             timeRange = ""
@@ -101,10 +100,9 @@ class StatementViewData(object):
             statue = False
         return statue
 
-    def get_current_month_day(self):
-        day_now = time.localtime()
+    def get_month_day(self, year,month):
         begin_day = 1
-        wday, monthRange = calendar.monthrange(day_now.tm_year, day_now.tm_mon)  # 得到本月的天数 第一返回为月第一日为星期几（0-6）, 第二返回为此月天数
+        wday, monthRange = calendar.monthrange(int(year), int(month))
         end_day = monthRange
         mon_year = str(datetime.datetime.now().strftime("%a--%Y"))
         month, year = mon_year.split("--")
@@ -126,17 +124,18 @@ class StatementViewData(object):
 
     def create_xls_reports(self):
         statue, msg, file_path_name = True, "", ""
-        all_datas = StatementView.objects.filter().values_list("settlement_id", "type", "order_id", "sku", "description",
+        all_datas = StatementView.objects.filter().values_list("date_time","settlement_id", "type", "order_id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order_city",
                   "order_state", "order_postal", "product_sales", "shipping_credits",
                   "promotional_rebates", "sales_tax_collected", "selling_fees",
-                  "fba_fees", "other_transaction_fees", "other", "total", "store_name")
+                  "fba_fees", "other_transaction_fees", "other", "total")
 
-        header = ["settlement id", "type", "order id", "sku", "description",
+        header = ["date/time","settlement id", "type", "order id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order city",
                   "order state", "order postal", "product sales", "shipping credits",
                   "promotional rebates", "sales tax collected", "selling fees",
-                  "fba fees", "other transaction fees", "other", "total", u"店铺名"]
+                  "fba fees", "other transaction fees", "other", "total"]
+        print "all_data:", len(all_datas)
         try:
             wb, filename = create_xls(**{"datas": all_datas, "header": header})
             file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
@@ -144,7 +143,9 @@ class StatementViewData(object):
         except Exception,e:
             statue = False
             msg = "create xls Error: " + str(e)
+            print "msg: ", msg
         return  {"statue": statue, "msg": msg, "file_path_name": file_path_name}
+
 
 
 

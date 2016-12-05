@@ -2386,7 +2386,7 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 <tr data-type="Custom"><td>Custom Transaction Report&nbsp; May 1, 2016 - May 11, 2016</td><td data-sort-date="2016/5/12">May 11, 2016</td><td data-sort-date="2016/5/1">May 1, 2016 - May 11, 2016</td><td><div>Cancelled</div></td></tr>
 
     {% for line in recorde_list %}
-
+        {% if line.report_file_path %}
         <tr data-type="Monthly">
             <td>{{ line.is_custom }}&nbsp;{{ line.reportType }}&nbsp;Report&nbsp;{{ line.timeRange }}</td>
             <td data-sort-date="2016/8/5">{{ line.request_date }}</td>
@@ -2406,6 +2406,7 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
                 </td>
             {% endif %}
         </tr>
+        {% endif %}
 
     {% endfor %}
     </tbody></table><table class="data-display" cellspacing="1"><tbody>
