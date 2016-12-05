@@ -161,7 +161,6 @@
             data: post_dict,
             dataType: "json",
             beforeSend:function(XMLHttpRequest){
-              $("#loading").html("<img src='/static/admin/img/loading.gif' />");
               showMask();
             },
             success: function (sdata) {
@@ -175,7 +174,6 @@
                     alert("删除文件失败: " + sdata.msg);
                 }
             }, error: function (edata) {
-                $("#loading").empty();
                 showBody();
                 alert("删除文件失败" + edata);
 
@@ -194,37 +192,35 @@
             data: post_dict,
             dataType: "json",
             beforeSend:function(XMLHttpRequest){
-              $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
                showMask();
             },
             success: function (sdata) {
                 console.log(sdata)
                 if (sdata.statue == '0'){
-                    $("#loading").empty();
                     showBody();
                     alert("更新成功!");
                 }else{
-                    $("#loading").empty();
                     showBody();
                     alert("更新失败, "+sdata.msg);
                 }
             }, error: function (edata) {
                 console.log(edata);
-                $("#loading").empty();
                 showBody();
                 alert("更新失败!" + edata.msg);
-
             }
         });
     }
 
     function showMask(){
         $('body').css("overflow","hidden")
-        $("#cover").show();
+{#        $("#cover").show();#}
+        $("#cover").css("display", "block");
     }
     function showBody() {
         $('body').css("overflow","visible");
         $("#cover").css("display", "None");
+        $("#loading").css("display", "None");
 {#        $("#cover").show();#}
     }
     </script>
