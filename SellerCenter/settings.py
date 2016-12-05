@@ -80,7 +80,7 @@ DATABASES = {
     'default': {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "seller_center",
-        "USER": "ROOT",
+        "USER": "root",
         "PASSWORD": "admin",
         "HOST": "",
         "PORT": ""
