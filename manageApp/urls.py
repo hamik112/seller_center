@@ -10,4 +10,5 @@ urlpatterns = patterns('',
 
             url(r'^files-list/$', 'manageApp.views.files_action', name='files_list'),
             url(r'^list-files-json/$', 'manageApp.views.list_fils_json', name='list_fils_json'),
+            url(r'^filename-to-storename', 'manageApp.views.filename_to_storename', name='filename_to_storename'),
                        )

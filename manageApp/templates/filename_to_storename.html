@@ -37,12 +37,13 @@
                 <li ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a>
                 </li>
 
-                <li class="active">
+                <li >
                     <a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span>
                     </a>
                 </li>
-                 <li><a href="/manage/filename-to-storename/"   class="J_pro"><i class="fa fa-link"></i> <span>文件名对应店铺</span></a></li>
+                 <li class="active"><a href="/manage/filename-to-storename/"   class="J_pro"><i class="fa fa-link"></i> <span>文件名对应店铺</span></a></li>
 {% endblock %}
+
 
 
 
@@ -57,14 +58,14 @@
 
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>上传的文件列表</h5>
+                    <h5>文件名对应店铺名</h5>
 
                 </div>
                 <div class="ibox-content">
 
                     <div class="project-list">
                         {% csrf_token %}
-                        <table class="table table-hover" id="list-files-table-id">
+                        <table class="table table-hover" id="filename-to-storename-table-id">
                         </table>
                     </div>
                 </div>
@@ -87,7 +88,7 @@
 
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
-    $('#list-files-table-id').bootstrapTable({
+    $('#filename-to-storename-table-id').bootstrapTable({
         url: '/manage/list-files-json/',
         toolbar: '#toolbar', //工具按钮用哪个容器
         search: true,
@@ -123,19 +124,28 @@
             }
         },{
             field: 'uploadtime',
-            title: '上传时间',
+            title: '店铺名',
             align: 'center',
             valign: 'middle'
         },{
             field: "file_path",
-            title: 'statement更新',
+            title: '更新',
             align: 'center',
             valign: 'middle',
             formatter:function (value, row, index) {
                 filename = value.split("/");
                 filename = filename[filename.length-1].replace(" ","");
-                html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>更新</button>";
+                html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>修改</button>";
                 return html_str;
+            }
+        },{
+            field: 'add',
+            title: "添加",
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file();>添加</button>";
+                return htm_str;
             }
         }, {
             field: 'file_path',

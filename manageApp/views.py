@@ -73,3 +73,12 @@ def list_fils_json(request):
     files_list = list_files()
     return HttpResponse(json.dumps(files_list, default=json_serial))
 
+
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def filename_to_storename(request):
+
+    return render(request, 'filename_to_storename.html', locals())
+
+
