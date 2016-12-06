@@ -63,6 +63,8 @@ def statement_view(request):
 
 
 def pdf_file_view(request):
+    month = request.GET.get("month", "")
+
     return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
 
 

@@ -87,12 +87,16 @@ class StatementViewData(object):
 
 
     def update_recorde_generate_report_statue(self, recorde_id, file_path_name):
+        statue = True
+        if not os.path.exists(file_path_name):
+            statue = False
+            return statue
         try:
             report_file_path = file_path_name.split("GENERATE_REPORT/")[1]
         except Exception, e:
             print "file_path_name:",file_path_name
             report_file_path = ""
-        statue = True
+
         try:
             GenerateReport.objects.filter(id=recorde_id).update(action_statue=1,report_file_path=report_file_path)
         except Exception, e:
