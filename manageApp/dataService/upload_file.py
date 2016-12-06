@@ -2,7 +2,8 @@
 import  time
 import  os
 from django.conf import  settings
-from manageApp.models import  UploadFileRecorde
+from manageApp.models import  UploadFileRecorde, StatementView
+
 
 
 UPLOAD_PATH = settings.UPLOAD_PATH
@@ -60,8 +61,10 @@ def list_files(**params):
 
 def delete_file(filename):
     statue = 0
+    print  "filename:", filename
     msg = ""
     try:
+        StatementView.objects.filter(filename=filename).delete()
         ffile= UploadFileRecorde.objects.filter(filename=filename)
         file_path = ffile[0].file_path
         os.remove(file_path)
