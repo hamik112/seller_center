@@ -35,9 +35,9 @@ def create_xls(**params):
             else:
                 tmp_list.append(i)
         ws1.append(list(tmp_list))
-        _cell = ws1.cell('T1')
-        nf = styles.numbers.FORMAT_NUMBER_COMMA_SEPARATED1
-        _cell.style.number_format = nf
+        # _cell = ws1.cell('T1')
+        # nf = styles.numbers.FORMAT_NUMBER_COMMA_SEPARATED1
+        # _cell.style.number_format = nf
         # log2.info("create file: %s" %(str(filename)))
     return wb, filename
 
