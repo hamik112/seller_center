@@ -7,8 +7,9 @@ import xlrd
 import  datetime
 from openpyxl import Workbook, styles
 
+nf = styles.numbers.FORMAT_NUMBER_COMMA_SEPARATED1
 
-
+list_n_list = ['T', 'U']
 
 def create_xls(**params):
     header = params.get("header", "")
@@ -24,21 +25,24 @@ def create_xls(**params):
     ws1.title= "template"
     title_list = header
     ws1.append(title_list)
+    n = 1
     for lst in datas:
         tmp_list = []
         for i in lst:
-            if is_number(i):
-                if lst.index(i) >11:
-                    tmp_list.append(format_str(i))
-                else:
-                    tmp_list.append(deal_number(i))
+            if lst.index(i)==0:
+                tmp_list.append(datetime_to_str(i))
+                pass
             else:
-                tmp_list.append(i)
+                if is_number(i):
+                    tmp_list.append(deal_number(i))
+                else:
+                    tmp_list.append(i)
         ws1.append(list(tmp_list))
-        # _cell = ws1.cell('T1')
-        # nf = styles.numbers.FORMAT_NUMBER_COMMA_SEPARATED1
-        # _cell.style.number_format = nf
-        # log2.info("create file: %s" %(str(filename)))
+        if lst[2].replace(" ","").lower() == "transfer":
+            for ni in list_n_list:
+                _cell_ni = ws1.cell( ni + str(n + 1))
+                _cell_ni.number_format = nf
+        n += 1
     return wb, filename
 
 
@@ -66,21 +70,6 @@ def deal_number(mnumber):
     return af_money
 
 
-def format_str(num):
-    num = deal_number(num)
-    if num >= 1000 or num <= -1000:
-        try:
-            return number_format(num,2)
-        except Exception:
-            return num
-    else:
-        return num
 
-
-def number_format(num, places=0):
-
-    """Format a number according to locality and given places"""
-
-    locale.setlocale(locale.LC_ALL, "")
-
-    return locale.format("%.*f", (places, num), True)
+def datetime_to_str(dt):
+    return dt.strftime("%b %d, %Y %I:%M:%S %p PDT") #PDT, PST

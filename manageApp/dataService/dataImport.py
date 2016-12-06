@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # encoding:utf-8
 
+import  datetime
+
 from manageApp.dataService.deal_xls import read_xls
 from manageApp.models import StatementView, UploadFileRecorde
 
@@ -38,10 +40,10 @@ class StatementViewImport(object):
             f_name = ""
             return {"statue":-1, "msg": "文件名错误!"}
         for dt in datas:
-            print "sheet name:", dt.get("name", "").replace(" ", ""), f_name.split(".")[0].replace(" ", "")
             if dt.get("name", "").lower() == "sheet1" or dt.get("name", "").lower() == "template" or dt.get("name", "").replace(" ","") == f_name.split(".")[0].replace(" ",""):
                 value_list = dt.get("values", [])
                 break
+
         if not value_list:
             return {"statue": -1, "msg": "表格无数据或请查看sheet名称是否正确"}
         header_list = value_list[7]
@@ -60,12 +62,12 @@ class StatementViewImport(object):
             except Exception,e :
                 return {"statue": -1, "msg": u"没有找到字段:%s" % str(name)}
         for data_line in value_list[8:]:
-            tmp_dict = {}
+            tmp_dict = {"filename":filename}
             for name in need_header_list:
                 if name == u"店铺" or name == "店铺":
                     tmp_dict["store_name"] = data_line[header_dict.get(name)]
                 elif name == "date_time":
-                    tmp_dict["date_time"] = data_line[header_dict.get("date_time")]
+                    tmp_dict["date_time"] = self.str_to_datetime(data_line[header_dict.get("date_time")])
                 else:
                     dict_name = name.replace(" ", "_")
                     tmp_dict[dict_name] = data_line[header_dict.get(name)]
@@ -73,6 +75,17 @@ class StatementViewImport(object):
                 stv  = StatementView(**tmp_dict)
                 stv.save()
             except Exception, e:
-                return {"statue": -1, "msg": str(e)}
+                try:
+                    StatementView.objects.filter(order_id=tmp_dict.get("order_id","")).update(**tmp_dict)
+                except Exception, e:
+                    return {"statue": -1, "msg": str(e)}
         return {"statue":0, "msg":""}
 
+    def str_to_datetime(self, date_str):
+        time_zone = date_str.split(" ")[-1]
+        try:
+            dt =  datetime.datetime.strptime(date_str, "%b %d, %Y %I:%M:%S %p "+time_zone)
+        except Exception, e:
+            print e
+            dt = datetime.datetime.now()
+        return  dt

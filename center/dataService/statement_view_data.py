@@ -34,14 +34,14 @@ class StatementViewData(object):
             pdf_url = "http://" + cur_path + "/summary-pdf/"
             date = datetime.datetime.now()
             datestr = date.strftime("%Y-%m-%d")
-            return_id = self.write_recorde_generate_report()
+            return_dict = self.write_recorde_generate_report()
             result = self.web_html_to_pdf(pdf_url, datestr+"_output.pdf")
-            update_statue = self.update_recorde_generate_report_statue(return_id, result.get("file_path_name",""))
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return result
         elif self.post_dict.get("reportType", "") == "Transaction":   #导出表格
-            return_id = self.write_recorde_generate_report()
-            result = self.create_xls_reports()
-            update_statue = self.update_recorde_generate_report_statue(return_id, result.get("file_path_name",""))
+            return_dict = self.write_recorde_generate_report()
+            result = self.create_xls_reports(**return_dict)
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return update_statue
         # statement_list = StatementView.objects.filter()
 
@@ -72,7 +72,7 @@ class StatementViewData(object):
             timeRange = str(current_month.get("day_begin", "")) +" - "+ str(current_month.get("day_end", ""))
         else:
             timeRange = ""
-        request_date = datetime.datetime.now().strftime("%a %m, %Y")
+        request_date = datetime.datetime.now().strftime("%b %m, %Y")
         recorde_dict = {"reportType": reportType, "year": year, "is_custom": "Custom", "timeRange": timeRange,
                         "timeRangeType": timeRangeType, "month": month, "action_statue": 0,"request_date":request_date}
         return_id = -1
@@ -83,10 +83,12 @@ class StatementViewData(object):
             return_id = gr.id
         except Exception, e:
             print "Error, ",str(e)
-        return return_id
+        return {"return_id":return_id, "year": year, "month":month,
+                "timeRange":timeRange}
 
 
     def update_recorde_generate_report_statue(self, recorde_id, file_path_name):
+        """ 更新记录 """
         statue = True
         if not os.path.exists(file_path_name):
             statue = False
@@ -104,11 +106,11 @@ class StatementViewData(object):
             statue = False
         return statue
 
-    def get_month_day(self, year,month):
-        begin_day = 1
-        wday, monthRange = calendar.monthrange(int(year), int(month))
-        end_day = monthRange
-        mon_year = str(datetime.datetime.now().strftime("%a--%Y"))
+    def get_month_day(self, num_year,num_month):
+        wday, monthRange = calendar.monthrange(int(num_year), int(num_month))
+        in_year = str(num_month) +"--"+ str(num_year)
+        datetime_year = datetime.datetime.strptime(in_year, "%m--%Y")
+        mon_year = str(datetime_year.strftime("%b--%Y"))
         month, year = mon_year.split("--")
         begin_day = str(month) + " 1, "+ str(year)
         end_day = str(month) + " "+str(monthRange) +", "+str(year)
@@ -126,9 +128,14 @@ class StatementViewData(object):
         return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
 
 
-    def create_xls_reports(self):
+    def create_xls_reports(self, **params):
+        timeRange = params.get("timeRange", "")
+        begin_day, end_day = timeRange.split("-")
+        begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
+        end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
+        print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
-        all_datas = StatementView.objects.filter().values_list("date_time","settlement_id", "type", "order_id", "sku", "description",
+        all_datas = StatementView.objects.filter(date_time__range=(begin_date, end_date)).values_list("date_time","settlement_id", "type", "order_id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order_city",
                   "order_state", "order_postal", "product_sales", "shipping_credits",
                   "promotional_rebates", "sales_tax_collected", "selling_fees",
@@ -142,6 +149,7 @@ class StatementViewData(object):
         print "all_data:", len(all_datas)
         try:
             wb, filename = create_xls(**{"datas": all_datas, "header": header})
+            print filename
             file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
             wb.save(file_path_name)
         except Exception,e:

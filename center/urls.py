@@ -20,4 +20,7 @@ urlpatterns = patterns('',
 
             url(r'download-file/$', 'center.views.download_file', name='download_file'),
 
+            url(r'amazon-login/$', 'center.views.amazon_login', name='amazon_login'),
+            url(r'amazon-register/$', 'center.views.amazon_register', name='amazon_register'),
+            url(r'amazon-logout/$', 'center.views.amazon_logout', name='amazon_logout'),
                       )

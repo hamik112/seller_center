@@ -7,11 +7,13 @@ from django.shortcuts import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  auth
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 from manageApp.dataService.upload_file import FileUpload, list_files, delete_file
 from manageApp.dataService.deal_xls import read_xls
 from manageApp.dataService.JSON_serial import json_serial
 from manageApp.dataService.dataImport import  StatementViewImport
+
 # Create your views here.
 
 def login(request):
@@ -36,6 +38,7 @@ def logout(request):
 
 # @login_required(login_url="/manage/user-login/")
 @login_required(login_url='/manage/user-login/')
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login/")
 def home(request):
     username = request.user.username
     if request.method == "POST":
@@ -44,7 +47,7 @@ def home(request):
         return HttpResponse(json.dumps(upload_files))
     return  render(request, 'manage_index.html', locals())
 
-
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login/")
 @login_required(login_url="/manage/user-login/")
 def files_action(request):
     username = request.user.username
@@ -64,7 +67,7 @@ def files_action(request):
         return render(request, "file_list.html", locals())
 
 
-
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login/")
 @login_required(login_url="/manage/user-login/")
 def list_fils_json(request):
     files_list = list_files()
