@@ -66,7 +66,7 @@ class StatementViewData(object):
         year = self.post_dict.get("year")
         timeRangeType = self.post_dict.get("timeRangeType")
         month = self.post_dict.get("month", "")
-        print reportType, year, timeRangeType, month
+        # print reportType, year, timeRangeType, month
         if timeRangeType == "Monthly":
             current_month = self.get_month_day(year, month)
             timeRange = str(current_month.get("day_begin", "")) +" - "+ str(current_month.get("day_end", ""))
@@ -76,7 +76,7 @@ class StatementViewData(object):
         recorde_dict = {"reportType": reportType, "year": year, "is_custom": "Custom", "timeRange": timeRange,
                         "timeRangeType": timeRangeType, "month": month, "action_statue": 0,"request_date":request_date}
         return_id = -1
-        print "recorde_dict: ", recorde_dict
+        # print "recorde_dict: ", recorde_dict
         gr = GenerateReport(**recorde_dict)
         try:
             gr.save()
@@ -149,7 +149,6 @@ class StatementViewData(object):
         print "all_data:", len(all_datas)
         try:
             wb, filename = create_xls(**{"datas": all_datas, "header": header})
-            print filename
             file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
             wb.save(file_path_name)
         except Exception,e:
