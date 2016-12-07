@@ -14,6 +14,7 @@ from  center.dataService.create_xls import create_xls
 from center.models import  GenerateReport
 
 from manageApp.dataService.upload_file import get_path
+from manageApp.models import FilenameToStorename
 
 GenerateReport_PATH = settings.GENERATE_REPORT_PATH
 
@@ -127,6 +128,14 @@ class StatementViewData(object):
     def web_html_to_pdf(self, url, output_file):
         statue, msg, output_file_name = True, "", ""
         output_file_name = os.path.join(get_path(GenerateReport_PATH), output_file)
+        user_email = self.request.user.username
+        try:
+            serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
+        except Exception, e:
+            msg = str(e)
+            print msg
+            statue = False
+            return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
         try:
             os.system("wkhtmltopdf " + url+ " " + output_file_name)
         except Exception, e:
@@ -142,7 +151,17 @@ class StatementViewData(object):
         end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
         print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
-        all_datas = StatementView.objects.filter(date_time__range=(begin_date, end_date)).values_list("date_time","settlement_id", "type", "order_id", "sku", "description",
+        user_email = self.request.user.username
+        try:
+            serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
+        except Exception, e:
+            msg = str(e)
+            print msg
+            statue = False
+            return {"statue": statue, "msg": msg, "file_path_name": file_path_name}
+        all_datas = StatementView.objects.filter(serial_number=serial_number,
+                                                 date_time__range=(begin_date, end_date)).values_list("date_time",
+                 "settlement_id", "type", "order_id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order_city",
                   "order_state", "order_postal", "product_sales", "shipping_credits",
                   "promotional_rebates", "sales_tax_collected", "selling_fees",

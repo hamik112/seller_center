@@ -55,6 +55,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'SellerCenter.urls'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

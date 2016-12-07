@@ -15,7 +15,7 @@ from manageApp.dataService.JSON_serial import json_serial
 from manageApp.dataService.dataImport import  StatementViewImport
 
 from manageApp.dataService.filename_to_storename import FilenameStoreName
-
+from manageApp.dataService.dataImport import get_update_error_str
 # Create your views here.
 
 def login(request):
@@ -89,6 +89,7 @@ def filename_to_storename(request):
             result = fsn.post_add_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "update":
+            print "update ..........."
             result = fsn.post_update_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         return render(request,"filename_to_storename.html", locals())
@@ -104,4 +105,10 @@ def filename_to_storename_json(request):
     return HttpResponse(json.dumps(result, default=json_serial))
 
 
-
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def get_update_error_msg(request):
+    uid = request.GET.get("uid", "")
+    error_msg = get_update_error_str(uid)
+    result = {"statue": 0, "msg": error_msg}
+    return HttpResponse(json.dumps(result))

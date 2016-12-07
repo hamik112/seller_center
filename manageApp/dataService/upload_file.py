@@ -21,7 +21,8 @@ class FileUpload(object):
         for fileobj in self.fileobj_list:
             fname = fileobj.name.replace(" ", "")
             if self.username:
-                filename = str(self.username) +"__"+ str(time.time()).replace(".","")+"__" + fname
+                # filename = str(self.username) +"__"+ str(time.time()).replace(".","")+"__" + fname
+                filename = fname
             else:
                 filename = str(time.time()).replace(".","")+"_" + fname
             file_path = os.path.join(get_path(UPLOAD_PATH), filename)

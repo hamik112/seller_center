@@ -5,11 +5,17 @@ from django.utils import timezone
 # Create your models here.
 
 
+
+
+
+
 class UploadFileRecorde(models.Model):
     """ 记录上传的文件 """
     id         =  models.AutoField(primary_key=True,null=False)
     filename   =  models.CharField( max_length=255, default="", null=False)
     file_path  =  models.CharField( max_length=500, default="", null=False)
+    file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
+    error_msg   = models.CharField( max_length= 300, default="", null=False)
 
     uploadtime =  models.DateTimeField( default= timezone.now())
 
@@ -70,6 +76,9 @@ class StatementView(models.Model):
     other            = models.CharField( max_length=50, default="0", null=False)
     total            = models.CharField( max_length=50, default="0", null=False)
     store_name       = models.CharField( max_length=50, default="", null=False)
+
+    # 序号，代表了店铺名，来源于文件名的序号
+    serial_number    = models.CharField( max_length=50, default="", null=False)
 
     class Meta:
         db_table = "statement_view"

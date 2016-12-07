@@ -127,6 +127,23 @@
             align: 'center',
             valign: 'middle'
         },{
+            field: 'file_statue',
+            title: "状态",
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                if (value == '0'){
+                    htm_str =  "<span >正常</span>";
+                }else if(value == '1'){
+                  htm_str =  "<span style='color:green'>正在更新..</span>";
+                }else if(value == '2') {
+                    htm_str =  "<span style='color:blue'>已更新</span>";
+                }else{
+                    htm_str =  "<a onclick=javascript:error_detail(this); ><span style='color:red'>异常</span></a>";
+                }
+                return htm_str;
+            }
+        },{
             field: "file_path",
             title: 'statement更新',
             align: 'center',
@@ -199,11 +216,11 @@
             },
             success: function (sdata) {
                 console.log(sdata)
+                 showBody();
                 if (sdata.statue == '0'){
-                    showBody();
-                    alert("更新成功!");
+{#                    alert("更新成功!");#}
+                    location.reload()
                 }else{
-                    showBody();
                     alert("更新失败, "+sdata.msg);
                 }
             }, error: function (edata) {
@@ -214,6 +231,37 @@
         });
     }
 
+
+    function error_detail(thisobj) {
+        line_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+        $.ajax({
+            url: "/manage/get-update-error-msg/",
+            type: "GET",
+            data: {"uid":line_id},
+            dateType:"json",
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+            },
+            success: function (sdata) {
+                 showBody();
+                sdata = JSON.parse(sdata)
+                if (sdata.statue == '0' || sdata.statue == 0){
+                    if (sdata.msg.length == 0){
+                        alert("没有异常信息!");
+                    }else {
+                        alert("异常信息是: " + sdata.msg);
+                    }
+                }else{
+                    alert("查看失败:  "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                showBody();
+                alert("查看失败!" + edata);
+            }
+        })
+    }
     function showMask(){
         $('body').css("overflow","hidden")
 {#        $("#cover").show();#}
