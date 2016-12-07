@@ -18,9 +18,9 @@ def import_one_file_to_statement_view(task_dict):
     logger.info("running ...")
     datas = task_dict.get("datas",{})
     filename = task_dict.get("filename", "")
-    datas = datas.get("data", [])
+    datas = datas.get("data", {})
 
-    if datas.get("statue", "") == -1 and datas.get("msg", ""):
+    if isinstance(datas, dict) and  datas.get("statue", "") == -1 and datas.get("msg", ""):
         update_file_statue(filename, -1, error_msg=datas.get("msg", ""))
         return {"statue": -1, "msg": datas.get("msg", "")}
 
