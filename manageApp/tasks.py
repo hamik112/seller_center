@@ -42,7 +42,7 @@ def import_one_file_to_statement_view(task_dict):
         try:
             value_list = datas[0].get("values", [])
         except Exception, e:
-            msg = str(e)
+            msg = "没有找到文件!" + str(e)
             print msg
             update_file_statue(filename, -1, error_msg=msg)
     if not value_list:
