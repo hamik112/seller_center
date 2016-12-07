@@ -25,7 +25,7 @@ def login(request):
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request,user)
-            return HttpResponseRedirect("/manage/")
+            return HttpResponseRedirect("/manage/files-list/")
         else:
             return render(request, 'login.html', locals())
     else:

@@ -32,17 +32,17 @@ def create_xls(**params):
 def read_xls(filename):
     _value_list = []
     if not os.path.exists(filename):
-        return {"status": -1, "msg":"not found file...", "data":_value_list}
+        return {"statue": -1, "msg":"not found file...", "data":_value_list}
     try:
         data = xlrd.open_workbook(filename)
     except Exception, e:
         errors = "open excel Error, %s" % e
         log2.error(errors)
-        return {"status": -2 , "msg": errors, "data":_value_list}
+        return {"statue": -2 , "msg": errors, "data":_value_list}
     sheets = data.sheets()
     _value_list = [{'name': sheet.name, 'values': sheet._cell_values, 'nrows': len(sheet._cell_values)} for sheet in
                    sheets]
-    return {"status": 1, "msg":"", "data":_value_list}
+    return {"statue": 1, "msg":"", "data":_value_list}
 
 
 

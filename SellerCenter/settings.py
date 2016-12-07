@@ -14,6 +14,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -29,6 +31,22 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
+#djcelery+broker配置
+import djcelery
+djcelery.setup_loader()
+
+BROKER_URL = 'redis://127.0.0.1:6379/0'
+#或者
+#BROKER_HOST = "192.168.1.83"
+#BROKER_PORT = 6379
+#BROKER_USER = ""
+#BROKER_PASSWORD = ""
+#BROKER_VHOST = "0"
+
+
+
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -40,6 +58,9 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'center',
     'manageApp',
+
+    'djcelery',
+    #'kombu.transport.django'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -74,6 +95,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'SellerCenter.wsgi.application'
+
+
+
+
 
 
 # Database
