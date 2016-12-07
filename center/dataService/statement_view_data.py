@@ -18,6 +18,7 @@ from manageApp.dataService.upload_file import get_path
 GenerateReport_PATH = settings.GENERATE_REPORT_PATH
 
 
+
 class StatementViewData(object):
     def __init__(self, request):
         self.request =  request
@@ -26,7 +27,13 @@ class StatementViewData(object):
 
     def statement_data_read(self):
         generate_report_list = GenerateReport.objects.filter()
-        return list(generate_report_list.values())
+        return_report_list = []
+        for fline in generate_report_list.values():
+            if not os.path.exists(os.path.join(GenerateReport_PATH, fline.get("report_file_path",""))):
+                continue
+            else:
+                return_report_list.append(fline)
+        return return_report_list
 
     def request_report(self):
         if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf

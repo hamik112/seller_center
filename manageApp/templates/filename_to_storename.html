@@ -52,17 +52,20 @@
 <div id="cover" class="cover"></div>
 
 <div class="loading" id="loading"></div>
+
 <div class="row" >
     <div class="col-lg-12">
+            <div class="alert alert-error" id="alert-error-id" style="display: none">
+                <a class="alert-link">{{ result.msg }}</a>
+           </div>
         <div class="wrapper wrapper-content animated fadeInUp">
-
             <div class="ibox">
                 <div class="ibox-title">
                     <h5>文件名对应店铺名</h5>
-
                 </div>
-                <div class="ibox-content">
 
+                <div class="ibox-content">
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_line">添加</button>
                     <div class="project-list">
                         {% csrf_token %}
                         <table class="table table-hover" id="filename-to-storename-table-id">
@@ -73,6 +76,72 @@
         </div>
     </div>
 </div>
+
+
+
+        <!-- 模态框（Modal） -->
+        <div class="modal fade bd-example-modal-lg" id="add_line" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+               <form class="form-horizontal" method="post" action="/manage/filename-to-storename/">
+                    {% csrf_token %}
+                 <div class="modal-header">
+                    <button type="button" class="close"
+                       data-dismiss="modal" aria-hidden="true">
+                          &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                       <h2>添加卡</h2>
+                    </h4>
+                 </div>
+
+
+                 <div class="modal-body">
+                     <div class="row">
+                       <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">序号</label>
+                                <div class="col-md-9">
+                                  <input class="form-control" size="16" type="text" name="serial_number"  value="{{ result.serial_number }}" placeholder="序号"  required="required">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">店名</label>
+                                <div class="col-md-9">
+                                  <input class="form-control" size="16" type="text" name="storename" placeholder="店名"  value="{{ result.storename }}" required="required">
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label for="dtp_input1" class="col-md-2 control-label">email</label>
+                                <div class="col-md-9">
+                                  <input class="form-control"  type="text" name="email" value="" placeholder="email"  value="{{ result.email }}" required="required">
+                                </div>
+                            </div>
+                           <div class="form-group">
+                                <label for="dtp_input2" class="col-md-2 control-label">密码</label>
+                                <div class="col-md-9">
+                                  <input class="form-control" size="16" type="text" name="password" value="starmerx"  readonly required="required">
+                                </div>
+                            </div>
+                            <input type="hidden" name="action_type" value="add">
+                        </div>
+
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" onclick=javascript:add_line(this); class="btn btn-primary">
+                       确认
+                    </button>
+                 </div>
+                 </form>
+               </div>
+             </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+
 
 {% endblock %}
 
@@ -89,7 +158,7 @@
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
     $('#filename-to-storename-table-id').bootstrapTable({
-        url: '/manage/list-files-json/',
+        url: '/manage/filename-to-storename-json/',
         toolbar: '#toolbar', //工具按钮用哪个容器
         search: true,
         strictSearch: true,
@@ -123,51 +192,55 @@
                 return filename;
             }
         },{
-            field: 'uploadtime',
-            title: '店铺名',
+            field: "serial_number",
+            title: "序号",
             align: 'center',
             valign: 'middle'
         },{
-            field: "file_path",
+            field: 'storename',
+            title: '店名',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: 'email',
+            title: 'email',
+            align: 'center',
+            valign: 'middle'
+        }, {
+            field: 'password',
+            title: 'password',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: "action",
             title: '更新',
             align: 'center',
             valign: 'middle',
             formatter:function (value, row, index) {
-                filename = value.split("/");
-                filename = filename[filename.length-1].replace(" ","");
-                html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>修改</button>";
+                html_str = "<button class='btn btn-primary' onclick=javascript:update_line(this);>修改</button>";
                 return html_str;
             }
-        },{
-            field: 'add',
-            title: "添加",
-            align: 'center',
-            valign:'middle',
-            formatter: function (value, row, index) {
-                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file();>添加</button>";
-                return htm_str;
-            }
         }, {
-            field: 'file_path',
-            title: "操作",
+            field: 'action',
+            title: "删除",
             align: 'center',
             valign:'middle',
             formatter: function (value, row, index) {
-                filename = value.split("/");
-                filename = filename[filename.length-1].replace(" ","");
-                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file(\'"+filename+"\');>删除</button>";
+                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_line(this);>删除</button>";
                 return htm_str;
             }
         }],
     });
 
 
-    function  delete_file(filename) {
-        post_dict = {"filename": filename,
+    function  delete_line(thisobj) {
+        dele_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+        console.log(dele_id);
+        post_dict = {"dele_id": dele_id,
             "action_type": "delete",
             "csrfmiddlewaretoken": csrf_token};
         $.ajax({
-            url: "/manage/files-list/",
+            url: "/manage/filename-to-storename/",
             type: "POST",
             data: post_dict,
             dataType: "json",
@@ -177,29 +250,31 @@
             },
             success: function (sdata) {
                 console.log(sdata);
+                showBody();
                 if (sdata.statue == '0'){
-                    showBody();
-                    alert("删除文件成功!");
+                    $('#myModal').modal('hide');
+                    alert("删除成功!");
                 }else{
-                    showBody();
-                    alert("删除文件失败: " + sdata.msg);
+                    alert("删除失败: " + sdata.msg);
                 }
                 location.reload();
             }, error: function (edata) {
                 showBody();
-                alert("删除文件失败" + edata);
+                console.log(edata)
+                alert("删除失败" + edata);
 
             }
         });
     }
 
-    function  statement_update_file(filename) {
-        var post_dict = {"filename": filename,
-            "action_type": "update_statement",
+    function  update_line(thisobj) {
+        update_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+        var post_dict = {"update_id": update_id,
+            "action_type": "update",
             "csrfmiddlewaretoken": csrf_token};
         console.log(post_dict);
         $.ajax({
-           url: "/manage/files-list/",
+           url: "/manage/filename-to-storename/",
             type: "POST",
             data: post_dict,
             dataType: "json",
@@ -208,10 +283,11 @@
                showMask();
             },
             success: function (sdata) {
-                console.log(sdata)
+{#                console.log(sdata)#}
                 if (sdata.statue == '0'){
+                    infos_to_modal(sdata.infos);
                     showBody();
-                    alert("更新成功!");
+                    $('#add_line').modal('show');
                 }else{
                     showBody();
                     alert("更新失败, "+sdata.msg);
@@ -222,6 +298,54 @@
                 alert("更新失败!" + edata.msg);
             }
         });
+    }
+    
+    function  add_line() {
+        var action_type = "add";
+        var serial_number = $("[name='serial_number']").val();
+        var storename  = $("[name='storename']").val();
+        var email  =  $("[name='email']").val();
+        var password = $("[name='password']").val()
+        var csrf_token = $("[name='csrfmiddlewaretoken']").val();
+        post_dict = {"action_type":action_type, "serial_number": serial_number,
+            "storename":storename, "email": email,
+            "password": password, "csrfmiddlewaretoken":csrf_token}
+        $.ajax({
+            url: "/manage/filename-to-storename/",
+            type: "POST",
+            data: post_dict,
+            dataType: "json",
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+            },
+            success: function (sdata) {
+                showBody();
+                if (sdata.statue == '0'){
+                    $("#add_line").modal('hide');
+                    alert("操作成功!")
+                    location.reload();
+                }else{
+                    alert("操作失败: "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                showBody();
+                alert("操作失败!" + edata);
+            }
+        });
+    }
+
+    function infos_to_modal(infos){
+        $("[name='storename']").val(infos.storename);
+        $("[name='email']").val(infos.email);
+        $("[name='serial_number']").val(infos.serial_number);
+    }
+
+    function delete_modal_data(){
+        $("[name='storename']").val("");
+        $("[name='email']").val("");
+        $("[name='serial_number']").val("");
     }
 
     function showMask(){
@@ -235,6 +359,17 @@
         $("#loading").empty();
 {#        $("#cover").show();#}
     }
+
+
+
+    function init() {
+        if ("{{ result.statue }}" == "0"){
+            $("#alert-error-id").css("display", "block");
+            $("#alert-error-id > a").text("{{ result.msg }}");
+        }
+        delete_modal_data();
+    }
+    init();
     </script>
 
 

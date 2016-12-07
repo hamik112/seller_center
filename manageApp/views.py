@@ -14,6 +14,8 @@ from manageApp.dataService.deal_xls import read_xls
 from manageApp.dataService.JSON_serial import json_serial
 from manageApp.dataService.dataImport import  StatementViewImport
 
+from manageApp.dataService.filename_to_storename import FilenameStoreName
+
 # Create your views here.
 
 def login(request):
@@ -78,7 +80,28 @@ def list_fils_json(request):
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def filename_to_storename(request):
+    if request.method == "POST":
+        fsn = FilenameStoreName()
+        if request.POST.get("action_type","") == "delete":
+            result = fsn.post_delete_line(request.POST)
+            return HttpResponse(json.dumps(result, default=json_serial))
+        elif request.POST.get("action_type", "") == "add":
+            result = fsn.post_add_line(request.POST)
+            return HttpResponse(json.dumps(result, default=json_serial))
+        elif request.POST.get("action_type", "") == "update":
+            result = fsn.post_update_line(request.POST)
+            return HttpResponse(json.dumps(result, default=json_serial))
+        return render(request,"filename_to_storename.html", locals())
+    else:
+        return render(request, 'filename_to_storename.html', locals())
 
-    return render(request, 'filename_to_storename.html', locals())
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def filename_to_storename_json(request):
+    result = FilenameStoreName().read_data()
+    print result
+    return HttpResponse(json.dumps(result, default=json_serial))
+
 
 

@@ -84,7 +84,10 @@ def download_file(request):
     if not file_name:
         return HttpResponseRedirect("/date-range-reports/")
     the_file_name = file_name.split("/")[-1]
-    response = StreamingHttpResponse(file_iterator(file_name))
+    try:
+        response = StreamingHttpResponse(file_iterator(file_name))
+    except:
+        return HttpResponseRedirect("/date-range-reports/")
     response['Content-Type'] = 'application/' + str(file_type)
     response['Content-Disposition'] = 'attachment;filename="{0}"'.format(the_file_name)
     return response

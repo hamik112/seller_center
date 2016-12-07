@@ -1,3 +1,4 @@
+# encoding:utf-8
 from django.db import models
 
 from django.utils import timezone
@@ -5,6 +6,7 @@ from django.utils import timezone
 
 
 class UploadFileRecorde(models.Model):
+    """ 记录上传的文件 """
     id         =  models.AutoField(primary_key=True,null=False)
     filename   =  models.CharField( max_length=255, default="", null=False)
     file_path  =  models.CharField( max_length=500, default="", null=False)
@@ -13,13 +15,32 @@ class UploadFileRecorde(models.Model):
 
     class Meta:
         db_table = "upload_file_recorde"
-
     def __unicode__(self):
         return self.filename
 
 
 
+class FilenameToStorename(models.Model):
+    """ 文件名与店铺的对应 """
+    id              =  models.AutoField( primary_key=True, null=False)
+    filename        =  models.CharField( max_length= 300, null=False)
+    serial_number   =  models.CharField( max_length=50, default="", unique=True,null=False)
+    storename       =  models.CharField( max_length= 100,default="", null=False)
+    email           =  models.CharField( max_length= 50, default="",unique=True, null=False)      #email即是用户名不能重复
+    password        =  models.CharField( max_length= 100, default="starmerx", null=False)
+
+    create_time     =  models.DateTimeField( default=timezone.now())
+    update_time     =  models.DateTimeField( default=timezone.now())
+
+    class Meta:
+        db_table = "filename_to_storename"
+
+    def __unicode__(self):
+        return self.filename
+
+
 class StatementView(models.Model):
+    """ date range reports 报表"""
     id              =  models.AutoField( primary_key=True, null=False)
     # date_time    =  models.CharField( max_length=50, default="", null=False)
     date_time       = models.DateTimeField( default=timezone.now(), null=False)
