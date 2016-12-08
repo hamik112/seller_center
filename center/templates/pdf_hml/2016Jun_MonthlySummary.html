@@ -40,10 +40,18 @@
 					<div class="stl_01" style="top:11.1169em; left:63.7325em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:12.0719em; left:63.7325em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:16.0135em; left:2.0042em;"><span class="stl_19 stl_13 stl_09" style="font-weight:bold;">Income &nbsp;</span></div>
+                {% if Income %}
+                    <div class="stl_01" style="top:15.8772em; left:{{ Income.number_length }}em;"><span class="stl_21 stl_13 stl_11" style="font-weight:bold;">{{ Income.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:15.8772em; left:28.1058em;"><span class="stl_21 stl_13 stl_11" style="font-weight:bold;">7,038.51 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:17.2519em; left:30.17em;"><span class="stl_20 stl_08 stl_11">Credits &nbsp;</span></div>
 					<div class="stl_01" style="top:16.016em; left:33.97em;"><span class="stl_19 stl_13 stl_09" style="font-weight:bold;">Expenses &nbsp;</span></div>
+                {% if Exception %}
+                    <div class="stl_01" style="top:15.8797em; left:{{ Exception.number_length }}em;"><span class="stl_21 stl_13 stl_11" style="font-weight:bold;">{{ Exception.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:15.8797em; left:59.8233em;"><span class="stl_21 stl_13 stl_11" style="font-weight:bold;">-1,401.35 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:17.2519em; left:62.1667em;"><span class="stl_20 stl_08 stl_11">Credits &nbsp;</span></div>
 					<div class="stl_01" style="top:17.2519em; left:24.5783em;"><span class="stl_20 stl_08 stl_11">Debits &nbsp;</span></div>
 					<div class="stl_01" style="top:17.2519em; left:56.5875em;"><span class="stl_20 stl_08 stl_11">Debits &nbsp;</span></div>
@@ -55,68 +63,206 @@
                 {% else %}
 					<div class="stl_01" style="top:18.4878em; left:29.7458em;"><span class="stl_20 stl_08 stl_11">6,771.03 &nbsp;</span></div>
                 {% endif %}
+
+                {% if FBA_product_sales %}
+                    <div class="stl_01" style="top:20.3394em; left:{{ FBA_product_sales.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_product_sales.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:20.3394em; left:31.6925em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+				{% endif %}
 					<div class="stl_01" style="top:18.5053em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Seller fulfilled selling fees &nbsp;</span></div>
 					<div class="stl_01" style="top:19.4386em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">FBA selling fees &nbsp;</span></div>
+                {% if seller_fulfilled_selling_fees %}
+                    <div class="stl_01" style="top:18.5053em; left:{{ seller_fulfilled_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ seller_fulfilled_selling_fees.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:18.5053em; left:55.775em;"><span class="stl_20 stl_08 stl_11">-1,412.43 &nbsp;</span></div>
+			    {% endif %}
+                {% if FBA_selling_fees %}
+                    <div class="stl_01" style="top:19.4386em; left:{{ FBA_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_selling_fees.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:19.4386em; left:57.8892em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+                {% if  product_refund %}
+                    <div class="stl_01" style="top:19.4061em; left:{{ product_refund.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ product_refund.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:19.4061em; left:24.2525em;"><span class="stl_20 stl_08 stl_11">-230.32 &nbsp;</span></div>
+                {% endif %}
+
+                {% if FBA_product_refund %}
+                    <div class="stl_01" style="top:21.3036em; left:{{ FBA_product_refund.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_product_refund.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:21.3036em; left:25.9067em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:20.3878em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Selling fee refunds &nbsp;</span></div>
+
+                {% if  selling_fee_refund %}
+                    <div class="stl_01" style="top:20.3878em; left:{{ selling_fee_refund.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ selling_fee_refund.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:20.3878em; left:62.5542em;"><span class="stl_20 stl_08 stl_11">52.26 &nbsp;</span></div>
+			    {% endif %}
 					<div class="stl_01" style="top:21.3036em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">FBA product sale refunds &nbsp;</span></div>
 					<div class="stl_01" style="top:21.3219em; left:33.92em;"><span class="stl_20 stl_08 stl_09" style="word-spacing:0.0001em;">FBA transaction fees &nbsp;</span></div>
 					<div class="stl_01" style="top:22.2553em; left:33.92em;"><span class="stl_20 stl_08 stl_09" style="word-spacing:0.0001em;">FBA transaction fee refunds &nbsp;</span></div>
 					<div class="stl_01" style="top:23.1736em; left:33.92em;"><span class="stl_20 stl_08 stl_09" style="word-spacing:0.0002em;">Other transaction fees &nbsp;</span></div>
 					<div class="stl_01" style="top:24.1686em; left:33.92em;"><span class="stl_20 stl_08 stl_09" style="word-spacing:0.0001em;">Other transaction fee refunds &nbsp;</span></div>
+
+                {% if fba_transaction_fees %}
+                    <div class="stl_01" style="top:21.3211em; left:{{ fba_transaction_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ fba_transaction_fees.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:21.3211em; left:57.9192em;"><span class="stl_20 stl_08 stl_09">0</span></div>
-					<div class="stl_01" style="top:23.1736em; left:57.9192em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+                {% if other_transaction_fees %}
+                    <div class="stl_01" style="top:23.1736em; left:{{ other_transaction_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ other_transaction_fees.number }}</span></div>
+                {% else %}
+                    <div class="stl_01" style="top:23.1736em; left:57.9192em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+				{% endif %}
 					<div class="stl_01" style="top:22.2836em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">FBA inventory credit &nbsp;</span></div>
 					<div class="stl_01" style="top:23.1561em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Shipping credits &nbsp;</span></div>
+                {% if FBA_invenbry_credit %}
+                   <div class="stl_01" style="top:22.2836em; left:{{ FBA_invenbry_credit.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_invenbry_credit.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:22.2836em; left:31.73em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+
+                {% if fba_transaction_fee_refunds %}
+                    <div class="stl_01" style="top:22.2553em; left:{{ fba_transaction_fee_refunds.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ fba_transaction_fee_refunds.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:22.2553em; left:63.7425em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+				{% endif %}
+                {% if other_transaction_fee_refunds %}
+                    <div class="stl_01" style="top:24.1686em; left:{{ other_transaction_fee_refunds.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ other_transaction_fee_refunds.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:24.1686em; left:63.7208em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+                {% if shipping_credits %}
+                    <div class="stl_01" style="top:23.1561em; left:{{ shipping_credits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ shipping_credits.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:23.1561em; left:30.2783em;"><span class="stl_20 stl_08 stl_11">575.38 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:24.0894em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0004em;">Shipping credit refunds &nbsp;</span></div>
 					<div class="stl_01" style="top:25.0236em; left:1.9792em;"><span class="stl_20 stl_08 stl_09" style="word-spacing:0.0003em;">Gift wrap credits &nbsp;</span></div>
+
+                {% if shipping_credits_refund %}
+                    <div class="stl_01" style="top:24.0894em; left:{{ shipping_credits_refund.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ shipping_credits_refund.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:24.0894em; left:24.5925em;"><span class="stl_20 stl_08 stl_11">-60.00 &nbsp;</span></div>
+                {% endif %}
+
+                {% if gift_wrap_credits %}
+                    <div class="stl_01" style="top:25.0228em; left:{{ gift_wrap_credits.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ gift_wrap_credits.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:25.0228em; left:31.7233em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+
+                {% if promotional_rebates_refund %}
+                    <div class="stl_01" style="top:27.9011em; left:{{ promotional_rebates_refund.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ promotional_rebates_refund.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:27.9011em; left:31.7233em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:25.1019em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">FBA inventory and inbound services fees &nbsp;</span></div>
 					<div class="stl_01" style="top:26.0511em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Shipping label purchases &nbsp;</span></div>
 					<div class="stl_01" style="top:26.9628em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Shipping label refunds &nbsp;</span></div>
+                {% if FBA_inventory_inbound_services_fees %}
+                    <div class="stl_01" style="top:25.1019em; left:{{ FBA_inventory_inbound_services_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_inventory_inbound_services_fees.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:25.1019em; left:57.965em;"><span class="stl_20 stl_08 stl_09">0</span></div>
-					<div class="stl_01" style="top:26.0511em; left:57.95em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+                {% if Shipping_label_purchases %}
+                    <div class="stl_01" style="top:26.0511em; left:{{ Shipping_label_purchases.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ Shipping_label_purchases.number }}</span></div>
+                {% else %}
+                    <div class="stl_01" style="top:26.0511em; left:57.95em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:26.0028em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0004em;">Gift wrap credit refunds &nbsp;</span></div>
 					<div class="stl_01" style="top:26.9669em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Promotional rebates &nbsp;</span></div>
+
+                {% if gift_wrap_credits_refund %}
+                    <div class="stl_01" style="top:26.0028em; left:{{ gift_wrap_credits_refund.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ gift_wrap_credits_refund.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:26.0028em; left:25.9375em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+
+                {% if promotional_rebates %}
+                     <div class="stl_01" style="top:26.9669em; left:{{ promotional_rebates.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ promotional_rebates.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:26.9669em; left:25.9525em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+				{% endif %}
+                {% if Shipping_label_refunds %}
+                    <div class="stl_01" style="top:26.9628em; left:{{ Shipping_label_refunds.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ Shipping_label_refunds.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:26.9628em; left:63.7208em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
+                {% if carrier_shipping_label_adjustments %}
+                    <div class="stl_01" style="top:27.9361em; left:{{ carrier_shipping_label_adjustments.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ carrier_shipping_label_adjustments.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:27.9361em; left:63.7158em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:27.9011em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Promotional rebate refunds &nbsp;</span></div>
 					<div class="stl_01" style="top:28.7828em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">A-to-z Guarantee claims &nbsp;</span></div>
 					<div class="stl_01" style="top:27.9236em; left:33.9192em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Carrier shipping label adjustments &nbsp;</span></div>
 					<div class="stl_01" style="top:28.8878em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0001em;">Service fees &nbsp;</span></div>
+                {% if a_to_z_guarantee_chaims %}
+                    <div class="stl_01" style="top:28.7828em; left:{{ a_to_z_guarantee_chaims.number_length }}em;"><span class="stl_20 stl_08 stl_11">0 &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:28.7828em; left:24.5925em;"><span class="stl_20 stl_08 stl_11">-17.58 &nbsp;</span></div>
+                {% endif %}
+                {% if chargebacks %}
+                    <div class="stl_01" style="top:29.8294em; left:{{ chargebacks.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ chargebacks.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:29.8294em; left:25.9225em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+				{% endif %}
+                {% if Service_fees %}
+                    <div class="stl_01" style="top:28.8878em; left:{{ Service_fees.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ Service_fees.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:28.8878em; left:56.5892em;"><span class="stl_20 stl_08 stl_11">-39.99 &nbsp;</span></div>
+                {% endif %}
+                {% if Refund_administration_fees %}
+                    <div class="stl_01" style="top:29.8519em; left:{{ Refund_administration_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ Refund_administration_fees.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:29.8519em; left:56.9433em;"><span class="stl_20 stl_08 stl_09">-1.19 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:29.8294em; left:1.9792em;"><span class="stl_20 stl_08 stl_11">Chargebacks &nbsp;</span></div>
 					<div class="stl_01" style="top:29.8519em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Refund administration fees &nbsp;</span></div>
 					<div class="stl_01" style="top:30.8694em; left:33.92em;"><span class="stl_20 stl_08 stl_09">Adjustments &nbsp;</span></div>
+                {% if Adjustments %}
+                    <div class="stl_01" style="top:30.8819em; left:{{ Adjustments.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ Adjustments.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:30.8819em; left:63.6667em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:31.9053em; left:33.9542em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0005em;">Cost of Advertising &nbsp;</span></div>
 					<div class="stl_01" style="top:32.9103em; left:33.9767em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">Refund for Advertiser &nbsp;</span></div>
+                {% if cost_of_advertising %}
+                    <div class="stl_01" style="top:31.9869em; left:{{ cost_of_advertising.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ cost_of_advertising.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:31.9869em; left:58.0092em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:32.1711em; left:17.7483em;"><span class="stl_22 stl_08 stl_09" style="font-weight:bold;">subtotals &nbsp;</span></div>
-					<div class="stl_01" style="top:32.1761em; left:24.2375em;"><span class="stl_20 stl_08 stl_11">-307.90 &nbsp;</span></div>
-					<div class="stl_01" style="top:32.1761em; left:29.7458em;"><span class="stl_20 stl_08 stl_11">7,346.41 &nbsp;</span></div>
+                {% if income_subtotal_debits %}
+                    <div class="stl_01" style="top:32.1761em; left:{{ income_subtotal_debits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ income_subtotal_debits.number }} &nbsp;</span></div>
+                {% else %}
+					<div class="stl_01" style="top:32.1761em; left:24.2375em;"><span class="stl_20 stl_08 stl_11">0 &nbsp;</span></div>
+				{% endif %}
+                {% if income_subtotal_credits %}
+                    <div class="stl_01" style="top:32.1761em; left:{{ income_subtotal_credits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ income_subtotal_credits.number }} &nbsp;</span></div>
+                {% else %}
+					<div class="stl_01" style="top:32.1761em; left:29.7458em;"><span class="stl_20 stl_08 stl_11">0 &nbsp;</span></div>
+                {% endif %}
+                {% if refund_for_advertiser %}
+                    <div class="stl_01" style="top:33.1344em; left:{{ refund_for_advertiser.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ refund_for_advertiser.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:33.1344em; left:63.665em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:34.2777em; left:2.0042em;"><span class="stl_19 stl_13 stl_11" style="font-weight:bold;">Transfers &nbsp;</span></div>
 					<div class="stl_01" style="top:34.1414em; left:31.43em;"><span class="stl_21 stl_13 stl_09" style="font-weight:bold;">0</span></div>
 					<div class="stl_01" style="top:34.8553em; left:49.7867em;"><span class="stl_22 stl_08 stl_09" style="font-weight:bold;">subtotals &nbsp;</span></div>
+                {% if expense_subtotal_debits %}
+                    <div class="stl_01" style="top:34.8578em; left:{{ expense_subtotal_debits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ expense_subtotal_debits.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:34.8578em; left:55.7942em;"><span class="stl_20 stl_08 stl_11">-1,453.61 &nbsp;</span></div>
+                {% endif %}
+                {% if expense_subtotal_credits %}
+                    <div class="stl_01" style="top:34.9319em; left:{{ expense_subtotal_credits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ expense_subtotal_credits.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:34.9319em; left:62.6667em;"><span class="stl_20 stl_08 stl_11">52.26 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:35.6186em; left:24.6325em;"><span class="stl_20 stl_08 stl_11">Debits &nbsp;</span></div>
 					<div class="stl_01" style="top:36.7828em; left:25.9617em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:35.6186em; left:30.2292em;"><span class="stl_20 stl_08 stl_11">Credits &nbsp;</span></div>
