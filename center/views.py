@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from center.dataService.data_format import file_iterator
+from center.dataService.summary_pdf_data import SummaryPdfData
 # Create your views here.
 
 
@@ -67,10 +68,18 @@ def statement_view(request):
 
 
 
-# @login_required(login_url="/amazon-login/")
+@login_required(login_url="/amazon-login/")
 def pdf_file_view(request):
+    username = request.user.username
     month = request.GET.get("month", "")
-
+    year  = request.GET.get("year", "")
+    begin_date, end_date = request.GET.get("begin_date", ""), request.GET.get("end_date",  "")
+    print username, month, year, begin_date, end_date
+    parmas = {"month":month, "year":year, "begin_date":begin_date, "end_date":end_date}
+    spd = SummaryPdfData(username=username, **parmas)
+    storename = spd.get_storename()
+    product_sales = spd.product_sales()
+    print storename, product_sales
     return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
 
 

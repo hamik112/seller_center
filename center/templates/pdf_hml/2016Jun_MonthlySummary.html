@@ -19,10 +19,10 @@
 					<div class="stl_01" style="top:1.4486em; left:61.64em;"><span class="stl_07 stl_08 stl_09" style="font-weight:bold; word-spacing:0em;">Page 1 of 1 &nbsp;</span></div>
 					<div class="stl_01" style="top:2.2603em; left:32.9492em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0004em;">Display name: &nbsp;</span></div>
 					<div class="stl_01" style="top:3.1028em; left:32.9492em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0003em;">Legal name: &nbsp;</span></div>
-					<div class="stl_01" style="top:2.214em; left:41.6342em;"><span class="stl_12 stl_13 stl_11" style="word-spacing:0.0002em;">Meridian Store &nbsp;</span></div>
-					<div class="stl_01" style="top:3.0565em; left:41.6342em;"><span class="stl_12 stl_13 stl_09" style="word-spacing:0.0002em;">T. Tenson Ge &nbsp;</span></div>
+					<div class="stl_01" style="top:2.214em; left:41.6342em;"><span class="stl_12 stl_13 stl_11" style="word-spacing:0.0002em;">{% if storename %}{{ storename }}{% else %}Meridian Store{% endif %} &nbsp;</span></div>
+					<div class="stl_01" style="top:3.0565em; left:41.6342em;"><span class="stl_12 stl_13 stl_09" style="word-spacing:0.0002em;">{% if storename %}{{ storename }}{% else %}T. Tenson Ge{% endif %} &nbsp;</span></div>
 					<div class="stl_01" style="top:3.7244em; left:1.44em;"><a href="https://sellercentral.amazon.com/gp/help/200989210" target="_blank"><span class="stl_14 stl_08 stl_11" style="word-spacing:0.0003em;">Questions? Get Help Online &nbsp;</span></a></div>
-					<div class="stl_01" style="top:5.3144em; left:1.6858em;"><span class="stl_15 stl_13 stl_11" style="word-spacing:0.0003em;">Account activity from Jun 1, 2016 through Jun 30, 2016 &nbsp;</span></div>
+					<div class="stl_01" style="top:5.3144em; left:1.6858em;"><span class="stl_15 stl_13 stl_11" style="word-spacing:0.0003em;">Account activity from {% if begin_date %}{{ begin_date }}{% else %}Jun 1, 2016{% endif %} through {% if end_date %}{{ end_date }}{% else %}Jun 30, 2016{% endif %} &nbsp;</span></div>
 					<div class="stl_01" style="top:5.4585em; left:53.3333em;"><span class="stl_16 stl_17 stl_18" style="word-spacing:0.0003em;">All amounts in USD, unless specified &nbsp;</span></div>
 					<div class="stl_01" style="top:6.6594em; left:2.0042em;"><span class="stl_19 stl_13 stl_11" style="font-weight:bold;">Summaries &nbsp;</span></div>
 					<div class="stl_01" style="top:6.7503em; left:11.3633em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Can include Amazon Marketplace, Fulfillment by Amazon (FBA), and Amazon Webstore transactions &nbsp;</span></div>
@@ -50,7 +50,11 @@
 					<div class="stl_01" style="top:18.4878em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0004em;">Product sales (non-FBA) &nbsp;</span></div>
 					<div class="stl_01" style="top:19.4061em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Product sale refunds (non-FBA) &nbsp;</span></div>
 					<div class="stl_01" style="top:20.3394em; left:1.9792em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0004em;">FBA product sales &nbsp;</span></div>
+                {% if product_sales %}
+                    <div class="stl_01" style="top:18.4878em; left:{{ product_sales.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ product_sales.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:18.4878em; left:29.7458em;"><span class="stl_20 stl_08 stl_11">6,771.03 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:20.3394em; left:31.6925em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:18.5053em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Seller fulfilled selling fees &nbsp;</span></div>
 					<div class="stl_01" style="top:19.4386em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">FBA selling fees &nbsp;</span></div>
