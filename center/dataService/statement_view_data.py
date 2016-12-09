@@ -59,7 +59,7 @@ class StatementViewData(object):
             pdf_url = pdf_url.replace(" ", "%20").replace(",","%2c")
             print pdf_url
             date = datetime.datetime.now()
-            datestr = date.strftime("%Y-%m-%d")
+            datestr = date.strftime("%Y-%m-%d_%H:%M:%S'")
             return_dict = self.write_recorde_generate_report()
             result = self.web_html_to_pdf(pdf_url, datestr+"_output.pdf")
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
