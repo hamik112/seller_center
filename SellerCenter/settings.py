@@ -149,7 +149,7 @@ if not os.path.exists(UPLOAD_PATH):
     os.mkdir(UPLOAD_PATH)
 
 
-GENERATE_REPORT_PATH = os.path.join(BASE_DIR, "center/static/GENERATE_REPORT")  #生成的报表路径
+GENERATE_REPORT_PATH = os.path.join(BASE_DIR, "center/GENERATE_REPORT")  #生成的报表路径
 if not os.path.exists(GENERATE_REPORT_PATH):
     os.mkdir(GENERATE_REPORT_PATH)
 

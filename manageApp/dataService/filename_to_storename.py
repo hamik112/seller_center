@@ -86,7 +86,6 @@ class FilenameStoreName(object):
 
 
     def post_add_line(self, post_dict):
-        print post_dict
         keys_list = ["serial_number", "storename", "email", "password"]
         params_dict = {}.fromkeys(keys_list, "")
         for name in keys_list:
