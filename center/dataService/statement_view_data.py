@@ -59,7 +59,7 @@ class StatementViewData(object):
             pdf_url = pdf_url.replace(" ", "%20").replace("&","\&").replace("%", "\%").replace(",", "\,")
             print pdf_url
             date = datetime.datetime.now()
-            datestr = date.strftime("%Y-%m-%d_%H:%M:%S")
+            datestr = date.strftime("%Y-%m-%d_%H-%M-%S")
             return_dict = self.write_recorde_generate_report()
             result = self.web_html_to_pdf(str(pdf_url), datestr+"_output.pdf")
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
@@ -148,13 +148,16 @@ class StatementViewData(object):
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
         try:
             filename = output_file_name.split(".")[0]
-            output_file_name = filename + ".png"
+            output_file_name_png = filename + ".png"
             pdf_filename = filename + ".pdf"
             print output_file_name, pdf_filename
-            bash_str = "wkhtmltopdf" +" " + url+ "  " + output_file_name
-            convert_img_pdf_bash_str = "convert" + " " + output_file_name + "  " + pdf_filename
+            # bash_str = "wkhtmltoimage" +" " + url+ "  " + output_file_name_png
+            bash_str = "wkhtmltopdf " + " " + url + " " + pdf_filename
+            convert_img_pdf_bash_str = "convert" + " " + output_file_name_png + "  " + pdf_filename
             os.popen(bash_str)
             # os.system(convert_img_pdf_bash_str)
+            # output_file_name = output_file_name_png
+            output_file_name = pdf_filename
         except Exception, e:
             print "html to pdf error: ", str(e)
             statue = False
