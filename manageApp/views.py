@@ -110,7 +110,6 @@ def filename_to_storename(request):
 @login_required(login_url="/manage/user-login")
 def filename_to_storename_json(request):
     result = FilenameStoreName().read_data()
-    print result
     return HttpResponse(json.dumps(result, default=json_serial))
 
 
