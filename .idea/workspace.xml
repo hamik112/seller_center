@@ -4,9 +4,6 @@
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" afterPath="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/dataService/upload_file.py" afterPath="$PROJECT_DIR$/manageApp/dataService/upload_file.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/templates/filename_to_storename.html" afterPath="$PROJECT_DIR$/manageApp/templates/filename_to_storename.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/views.py" afterPath="$PROJECT_DIR$/manageApp/views.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -60,11 +57,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filename_to_storename.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="filename_to_storename.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="52" />
+            <state relative-caret-position="617">
+              <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
               <folding>
                 <element signature="e#40#83#0" expanded="true" />
               </folding>
@@ -72,11 +69,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="filename_to_storename.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="filename_to_storename.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manageApp/templates/filename_to_storename.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="168" column="31" selection-start-line="168" selection-start-column="31" selection-end-line="168" selection-end-column="31" />
+            <state relative-caret-position="195">
+              <caret line="152" column="43" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
               <folding>
                 <element signature="e#6777#6803#0#HTML" expanded="true" />
               </folding>
@@ -193,8 +190,8 @@
         <option value="$PROJECT_DIR$/manageApp/tasks.py" />
         <option value="$PROJECT_DIR$/manageApp/views.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/upload_file.py" />
-        <option value="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" />
         <option value="$PROJECT_DIR$/manageApp/templates/filename_to_storename.html" />
+        <option value="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" />
       </list>
     </option>
   </component>
@@ -205,8 +202,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="266" />
-    <option name="y" value="66" />
+    <option name="x" value="69" />
+    <option name="y" value="38" />
     <option name="width" value="1737" />
     <option name="height" value="1014" />
   </component>
@@ -606,7 +603,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="266" y="66" width="1737" height="1014" extended-state="0" />
+    <frame x="69" y="38" width="1737" height="1014" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18612923" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -616,7 +613,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21612541" sideWeight="0.49573106" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19148937" sideWeight="0.49573106" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -996,22 +993,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py">
+    <entry file="file://$PROJECT_DIR$/manageApp/templates/filename_to_storename.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="115" column="28" selection-start-line="115" selection-start-column="28" selection-end-line="115" selection-end-column="52" />
+        <state relative-caret-position="195">
+          <caret line="152" column="43" selection-start-line="152" selection-start-column="43" selection-end-line="152" selection-end-column="43" />
           <folding>
-            <element signature="e#40#83#0" expanded="true" />
+            <element signature="e#6777#6803#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/manageApp/templates/filename_to_storename.html">
+    <entry file="file://$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="168" column="31" selection-start-line="168" selection-start-column="31" selection-end-line="168" selection-end-column="31" />
+        <state relative-caret-position="617">
+          <caret line="146" column="24" selection-start-line="146" selection-start-column="24" selection-end-line="146" selection-end-column="24" />
           <folding>
-            <element signature="e#6777#6803#0#HTML" expanded="true" />
+            <element signature="e#40#83#0" expanded="true" />
           </folding>
         </state>
       </provider>

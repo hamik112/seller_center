@@ -142,9 +142,10 @@ class FilenameStoreName(object):
                 if not line[header_dict.get(name)]:
                     error_list.append(str(n)+":"+str(line) )
                     continue
-                tmp_dict["password"] = "starmerx"
+            tmp_dict["password"] = "starmerx"
+            if "" in tmp_dict.values():
+                continue
             self.post_add_line(tmp_dict)
-        print error_list
         if len(error_list) > 0:
             msg = "还有 %s 没有添加!" % (str(len(error_list)))
         else:
