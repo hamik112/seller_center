@@ -58,7 +58,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'center',
     'manageApp',
-
     'djcelery',
     #'kombu.transport.django'
 )

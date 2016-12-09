@@ -1,5 +1,6 @@
 # encoding:utf-8
 import  json
+import  datetime
 
 from django.http import StreamingHttpResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
@@ -68,12 +69,15 @@ def statement_view(request):
 
 
 
-@login_required(login_url="/amazon-login/")
+# @login_required(login_url="/amazon-login/")
 def pdf_file_view(request):
     username = request.user.username
     month = request.GET.get("month", "")
     year  = request.GET.get("year", "")
-    begin_date, end_date = request.GET.get("begin_date", ""), request.GET.get("end_date",  "")
+    begin_date_str, end_date_str = request.GET.get("begin_date", ""), request.GET.get("end_date",  "")
+    print username, month, year, begin_date_str,"||", end_date_str
+    begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
+    end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y")
     print username, month, year, begin_date, end_date
     parmas = {"month":month, "year":year, "begin_date":begin_date, "end_date":end_date}
     spd = SummaryPdfData(username=username, **parmas)

@@ -5,6 +5,8 @@ import  os
 import  datetime
 import calendar
 import time
+import  urllib
+import  pdfkit
 
 from django.conf import settings
 
@@ -24,6 +26,17 @@ class StatementViewData(object):
     def __init__(self, request):
         self.request =  request
         self.post_dict = request.POST if request.POST else {}
+        self.reportType = self.post_dict.get("reportType")
+        self.year = self.post_dict.get("year")
+        self.timeRangeType = self.post_dict.get("timeRangeType", "")
+        self.month = self.post_dict.get("month", "")
+        # print reportType, year, timeRangeType, month
+        if self.timeRangeType == "Monthly":
+            self.current_month = self.get_month_day(self.year, self.month)
+            self.timeRange = str(self.current_month.get("day_begin", "")) +" - "+ str(self.current_month.get("day_end", ""))
+        else:
+            self.timeRange = ""
+            self.current_month = {}
         pass
 
     def statement_data_read(self):
@@ -39,7 +52,12 @@ class StatementViewData(object):
     def request_report(self):
         if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf
             cur_path = self.request.get_host()
-            pdf_url = "http://" + cur_path + "/summary-pdf/"
+            pdf_url = "http://" + cur_path + "/summary-pdf/?"
+            pdf_url  +=  "year="+self.year+"&month="+self.month + \
+                       "&begin_date="+str(self.current_month.get("day_begin", "")) + \
+                       "&end_date="+  str(self.current_month.get("day_end", ""))
+            pdf_url = pdf_url.replace(" ", "%20").replace(",","%2c")
+            print pdf_url
             date = datetime.datetime.now()
             datestr = date.strftime("%Y-%m-%d")
             return_dict = self.write_recorde_generate_report()
@@ -70,19 +88,10 @@ class StatementViewData(object):
 
 
     def write_recorde_generate_report(self):
-        reportType = self.post_dict.get("reportType")
-        year = self.post_dict.get("year")
-        timeRangeType = self.post_dict.get("timeRangeType")
-        month = self.post_dict.get("month", "")
-        # print reportType, year, timeRangeType, month
-        if timeRangeType == "Monthly":
-            current_month = self.get_month_day(year, month)
-            timeRange = str(current_month.get("day_begin", "")) +" - "+ str(current_month.get("day_end", ""))
-        else:
-            timeRange = ""
+
         request_date = datetime.datetime.now().strftime("%b %m, %Y")
-        recorde_dict = {"reportType": reportType, "year": year, "is_custom": "Custom", "timeRange": timeRange,
-                        "timeRangeType": timeRangeType, "month": month, "action_statue": 0,"request_date":request_date}
+        recorde_dict = {"reportType": self.reportType, "year": self.year, "is_custom": "Custom", "timeRange": self.timeRange,
+                        "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": 0,"request_date":request_date}
         return_id = -1
         # print "recorde_dict: ", recorde_dict
         gr = GenerateReport(**recorde_dict)
@@ -91,8 +100,8 @@ class StatementViewData(object):
             return_id = gr.id
         except Exception, e:
             print "Error, ",str(e)
-        return {"return_id":return_id, "year": year, "month":month,
-                "timeRange":timeRange}
+        return {"return_id":return_id, "year": self.year, "month":self.month,
+                "timeRange":self.timeRange}
 
 
     def update_recorde_generate_report_statue(self, recorde_id, file_path_name):
@@ -129,6 +138,7 @@ class StatementViewData(object):
         statue, msg, output_file_name = True, "", ""
         output_file_name = os.path.join(get_path(GenerateReport_PATH), output_file)
         user_email = self.request.user.username
+        # options = {"year":self.year, "month":self.month,"begin_date":self.}
         try:
             serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
         except Exception, e:
@@ -137,7 +147,9 @@ class StatementViewData(object):
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
         try:
-            os.system("wkhtmltopdf " + url+ " " + output_file_name)
+            config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
+            pdfkit.from_url(url, output_file_name, configuration=config)
+            # os.system("wkhtmltopdf " + url+ " " + output_file_name)
         except Exception, e:
             print "html to pdf error: ", str(e)
             statue = False
