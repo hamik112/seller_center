@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/views.py" afterPath="$PROJECT_DIR$/manageApp/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stop.sh" afterPath="$PROJECT_DIR$/stop.sh" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,7 +25,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manageApp/views.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="574">
@@ -33,6 +33,16 @@
               <folding>
                 <element signature="e#18#30#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stop.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/stop.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="54">
+              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -93,16 +103,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks_util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/dataService/tasks_util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="430">
-              <caret line="28" column="36" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/manageApp/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -141,7 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/center/templates/advertising.html" />
         <option value="$PROJECT_DIR$/center/templates/performance.html" />
         <option value="$PROJECT_DIR$/center/templates/Home.html" />
         <option value="$PROJECT_DIR$/SellerCenter/urls.py" />
@@ -192,6 +191,7 @@
         <option value="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" />
         <option value="$PROJECT_DIR$/manageApp/templates/filename_to_storename.html" />
         <option value="$PROJECT_DIR$/manageApp/views.py" />
+        <option value="$PROJECT_DIR$/stop.sh" />
       </list>
     </option>
   </component>
@@ -664,13 +664,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="2037" column="40" selection-start-line="2037" selection-start-column="22" selection-end-line="2037" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/static/js/rainier-payments-MYP-UI-220489252._V1_.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="319">
@@ -1010,6 +1003,14 @@
           <folding>
             <element signature="e#18#30#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stop.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+          <folding />
         </state>
       </provider>
     </entry>
