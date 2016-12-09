@@ -75,10 +75,10 @@ def pdf_file_view(request):
     month = request.GET.get("month", "")
     year  = request.GET.get("year", "")
     begin_date_str, end_date_str = request.GET.get("begin_date", ""), request.GET.get("end_date",  "")
-    print username, month, year, begin_date_str,"||", end_date_str
+    # print username, month, year, begin_date_str,"||", end_date_str
     begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
     end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y")
-    print username, month, year, begin_date, end_date
+    # print username, month, year, begin_date, end_date
     parmas = {"month":month, "year":year, "begin_date":begin_date, "end_date":end_date}
     spd = SummaryPdfData(username=username, **parmas)
     storename = spd.get_storename()
@@ -131,8 +131,8 @@ def pdf_file_view(request):
                                                               refund_for_advertiser])
     Income = spd.Income([income_subtotal_debits, income_subtotal_credits])
     Exception = spd.Expenses([expense_subtotal_credits, expense_subtotal_debits])
-    print Income, Exception
-    print storename, product_sales, income_subtotal_debits, selling_fee_refund
+    # print Income, Exception
+    # print storename, product_sales, income_subtotal_debits, selling_fee_refund
     return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
 
 

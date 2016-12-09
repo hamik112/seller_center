@@ -79,7 +79,7 @@ class StatementView(models.Model):
 
     # 序号，代表了店铺名，来源于文件名的序号
     serial_number    = models.CharField( max_length=50, default="", null=False)
-
+    area             = models.CharField( max_length=100, default="", null=False)
     class Meta:
         db_table = "statement_view"
 

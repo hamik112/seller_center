@@ -36,6 +36,14 @@ class FileUpload(object):
     def write_recorde(self, file_path, filename):
         print filename
         write_dict = {"filename":filename, "file_path": file_path}
+        try:
+            statue = UploadFileRecorde.objects.filter(filename=filename,file_path=file_path)
+        except Exception, e:
+            print e
+            statue = []
+        if statue:
+            print "文件记录已经存在!"
+            return
         ufr = UploadFileRecorde(**write_dict)
         try:
             ufr.save()

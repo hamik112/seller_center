@@ -63,6 +63,7 @@ def files_action(request):
             result = StatementViewImport([filename]).import_files_to_statement_view()
             result = result[0]
             return HttpResponse(json.dumps(result))
+
         else:
             return HttpResponse(json.dumps({"statue": -1, "msg":""}))
     else:
@@ -91,6 +92,11 @@ def filename_to_storename(request):
         elif request.POST.get("action_type", "") == "update":
             print "update ..........."
             result = fsn.post_update_line(request.POST)
+            return HttpResponse(json.dumps(result, default=json_serial))
+        elif request.POST.get("action_type", "") == "file_storename":
+            print "file to storename ..."
+            print request.POST
+            result = fsn.post_add_many_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         return render(request,"filename_to_storename.html", locals())
     else:

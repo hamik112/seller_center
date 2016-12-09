@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # encoding:utf-8
 
-
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 from celery import  task
 from celery.utils.log import get_task_logger
@@ -20,6 +22,7 @@ def import_one_file_to_statement_view(task_dict):
     filename = task_dict.get("filename", "")
     datas = datas.get("data", {})
 
+    print datas
     if isinstance(datas, dict) and  datas.get("statue", "") == -1 and datas.get("msg", ""):
         update_file_statue(filename, -1, error_msg=datas.get("msg", ""))
         return {"statue": -1, "msg": datas.get("msg", "")}
@@ -54,7 +57,7 @@ def import_one_file_to_statement_view(task_dict):
                         'marketplace', 'fulfillment', 'order city', 'order state', 'order postal',
                         'product sales', "shipping credits", "gift wrap credits", "promotional rebates",
                         "sales tax collected", "selling fees", "fba fees", "other transaction fees",
-                        "other", "total", u"店铺"]
+                        "other", "total" ]
     header_dict = {}
     for name in need_header_list:
         try:
@@ -62,10 +65,21 @@ def import_one_file_to_statement_view(task_dict):
                 header_dict[name] = header_list.index("date/time")
             else:
                 header_dict[name] = header_list.index(name)
-        except Exception, e:
-            msg = u"没有找到字段:%s" % str(name)
+        except :
+            msg = "没有找到字段: " + str(name)
             update_file_statue(filename, -1, error_msg=msg)
             return {"statue": -1, "msg": msg}
+    try:
+        header_dict[u"店铺"] = header_list.index(u"店铺")
+    except Exception, e:
+        msg = "没有找到字段: 店铺"
+        update_file_statue(filename, -1, error_msg=msg)
+        return {"statue": -1, "msg": msg}
+
+
+    filename_split_list = filename.split("-")
+    if len(filename_split_list) < 2:
+        return {"statue": -1, "msg": "文件名错误:文件名格式不正确!"}
     serial_number = "-".join(filename.split("-")[:2])
     for data_line in value_list[8:]:
         tmp_dict = {"filename": filename}

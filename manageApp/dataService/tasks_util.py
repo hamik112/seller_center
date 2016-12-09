@@ -12,6 +12,13 @@ def update_file_statue(filename, statue, error_msg= ""):
     except Exception, e:
         print str(e)
 
+def get_update_file_statue(filename):
+    try:
+        file_statue = UploadFileRecorde.objects.filter(filename=filename).values_list("file_statue", flat=True)[0]
+    except Exception,e :
+        file_statue = ""
+    return file_statue
+
 
 def str_to_datetime( date_str):
     time_zone = date_str.split(" ")[-1]

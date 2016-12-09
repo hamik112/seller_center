@@ -63,6 +63,7 @@
 
                 <div class="ibox-content">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add_line">添加</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">表格导入</button>
                     <div class="project-list">
                         {% csrf_token %}
                         <table class="table table-hover" id="filename-to-storename-table-id">
@@ -131,6 +132,49 @@
                        data-dismiss="modal">关闭
                     </button>
                     <button type="button" onclick=javascript:add_line(this); class="btn btn-primary">
+                       确认
+                    </button>
+                 </div>
+                 </form>
+               </div>
+             </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+
+
+
+
+          <!-- 模态框（Modal） -->
+        <div class="modal fade bd-example-modal-lg" id="add_many_line" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+               <form class="form-horizontal" method="post" action="/manage/filename-to-storename/">
+                    {% csrf_token %}
+                 <div class="modal-header">
+                    <button type="button" class="close"
+                       data-dismiss="modal" aria-hidden="true">
+                          &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                       <h2>添加卡</h2>
+                    </h4>
+                 </div>
+
+
+                 <div class="modal-body">
+                     <div class="row">
+                       <div class="col-md-12" style="min-height: 300px;">
+                            <label class="control-label">选择文件</label>
+                            <input type="file" name="filename" id="filename-id">
+                        </div>
+
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick=javascript:add_many_line(this); >
                        确认
                     </button>
                  </div>
@@ -325,6 +369,41 @@
         });
     }
 
+    function add_many_line() {
+        var action_type = "file_storename";
+        var csrf_token = $("[name='csrfmiddlewaretoken']").val();
+        var formData = new FormData();
+        formData.append("filename", $("#filename-id").files[0]);
+        formData.append("action_type", action_type)
+        formData.append("csrfmiddlewaretoken", csrf_token);
+        $.ajax({
+            url: "/manage/filename-to-storename/",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+            },
+            success: function (sdata) {
+                showBody();
+                if (sdata.statue == '0'){
+                    $("#add_many_line").modal('hide');
+                    alert("操作成功!")
+                    location.reload();
+                }else{
+                    alert("操作失败: "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                showBody();
+                alert("操作失败!" + edata);
+            }
+        });
+
+    }
+    
+    
     function infos_to_modal(infos){
         $("[name='storename']").val(infos.storename);
         $("[name='email']").val(infos.email);

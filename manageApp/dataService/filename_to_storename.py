@@ -109,3 +109,6 @@ class FilenameStoreName(object):
         return {"statue":0, "infos": infos }
 
 
+    def post_add_many_line(self, post_dict):
+        """ 批量导入对应关系 """
+

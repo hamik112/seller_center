@@ -10,7 +10,7 @@ from manageApp.dataService.deal_xls import read_xls
 from manageApp.models import StatementView, UploadFileRecorde
 
 from manageApp.tasks import import_one_file_to_statement_view
-from manageApp.dataService.tasks_util import update_file_statue
+from manageApp.dataService.tasks_util import update_file_statue, get_update_file_statue
 
 
 class StatementViewImport(object):
@@ -21,16 +21,28 @@ class StatementViewImport(object):
         statue_list = []
         print self.files_list
         for filename in self.files_list:
+            if get_update_file_statue(filename) == "1":
+                statue_dict = {"filename": filename, "statue": -1, "msg": u"文件正在更新"}
+                statue_list.append(statue_dict)
+                continue
+            elif get_update_file_statue(filename) == "-1":
+                statue_dict = {"filename": filename, "statue": -1, "msg": u"文件更新异常,点击异常查看异常信息"}
+                statue_list.append(statue_dict)
+                continue
+            else:
+                pass
             if filename.endswith(".xls") or filename.endswith(".xlsx"):
                 try:
                     file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
                     datas = read_xls(file_path)
                     update_file_statue(filename,1)
-                    # statue = self.import_one_file_to_statement_view(datas, filename)
-                    # t = threading.Thread(target=self.import_one_file_to_statement_view, args=(datas, filename))
-                    # t.start()
-                    import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
-                    statue_dict = {"filename": filename, "statue": 0, "msg": ""}
+                    try:
+                        import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
+                        statue_dict = {"filename": filename, "statue": 0, "msg": ""}
+                    except Exception, e:
+                        print e
+                        statue_dict = {"filename": filename, "statue": 0, "msg": str(e)}
+                        update_file_statue(filename, -1, error_msg=str(e))
                     # statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}
                 except Exception, e:
                     statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
