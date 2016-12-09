@@ -128,7 +128,6 @@ class FilenameStoreName(object):
             except Exception, e:
                 msg = "没有找到字段: %s" % str(name)
                 return {"statue":-1, "msg": msg}
-        print header_dict
         n, error_list = 1, []
         for line in data[1:]:
             tmp_dict = {}

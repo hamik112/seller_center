@@ -397,7 +397,7 @@
                 showBody();
                 if (sdata.statue == '0'){
                     $("#add_many_line").modal('hide');
-                    alert("操作成功!")
+                    alert("操作成功!"+sdata.msg);
                     location.reload();
                 }else{
                     alert("操作失败: "+sdata.msg);
