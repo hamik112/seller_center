@@ -3,8 +3,8 @@
 
 from django.contrib.auth.models import User
 from manageApp.models import  FilenameToStorename
-
-
+from manageApp.dataService.upload_file import FileUpload
+from manageApp.dataService.deal_xls import read_xls
 
 def user_add(update=None, **parmas):
     print parmas, update
@@ -109,6 +109,47 @@ class FilenameStoreName(object):
         return {"statue":0, "infos": infos }
 
 
-    def post_add_many_line(self, post_dict):
+    def post_add_many_line(self, ufils, username ,post_dict):
         """ 批量导入对应关系 """
+        fud_name = FileUpload(ufils,username=username).write_file(file_to_store=True)
+        _value_list = read_xls(fud_name[0])
+        need_header_list = [u"序号", u"店名", u"账号email"]
+        value_list = ["serial_number", "storename", "email"]
+        key_value_dict = dict(zip(need_header_list, value_list))
+        try:
+            data = _value_list.get("data",[])[0].get("values",[])
+        except Exception,e :
+            return {"statue": -1, "msg": "上传文件失败/文件的sheet不是第一个!"}
+        header_list  = data[0]
+        header_dict = {}.fromkeys(need_header_list, "")
+        for name in need_header_list:
+            try:
+                header_dict[name] = header_list.index(name)
+            except Exception, e:
+                msg = "没有找到字段: %s" % str(name)
+                return {"statue":-1, "msg": msg}
+        print header_dict
+        n, error_list = 1, []
+        for line in data[1:]:
+            tmp_dict = {}
+            for name in need_header_list:
+                try:
+                    tmp_dict[key_value_dict.get(name)] = line[header_dict.get(name)]
+                except Exception, e:
+                    print str(e)
+                    error_list.append(str(n) + str(line))
+                    continue
+                if not line[header_dict.get(name)]:
+                    error_list.append(str(n)+":"+str(line) )
+                    continue
+                tmp_dict["password"] = "starmerx"
+            self.post_add_line(tmp_dict)
+        print error_list
+        if len(error_list) > 0:
+            msg = "还有 %s 没有添加!" % (str(len(error_list)))
+        else:
+            msg = "所有都已经添加完成"
+        return {"statue":0, "msg": msg}
+
+
 

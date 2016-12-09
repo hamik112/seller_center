@@ -45,6 +45,7 @@ def home(request):
     username = request.user.username
     if request.method == "POST":
         ufiles = request.FILES.getlist("file[]", "")
+        print ufiles
         upload_files = FileUpload(ufiles,username=username).write_file()
         return HttpResponse(json.dumps(upload_files))
     return  render(request, 'manage_index.html', locals())
@@ -81,6 +82,7 @@ def list_fils_json(request):
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def filename_to_storename(request):
+    username = request.user.username
     if request.method == "POST":
         fsn = FilenameStoreName()
         if request.POST.get("action_type","") == "delete":
@@ -95,8 +97,9 @@ def filename_to_storename(request):
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "file_storename":
             print "file to storename ..."
-            print request.POST
-            result = fsn.post_add_many_line(request.POST)
+            ufiles = request.FILES.getlist("filename", "")
+            print ufiles
+            result = fsn.post_add_many_line(ufiles,username , request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         return render(request,"filename_to_storename.html", locals())
     else:

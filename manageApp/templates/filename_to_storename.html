@@ -163,6 +163,11 @@
 
                  <div class="modal-body">
                      <div class="row">
+                       <div class="col-md-12">
+                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email</h3>
+                       </div>
+                         <hr />
+                         <br />
                        <div class="col-md-12" style="min-height: 300px;">
                             <label class="control-label">选择文件</label>
                             <input type="file" name="filename" id="filename-id">
@@ -373,14 +378,17 @@
         var action_type = "file_storename";
         var csrf_token = $("[name='csrfmiddlewaretoken']").val();
         var formData = new FormData();
-        formData.append("filename", $("#filename-id").files[0]);
-        formData.append("action_type", action_type)
+        formData.append("filename", document.getElementById("filename-id").files[0]);
+        formData.append("action_type", action_type);
         formData.append("csrfmiddlewaretoken", csrf_token);
+
         $.ajax({
             url: "/manage/filename-to-storename/",
             type: "POST",
             data: formData,
             dataType: "json",
+            processData: false,
+            contentType: false,
             beforeSend:function(XMLHttpRequest){
                $("#loading").html("<img src='/static/admin/img/loading.gif' />");
                showMask();

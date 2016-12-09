@@ -16,7 +16,7 @@ class FileUpload(object):
     def __call__(self, *args, **kwargs):
         return self.write_file()
 
-    def write_file(self):
+    def write_file(self, file_to_store=None):
         file_list = []
         for fileobj in self.fileobj_list:
             fname = fileobj.name.replace(" ", "")
@@ -30,7 +30,8 @@ class FileUpload(object):
                 for chunk in fileobj.chunks():
                     f.write(chunk)
             file_list.append(file_path)
-            self.write_recorde(file_path, filename)
+            if not file_to_store:
+                self.write_recorde(file_path, filename)
         return file_list
 
     def write_recorde(self, file_path, filename):
