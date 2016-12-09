@@ -56,12 +56,12 @@ class StatementViewData(object):
             pdf_url  +=  "year="+self.year+"&month="+self.month + \
                        "&begin_date="+str(self.current_month.get("day_begin", "")) + \
                        "&end_date="+  str(self.current_month.get("day_end", ""))
-            pdf_url = pdf_url.replace(" ", "%20").replace(",","%2c")
+            pdf_url = pdf_url.replace(" ", "%20").replace("&","\&").replace("%", "\%").replace(",", "\,")
             print pdf_url
             date = datetime.datetime.now()
-            datestr = date.strftime("%Y-%m-%d_%H:%M:%S'")
+            datestr = date.strftime("%Y-%m-%d_%H:%M:%S")
             return_dict = self.write_recorde_generate_report()
-            result = self.web_html_to_pdf(pdf_url, datestr+"_output.pdf")
+            result = self.web_html_to_pdf(str(pdf_url), datestr+"_output.pdf")
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return result
         elif self.post_dict.get("reportType", "") == "Transaction":   #导出表格
@@ -147,9 +147,14 @@ class StatementViewData(object):
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
         try:
-            config = pdfkit.configuration(wkhtmltopdf='/usr/bin/wkhtmltopdf')
-            pdfkit.from_url(url, output_file_name, configuration=config)
-            # os.system("wkhtmltopdf " + url+ " " + output_file_name)
+            filename = output_file_name.split(".")[0]
+            output_file_name = filename + ".png"
+            pdf_filename = filename + ".pdf"
+            print output_file_name, pdf_filename
+            bash_str = "wkhtmltopdf" +" " + url+ "  " + output_file_name
+            convert_img_pdf_bash_str = "convert" + " " + output_file_name + "  " + pdf_filename
+            os.popen(bash_str)
+            # os.system(convert_img_pdf_bash_str)
         except Exception, e:
             print "html to pdf error: ", str(e)
             statue = False
