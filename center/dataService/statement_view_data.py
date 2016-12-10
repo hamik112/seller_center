@@ -47,7 +47,7 @@ class StatementViewData(object):
                 continue
             else:
                 return_report_list.append(fline)
-        return return_report_list
+        return return_report_list[::-1]
 
     def request_report(self):
         if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf
@@ -190,12 +190,8 @@ class StatementViewData(object):
                   "fba fees", "other transaction fees", "other", "total"]
         print "all_data:", len(all_datas)
         try:
-            print filename
             file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
             filename = create_csv(**{"datas":all_datas, "header": header, "filename":file_path_name})
-            print filename
-
-            print  file_path_name
         except Exception, e:
             statue = False
             msg = "create csv Error: " + str(e)
