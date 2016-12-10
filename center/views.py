@@ -64,7 +64,7 @@ def date_range_reports(request):
 
 @login_required(login_url="/amazon-login/")
 def statement_view(request):
-    result_dict = StatementViewData(request).test_return()
+    # result_dict = StatementViewData(request).test_return()
     return  render(request, 'statement_view.html', locals())
 
 

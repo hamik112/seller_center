@@ -58,6 +58,7 @@ def import_one_file_to_statement_view(task_dict):
                         "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                         "other", "total" ]
     header_dict = {}
+    print header_list
     for name in need_header_list:
         try:
             if name == "date_time":
@@ -65,7 +66,10 @@ def import_one_file_to_statement_view(task_dict):
             else:
                 header_dict[name] = header_list.index(name)
         except :
-            msg = "没有找到字段: " + str(name)
+            if name == "date_time":
+                msg = "没有找到字段: date/time" 
+            else:
+                msg = "没有找到字段: " + str(name)
             update_file_statue(filename, -1, error_msg=msg)
             return {"statue": -1, "msg": msg}
     try:
