@@ -54,7 +54,7 @@ class StatementView(models.Model):
     filename        =  models.CharField( max_length=100, default="", null=False)
 
     settlement_id   =  models.CharField( max_length=50, default="", null=False)
-    type            =  models.CharField( max_length=50, default="", null=False)
+    type            =  models.CharField( max_length=200, default="", null=False)
     order_id        =  models.CharField( max_length=100, unique=True, default="", null=False)
     sku             =  models.CharField( max_length=50, default="", null=False)
     description     =  models.CharField( max_length=200, default="", null=False)

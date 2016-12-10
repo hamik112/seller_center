@@ -152,3 +152,60 @@ GENERATE_REPORT_PATH = os.path.join(BASE_DIR, "center/GENERATE_REPORT")  #生成
 if not os.path.exists(GENERATE_REPORT_PATH):
     os.mkdir(GENERATE_REPORT_PATH)
 
+
+
+app_path = os.path.join(BASE_DIR, "center")
+
+
+LOG_PATH = os.path.join(app_path, "log")
+if not os.path.exists(LOG_PATH):
+    os.mkdir(LOG_PATH)
+
+
+LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': True,
+        'formatters': {
+        'standard': {
+        'format': '%(levelname)s %(asctime)s %(message)s'
+        },
+    },
+    'filters': {
+    },
+    'handlers': {
+        'mail_admins': {
+                        'level': 'ERROR',
+                        'class': 'django.utils.log.AdminEmailHandler',
+                        'formatter':'standard',
+        },
+        'test1_handler': {
+                        'level':'DEBUG',
+                        'class':'logging.handlers.RotatingFileHandler',
+                        'filename':os.path.join(LOG_PATH, "access.log"),
+                        'formatter':'standard',
+        },
+        'test2_handler': {
+                        'level':'DEBUG',
+                        'class':'logging.handlers.RotatingFileHandler',
+                        'filename':os.path.join(LOG_PATH,"get_post_data.log"),
+                        'formatter':'standard',
+        },
+    },
+    'loggers': {
+        'django.request': {
+                        'handlers': ['mail_admins'],
+                        'level': 'ERROR',
+                        'propagate': True,
+        },
+        'test1':{
+                        'handlers': ['test1_handler'],
+                        'level': 'INFO',
+                        'propagate': False
+        },
+        'test2':{
+                'handlers': ['test2_handler'],
+                'level': 'INFO',
+                'propagate': False
+        },
+    }
+}

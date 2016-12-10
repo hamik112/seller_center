@@ -5,6 +5,7 @@ import sys
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
+import  logging
 from celery import  task
 from celery.utils.log import get_task_logger
 
@@ -13,6 +14,7 @@ from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 
 logger = get_task_logger(__name__)
 
+log1 = logging.getLogger("test1")
 
 
 @task
@@ -95,13 +97,17 @@ def import_one_file_to_statement_view(task_dict):
                 dict_name = name.replace(" ", "_")
                 tmp_dict[dict_name] = data_line[header_dict.get(name)]
         tmp_dict["serial_number"] = serial_number
+        if not tmp_dict.get("order_id"):
+            tmp_dict["order_id"] = tmp_dict.get("date_time")
         try:
             stv = StatementView(**tmp_dict)
             stv.save()
         except Exception, e:
+            log1.info(str(e))
             try:
                 StatementView.objects.filter(order_id=tmp_dict.get("order_id", "")).update(**tmp_dict)
             except Exception, e:
+                log1.error(str(e)+str(tmp_dict.get("order_id", "")))
                 update_file_statue(filename, -1, error_msg=str(e))
                 return {"statue": -1, "msg": str(e)}
     update_file_statue(filename, 2)
