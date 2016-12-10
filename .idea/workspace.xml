@@ -2,8 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/statement_view_data.py" afterPath="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/manageApp/dataService/deal_xls.py" afterPath="$PROJECT_DIR$/manageApp/dataService/deal_xls.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/Home.html" afterPath="$PROJECT_DIR$/center/templates/Home.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/advertising-2.html" afterPath="$PROJECT_DIR$/center/templates/advertising-2.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/all_statements.html" afterPath="$PROJECT_DIR$/center/templates/all_statements.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/amazon_login.html" afterPath="$PROJECT_DIR$/center/templates/amazon_login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/amazon_register.html" afterPath="$PROJECT_DIR$/center/templates/amazon_register.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/data_range_reports.html" afterPath="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/inventory.html" afterPath="$PROJECT_DIR$/center/templates/inventory.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/orders.html" afterPath="$PROJECT_DIR$/center/templates/orders.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/performance.html" afterPath="$PROJECT_DIR$/center/templates/performance.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/pricing.html" afterPath="$PROJECT_DIR$/center/templates/pricing.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/statement_view.html" afterPath="$PROJECT_DIR$/center/templates/statement_view.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/transaction.html" afterPath="$PROJECT_DIR$/center/templates/transaction.html" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,111 +36,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="filename_to_storename.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py">
+      <file leaf-file-name="amazon_register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/amazon_register.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69">
-              <caret line="105" column="50" selection-start-line="105" selection-start-column="50" selection-end-line="105" selection-end-column="50" />
-              <folding>
-                <element signature="e#40#83#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="statement_view_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-              <folding>
-                <element signature="e#38#48#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataImport.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/dataService/dataImport.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="39" column="49" selection-start-line="39" selection-start-column="49" selection-end-line="39" selection-end-column="49" />
-              <folding>
-                <element signature="e#40#56#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SellerCenter/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="24">
-              <caret line="102" column="10" selection-start-line="102" selection-start-column="10" selection-end-line="102" selection-end-column="10" />
+            <state relative-caret-position="216">
+              <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tasks.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/tasks.py">
+      <file leaf-file-name="Home.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/Home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="507">
-              <caret line="92" column="50" selection-start-line="92" selection-start-column="50" selection-end-line="92" selection-end-column="50" />
-              <folding>
-                <marker date="1481352948186" expanded="true" signature="2598:2744" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tasks_util.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/dataService/tasks_util.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="25" column="87" selection-start-line="25" selection-start-column="87" selection-end-line="25" selection-end-column="87" />
+            <state relative-caret-position="252">
+              <caret line="6" column="72" selection-start-line="6" selection-start-column="72" selection-end-line="6" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/views.py">
+      <file leaf-file-name="inventory.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/inventory.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1295">
-              <caret line="56" column="60" selection-start-line="56" selection-start-column="60" selection-end-line="56" selection-end-column="60" />
+            <state relative-caret-position="252">
+              <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_xls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/dataService/create_xls.py">
+      <file leaf-file-name="orders.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/orders.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
+            <state relative-caret-position="54">
+              <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deal_xls.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/manageApp/dataService/deal_xls.py">
+      <file leaf-file-name="performance.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-              <folding>
-                <element signature="e#18#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="180">
+              <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="data_format.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/dataService/data_format.py">
+      <file leaf-file-name="pricing.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+            <state relative-caret-position="126">
+              <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statement_view.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="transaction.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="all_statements.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="amazon_login.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -143,25 +144,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/center/templates/performance.html" />
-        <option value="$PROJECT_DIR$/center/templates/Home.html" />
-        <option value="$PROJECT_DIR$/SellerCenter/urls.py" />
         <option value="$PROJECT_DIR$/manageApp/templates/base.html" />
         <option value="$PROJECT_DIR$/manageApp/dataService/data_range_reports.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/JSON_serial.py" />
-        <option value="$PROJECT_DIR$/center/templates/transaction.html" />
-        <option value="$PROJECT_DIR$/center/templates/advertising-2.html" />
-        <option value="$PROJECT_DIR$/center/templates/orders.html" />
-        <option value="$PROJECT_DIR$/center/templates/pricing.html" />
-        <option value="$PROJECT_DIR$/center/templates/inventory.html" />
         <option value="$PROJECT_DIR$/manageApp/dataService/statement_view.py" />
         <option value="$PROJECT_DIR$/center/static/js/rainier-payments-MYP-UI-220489252._V1_.js" />
         <option value="$PROJECT_DIR$/center/static/js/rainier-payments-DRR-2950254370._V1_.js" />
         <option value="$PROJECT_DIR$/center/models.py" />
-        <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
-        <option value="$PROJECT_DIR$/center/templates/amazon_register.html" />
         <option value="$PROJECT_DIR$/center/urls.py" />
-        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
         <option value="$PROJECT_DIR$/center/dataService/data_format.py" />
         <option value="$PROJECT_DIR$/manageApp/auth.py" />
         <option value="$PROJECT_DIR$/manageApp/myauth.py" />
@@ -171,7 +161,6 @@
         <option value="$PROJECT_DIR$/change_auth_user_length.py" />
         <option value="$PROJECT_DIR$/manageApp/urls.py" />
         <option value="$PROJECT_DIR$/manageApp/templates/login.html" />
-        <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
         <option value="$PROJECT_DIR$/manageApp/templates/manage_index.html" />
         <option value="$PROJECT_DIR$/manageApp/templates/file_list.html" />
         <option value="$PROJECT_DIR$/manageApp/dataService/update_statue.py" />
@@ -194,6 +183,18 @@
         <option value="$PROJECT_DIR$/SellerCenter/settings.py" />
         <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/deal_xls.py" />
+        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+        <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
+        <option value="$PROJECT_DIR$/center/templates/advertising-2.html" />
+        <option value="$PROJECT_DIR$/center/templates/all_statements.html" />
+        <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
+        <option value="$PROJECT_DIR$/center/templates/amazon_register.html" />
+        <option value="$PROJECT_DIR$/center/templates/Home.html" />
+        <option value="$PROJECT_DIR$/center/templates/inventory.html" />
+        <option value="$PROJECT_DIR$/center/templates/orders.html" />
+        <option value="$PROJECT_DIR$/center/templates/performance.html" />
+        <option value="$PROJECT_DIR$/center/templates/pricing.html" />
+        <option value="$PROJECT_DIR$/center/templates/transaction.html" />
       </list>
     </option>
   </component>
@@ -296,6 +297,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="center" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SellerCenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SellerCenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="center" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -629,7 +648,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5224359" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30876067" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -680,34 +699,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/center/static/js/rainier-payments-MYP-UI-220489252._V1_.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="948" column="19" selection-start-line="948" selection-start-column="19" selection-end-line="948" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/static/js/rainier-payments-DRR-2950254370._V1_.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="1233" column="51" selection-start-line="1233" selection-start-column="51" selection-end-line="1233" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SellerCenter/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/Pro2.0/lib/python2.7/ntpath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -719,20 +710,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="2759" column="27" selection-start-line="2759" selection-start-column="27" selection-end-line="2759" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/amazon_register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="2189" column="17" selection-start-line="2189" selection-start-column="17" selection-end-line="2189" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -754,13 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="424">
-          <caret line="1515" column="191" selection-start-line="1515" selection-start-column="191" selection-end-line="1515" selection-end-column="191" />
         </state>
       </provider>
     </entry>
@@ -792,41 +762,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="1762" column="127" selection-start-line="1762" selection-start-column="127" selection-end-line="1762" selection-end-column="127" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="1737" column="121" selection-start-line="1737" selection-start-column="121" selection-end-line="1737" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="2032" column="9" selection-start-line="2032" selection-start-column="9" selection-end-line="2032" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="6" column="334" selection-start-line="6" selection-start-column="334" selection-end-line="6" selection-end-column="334" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/advertising-2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="1631" column="30" selection-start-line="1631" selection-start-column="30" selection-end-line="1631" selection-end-column="30" />
         </state>
       </provider>
     </entry>
@@ -865,6 +800,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
           <caret line="23" column="72" selection-start-line="23" selection-start-column="72" selection-end-line="23" selection-end-column="72" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1021,11 +957,107 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manageApp/dataService/deal_xls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
+        <state relative-caret-position="456">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
             <element signature="e#18#28#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/advertising-2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="7" column="72" selection-start-line="7" selection-start-column="72" selection-end-line="7" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/amazon_register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/Home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="6" column="72" selection-start-line="6" selection-start-column="72" selection-end-line="6" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/inventory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="7" column="68" selection-start-line="7" selection-start-column="68" selection-end-line="7" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/orders.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="54">
+          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="4" column="64" selection-start-line="4" selection-start-column="64" selection-end-line="4" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="3" column="64" selection-start-line="3" selection-start-column="64" selection-end-line="3" selection-end-column="64" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="1" column="60" selection-start-line="1" selection-start-column="60" selection-end-line="1" selection-end-column="60" />
+          <folding />
         </state>
       </provider>
     </entry>
