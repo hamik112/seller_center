@@ -94,9 +94,9 @@ def create_csv(**params):
             if lst.index(i) == 0:
                 tmp_list.append(datetime_to_str(i))
             elif lst[2].replace(" ","").lower() == "transfer":
-                tmp_list.append(csv_deal_number(i, transfer=True))
+                tmp_list.append(csv_deal_number(i, tranfer=True))
             else:
-                tmp_list.append(csv_deal_number(i))
+                tmp_list.append(csv_deal_number(i, tranfer=False))
         try:
             writer.writerow(list(tmp_list))
         except Exception, e:

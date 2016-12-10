@@ -98,7 +98,7 @@ def import_one_file_to_statement_view(task_dict):
                 tmp_dict[dict_name] = data_line[header_dict.get(name)]
         tmp_dict["serial_number"] = serial_number
         if not tmp_dict.get("order_id"):
-            tmp_dict["order_id"] = tmp_dict.get("date_time")
+            tmp_dict["order_id"] = tmp_dict.get("date_time", "")
         try:
             stv = StatementView(**tmp_dict)
             stv.save()
