@@ -5,7 +5,7 @@ import logging
 import xlrd
 import  datetime
 from openpyxl import Workbook
-from pyexcel_xls import  get_data
+
 
 log2 = logging.getLogger("test2")
 
@@ -46,17 +46,6 @@ def read_xls(filename):
     return {"statue": 1, "msg":"", "data":_value_list}
 
 
-def myread_xls(filename):
-    _value_list = []
-    if not os.path.exists(filename):
-        return {"statue": -1, "msg": "not found file...", "data": _value_list}
-    try:
-        data = get_data(filename)
-    except Exception, e:
-        errors = "open excel Error, %s" %e
-        log2.error(errors)
-        return {"statue": -2, "msg": errors, "data": _value_list}
-    _value_list = [{"name":name, "values":data[name]} for name in data.keys()]
-    return {"statue":1, "msg": "", "data":_value_list}
+
 
 

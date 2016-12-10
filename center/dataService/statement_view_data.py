@@ -6,7 +6,7 @@ import  datetime
 import calendar
 import time
 import  urllib
-import  pdfkit
+# import  pdfkit
 
 from django.conf import settings
 
