@@ -12,32 +12,45 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from center.dataService.data_format import file_iterator
-from center.dataService.summary_pdf_data import SummaryPdfData, create_pdf_from_html
+from center.dataService.get_storename import get_storename
+
 # Create your views here.
 
 
 @login_required(login_url="/amazon-login/")
 def home(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, "Home.html", locals())
 
 @login_required(login_url="/amazon-login/")
 def inventory(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'inventory.html', locals())
 
 @login_required(login_url="/amazon-login/")
 def pricing(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'pricing.html', locals())
 
 @login_required(login_url="/amazon-login/")
 def orders(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'orders.html', locals())
 
 @login_required(login_url="/amazon-login/")
 def advertising(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'advertising-2.html', locals())
 
 @login_required(login_url="/amazon-login/")
 def performance(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'performance.html', locals())
 
 @login_required(login_url="/amazon-login/")
@@ -47,11 +60,15 @@ def transaction(request):
 
 @login_required(login_url="/amazon-login/")
 def all_statements(request):
+    email = request.user.username
+    store_name = get_storename(email)
     return render(request, 'all_statements.html', locals())
 
 @login_required(login_url="/amazon-login/")
 @csrf_exempt
 def date_range_reports(request):
+    email = request.user.username
+    store_name = get_storename(email)
     if request.method == "POST":
         print request.POST
         result = StatementViewData(request).request_report()
@@ -64,7 +81,10 @@ def date_range_reports(request):
 
 @login_required(login_url="/amazon-login/")
 def statement_view(request):
+    email = request.user.username
+    store_name = get_storename(email)
     # result_dict = StatementViewData(request).test_return()
+
     return  render(request, 'statement_view.html', locals())
 
 
@@ -76,6 +96,8 @@ def statement_view(request):
 
 @login_required(login_url="/amazon-login/")
 def download_file(request):
+    email = request.user.username
+    store_name = get_storename(email)
     file_type = request.GET.get("file_type", "octet-stream")    #vnd.ms-excel (.xls),  octet-stream(pdf) 下载文件
     file_name = request.GET.get("file_name", "not_found_file_name")
     if not file_name:
@@ -92,11 +114,15 @@ def download_file(request):
 
 @login_required(login_url="/amazon-login/")
 def amazon_logout(request):
+    email = request.user.username
+    store_name = get_storename(email)
     auth.logout(request)
     return HttpResponseRedirect("/amazon-login/")
 
 
 def amazon_login(request):
+    email = request.user.username
+    store_name = get_storename(email)
     if request.method == "POST":
         email = request.POST.get("email", "")
         password = request.POST.get("password", "")
@@ -114,6 +140,8 @@ def amazon_login(request):
 
 
 def amazon_register(request):
+    email = request.user.username
+    store_name = get_storename(email)
     if request.method == "POST":
         username = request.POST.get("customerName", "")
         email = request.POST.get("email", "")
