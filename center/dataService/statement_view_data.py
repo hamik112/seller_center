@@ -42,7 +42,8 @@ class StatementViewData(object):
         pass
 
     def statement_data_read(self):
-        generate_report_list = GenerateReport.objects.filter()
+        username = self.request.user.username
+        generate_report_list = GenerateReport.objects.filter(username=username)
         return_report_list = []
         for fline in generate_report_list.values():
             if not os.path.exists(os.path.join(GenerateReport_PATH, fline.get("report_file_path",""))):
@@ -77,10 +78,11 @@ class StatementViewData(object):
 
 
     def write_recorde_generate_report(self):
-
+        username = self.request.user.username
         request_date = datetime.datetime.now().strftime("%b %m, %Y")
         recorde_dict = {"reportType": self.reportType, "year": self.year, "is_custom": "Custom", "timeRange": self.timeRange,
-                        "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": 0,"request_date":request_date}
+                        "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": 0,"request_date":request_date,
+                        "username":username}
         return_id = -1
         # print "recorde_dict: ", recorde_dict
         gr = GenerateReport(**recorde_dict)

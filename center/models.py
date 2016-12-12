@@ -21,6 +21,7 @@ class GenerateReport(models.Model):
 
     action_statue     =  models.CharField( max_length= 20, default=0, null=False)
 
+    username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
     class Meta:
         db_table = "generate_report_tb"
