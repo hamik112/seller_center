@@ -13,10 +13,12 @@ from django.conf import settings
 from manageApp.models import StatementView
 
 from  center.dataService.create_xls import create_xls, create_csv
+from center.dataService.summary_pdf_data import create_pdf_from_html
 from center.models import  GenerateReport
 
 from manageApp.dataService.upload_file import get_path
 from manageApp.models import FilenameToStorename
+
 
 GenerateReport_PATH = settings.GENERATE_REPORT_PATH
 
@@ -51,17 +53,17 @@ class StatementViewData(object):
 
     def request_report(self):
         if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf
-            cur_path = self.request.get_host()
-            pdf_url = "http://" + cur_path + "/summary-pdf/?"
-            pdf_url  +=  "year="+self.year+"&month="+self.month + \
-                       "&begin_date="+str(self.current_month.get("day_begin", "")) + \
-                       "&end_date="+  str(self.current_month.get("day_end", ""))
-            pdf_url = pdf_url.replace(" ", "%20").replace("&","\&").replace("%", "\%").replace(",", "\,")
-            print pdf_url
-            date = datetime.datetime.now()
-            datestr = date.strftime("%Y-%m-%d_%H-%M-%S")
+            # cur_path = self.request.get_host()
+            # pdf_url = "http://" + cur_path + "/summary-pdf/?"
+            # pdf_url  +=  "year="+self.year+"&month="+self.month + \
+            #            "&begin_date="+str(self.current_month.get("day_begin", "")) + \
+            #            "&end_date="+  str(self.current_month.get("day_end", ""))
+            # pdf_url = pdf_url.replace(" ", "%20").replace("&","\&").replace("%", "\%").replace(",", "\,")
+            # print pdf_url
+            # date = datetime.datetime.now()
+            # datestr = date.strftime("%Y-%m-%d_%H-%M-%S")
             return_dict = self.write_recorde_generate_report()
-            result = self.web_html_to_pdf(str(pdf_url), datestr+"_output.pdf")
+            result = self.web_html_to_pdf()
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return result
         elif self.post_dict.get("reportType", "") == "Transaction" :   #导出表格
@@ -121,10 +123,18 @@ class StatementViewData(object):
         return  {"day_begin": begin_day, "day_end": end_day}
 
 
-    def web_html_to_pdf(self, url, output_file):
+    def web_html_to_pdf(self):
         statue, msg, output_file_name = True, "", ""
-        output_file_name = os.path.join(get_path(GenerateReport_PATH), output_file)
         user_email = self.request.user.username
+        begin_day, end_day = self.timeRange.split("-")
+        begin_day_list = str(begin_day).replace(",", "").split(" ")
+        end_day_list = str(end_day).replace(",", "").split(" ")
+        if self.timeRangeType == "Monthly":
+            filename = str(begin_day_list[2])+str(begin_day_list[0])+"_MonthlyTransaction.pdf"
+        else:
+            filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-"
+            + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.pdf"
+        output_file_name = os.path.join(get_path(GenerateReport_PATH), filename)
         # options = {"year":self.year, "month":self.month,"begin_date":self.}
         try:
             serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
@@ -133,22 +143,33 @@ class StatementViewData(object):
             print msg
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
+        params = {"username":self.request.user.username,"month":self.month,"year":self.year,
+                  "begin_date_str":str(self.current_month.get("day_begin", "")),
+                  "end_date_str": str(self.current_month.get("day_end", "")),
+                  "filename":output_file_name}
         try:
-            filename = output_file_name.split(".")[0]
-            output_file_name_png = filename + ".png"
-            pdf_filename = filename + ".pdf"
-            print output_file_name, pdf_filename
-            # bash_str = "wkhtmltoimage" +" " + url+ "  " + output_file_name_png
-            bash_str = "wkhtmltopdf " + " " + url + " " + pdf_filename
-            convert_img_pdf_bash_str = "convert" + " " + output_file_name_png + "  " + pdf_filename
-            os.popen(bash_str)
-            # os.system(convert_img_pdf_bash_str)
-            # output_file_name = output_file_name_png
-            output_file_name = pdf_filename
+            output_file_create = create_pdf_from_html(**params)
         except Exception, e:
             print "html to pdf error: ", str(e)
             statue = False
-        return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
+        # try:
+        #     filename = output_file_name.split(".")[0]
+        #     output_file_name_png = filename + ".png"
+        #     pdf_filename = filename + ".pdf"
+        #     create_pdf_from_html()
+        #
+        #     print output_file_name, pdf_filename
+        #     # bash_str = "wkhtmltoimage" +" " + url+ "  " + output_file_name_png
+        #     bash_str = "wkhtmltopdf " + " " + url + " " + pdf_filename
+        #     convert_img_pdf_bash_str = "convert" + " " + output_file_name_png + "  " + pdf_filename
+        #     os.popen(bash_str)
+        #     # os.system(convert_img_pdf_bash_str)
+        #     # output_file_name = output_file_name_png
+        #     output_file_name = pdf_filename
+        # except Exception, e:
+        #     print "html to pdf error: ", str(e)
+        #     statue = False
+        return {"statue": statue, "msg": msg, "file_path_name": output_file_create}
 
 
     def create_xls_reports(self, **params):
@@ -179,14 +200,14 @@ class StatementViewData(object):
                                                  date_time__range=(begin_date, end_date)).values_list("date_time",
                  "settlement_id", "type", "order_id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order_city",
-                  "order_state", "order_postal", "product_sales", "shipping_credits",
-                  "promotional_rebates", "sales_tax_collected", "selling_fees","gift_wrap_credits",
+                  "order_state", "order_postal", "product_sales", "shipping_credits","gift_wrap_credits",
+                  "promotional_rebates", "sales_tax_collected", "selling_fees",
                   "fba_fees", "other_transaction_fees", "other", "total")
 
         header = ["date/time","settlement id", "type", "order id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order city",
-                  "order state", "order postal", "product sales", "shipping credits",
-                  "promotional rebates", "sales tax collected", "selling fees","gift wrap credits",
+                  "order state", "order postal", "product sales", "shipping credits","gift wrap credits",
+                  "promotional rebates", "sales tax collected", "selling fees",
                   "fba fees", "other transaction fees", "other", "total"]
         print "all_data:", len(all_datas)
         try:

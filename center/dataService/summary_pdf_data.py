@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 # encoding:utf-8
 
+import  os
+import  datetime
 from django.db.models import  Sum
 
 from django.db.models import Q
 from manageApp.models import StatementView
 from manageApp.models import FilenameToStorename
 
+from django.conf import settings
+
+from django.template import  Template, Context
 
 
 def oredits_number_len(number_str):
@@ -502,3 +507,135 @@ class SummaryPdfData(object):
         expenses_number = format(expenses_number, ",")
         return {"number_length": Expenses_len(expenses_number), "number": expenses_number}
 
+
+    def charges_to_credit_card(self):
+        query_select = Q(serial_number=self.serial_number, type="Debt")
+        if self.begin_date and self.end_date:
+            query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
+        try:
+            charges_to_credit_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
+        except Exception, e:
+            charges_to_credit_dict = {}
+        if charges_to_credit_dict.get("total__sum"):
+            product_sale_sum = charges_to_credit_dict.get("product_sales__sum", 0) + charges_to_credit_dict.get("other__sum",
+                                                                                                                  0)
+        else:
+            product_sale_sum = 0
+        product_sale_sum = format(product_sale_sum, ",")
+        product_sale_html_sum = oredits_number_len(product_sale_sum)
+        return {"number_length": product_sale_html_sum, "number": product_sale_sum}
+
+
+
+
+
+def generate_dict(**param_dict):
+    year = param_dict.get("year", "")
+    begin_date_str, end_date_str = param_dict.get("begin_date_str",""), param_dict.get("end_date_str", "")
+    username, month= param_dict.get("username",""),param_dict.get("month","")
+    if  begin_date_str and  end_date_str:
+        begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
+        end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y")
+    else:
+        begin_date, end_date = datetime.datetime.now(), datetime.datetime.now()
+    # print username, month, year, begin_date, end_date
+    parmas = {"month":month, "year":year, "begin_date":begin_date, "end_date":end_date}
+    spd = SummaryPdfData(username=username, **parmas)
+    storename = spd.get_storename()
+    product_sales = spd.product_sales()
+    product_refund = spd.product_refund()
+    FBA_product_sales = spd.FBA_product_sales()
+    FBA_product_refund = spd.FBA_product_refund()
+    FBA_invenbry_credit = spd.FB_inventory_credit()
+    shipping_credits = spd.shipping_credits()
+    shipping_credits_refund = spd.shipping_credits_refund()
+    gift_wrap_credits = spd.gift_wrap_credits()
+    gift_wrap_credits_refund = spd.gift_wrap_credits_refund()
+    promotional_rebates = spd.promotional_rebates()
+    promotional_rebates_refund = spd.promotional_rebates_refund()
+    a_to_z_guarantee_chaims = spd.A_to_z_guarantee_claims()
+    chargebacks = spd.chargebacks()
+    income_subtotal_debits = spd.income_subtotal_debits([product_refund, FBA_product_refund,
+                                             shipping_credits_refund, gift_wrap_credits_refund,
+                                             promotional_rebates, a_to_z_guarantee_chaims,
+                                             chargebacks])
+    income_subtotal_credits = spd.income_subtotal_credits([product_sales, FBA_product_sales,
+                                                           FBA_invenbry_credit, shipping_credits,
+                                                           gift_wrap_credits,promotional_rebates_refund])
+    seller_fulfilled_selling_fees = spd.seller_fulfilled_selling_fees()
+    FBA_selling_fees = spd.FBA_selling_fees()
+    selling_fee_refund  = spd.selling_fee_refund()
+    fba_transaction_fees  = spd.fba_transaction_fees()
+    fba_transaction_fee_refunds   = spd.fba_transaction_fee_refunds()
+    other_transaction_fees = spd.other_transaction_fees()
+    other_transaction_fee_refunds = spd.other_transaction_fee_refunds()
+    FBA_inventory_inbound_services_fees = spd.FBA_inventory_inbound_services_fees()
+
+    Shipping_label_purchases = spd.Shipping_label_purchases()
+    Shipping_label_refunds = spd.Shipping_label_refunds()
+    carrier_shipping_label_adjustments = spd.carrier_shipping_label_adjustments()
+
+    Service_fees = spd.Service_fees()
+    Adjustments = spd.Adjustments()
+    Refund_administration_fees  = spd.Refund_administration_fees()
+    cost_of_advertising = spd.cost_of_advertising()
+    refund_for_advertiser = spd.refund_for_advertiser()
+
+    expense_subtotal_debits = spd.expenses_subtotal_debits([seller_fulfilled_selling_fees, FBA_selling_fees,
+                                            fba_transaction_fees, other_transaction_fees,
+                                            FBA_inventory_inbound_services_fees, Shipping_label_purchases,
+                                            Service_fees, Refund_administration_fees,cost_of_advertising])
+    expense_subtotal_credits = spd.expenses_subtotal_credits([selling_fee_refund,fba_transaction_fee_refunds,
+                                                              other_transaction_fee_refunds,Shipping_label_refunds,
+                                                              carrier_shipping_label_adjustments,Adjustments,
+                                                              refund_for_advertiser])
+    Income = spd.Income([income_subtotal_debits, income_subtotal_credits])
+    Exception = spd.Expenses([expense_subtotal_credits, expense_subtotal_debits])
+    Charges_to_credit_card = spd.charges_to_credit_card()
+
+    return {"storename":storename,"product_sales":product_sales,"product_refund":product_refund,
+            "FBA_product_sales":FBA_product_sales, "FBA_product_refund":FBA_product_refund,
+            "FBA_invenbry_credit":FBA_invenbry_credit,"shipping_credits":shipping_credits,
+            "shipping_credits_refund":shipping_credits_refund, "gift_wrap_credits":gift_wrap_credits,
+            "gift_wrap_credits_refund":gift_wrap_credits_refund,"promotional_rebates":promotional_rebates,
+            "promotional_rebates_refund":promotional_rebates_refund,"a_to_z_guanrantee_chaims":a_to_z_guarantee_chaims,
+            "chargebacks":chargebacks,"income_subtotal_debits":income_subtotal_debits,
+            "income_subtotal_credits":income_subtotal_credits, "seller_fulfilled_selling_fees":seller_fulfilled_selling_fees,
+            "FBA_selling_fees":FBA_selling_fees,"selling_fee_refund":selling_fee_refund,
+            "fba_transaction_fee_refunds":fba_transaction_fee_refunds, "fba_transaction_fees":fba_transaction_fees,
+            "FBFBA_inventory_inbound_services_fees":FBA_inventory_inbound_services_fees, "Shipping_label_purchases":Shipping_label_purchases,
+            "Shipping_label_refunds":Shipping_label_refunds, "carrier_shipping_label_adjustments":carrier_shipping_label_adjustments,
+            "Service_fees":Service_fees,"Adjustments":Adjustments, "Refund_administration_fees":Refund_administration_fees,
+            "cost_of_advertising":cost_of_advertising, "refund_for_advertiser":refund_for_advertiser,
+            "expense_subtotal_debits":expense_subtotal_debits, "expense_subtotal_credits":expense_subtotal_credits,
+            "Income":Income, "Exception":Exception, "Charges_to_credit_card": Charges_to_credit_card}
+
+
+def create_pdf_from_html(**params):
+    params_file = params.get("filename", "")
+    if params_file:
+        pdf_filename = params_file
+    else:
+        pdf_filename = "output.pdf"
+    base_dir = settings.BASE_DIR
+    generate_dir = settings.GENERATE_REPORT_PATH
+    pdf_dir = os.path.join(base_dir, "center/templates/pdf_hml/")
+    filename = os.path.join(pdf_dir,"2016Jun_MonthlySummary.html")
+    pdf_html_str = open(filename).read()
+    t = Template(pdf_html_str)
+    g_dict = generate_dict(**params)
+    print g_dict
+    c = Context(g_dict)
+    result_html = t.render(c)
+    result_filename = os.path.join(pdf_dir, "result_pdf.html")
+    output_file = os.path.join(generate_dir, pdf_filename)
+    try:
+        with open(result_filename, "w") as f:
+            f.write(result_html)
+    except Exception, e:
+        print e
+    try:
+        os.system("wkhtmltopdf %s %s"%(result_filename, output_file))
+    except Exception,e :
+        print "html to pdf error %s"%str(e)
+    return output_file

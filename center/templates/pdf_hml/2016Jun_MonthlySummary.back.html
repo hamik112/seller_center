@@ -1,16 +1,17 @@
+{% load staticfiles %}
 <!DOCTYPE html><!--[if IE]>  <html class="ie"> <![endif]-->
 <html>
 	<head>
 		<meta charset="utf-8" />
 		<title>
 		</title>
-		<link rel="stylesheet" type="text/css" href="./2016Jun_MonthlySummary_files/style.css" />
+		<link rel="stylesheet" type="text/css" href="{% static '2016Jun_MonthlySummary_files/style.css' %}" />
 	</head>
 	<body>
 		<div class="stl_02">
 			<div class="stl_03">
-				<object data="./2016Jun_MonthlySummary_files/img_03.svg" type="image/svg+xml" class="stl_04" style="position:absolute; width:66em; height:51em;">
-					<embed src="./2016Jun_MonthlySummary_files/img_03.svg" type="image/svg+xml" class="stl_04" />
+				<object data="{% static '2016Jun_MonthlySummary_files/img_03.svg' %}" type="image/svg+xml" class="stl_04" style="position:absolute; width:66em; height:51em;">
+					<embed src="{% static '2016Jun_MonthlySummary_files/img_03.svg' %}" type="image/svg+xml" class="stl_04" />
 				</object>
 			</div>
 			<div class="view">
@@ -273,11 +274,7 @@
 					<div class="stl_01" style="top:38.1619em; left:62.2792em;"><span class="stl_20 stl_08 stl_11">Credits &nbsp;</span></div>
 					<div class="stl_01" style="top:39.2619em; left:63.805em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:37.7011em; left:31.7517em;"><span class="stl_20 stl_08 stl_09">0</span></div>
-                {% if Charges_to_credit_card %}
-                    <div class="stl_01" style="top:38.6344em; left:{{ Charges_to_credit_card.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ Charges_to_credit_card.number }}</span></div>
-                {% else %}
 					<div class="stl_01" style="top:38.6344em; left:31.7417em;"><span class="stl_20 stl_08 stl_09">0</span></div>
-                {% endif %}
 					<div class="stl_01" style="top:38.1636em; left:56.5575em;"><span class="stl_20 stl_08 stl_11">Debits &nbsp;</span></div>
 					<div class="stl_01" style="top:39.1803em; left:34.1658em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0004em;">Sales, shipping, and gift wrap tax collected &nbsp;</span></div>
 					<div class="stl_01" style="top:40.2628em; left:34.1658em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Sales tax refunds &nbsp;</span></div>
