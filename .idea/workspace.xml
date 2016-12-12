@@ -69,9 +69,9 @@
         <entry file="file://$PROJECT_DIR$/manageApp/tasks.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="556">
-              <caret line="112" column="62" selection-start-line="112" selection-start-column="62" selection-end-line="112" selection-end-column="62" />
+              <caret line="112" column="63" selection-start-line="112" selection-start-column="63" selection-end-line="112" selection-end-column="63" />
               <folding>
-                <marker date="1481535650751" expanded="true" signature="2648:2794" ph="..." />
+                <marker date="1481535918195" expanded="true" signature="2648:2794" ph="..." />
               </folding>
             </state>
           </provider>
@@ -1014,9 +1014,9 @@
     <entry file="file://$PROJECT_DIR$/manageApp/tasks.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="556">
-          <caret line="112" column="62" selection-start-line="112" selection-start-column="62" selection-end-line="112" selection-end-column="62" />
+          <caret line="112" column="63" selection-start-line="112" selection-start-column="63" selection-end-line="112" selection-end-column="63" />
           <folding>
-            <marker date="1481535650751" expanded="true" signature="2648:2794" ph="..." />
+            <marker date="1481535918195" expanded="true" signature="2648:2794" ph="..." />
           </folding>
         </state>
       </provider>

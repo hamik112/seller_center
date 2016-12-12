@@ -108,7 +108,7 @@ def import_one_file_to_statement_view(task_dict):
             try:
                 StatementView.objects.filter(order_id=tmp_dict.get("order_id", "")).update(**tmp_dict)
             except Exception, e:
-                msg = "存在重复记录:"+str(e)+str(tmp_dict.get("order_id", ""))
+                msg = "存在重复记录:"+str(tmp_dict.get("order_id", ""))
                 log1.error(msg)
                 update_file_statue(filename, -1, error_msg=msg)
                 return {"statue": -1, "msg": str(e)}
