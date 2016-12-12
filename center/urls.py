@@ -16,7 +16,7 @@ urlpatterns = patterns('',
             url(r'advertising/$', 'center.views.advertising', name='advertising'),
             url(r'performance/$', 'center.views.performance', name='performance'),
 
-            url(r'summary-pdf/$', 'center.views.pdf_file_view', name='pdf_file_view'),
+            # url(r'summary-pdf/$', 'center.views.pdf_file_view', name='pdf_file_view'),
 
             url(r'download-file/$', 'center.views.download_file', name='download_file'),
 
