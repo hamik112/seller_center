@@ -392,11 +392,11 @@
             beforeSend:function(XMLHttpRequest){
                $("#loading").html("<img src='/static/admin/img/loading.gif' />");
                showMask();
+               $("#add_many_line").modal('hide');
             },
             success: function (sdata) {
                 showBody();
                 if (sdata.statue == '0'){
-                    $("#add_many_line").modal('hide');
                     alert("操作成功!"+sdata.msg);
                     location.reload();
                 }else{
