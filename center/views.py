@@ -74,6 +74,8 @@ def pdf_file_view(request):
     username = request.user.username
     month = request.GET.get("month", "")
     year  = request.GET.get("year", "")
+    if not month or not  year:
+        return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
     begin_date_str, end_date_str = request.GET.get("begin_date", ""), request.GET.get("end_date",  "")
     # print username, month, year, begin_date_str,"||", end_date_str
     begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
