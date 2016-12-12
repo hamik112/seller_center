@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/Home.html" afterPath="$PROJECT_DIR$/center/templates/Home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/advertising-2.html" afterPath="$PROJECT_DIR$/center/templates/advertising-2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/all_statements.html" afterPath="$PROJECT_DIR$/center/templates/all_statements.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/data_range_reports.html" afterPath="$PROJECT_DIR$/center/templates/data_range_reports.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/inventory.html" afterPath="$PROJECT_DIR$/center/templates/inventory.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/orders.html" afterPath="$PROJECT_DIR$/center/templates/orders.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/performance.html" afterPath="$PROJECT_DIR$/center/templates/performance.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/pricing.html" afterPath="$PROJECT_DIR$/center/templates/pricing.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/statement_view.html" afterPath="$PROJECT_DIR$/center/templates/statement_view.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/transaction.html" afterPath="$PROJECT_DIR$/center/templates/transaction.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/views.py" afterPath="$PROJECT_DIR$/center/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" afterPath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,101 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+      <file leaf-file-name="statement_view_data.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="3013" column="13" selection-start-line="3013" selection-start-column="13" selection-end-line="3013" selection-end-column="13" />
+            <state relative-caret-position="-970">
+              <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Home.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/Home.html">
+      <file leaf-file-name="summary_pdf_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="5997" column="55" selection-start-line="5997" selection-start-column="55" selection-end-line="5997" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="inventory.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/inventory.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="11607" column="55" selection-start-line="11607" selection-start-column="55" selection-end-line="11607" selection-end-column="55" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="orders.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/orders.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="2518" column="13" selection-start-line="2518" selection-start-column="13" selection-end-line="2518" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="performance.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="284">
-              <caret line="2422" column="51" selection-start-line="2422" selection-start-column="51" selection-end-line="2422" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/manageApp/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="33" column="13" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pricing.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="2856" column="51" selection-start-line="2856" selection-start-column="51" selection-end-line="2856" selection-end-column="51" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="statement_view.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="259">
-              <caret line="3422" column="13" selection-start-line="3422" selection-start-column="13" selection-end-line="3422" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="transaction.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="3347" column="0" selection-start-line="3347" selection-start-column="0" selection-end-line="3347" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="get_storename.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/center/dataService/get_storename.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="7" column="87" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
+            <state relative-caret-position="2052">
+              <caret line="627" column="18" selection-start-line="627" selection-start-column="18" selection-end-line="627" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -178,7 +88,6 @@
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
         <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" />
-        <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
         <option value="$PROJECT_DIR$/center/urls.py" />
         <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/center/models.py" />
@@ -194,6 +103,7 @@
         <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
         <option value="$PROJECT_DIR$/center/templates/transaction.html" />
         <option value="$PROJECT_DIR$/center/dataService/get_storename.py" />
+        <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
       </list>
     </option>
   </component>
@@ -669,7 +579,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.077991456" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26068377" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -912,17 +822,7 @@
         <state relative-caret-position="327">
           <caret line="276" column="106" selection-start-line="276" selection-start-column="106" selection-end-line="276" selection-end-column="106" />
           <folding>
-            <element signature="n#style#0;n#div#144;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="516">
-          <caret line="524" column="51" selection-start-line="524" selection-start-column="51" selection-end-line="524" selection-end-column="51" />
-          <folding>
-            <element signature="e#40#50#0" expanded="true" />
+            <element signature="n#style#0;n#div#144;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -939,14 +839,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
           <caret line="25" column="23" selection-start-line="25" selection-start-column="23" selection-end-line="25" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
           <folding />
         </state>
       </provider>
@@ -1001,6 +893,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="3422" column="13" selection-start-line="3422" selection-start-column="13" selection-end-line="3422" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="3347" column="0" selection-start-line="3347" selection-start-column="0" selection-end-line="3347" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/dataService/get_storename.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -1035,32 +951,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="284">
+        <state relative-caret-position="298">
           <caret line="2422" column="51" selection-start-line="2422" selection-start-column="51" selection-end-line="2422" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="249">
-          <caret line="2856" column="51" selection-start-line="2856" selection-start-column="51" selection-end-line="2856" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="3422" column="13" selection-start-line="3422" selection-start-column="13" selection-end-line="3422" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/transaction.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="3347" column="0" selection-start-line="3347" selection-start-column="0" selection-end-line="3347" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1073,10 +965,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/get_storename.py">
+    <entry file="file://$PROJECT_DIR$/center/templates/pricing.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="87" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
+        <state relative-caret-position="249">
+          <caret line="2856" column="51" selection-start-line="2856" selection-start-column="51" selection-end-line="2856" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-970">
+          <caret line="45" column="42" selection-start-line="45" selection-start-column="42" selection-end-line="45" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2052">
+          <caret line="627" column="18" selection-start-line="627" selection-start-column="18" selection-end-line="627" selection-end-column="18" />
           <folding />
         </state>
       </provider>

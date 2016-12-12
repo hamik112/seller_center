@@ -624,7 +624,7 @@ def create_pdf_from_html(**params):
     pdf_html_str = open(filename).read()
     t = Template(pdf_html_str)
     g_dict = generate_dict(**params)
-    print g_dict
+    # print g_dict
     c = Context(g_dict)
     result_html = t.render(c)
     result_filename = os.path.join(pdf_dir, "result_pdf.html")
