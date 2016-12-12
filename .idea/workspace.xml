@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/readme.md" afterPath="$PROJECT_DIR$/readme.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/amazon_login.html" afterPath="$PROJECT_DIR$/center/templates/amazon_login.html" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,28 +28,50 @@
       <file leaf-file-name="Home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/Home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="-1230">
               <caret line="95" column="393" selection-start-line="95" selection-start-column="393" selection-end-line="95" selection-end-column="393" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="readme.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readme.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="324">
+              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="advertising-2.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/advertising-2.html">
+      <file leaf-file-name="amazon_login.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="1594" column="1012" selection-start-line="1594" selection-start-column="1012" selection-end-line="1594" selection-end-column="1012" />
+            <state relative-caret-position="308">
+              <caret line="2465" column="18" selection-start-line="2465" selection-start-column="18" selection-end-line="2465" selection-end-column="18" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#2;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#form#0;n#div#4;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#img#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#1;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#iframe#0;n#div#10;n#div#8;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#object#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="amazon_login1.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/amazon_login1.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="218">
+              <caret line="2517" column="86" selection-start-line="2517" selection-start-column="86" selection-end-line="2517" selection-end-column="100" />
               <folding />
             </state>
           </provider>
@@ -78,7 +100,7 @@
       <file leaf-file-name="inventory.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/inventory.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
+            <state relative-caret-position="-6608">
               <caret line="1600" column="957" selection-start-line="1600" selection-start-column="957" selection-end-line="1600" selection-end-column="957" />
               <folding />
             </state>
@@ -98,7 +120,7 @@
       <file leaf-file-name="performance.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
+            <state relative-caret-position="-4628">
               <caret line="1387" column="103" selection-start-line="1387" selection-start-column="103" selection-end-line="1387" selection-end-column="103" />
               <folding />
             </state>
@@ -110,16 +132,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="440">
               <caret line="1771" column="45" selection-start-line="1771" selection-start-column="45" selection-end-line="1771" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -164,7 +176,6 @@
         <option value="$PROJECT_DIR$/manageApp/dataService/filename_to_storename.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/deal_xls.py" />
         <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
-        <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
         <option value="$PROJECT_DIR$/center/templates/amazon_register.html" />
         <option value="$PROJECT_DIR$/center/templates/pricing.html" />
         <option value="$PROJECT_DIR$/center/templates/transaction.html" />
@@ -184,6 +195,7 @@
         <option value="$PROJECT_DIR$/center/templates/performance.html" />
         <option value="$PROJECT_DIR$/center/templates/Home.html" />
         <option value="$PROJECT_DIR$/readme.md" />
+        <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
       </list>
     </option>
   </component>
@@ -670,13 +682,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/manageApp/templates/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3006">
@@ -799,13 +804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
           <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="4" column="60" selection-start-line="4" selection-start-column="60" selection-end-line="4" selection-end-column="60" />
         </state>
       </provider>
     </entry>
@@ -950,7 +948,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/advertising-2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="-5978">
           <caret line="1594" column="1012" selection-start-line="1594" selection-start-column="1012" selection-end-line="1594" selection-end-column="1012" />
           <folding />
         </state>
@@ -974,7 +972,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/inventory.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
+        <state relative-caret-position="-6608">
           <caret line="1600" column="957" selection-start-line="1600" selection-start-column="957" selection-end-line="1600" selection-end-column="957" />
           <folding />
         </state>
@@ -990,7 +988,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
+        <state relative-caret-position="-4628">
           <caret line="1387" column="103" selection-start-line="1387" selection-start-column="103" selection-end-line="1387" selection-end-column="103" />
           <folding />
         </state>
@@ -1006,7 +1004,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/Home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
+        <state relative-caret-position="-1230">
           <caret line="95" column="393" selection-start-line="95" selection-start-column="393" selection-end-line="95" selection-end-column="393" />
           <folding />
         </state>
@@ -1014,9 +1012,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/readme.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state relative-caret-position="324">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/amazon_login1.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="2517" column="86" selection-start-line="2517" selection-start-column="86" selection-end-line="2517" selection-end-column="100" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/amazon_login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="2465" column="18" selection-start-line="2465" selection-start-column="18" selection-end-line="2465" selection-end-column="18" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#6;n#div#0;n#form#0;n#div#4;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#5;n#div#3;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iframe#0;n#div#0;n#div#0;n#div#1;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#iframe#0;n#div#10;n#div#8;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#object#0;n#div#3;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
