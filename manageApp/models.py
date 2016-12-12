@@ -49,13 +49,14 @@ class StatementView(models.Model):
     """ date range reports 报表"""
     id              =  models.AutoField( primary_key=True, null=False)
     # date_time    =  models.CharField( max_length=50, default="", null=False)
+    unique_id       = models.CharField( max_length=200, default="", null=False)   #时间加order_id为唯一标识
     date_time       = models.DateTimeField( default=timezone.now(), null=False)
 
     filename        =  models.CharField( max_length=100, default="", null=False)
 
     settlement_id   =  models.CharField( max_length=50, default="", null=False)
     type            =  models.CharField( max_length=200, default="", null=False)
-    order_id        =  models.CharField( max_length=100, unique=True, default="", null=False)
+    order_id        =  models.CharField( max_length=100, default="", null=False)
     sku             =  models.CharField( max_length=50, default="", null=False)
     description     =  models.CharField( max_length=200, default="", null=False)
     quantity        =  models.CharField( max_length=50 , default="", null=False)
