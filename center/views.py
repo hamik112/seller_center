@@ -164,3 +164,5 @@ def amazon_register(request):
     else:
         return render(request, 'amazon_register.html', locals())
 
+
+    

@@ -12,7 +12,7 @@ from django.utils import timezone
 class UploadFileRecorde(models.Model):
     """ 记录上传的文件 """
     id         =  models.AutoField(primary_key=True,null=False)
-    filename   =  models.CharField( max_length=255, default="", null=False)
+    filename   =  models.CharField( max_length=255, default="", unique=True, null=False)
     file_path  =  models.CharField( max_length=500, default="", null=False)
     file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
     error_msg   = models.CharField( max_length= 300, default="", null=False)
@@ -49,7 +49,7 @@ class StatementView(models.Model):
     """ date range reports 报表"""
     id              =  models.AutoField( primary_key=True, null=False)
     # date_time    =  models.CharField( max_length=50, default="", null=False)
-    unique_id       = models.CharField( max_length=200, default="", unique=True, null=False)   #时间加order_id为唯一标识
+    # unique_id       = models.CharField( max_length=200, default="", unique=True, null=False)   #时间加order_id为唯一标识
     date_time       = models.DateTimeField( default=timezone.now(), null=False)
 
     filename        =  models.CharField( max_length=100, default="", null=False)
