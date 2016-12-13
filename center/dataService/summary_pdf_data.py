@@ -535,7 +535,7 @@ def generate_dict(**param_dict):
     username, month= param_dict.get("username",""),param_dict.get("month","")
     if  begin_date_str and  end_date_str:
         begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
-        end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y")
+        end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y") + datetime.timedelta(days=1)  #date_time__range不包含最后一天
     else:
         begin_date, end_date = datetime.datetime.now(), datetime.datetime.now()
     # print username, month, year, begin_date, end_date

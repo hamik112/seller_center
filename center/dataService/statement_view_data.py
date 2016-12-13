@@ -187,7 +187,8 @@ class StatementViewData(object):
             + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.csv"
         print "filename: ", filename
         begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
-        end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y") + datetime.timedelta(days=1)  #date_time__range不包含最后一天
+        end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
+        file_end_date = end_day + datetime.timedelta(days=1)  #date_time__range不包含最后一天
         print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
         user_email = self.request.user.username
@@ -199,7 +200,7 @@ class StatementViewData(object):
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": file_path_name}
         all_datas = StatementView.objects.filter(serial_number=serial_number,
-                                                 date_time__range=(begin_date, end_date)).values_list("date_time",
+                                                 date_time__range=(begin_date, file_end_date)).values_list("date_time",
                  "settlement_id", "type", "order_id", "sku", "description",
                   "quantity", "marketplace", "fulfillment", "order_city",
                   "order_state", "order_postal", "product_sales", "shipping_credits","gift_wrap_credits",
