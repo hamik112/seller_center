@@ -79,6 +79,23 @@ class TransactionView(models.Model):
 
 
 
+class InventoryReports(models.Model):
+    id            =   models.AutoField( primary_key=True,null=False)
+    username      =   models.CharField( max_length= 200, default="", null=False)
+
+
+    report_type   =   models.CharField( max_length=100, default="", null=False)
+    batch_id      =   models.CharField( max_length=100, default="", null=False)
+    date_time_request     =   models.CharField( max_length=100, default="", null=False)
+    date_time_completed   =   models.CharField( max_length=100, default="", null=False)
+    report_status         =   models.CharField( max_length=100, default="", null=False)
+
+    class Meta:
+        db_table = "inventory_reports_tb"
+    def __unicode__(self):
+        return  self.report_type
+
+
 
 
 

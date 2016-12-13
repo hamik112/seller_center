@@ -120,3 +120,7 @@ def get_update_error_msg(request):
     error_msg = get_update_error_str(uid)
     result = {"statue": 0, "msg": error_msg}
     return HttpResponse(json.dumps(result))
+
+
+
+
