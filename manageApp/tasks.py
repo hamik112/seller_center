@@ -60,7 +60,7 @@ def import_one_file_to_statement_view(task_dict):
                         "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                         "other", "total" ]
     header_dict = {}
-    print header_list
+    # print header_list
     for name in need_header_list:
         try:
             if name == "date_time":
@@ -86,8 +86,14 @@ def import_one_file_to_statement_view(task_dict):
     if len(filename_split_list) < 2:
         return {"statue": -1, "msg": "文件名错误:文件名格式不正确!"}
     serial_number = "-".join(filename.split("-")[:2])
-    area  = filename.split("-")[-1]
+    try:
+        area  = filename.split(".")[0].split("-")[-1]
+    except Exception, e:
+        area = ""
+    print len(value_list)
+    n = 0
     for data_line in value_list[8:]:
+        n += 1
         tmp_dict = {"filename": filename}
         for name in need_header_list:
             if name == u"店铺" or name == "店铺":
@@ -106,6 +112,7 @@ def import_one_file_to_statement_view(task_dict):
             stv = StatementView(**tmp_dict)
             stv.save()
         except Exception, e:
+            print str(e)
             log1.info(str(e))
             try:
                 StatementView.objects.filter(order_id=tmp_dict.get("order_id", "")).update(**tmp_dict)
@@ -114,6 +121,7 @@ def import_one_file_to_statement_view(task_dict):
                 log1.error(msg)
                 update_file_statue(filename, -1, error_msg=msg)
                 return {"statue": -1, "msg": str(e)}
+    print n
     update_file_statue(filename, 2)
     return {"statue": 0, "msg": ""}
 

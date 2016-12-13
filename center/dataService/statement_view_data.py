@@ -187,7 +187,7 @@ class StatementViewData(object):
             + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.csv"
         print "filename: ", filename
         begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
-        end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
+        end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y") + datetime.timedelta(days=1)  #date_time__range不包含最后一天
         print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
         user_email = self.request.user.username
