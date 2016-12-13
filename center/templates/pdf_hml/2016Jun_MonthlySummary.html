@@ -28,15 +28,27 @@
 					<div class="stl_01" style="top:7.9503em; left:62.4608em;"><span class="stl_20 stl_08 stl_09">Totals &nbsp;</span></div>
 					<div class="stl_01" style="top:9.2261em; left:1.9608em;"><span class="stl_20 stl_08 stl_09">Income &nbsp;</span></div>
 					<div class="stl_01" style="top:9.2261em; left:15.27em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0004em;">Net sales, credits, and refunds &nbsp;</span></div>
+                {% if  summaries_income %}
+                    <div class="stl_01" style="top:9.2261em; left:{{ summaries_income.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ summaries_income.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:9.2261em; left:61.7783em;"><span class="stl_20 stl_08 stl_11">7,038.51 &nbsp;</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:10.1828em; left:1.9608em;"><span class="stl_20 stl_08 stl_11">Expenses &nbsp;</span></div>
 					<div class="stl_01" style="top:11.1169em; left:1.9608em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Sales Tax &nbsp;</span></div>
 					<div class="stl_01" style="top:12.0719em; left:1.9608em;"><span class="stl_20 stl_08 stl_09">Transfers &nbsp;</span></div>
 					<div class="stl_01" style="top:10.1828em; left:15.27em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0004em;">Net fees, including Amazon service fees, selling fees, FBA fees, shipping, and taxes &nbsp;</span></div>
 					<div class="stl_01" style="top:11.1169em; left:15.27em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0003em;">Net taxes collected on product sales and services &nbsp;</span></div>
 					<div class="stl_01" style="top:12.0719em; left:15.27em;"><span class="stl_10 stl_08 stl_11" style="word-spacing:0.0004em;">Net deposits and withdrawals &nbsp;</span></div>
+                {% if summaries_expenses %}
+                    <div class="stl_01" style="top:10.1828em; left:{{ summaries_expenses.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ summaries_expenses.number }} &nbsp;</span></div>
+                {% else %}
 					<div class="stl_01" style="top:10.1828em; left:61.5917em;"><span class="stl_20 stl_08 stl_11">-1,401.35 &nbsp;</span></div>
+                {% endif %}
+                {% if summaries_transfers %}
+                    <div class="stl_01" style="top:11.1169em; left:{{ summaries_transfers.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ summaries_transfers.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:11.1169em; left:63.7325em;"><span class="stl_20 stl_08 stl_09">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:12.0719em; left:63.7325em;"><span class="stl_20 stl_08 stl_09">0</span></div>
 					<div class="stl_01" style="top:16.0135em; left:2.0042em;"><span class="stl_19 stl_13 stl_09" style="font-weight:bold;">Income &nbsp;</span></div>
                 {% if Income %}
@@ -250,7 +262,11 @@
 					<div class="stl_01" style="top:33.1344em; left:63.665em;"><span class="stl_20 stl_08 stl_09">0</span></div>
                 {% endif %}
 					<div class="stl_01" style="top:34.2777em; left:2.0042em;"><span class="stl_19 stl_13 stl_11" style="font-weight:bold;">Transfers &nbsp;</span></div>
+                {% if Transfers %}
+                    <div class="stl_01" style="top:34.1414em; left:{{ Transfers.number_length }}em;"><span class="stl_21 stl_13 stl_09" style="font-weight:bold;">{{ Transfers.number }}</span></div>
+                {% else %}
 					<div class="stl_01" style="top:34.1414em; left:31.43em;"><span class="stl_21 stl_13 stl_09" style="font-weight:bold;">0</span></div>
+                {% endif %}
 					<div class="stl_01" style="top:34.8553em; left:49.7867em;"><span class="stl_22 stl_08 stl_09" style="font-weight:bold;">subtotals &nbsp;</span></div>
                 {% if expense_subtotal_debits %}
                     <div class="stl_01" style="top:34.8578em; left:{{ expense_subtotal_debits.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ expense_subtotal_debits.number }} &nbsp;</span></div>

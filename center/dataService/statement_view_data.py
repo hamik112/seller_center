@@ -153,6 +153,7 @@ class StatementViewData(object):
             output_file_create = create_pdf_from_html(**params)
         except Exception, e:
             print "html to pdf error: ", str(e)
+            output_file_create = ""
             statue = False
         # try:
         #     filename = output_file_name.split(".")[0]

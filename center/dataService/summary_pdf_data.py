@@ -502,10 +502,20 @@ class SummaryPdfData(object):
         Income_sum = format(Income_sum, ",")
         return {"number_length":Income_len(Income_sum), "number": Income_sum}
 
+    def summaries_income(self,subtotal_list):
+        Income_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
+        Income_sum = format(Income_sum, ",")
+        return {"number_length":expend_credicts_len(Income_sum), "number": Income_sum}
+
     def Expenses(self, subtotal_list):
         expenses_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
         expenses_number = format(expenses_number, ",")
         return {"number_length": Expenses_len(expenses_number), "number": expenses_number}
+
+    def summaries_expenses(self, subtotal_list):
+        expenses_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
+        expenses_number = format(expenses_number, ",")
+        return {"number_length": expend_credicts_len(expenses_number), "number": expenses_number}
 
 
     def charges_to_credit_card(self):
@@ -524,6 +534,16 @@ class SummaryPdfData(object):
         product_sale_sum = format(product_sale_sum, ",")
         product_sale_html_sum = oredits_number_len(product_sale_sum)
         return {"number_length": product_sale_html_sum, "number": product_sale_sum}
+
+    def Transfers(self, subtotal_list):
+        transfers_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
+        transfers_sum = format(transfers_sum, ",")
+        return {"number_length":Income_len(transfers_sum), "number": transfers_sum}
+
+    def summaries_transfers(self,subtotal_list):
+        transfers_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
+        transfers_number = format(transfers_number, ",")
+        return {"number_length": expend_credicts_len(transfers_number), "number": transfers_number}
 
 
 
@@ -590,8 +610,14 @@ def generate_dict(**param_dict):
                                                               carrier_shipping_label_adjustments,Adjustments,
                                                               refund_for_advertiser])
     Income = spd.Income([income_subtotal_debits, income_subtotal_credits])
+    summaries_income = spd.summaries_income([income_subtotal_debits, income_subtotal_credits])
     Exception = spd.Expenses([expense_subtotal_credits, expense_subtotal_debits])
+    summaries_expenses = spd.summaries_expenses([expense_subtotal_credits, expense_subtotal_debits])
     Charges_to_credit_card = spd.charges_to_credit_card()
+    Transfers = spd.Transfers([Charges_to_credit_card])
+    summaries_transfers = spd.summaries_transfers([Charges_to_credit_card])
+
+
 
     return {"storename":storename,"product_sales":product_sales,"product_refund":product_refund,
             "FBA_product_sales":FBA_product_sales, "FBA_product_refund":FBA_product_refund,
@@ -608,7 +634,12 @@ def generate_dict(**param_dict):
             "Service_fees":Service_fees,"Adjustments":Adjustments, "Refund_administration_fees":Refund_administration_fees,
             "cost_of_advertising":cost_of_advertising, "refund_for_advertiser":refund_for_advertiser,
             "expense_subtotal_debits":expense_subtotal_debits, "expense_subtotal_credits":expense_subtotal_credits,
-            "Income":Income, "Exception":Exception, "Charges_to_credit_card": Charges_to_credit_card}
+            "Income":Income, "Exception":Exception, "Charges_to_credit_card": Charges_to_credit_card,
+            "summaries_income": summaries_income, "summaries_expenses": summaries_expenses,
+            "Transfers":Transfers, "summaries_transfers": summaries_transfers}
+
+
+
 
 
 def create_pdf_from_html(**params):
