@@ -188,7 +188,7 @@ class StatementViewData(object):
         print "filename: ", filename
         begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
         end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
-        # print begin_date, end_date
+        print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
         user_email = self.request.user.username
         try:

@@ -32,20 +32,24 @@ class StatementViewImport(object):
             else:
                 pass
             if filename.endswith(".xls") or filename.endswith(".xlsx"):
-                try:
-                    file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
-                    datas = read_xls(file_path)
-                    update_file_statue(filename,1)
+                file_statue = get_update_file_statue(filename)
+                if file_statue == "2":
+                    statue_dict= {"filename":filename, "statue":-2, "msg":u"文件已经更新了!"}
+                else:
                     try:
-                        import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
-                        statue_dict = {"filename": filename, "statue": 0, "msg": ""}
+                        file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
+                        datas = read_xls(file_path)
+                        update_file_statue(filename,1)
+                        try:
+                            import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
+                            statue_dict = {"filename": filename, "statue": 0, "msg": ""}
+                        except Exception, e:
+                            print e
+                            statue_dict = {"filename": filename, "statue": 0, "msg": str(e)}
+                            update_file_statue(filename, -1, error_msg=str(e))
+                        # statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}
                     except Exception, e:
-                        print e
-                        statue_dict = {"filename": filename, "statue": 0, "msg": str(e)}
-                        update_file_statue(filename, -1, error_msg=str(e))
-                    # statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}
-                except Exception, e:
-                    statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
+                        statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
             else:
                 print "not found .xls file"
                 statue_dict = {"filename": filename, "statue": -1, "msg": u"文件不是.xls或.xlsx文件"}
