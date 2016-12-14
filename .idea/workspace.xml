@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/statement_view_data.py" afterPath="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" afterPath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/data_range_reports.html" afterPath="$PROJECT_DIR$/center/templates/data_range_reports.html" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,63 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="468">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="620" column="10" selection-start-line="620" selection-start-column="10" selection-end-line="620" selection-end-column="10" />
+            <state relative-caret-position="214">
+              <caret line="1712" column="1019" selection-start-line="1712" selection-start-column="1019" selection-end-line="1712" selection-end-column="1019" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/views.py">
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="85" column="37" selection-start-line="85" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
-              <folding>
-                <element signature="e#17#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="statement_view_data.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="179" column="48" selection-start-line="179" selection-start-column="48" selection-end-line="179" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="summary_pdf_data.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="641" column="73" selection-start-line="641" selection-start-column="73" selection-end-line="641" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016Jun_MonthlySummary.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="27" column="175" selection-start-line="27" selection-start-column="171" selection-end-line="27" selection-end-column="175" />
+            <state relative-caret-position="468">
+              <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -143,10 +100,10 @@
         <option value="$PROJECT_DIR$/center/dataService/create_xls.py" />
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.html.back" />
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.back.html" />
-        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
         <option value="$PROJECT_DIR$/center/views.py" />
         <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
+        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
       </list>
     </option>
   </component>
@@ -157,8 +114,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="366" />
-    <option name="y" value="12" />
+    <option name="x" value="497" />
+    <option name="y" value="26" />
     <option name="width" value="1423" />
     <option name="height" value="974" />
   </component>
@@ -606,17 +563,17 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="366" y="12" width="1423" height="974" extended-state="0" />
+    <frame x="497" y="26" width="1423" height="974" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17115805" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25928622" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.44764957" sideWeight="0.50426894" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.033997655" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14654163" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -951,14 +908,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="67" selection-start-line="15" selection-start-column="67" selection-end-line="15" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html.back2">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -999,14 +948,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="620" column="10" selection-start-line="620" selection-start-column="10" selection-end-line="620" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/views.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -1035,8 +976,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="641" column="73" selection-start-line="641" selection-start-column="73" selection-end-line="641" selection-end-column="73" />
+        <state relative-caret-position="705">
+          <caret line="647" column="35" selection-start-line="647" selection-start-column="35" selection-end-line="647" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="468">
+          <caret line="26" column="18" selection-start-line="26" selection-start-column="18" selection-end-line="26" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="1712" column="1019" selection-start-line="1712" selection-start-column="1019" selection-end-line="1712" selection-end-column="1019" />
           <folding />
         </state>
       </provider>
