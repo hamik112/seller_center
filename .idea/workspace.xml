@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/data_range_reports.html" afterPath="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/del_create_file.sh" afterPath="$PROJECT_DIR$/del_create_file.sh" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="214">
               <caret line="1712" column="1019" selection-start-line="1712" selection-start-column="1019" selection-end-line="1712" selection-end-column="1019" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="del_create_file.sh" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/del_create_file.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="108">
+              <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -71,7 +81,6 @@
         <option value="$PROJECT_DIR$/manageApp/dataService/deal_xls.py" />
         <option value="$PROJECT_DIR$/center/templates/amazon_register.html" />
         <option value="$PROJECT_DIR$/SellerCenter/settings.py" />
-        <option value="$PROJECT_DIR$/del_create_file.sh" />
         <option value="$PROJECT_DIR$/manageApp/templates/filename_to_storename.html" />
         <option value="$PROJECT_DIR$/readme.md" />
         <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
@@ -104,6 +113,7 @@
         <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+        <option value="$PROJECT_DIR$/del_create_file.sh" />
       </list>
     </option>
   </component>
@@ -573,7 +583,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14654163" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4513482" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -673,13 +683,6 @@
         <state relative-caret-position="2826">
           <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/del_create_file.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -994,6 +997,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="1712" column="1019" selection-start-line="1712" selection-start-column="1019" selection-end-line="1712" selection-end-column="1019" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/del_create_file.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding />
         </state>
       </provider>
