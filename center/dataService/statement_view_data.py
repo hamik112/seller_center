@@ -176,6 +176,7 @@ class StatementViewData(object):
                   "end_date_str": str(self.end_date_str),
                   "filename":output_file_name}
         try:
+            print "params = " , params
             output_file_create = create_pdf_from_html(**params)
         except Exception, e:
             print "html to pdf error: ", str(e)

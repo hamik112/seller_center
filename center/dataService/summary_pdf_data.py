@@ -70,7 +70,7 @@ class SummaryPdfData(object):
         return storename
 
     def product_sales(self):
-        print self.serial_number
+        # print self.serial_number
         query_select = Q(serial_number=self.serial_number, type="Order")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
@@ -104,7 +104,7 @@ class SummaryPdfData(object):
 
 
     def FBA_product_sales(self):
-        print self.serial_number
+        # print self.serial_number
         query_select = Q(serial_number=self.serial_number, type="Order", fulfillment="Amazon")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
@@ -638,7 +638,8 @@ def generate_dict(**param_dict):
             "expense_subtotal_debits":expense_subtotal_debits, "expense_subtotal_credits":expense_subtotal_credits,
             "Income":Income, "Exception":Exception, "Charges_to_credit_card": Charges_to_credit_card,
             "summaries_income": summaries_income, "summaries_expenses": summaries_expenses,
-            "Transfers":Transfers, "summaries_transfers": summaries_transfers}
+            "Transfers":Transfers, "summaries_transfers": summaries_transfers,
+            "begin_date_str": begin_date_str, "end_date_str":end_date_str}
 
 
 
