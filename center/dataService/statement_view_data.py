@@ -30,13 +30,31 @@ class StatementViewData(object):
         self.request =  request
         self.post_dict = request.POST if request.POST else {}
         self.reportType = self.post_dict.get("reportType")
-        self.year = self.post_dict.get("year")
         self.timeRangeType = self.post_dict.get("timeRangeType", "")
-        self.month = self.post_dict.get("month", "")
         # print reportType, year, timeRangeType, month
-        if self.timeRangeType == "Monthly":
+        if self.timeRangeType == "Monthly" :
+            self.year = self.post_dict.get("year")
+            self.month = self.post_dict.get("month", "")
             self.current_month = self.get_month_day(self.year, self.month)
+            self.is_custom = ""
+            self.begin_date_str = str(self.current_month.get("day_begin", ""))
+            self.end_date_str =  str(self.current_month.get("day_end", ""))
             self.timeRange = str(self.current_month.get("day_begin", "")) +" - "+ str(self.current_month.get("day_end", ""))
+        elif self.timeRangeType == "Custom" :
+            self.is_custom = "Custom"
+            self.startDateYear = self.post_dict.get("startDateYear","")
+            self.endDateYear = self.post_dict.get("endDateYear", "")
+            self.startDateMonth = self.post_dict.get("startDateMonth", "")
+            self.endDateMonth = self.post_dict.get("endDateMonth", "")
+            self.startDateDay = self.post_dict.get("startDateDay", "")
+            self.endDateDay = self.post_dict.get("endDateDay", "")
+            start_dateArray = datetime.datetime.utcfromtimestamp(float(self.post_dict.get("startDate","0")))
+            end_dateArray = datetime.datetime.utcfromtimestamp(float(self.post_dict.get("endDate", "0")))
+            self.begin_date_str = datetime.datetime.strftime(start_dateArray, "%b %d, %Y")
+            self.end_date_str = datetime.datetime.strftime(end_dateArray, "%b %d, %Y")
+            self.year = self.endDateYear
+            self.month = self.endDateMonth
+            self.timeRange = str(self.begin_date_str) + " - " + str(self.end_date_str)
         else:
             self.timeRange = ""
             self.current_month = {}
@@ -68,7 +86,14 @@ class StatementViewData(object):
             result = self.web_html_to_pdf()
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return result
-        elif self.post_dict.get("reportType", "") == "Transaction" :   #导出表格
+        elif self.reportType == "Transaction" and self.timeRangeType =="Custom":
+            return_dict = self.write_recorde_generate_report()
+            result = self.create_xls_reports(**return_dict)
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
+            return update_statue
+            pass
+
+        elif self.reportType == "Transaction" and self.timeRangeType == "Monthly":   #导出表格
             return_dict = self.write_recorde_generate_report()
             result = self.create_xls_reports(**return_dict)
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
@@ -81,7 +106,7 @@ class StatementViewData(object):
     def write_recorde_generate_report(self):
         username = self.request.user.username
         request_date = datetime.datetime.now().strftime("%b %m, %Y")
-        recorde_dict = {"reportType": self.reportType, "year": self.year, "is_custom": "Custom", "timeRange": self.timeRange,
+        recorde_dict = {"reportType": self.reportType, "year": self.year, "is_custom": self.is_custom, "timeRange": self.timeRange,
                         "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": 0,"request_date":request_date,
                         "username":username}
         return_id = -1
@@ -130,13 +155,13 @@ class StatementViewData(object):
         statue, msg, output_file_name = True, "", ""
         user_email = self.request.user.username
         begin_day, end_day = self.timeRange.split("-")
-        begin_day_list = str(begin_day).replace(",", "").split(" ")
-        end_day_list = str(end_day).replace(",", "").split(" ")
+        begin_day_list = str(begin_day).strip().replace(",", "").split(" ")
+        end_day_list = str(end_day).strip().replace(",", "").split(" ")
         if self.timeRangeType == "Monthly":
             filename = str(begin_day_list[2])+str(begin_day_list[0])+"_MonthlyTransaction.pdf"
         else:
-            filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-"
-            + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.pdf"
+            filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-" +\
+                       str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.pdf"
         output_file_name = os.path.join(generate_path(GenerateReport_PATH), filename)
         # options = {"year":self.year, "month":self.month,"begin_date":self.}
         try:
@@ -147,8 +172,8 @@ class StatementViewData(object):
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
         params = {"username":self.request.user.username,"month":self.month,"year":self.year,
-                  "begin_date_str":str(self.current_month.get("day_begin", "")),
-                  "end_date_str": str(self.current_month.get("day_end", "")),
+                  "begin_date_str":str(self.begin_date_str),
+                  "end_date_str": str(self.end_date_str),
                   "filename":output_file_name}
         try:
             output_file_create = create_pdf_from_html(**params)
@@ -179,14 +204,13 @@ class StatementViewData(object):
     def create_xls_reports(self, **params):
         timeRange = params.get("timeRange", "")
         begin_day, end_day = timeRange.split("-")
-        print "timeRange:", begin_day, end_day
-        begin_day_list = str(begin_day).replace(",", "").split(" ")
-        end_day_list = str(end_day).replace(",", "").split(" ")
+        begin_day_list = str(begin_day).strip().replace(",", "").split(" ")
+        end_day_list = str(end_day).strip().replace(",", "").split(" ")
         if self.timeRangeType == "Monthly":
             filename = str(begin_day_list[2])+str(begin_day_list[0])+"_MonthlyTransaction.csv"
         else:
-            filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-"
-            + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.csv"
+            filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-" +\
+                       str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.csv"
         print "filename: ", filename
         begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
         end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")

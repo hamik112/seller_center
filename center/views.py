@@ -71,9 +71,9 @@ def date_range_reports(request):
     email = request.user.username
     store_name = get_storename(email)
     if request.method == "POST":
-        print request.POST
+        # print request.POST
         result = StatementViewData(request).request_report()
-        print result
+        # print result
         return HttpResponse(json.dumps(result))
     else:
         recorde_list = StatementViewData(request).statement_data_read()
