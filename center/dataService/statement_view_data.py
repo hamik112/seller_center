@@ -60,11 +60,17 @@ class StatementViewData(object):
             self.current_month = {}
         pass
 
-    def statement_data_read(self):
+    def statement_data_read(self, **params):
+        try:
+            pageSize = int(params.get("pageSize", 10)) if int(params.get("pageSize", 10)) >= 10 else 10
+            cur_page = int(params.get("cur_page", 1)) if int(params.get("cur_page", 1))>= 1 else 1
+        except:
+            pageSize, cur_page = 10, 1
         username = self.request.user.username
-        generate_report_list = GenerateReport.objects.filter(username=username)
+        generate_report_list = GenerateReport.objects.filter(username=username).values()[pageSize * (cur_page -1): pageSize * cur_page]
+        print generate_report_list
         return_report_list = []
-        for fline in generate_report_list.values():
+        for fline in generate_report_list:
             if not os.path.exists(os.path.join(GenerateReport_PATH, fline.get("report_file_path",""))):
                 continue
             else:

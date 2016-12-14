@@ -76,6 +76,8 @@ def date_range_reports(request):
         # print result
         return HttpResponse(json.dumps(result))
     else:
+        pageSize = request.GET.get("pageSize",10)
+        cur_page = request.GET.get("cur_page",1)
         recorde_list = StatementViewData(request).statement_data_read()
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
@@ -184,7 +186,7 @@ def pdf_file_view(request):
     # print username, month, year, begin_date_str,"||", end_date_str
 
     if not begin_date_str or not end_date_str:
-        return render(request, "pdf_hml/2016Jun_MonthlySummary.html", locals())
+        return render(request, "pdf_hml/2016Jun_MonthlySummary.back.html", locals())
     # print username, month, year, begin_date, end_date
     begin_date = datetime.datetime.strptime(begin_date_str.strip(), "%b %d, %Y")
     end_date = datetime.datetime.strptime(end_date_str.strip(), "%b %d, %Y")

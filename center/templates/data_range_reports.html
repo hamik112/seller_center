@@ -2389,14 +2389,14 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
     <tr class="list-row-white">
         <td class="data-display-field" align="left" valign="middle">
-            <form name = "paginator" method = "get" action = "/gp/payments-account/date-range-reports.html" style = "padding: 0px; margin: 0px">
+            <form name = "paginator" method = "get" action = "/date-range-reports/" style = "padding: 0px; margin: 0px">
                 <table border = "0" cellpadding = "0" cellspacing = "0">
                     <tr>
                         <td valign = "middle">
                                     <input type="hidden" name="view" value="filter">
-                            Show <select name="pageSize"> <option value="10" selected="selected">10</option>
- <option value="20">20</option>
- <option value="50">50</option>
+                            Show <select name="pageSize"> <option value="{{ pageSize }}" selected="selected">{{ pageSize }}</option>
+{# <option value="20">20</option>#}
+{# <option value="50">50</option>#}
 </select> results per page
                         </td>
                         <td valign = "middle" style = "padding-left: 3px;">

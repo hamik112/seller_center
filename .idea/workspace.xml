@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/statement_view_data.py" afterPath="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/data_range_reports.html" afterPath="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html" afterPath="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" afterPath="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/views.py" afterPath="$PROJECT_DIR$/center/views.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -25,12 +29,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="data_range_reports.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="2398" column="35" selection-start-line="2398" selection-start-column="35" selection-end-line="2398" selection-end-column="35" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="2016Jun_MonthlySummary.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="347">
-              <caret line="302" column="57" selection-start-line="302" selection-start-column="57" selection-end-line="302" selection-end-column="57" />
+            <state relative-caret-position="180">
+              <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
               <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#11;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#12;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -57,6 +72,7 @@
                 <element signature="n#style#0;n#div#115;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#116;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#152;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#153;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#154;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#155;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#156;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -67,11 +83,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="phantojs_to_pdf.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/center/dataService/phantojs_to_pdf.py">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/center/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+            <state relative-caret-position="414">
+              <caret line="80" column="56" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+              <folding>
+                <element signature="e#17#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statement_view_data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -121,7 +149,6 @@
         <option value="$PROJECT_DIR$/manageApp/tasks.py" />
         <option value="$PROJECT_DIR$/manageApp/urls.py" />
         <option value="$PROJECT_DIR$/manageApp/views.py" />
-        <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html" />
         <option value="$PROJECT_DIR$/center/urls.py" />
         <option value="$PROJECT_DIR$/center/templates/inventory_reports.html" />
         <option value="$PROJECT_DIR$/center/models.py" />
@@ -129,13 +156,14 @@
         <option value="$PROJECT_DIR$/center/dataService/create_xls.py" />
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.html.back" />
         <option value="$PROJECT_DIR$/center/templates/data_range_reports.back.html" />
-        <option value="$PROJECT_DIR$/center/views.py" />
-        <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
         <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
-        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
         <option value="$PROJECT_DIR$/del_create_file.sh" />
         <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" />
+        <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html" />
+        <option value="$PROJECT_DIR$/center/views.py" />
+        <option value="$PROJECT_DIR$/center/templates/data_range_reports.html" />
+        <option value="$PROJECT_DIR$/center/dataService/statement_view_data.py" />
       </list>
     </option>
   </component>
@@ -146,8 +174,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="280" />
-    <option name="y" value="64" />
+    <option name="x" value="333" />
+    <option name="y" value="75" />
     <option name="width" value="1624" />
     <option name="height" value="892" />
   </component>
@@ -287,6 +315,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SellerCenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SellerCenter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="center" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="2016Jun_MonthlySummary_files" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -595,8 +645,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="280" y="64" width="1624" height="892" extended-state="0" />
-    <editor active="true" />
+    <frame x="333" y="75" width="1624" height="892" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18869123" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -606,7 +656,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289183" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21011673" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28664073" sideWeight="0.49573106" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -789,6 +839,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1440">
           <caret line="82" column="8" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="8" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -833,13 +884,6 @@
         <state relative-caret-position="552">
           <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -889,6 +933,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1818">
           <caret line="104" column="44" selection-start-line="104" selection-start-column="44" selection-end-line="104" selection-end-column="44" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -919,31 +964,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.back.html" />
-    <entry file="file://$PROJECT_DIR$/center/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="85" column="37" selection-start-line="85" selection-start-column="37" selection-end-line="85" selection-end-column="37" />
-          <folding>
-            <element signature="e#17#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="179" column="48" selection-start-line="179" selection-start-column="48" selection-end-line="179" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="705">
           <caret line="647" column="35" selection-start-line="647" selection-start-column="35" selection-end-line="647" selection-end-column="35" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -971,19 +1001,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+    <entry file="file://$PROJECT_DIR$/center/dataService/phantojs_to_pdf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="1712" column="1019" selection-start-line="1712" selection-start-column="1019" selection-end-line="1712" selection-end-column="1019" />
+        <state relative-caret-position="234">
+          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="347">
-          <caret line="302" column="57" selection-start-line="302" selection-start-column="57" selection-end-line="302" selection-end-column="57" />
+        <state relative-caret-position="180">
+          <caret line="10" column="31" selection-start-line="10" selection-start-column="31" selection-end-line="10" selection-end-column="31" />
           <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#0;n#div#1;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#11;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#12;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1010,6 +1041,7 @@
             <element signature="n#style#0;n#div#115;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#116;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#152;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#153;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#154;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#155;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#156;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1019,10 +1051,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/phantojs_to_pdf.py">
+    <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.back.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="31" column="19" selection-start-line="31" selection-start-column="19" selection-end-line="31" selection-end-column="19" />
+        <state relative-caret-position="162">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/data_range_reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="2398" column="35" selection-start-line="2398" selection-start-column="35" selection-end-line="2398" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="80" column="56" selection-start-line="80" selection-start-column="56" selection-end-line="80" selection-end-column="56" />
+          <folding>
+            <element signature="e#17#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/dataService/statement_view_data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="76" column="48" selection-start-line="76" selection-start-column="48" selection-end-line="76" selection-end-column="48" />
           <folding />
         </state>
       </provider>
