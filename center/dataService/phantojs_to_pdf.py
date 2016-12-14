@@ -1,19 +1,18 @@
-
-
 # encoding:utf-8
+
 
 from selenium import webdriver
 
 def execute(driver, script, args):
     driver.execute('executePhantomScript', {'script': script, 'args' : args })
 
-def html_to_pdf(filename):
+def html_to_pdf(result_path_html , filename):
     driver = webdriver.PhantomJS('phantomjs')
     # hack while the python interface lags
 
     driver.command_executor._commands['executePhantomScript'] = ('POST', '/session/$sessionId/phantom/execute')
-
-    driver.get('http://localhost:8080/summary-pdf/')
+    driver.get(result_path_html)   #
+    #driver.get('http://localhost:8080/summary-pdf/')
 
     # set page format
     # inside the execution script, webpage is "this"
@@ -23,3 +22,5 @@ def html_to_pdf(filename):
     # render current page
     render = '''this.render("'''+filename+'''")'''
     execute(driver, render, [])
+    driver.quit()
+    return filename

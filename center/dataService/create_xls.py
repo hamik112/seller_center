@@ -2,6 +2,7 @@
 
 
 import  re
+import  os
 import  locale
 import xlrd
 import  codecs
@@ -163,3 +164,36 @@ def datetime_to_str(dt):
     return dt.strftime("%b %d, %Y %I:%M:%S %p PDT") #PDT, PST
 
 
+
+
+
+
+
+def generate_path(root_path):
+    one_p_num = 1000
+    two_p_num = 200
+    i, j, k= 0, 0, 0
+    while True:
+        one_path = os.path.join(root_path, str(i))
+        if not os.path.exists(one_path):
+            os.mkdir(one_path)
+        if len(os.listdir(one_path)) >= one_p_num:
+            i += 1
+            one_path = os.path.join(root_path, str(i))
+            if not os.path.exists(one_path):
+                os.mkdir(one_path)
+            else:
+                continue
+        else:
+            two_path = os.path.join(one_path, str(j))
+            if not os.path.exists(two_path):
+                os.mkdir(two_path)
+            if len(os.listdir(two_path)) >= two_p_num:
+                j+= 1
+            else:
+                three_path = os.path.join(two_path, str(k))
+                if not os.path.exists(three_path):
+                    os.mkdir(three_path)
+                    return three_path
+                else:
+                    k += 1

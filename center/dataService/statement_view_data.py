@@ -16,7 +16,8 @@ from  center.dataService.create_xls import create_xls, create_csv
 from center.dataService.summary_pdf_data import create_pdf_from_html
 from center.models import  GenerateReport
 
-from manageApp.dataService.upload_file import get_path
+# from manageApp.dataService.upload_file import get_path
+from center.dataService.create_xls import generate_path
 from manageApp.models import FilenameToStorename
 
 
@@ -136,7 +137,7 @@ class StatementViewData(object):
         else:
             filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-"
             + str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.pdf"
-        output_file_name = os.path.join(get_path(GenerateReport_PATH), filename)
+        output_file_name = os.path.join(generate_path(GenerateReport_PATH), filename)
         # options = {"year":self.year, "month":self.month,"begin_date":self.}
         try:
             serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
@@ -189,7 +190,7 @@ class StatementViewData(object):
         print "filename: ", filename
         begin_date = datetime.datetime.strptime(begin_day.strip(), "%b %d, %Y")
         end_date    = datetime.datetime.strptime(end_day.strip(), "%b %d, %Y")
-        file_end_date = end_day + datetime.timedelta(days=1)  #date_time__range不包含最后一天
+        file_end_date = end_date + datetime.timedelta(days=1)  #date_time__range不包含最后一天
         print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
         user_email = self.request.user.username
@@ -215,7 +216,7 @@ class StatementViewData(object):
                   "fba fees", "other transaction fees", "other", "total"]
         print "all_data:", len(all_datas)
         try:
-            file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
+            file_path_name = os.path.join(generate_path(GenerateReport_PATH), filename)
             filename = create_csv(**{"datas":all_datas, "header": header, "filename":file_path_name})
         except Exception, e:
             statue = False
@@ -223,7 +224,7 @@ class StatementViewData(object):
             print "msg: ", msg
         # try:
         #     wb, filename = create_xls(**{"datas": all_datas, "header": header, "filename": filename})
-        #     file_path_name = os.path.join(get_path(GenerateReport_PATH), filename)
+        #     file_path_name = os.path.join(generate_path(GenerateReport_PATH), filename)
         #     wb.save(file_path_name)
         # except Exception,e:
         #     statue = False

@@ -12,6 +12,8 @@ from manageApp.models import FilenameToStorename
 from django.conf import settings
 
 from django.template import  Template, Context
+from center.dataService.phantojs_to_pdf import html_to_pdf
+
 
 
 def oredits_number_len(number_str):
@@ -666,7 +668,10 @@ def create_pdf_from_html(**params):
     except Exception, e:
         print e
     try:
-        os.system("wkhtmltopdf %s %s"%(result_filename, output_file))
+        output_file = html_to_pdf(result_filename, output_file)
+        # os.system("wkhtmltopdf %s %s"%(result_filename, output_file))
     except Exception,e :
+        output_file = ""
         print "html to pdf error %s"%str(e)
+
     return output_file
