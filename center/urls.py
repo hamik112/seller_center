@@ -7,8 +7,10 @@ urlpatterns = patterns('',
             url(r'^home/$', 'center.views.home', name="home"),
 
             url(r'transaction/$', 'center.views.transaction', name='payment'),
+            url(r'transaction/transaction-data/$', 'center.views.transaction_data', name='transaction_data'),
+
             url(r'inventory/$', 'center.views.inventory', name='inventory'),
-           url(r'inventory/inventory-reports/$', 'center.views.inventory_reports', name='inventory_reports'),
+            url(r'inventory/inventory-reports/$', 'center.views.inventory_reports', name='inventory_reports'),
             url(r'all-statements/$', 'center.views.all_statements', name='all_statements'),
             url(r'date-range-reports/$', 'center.views.date_range_reports', name='date_range_reports'),
             url(r'statement-view/$', 'center.views.statement_view', name='statement_view'),

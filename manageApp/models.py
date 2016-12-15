@@ -44,6 +44,10 @@ class FilenameToStorename(models.Model):
     def __unicode__(self):
         return self.filename
 
+    def get_serial_number(self):
+        return u'%s' % (self.serial_number)
+
+
 
 class StatementView(models.Model):
     """ date range reports 报表"""

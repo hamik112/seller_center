@@ -12,3 +12,10 @@ def get_storename(email):
     return store_name
 
 
+def get_serial_number(email):
+    try:
+        serial_number = FilenameToStorename.objects.filter(email=email).values_list("serial_number", flat=True)[0]
+    except Exception, e:
+        serial_number = ""
+    print serial_number
+    return serial_number

@@ -66,16 +66,31 @@ class StatementViewData(object):
             cur_page = int(params.get("cur_page", 1)) if int(params.get("cur_page", 1))>= 1 else 1
         except:
             pageSize, cur_page = 10, 1
+        start_item = (cur_page - 1) * pageSize + 1
         username = self.request.user.username
-        generate_report_list = GenerateReport.objects.filter(username=username).values()[pageSize * (cur_page -1): pageSize * cur_page]
-        print generate_report_list
+        generate_report_list = GenerateReport.objects.filter(username=username).values()[pageSize * (cur_page -1): pageSize * cur_page + 1]
+        # print generate_report_list
         return_report_list = []
         for fline in generate_report_list:
             if not os.path.exists(os.path.join(GenerateReport_PATH, fline.get("report_file_path",""))):
                 continue
             else:
                 return_report_list.append(fline)
-        return return_report_list[::-1]
+        if len(return_report_list) > 10:
+            end_item = cur_page * pageSize
+        else:
+            end_item = start_item-1 + len(return_report_list)
+        total_count = GenerateReport.objects.count()
+        if total_count % pageSize != 0:
+            total_page = total_count / pageSize + 1
+        else:
+            total_page = total_count / pageSize
+        if total_page > cur_page:
+            next_page =  cur_page + 1
+        else:
+            next_page = total_page
+        return {"recorde_list":return_report_list[::-1], "start_item":start_item,
+                "end_item":end_item, "total_page": total_page, "next_page":next_page}
 
     def request_report(self):
         if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf

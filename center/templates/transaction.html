@@ -1729,7 +1729,7 @@ function returnHome() {
 </div></div>
 <div id="sc-quick-search-switch"><div id="sc-quicklinks-top">
 <ul id="sc-quicklinks">
-<li class="sc-quicklink" id="sc-quicklink-messages"><a class="sc-ql-a" href="https://sellercentral.amazon.com/messaging/inbox/ref=ag_cmin_head_pymtvtrans"><span class="sc-quick-txt">Messages</span><span class="sc-mobile-icon" title="Messages"></span></a></li><li class="sc-quicklink" id="sc-quicklink-help" data-feature-name="scHelpLink"><a class="sc-ql-a" href="https://sellercentral.amazon.com/gp/help/help.html/ref=ag_help_head_pymtvtrans?ie=UTF8&amp;itemID=200700310&amp;language=en_US"><span class="sc-quick-txt">Help</span><span class="sc-mobile-icon" title="Help"></span></a></li><li class="sc-quicklink sc-drop-nav sc-hover-nav " id="sc-quicklink-settings"><a class="sc-menu-trigger sc-ql-a" href="https://sellercentral.amazon.com/hz/sc/account-information/ref=ag_acctinfo_tnav_pymtvtrans_"><span class="sc-quick-txt">Settings</span><span class="sc-mobile-icon" title="Settings"></span><span class="sc-nav-arrow"></span></a><!--[if IE 6]><iframe src="javascript:false;" class='sc-nav-iframeShim'></iframe><![endif]--><ul class="sc-sub-nav"><li class="sc-logout-quicklink"><a href="https://sellercentral.amazon.com/gp/sign-in/logout.html/ref=ag_logout_head_pymtvtrans">Logout</a></li><li><a href="https://sellercentral.amazon.com/hz/sc/account-information/ref=ag_acctinfo_dnav_pymtvtrans_">Account Info</a></li>
+<li class="sc-quicklink" id="sc-quicklink-messages"><a class="sc-ql-a" href="https://sellercentral.amazon.com/messaging/inbox/ref=ag_cmin_head_pymtvtrans"><span class="sc-quick-txt">Messages</span><span class="sc-mobile-icon" title="Messages"></span></a></li><li class="sc-quicklink" id="sc-quicklink-help" data-feature-name="scHelpLink"><a class="sc-ql-a" href="https://sellercentral.amazon.com/gp/help/help.html/ref=ag_help_head_pymtvtrans?ie=UTF8&amp;itemID=200700310&amp;language=en_US"><span class="sc-quick-txt">Help</span><span class="sc-mobile-icon" title="Help"></span></a></li><li class="sc-quicklink sc-drop-nav sc-hover-nav " id="sc-quicklink-settings"><a class="sc-menu-trigger sc-ql-a" href="/amazon-logout/?ref=ag_acctinfo_tnav_pymtvtrans_"><span class="sc-quick-txt">Settings</span><span class="sc-mobile-icon" title="Settings"></span><span class="sc-nav-arrow"></span></a><!--[if IE 6]><iframe src="javascript:false;" class='sc-nav-iframeShim'></iframe><![endif]--><ul class="sc-sub-nav"><li class="sc-logout-quicklink"><a href="/amazon-logout/?ref=ag_logout_head_pymtvtrans">Logout</a></li><li><a href="https://sellercentral.amazon.com/hz/sc/account-information/ref=ag_acctinfo_dnav_pymtvtrans_">Account Info</a></li>
 <li><a href="https://sellercentral.amazon.com/notifications/preferences/ref=ag_notifpref_dnav_pymtvtrans_">Notification Preferences</a></li>
 <li><a href="https://sellercentral.amazon.com/gp/seller/configuration/login-settings.html/ref=ag_loginsett_dnav_pymtvtrans_">Login Settings</a></li>
 <li><a href="https://sellercentral.amazon.com/gp/returns/settings/ref=ag_myr_dnav_pymtvtrans_">Return Settings</a></li>
@@ -2048,7 +2048,7 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
 
 
-<form action="https://sellercentral.amazon.com/gp/payments-account/view-transactions.html" method="get" name="searchTransactions" id="searchTransactions">
+<form action="/transaction/" method="post" name="searchTransactions" id="searchTransactions">
 <div class="pFindTransaction">
         <label class="gridvmid"><span id="SellerPayments_UI_ContextualHelp_FindATransaction" class="pHelpAnchor">Find a transaction</span><div style="display:none" id="SellerPayments_UI_ContextualHelp_FindATransaction_Div_Id"><strong>Find a transaction</strong><br><br><div>Enter an order number to view the credits, fees, and adjustments for a specific order.</div></div>: 
         <input placeholder="Enter order number" maxlength="19" type="text" size="30" name="orderId" id="orderId">
@@ -2099,7 +2099,8 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
 
 
-<form action="https://sellercentral.amazon.com/gp/payments-account/view-transactions.html" id="transactionSearch" name="transactionSearch" method="get">
+<form action="/transaction/transaction-data/" id="transactionSearch" name="transactionSearch" method="get">
+
     <input type="hidden" name="searchLanguage" value="en_US">
 
 <div id="filtertransactions" style="display: block;">
@@ -2327,16 +2328,119 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
 
 <select id="eventType" name="eventType">
-  <option value="" selected="selected">All transaction types</option>
-  <option value="Fulfillment">Order Payment</option>
-  <option value="Refund">Refund</option>
-  <option value="Chargeback">Chargeback Refund</option>
-  <option value="VirtualWholesaleFBAToAmazon">- - - - - - - -</option>
-  <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
-  <option value="ServiceFee">Service Fees</option>
-  <option value="ShippingService">Shipping services purchased through Amazon</option>
-  <option value="DebtRecovery">Paid to Amazon</option>
-  <option value="Adjustment">Other</option>
+   {% if eventType == "Fulfillment" %}
+          <option value="" >All transaction types</option>
+         <option value="Fulfillment" selected="selected">Order Payment</option>
+          <option value="Refund">Refund</option>
+          <option value="Chargeback">Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon">- - - - - - - -</option>
+          <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+   {% elif eventType == "Refund" %}
+        <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" selected="selected">Refund</option>
+          <option value="Chargeback">Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon">- - - - - - - -</option>
+          <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+   {% elif eventType == "Chargeback"%}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" selected="selected">Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon">- - - - - - - -</option>
+          <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+   {% elif eventType == "VirtualWholesaleFBAToAmazon"%}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" selected="selected">- - - - - - - -</option>
+          <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+    {% elif eventType == "GuaranteeClaim"%}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" >- - - - - - - -</option>
+          <option value="GuaranteeClaim" selected="selected">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+     {% elif eventType == "ServiceFee"%}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" >- - - - - - - -</option>
+          <option value="GuaranteeClaim" >A-to-z Guarantee Refund</option>
+          <option value="ServiceFee" selected="selected">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+    {% elif eventType == "ShippingService" %}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" >- - - - - - - -</option>
+          <option value="GuaranteeClaim" >A-to-z Guarantee Refund</option>
+          <option value="ServiceFee" >Service Fees</option>
+          <option value="ShippingService" selected="selected">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+    {% elif eventType == "DebtRecovery" %}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" >- - - - - - - -</option>
+          <option value="GuaranteeClaim" >A-to-z Guarantee Refund</option>
+          <option value="ServiceFee" >Service Fees</option>
+          <option value="ShippingService" >Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery" selected="selected">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+     {% elif eventType == "Adjustment" %}
+           <option value="" >All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund" >Refund</option>
+          <option value="Chargeback" >Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon" >- - - - - - - -</option>
+          <option value="GuaranteeClaim" >A-to-z Guarantee Refund</option>
+          <option value="ServiceFee" >Service Fees</option>
+          <option value="ShippingService" >Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery" >Paid to Amazon</option>
+          <option value="Adjustment"  selected="selected">Other</option>
+     {% else %}
+       <option value="" selected="selected">All transaction types</option>
+         <option value="Fulfillment">Order Payment</option>
+          <option value="Refund">Refund</option>
+          <option value="Chargeback">Chargeback Refund</option>
+          <option value="VirtualWholesaleFBAToAmazon">- - - - - - - -</option>
+          <option value="GuaranteeClaim">A-to-z Guarantee Refund</option>
+          <option value="ServiceFee">Service Fees</option>
+          <option value="ShippingService">Shipping services purchased through Amazon</option>
+          <option value="DebtRecovery">Paid to Amazon</option>
+          <option value="Adjustment">Other</option>
+   {% endif %}
+
+
 </select>
  or <a href="https://sellercentral.amazon.com/gp/payments-account/view-transactions.html?ie=UTF8&amp;mostRecentLast=0&amp;pageSize=Ten&amp;view=search">Search for a transaction</a>
         </td>
@@ -2466,7 +2570,7 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
         
 
 
-<input type="hidden" id="pageSize" name="pageSize" value="Ten">
+<input type="hidden" id="pageSize" name="pageSize" value="{% if pageSize %}{{ pageSize }}{% else %}10{% endif %}">
         
 
 
@@ -2590,16 +2694,16 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tbody>
                     <tr>
-                        <td align="left" width="33%" class="smaller">Items 1 to 1</td>
+                        <td align="left" width="33%" class="smaller">Items {{ start_item }} to {{ end_item }}</td>
                         <td align="center" width="33%" class="smaller">&nbsp;</td>
                         <td align="right" width="33%" class="smaller">
-                            
-                             
-                                                        
+
+
+
                             <span class="currentpagination"></span>
-                            
-                                                         
-                            
+
+
+
                         </td>
                     </tr>
                 </tbody>
@@ -2648,8 +2752,22 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
                 <th class="data-display-field" align="center" valign="middle">
                     <strong>Total</strong> 
                 </th>
-            </tr><tr class="list-row-odd"><td class="data-display-field" align="center" valign="top">Oct 15, 2016</td><td class="data-display-field" align="left" valign="top">Paid to Amazon | Seller repayment</td><td class="data-display-field" align="center" valign="top">---</td><td class="data-display-field" align="left" valign="top"><span class="tiny">---</span></td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$11.37</td><td class="data-display-field" align="right" valign="top"><a href="https://sellercentral.amazon.com/gp/payments-account/transaction-details.html?ie=UTF8&amp;eventType=&amp;groupId=2016290Df-4nXYET2mOMsbCKQkt8Q&amp;mostRecentLast=0&amp;pageSize=Ten&amp;subview=groups&amp;transaction_id=20162908mn0HRNYSV-Kuik9uARWkA&amp;view=filter"><strong>$11.37</strong></a></td></tr></tbody></table>
+            </tr>
 
+{#    <tr class="list-row-odd"><td class="data-display-field" align="center" valign="top">Oct 15, 2016</td><td class="data-display-field" align="left" valign="top">Paid to Amazon | Seller repayment</td><td class="data-display-field" align="center" valign="top">---</td><td class="data-display-field" align="left" valign="top"><span class="tiny">---</span></td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$0.00</td><td class="data-display-field" align="right" valign="top">$11.37</td><td class="data-display-field" align="right" valign="top"><a href="https://sellercentral.amazon.com/gp/payments-account/transaction-details.html?ie=UTF8&amp;eventType=&amp;groupId=2016290Df-4nXYET2mOMsbCKQkt8Q&amp;mostRecentLast=0&amp;pageSize=Ten&amp;subview=groups&amp;transaction_id=20162908mn0HRNYSV-Kuik9uARWkA&amp;view=filter"><strong>$11.37</strong></a></td></tr>#}
+
+    {% for line in recorde_list %}
+        <tr class="list-row-odd"><td class="data-display-field" align="center" valign="top">{{ line.date_time }}</td>
+            <td class="data-display-field" align="left" valign="top">{{ line.type }} </td>
+            <td class="data-display-field" align="center" valign="top">{{ line.order_id }}</td>
+            <td class="data-display-field" align="left" valign="top"><span class="tiny">{{ line.description |  truncatewords:"3" }}</span></td>
+            <td class="data-display-field" align="right" valign="top">${{ line.product_sales}}</td>
+            <td class="data-display-field" align="right" valign="top">${{ line.promotional_rebates }}</td>
+            <td class="data-display-field" align="right" valign="top">${{ line.amazon_fees }}</td>
+            <td class="data-display-field" align="right" valign="top">${{ line.other }}</td>
+            <td class="data-display-field" align="right" valign="top"><a href="#"><strong>${{ line.total }}</strong></a></td></tr>
+    {% endfor %}
+    </tbody></table>
     <table class="data-display" cellspacing="1"><tbody>
         <!-- Display the pagination row. -->
         
@@ -2660,28 +2778,74 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
         
             
+{#        <tr class="list-row-odd">#}
+{#            <td class="data-display-field">#}
+{#            <table cellspacing="0" cellpadding="0" border="0" width="100%">#}
+{#                <tbody>#}
+{#                    <tr>#}
+{#                        <td align="left" width="33%" class="smaller">Items {{ start_item }} to {{ end_item }}</td>#}
+{#                        <td align="center" width="33%" class="smaller">&nbsp;</td>#}
+{#                        <td align="right" width="33%" class="smaller">#}
+{#                            #}
+{#                             #}
+{#                                                        #}
+{#                            <span class="currentpagination"></span>#}
+{#                            #}
+{#                                                         #}
+{#                            #}
+{#                        </td>#}
+{#                    </tr>#}
+{#                </tbody>#}
+{#            </table>#}
+{#            </td>#}
+{#        </tr>#}
+
+
+
         <tr class="list-row-odd">
             <td class="data-display-field">
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tbody>
                     <tr>
-                        <td align="left" width="33%" class="smaller">Items 1 to 1</td>
+                    {% if start_item == end_item %}
+                        <td align="left" width="33%" class="smaller">Items {{ start_item }} </td>
+                        <td align="right" width="33%" class="smaller">
+                    {% else %}
+                        <td align="left" width="33%" class="smaller">Items {{ start_item }} to {{ end_item }}</td>
                         <td align="center" width="33%" class="smaller">&nbsp;</td>
                         <td align="right" width="33%" class="smaller">
-                            
-                             
-                                                        
-                            <span class="currentpagination"></span>
-                            
-                                                         
-                            
+                    {% endif %}
+
+                            {% if total_page > 1  %}
+{#                                <span class="currentpagination">{{ cur_page }}</span>#}
+
+                                {% if cur_page > 1  %}
+                                    <a href="/transaction/transaction-data/?pageSize={{ pageSize }}&cur_page={{ pre_page }}&view={{ view }}&subview={{ subview }}&eventType={{ eventType }}&groupId={{ groupId }}&Update={{ Update }}">Previous</a>
+                                {% else %}
+                                {% endif   %}
+                                 &nbsp;&nbsp;&nbsp;
+                                {% for i in total_page_list %}
+                                    {% if i == cur_page %}
+                                        <a><span class="currentpagination">{{ i }}</span></a>&nbsp;
+                                    {% else %}
+                                        <a href="/transaction/transaction-data/?pageSize={{ pageSize }}&cur_page={{ i }}&view={{ view }}&subview={{ subview }}&eventType={{ eventType }}&groupId={{ groupId }}&Update={{ Update }}">{{ i }}</a>&nbsp;
+                                    {% endif %}
+                                {% endfor %}
+                                &nbsp;&nbsp;&nbsp;
+                                {% if cur_page < total_page  %}
+                                    <a href="/transaction/transaction-data/?pageSize={{ pageSize }}&cur_page={{ next_page }}&view={{ view }}&subview={{ subview }}&eventType={{ eventType }}&groupId={{ groupId }}&Update={{ Update }}">Next</a>
+                                {% else %}
+                                {% endif %}
+                            {% else %}
+                                <span class="currentpagination"></span>
+                            {% endif %}
+
                         </td>
                     </tr>
                 </tbody>
             </table>
             </td>
         </tr>
-
 
 
         
@@ -2704,10 +2868,14 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
                                     <input type="hidden" name="view" value="filter">
                                     <input type="hidden" name="groupId" value="2016290Df-4nXYET2mOMsbCKQkt8Q">
                                     <input type="hidden" name="subview" value="groups">
-                            Show <select name="pageSize"> <option value="10" selected="selected">10</option>
- <option value="20">20</option>
- <option value="50">50</option>
-</select> results per page
+                            Show <select name="pageSize">
+                                 {% if pageSize %}
+                                      <option value="{{ pageSize }}" selected="selected">{{ pageSize }}</option>
+                                 {% endif %}
+                                 <option value="10" selected="selected">10</option>
+                                 <option value="20">20</option>
+                                 <option value="50">50</option>
+                                </select> results per page
                         </td>
                         <td valign="middle" style="padding-left: 3px;">
                             <input type="image" src="https://images-na.ssl-images-amazon.com/images/G/01/buttons/go-t._V192189541_.gif" width="23" align="absmiddle" height="23" border="0">
@@ -3555,3 +3723,4 @@ _uec(82455);
         });
       });
     </script><div style="z-index:-1;position:absolute;"></div></body></html>
+

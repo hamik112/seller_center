@@ -1,7 +1,7 @@
 # encoding:utf-8
 
-
 from django.db import models
+from django.contrib.auth.models import User
 
 from django.utils import  timezone
 # Create your models here.
@@ -36,7 +36,7 @@ class GenerateReport(models.Model):
 class AllStatements(models.Model):
 
     id           =  models.AutoField(primary_key=True, null=False)
-    username     =  models.CharField( max_length= 200, default= "", null=False)
+    username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
     settlement_period     = models.CharField( max_length=150, default="", null=False)
     beginning_balance     = models.CharField( max_length=100, default="", null=False)
@@ -56,7 +56,7 @@ class AllStatements(models.Model):
 
 class TransactionView(models.Model):
     id          =   models.AutoField( primary_key=True, null=False)
-    username    =   models.CharField( max_length= 200, default="", null=False)
+    username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
 
     filter_view  = models.CharField( max_length=200, default="", null=False)
@@ -81,7 +81,7 @@ class TransactionView(models.Model):
 
 class InventoryReports(models.Model):
     id            =   models.AutoField( primary_key=True,null=False)
-    username      =   models.CharField( max_length= 200, default="", null=False)
+    username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
 
     report_type   =   models.CharField( max_length=100, default="", null=False)

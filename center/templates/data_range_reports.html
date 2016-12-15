@@ -2359,15 +2359,28 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
             <table cellspacing="0" cellpadding="0" border="0" width="100%">
                 <tbody>
                     <tr>
-                        <td align="left" width="33%" class="smaller">Items 1 to 2</td>
+                    {% if start_item == end_item %}
+                        <td align="left" width="33%" class="smaller">Items {{ start_item }} </td>
+                        <td align="right" width="33%" class="smaller">
+                    {% else %}
+                        <td align="left" width="33%" class="smaller">Items {{ start_item }} to {{ end_item }}</td>
                         <td align="center" width="33%" class="smaller">&nbsp;</td>
                         <td align="right" width="33%" class="smaller">
+                    {% endif %}
 
+                            {% if total_page > 1  %}
+{#                                <span class="currentpagination">{{ cur_page }}</span>#}
+                                {% for i in total_page_list %}
+                                    <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ i }}">{{ i }}</a>&nbsp
+                                {% endfor %}
 
-
-                            <span class="currentpagination"></span>
-
-
+                                {% if next == 1  %}
+                                    <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ next_page }}">Next</a>
+                                {% else %}
+                                {% endif %}
+                            {% else %}
+                                <span class="currentpagination"></span>
+                            {% endif %}
 
                         </td>
                     </tr>

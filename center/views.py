@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from center.dataService.data_format import file_iterator
 from center.dataService.get_storename import get_storename
 from center.dataService.summary_pdf_data import SummaryPdfData
+from center.dataService.transaction_view import TrasactionView
 
 # Create your views here.
 
@@ -56,7 +57,43 @@ def performance(request):
 
 @login_required(login_url="/amazon-login/")
 def transaction(request):
+    username = request.user.username
+    store_name = get_storename(username)
     return render(request, "transaction.html", locals())
+
+
+@login_required(login_url="/amazon-login/")
+def transaction_data(request):
+    username = request.user.username
+    store_name = get_storename(username)
+    cur_page = int(request.GET.get("cur_page", 1))
+    pageSize = request.GET.get("pageSize", 10)
+    pageSize = 10 if pageSize == 10 or pageSize == "10" or pageSize == "Ten" else 10
+    eventType  = request.GET.get("eventType","")
+    mostRecentLast = request.GET.get("mostRecentLast","0")
+    Update  =  request.GET.get("Update", "")
+    subview = request.GET.get("subview", "")
+    groupId = request.GET.get("groupdId", "")
+    view = request.GET.get("view", "")
+    recorde_result = TrasactionView(username,request.GET).get_transaction_view()
+    # print recorde_result
+    recorde_list = recorde_result.get("recorde_list", [])
+    start_item = recorde_result.get("start_item", 1)
+    end_item = recorde_result.get("end_item", 1)
+    total_page = recorde_result.get("total_page", 1)
+    next_page = int(recorde_result.get("next_page", 1))
+    total_page_list = range(1, total_page + 1)
+    pre_page = 0 if cur_page  <= 0 else int(cur_page) - 1
+    return render(request, "transaction.html", locals())
+
+
+#ict: {u'pageSize': [u'Ten'], u'eventType': [u'Refund'], u'mostRecentLast': [u'0'], u'Update': [u''], u'subview': [u'groups'], u'searchLanguage': [u'en_US'], u'groupId': [u'2016290Df-4nXYET2mOMsbCKQkt8Q'], u'view': [u'filter']}>
+
+
+
+
+
+
 
 
 @login_required(login_url="/amazon-login/")
@@ -78,7 +115,18 @@ def date_range_reports(request):
     else:
         pageSize = request.GET.get("pageSize",10)
         cur_page = request.GET.get("cur_page",1)
-        recorde_list = StatementViewData(request).statement_data_read()
+
+        recorde_result = StatementViewData(request).statement_data_read(**{"pageSize":pageSize,"cur_page":cur_page})
+        recorde_list = recorde_result.get("recorde_list", [])
+        start_item = recorde_result.get("start_item",1)
+        end_item   = recorde_result.get("end_item",1)
+        total_page = recorde_result.get("total_page", 1)
+        next_page = recorde_result.get("next_page", 1)
+        total_page_list = range(1,total_page+1)
+        if int(cur_page) < int(total_page):
+            next = 1
+        else:
+            next = 0
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
 
