@@ -82,7 +82,10 @@ def transaction_data(request):
     end_item = recorde_result.get("end_item", 1)
     total_page = recorde_result.get("total_page", 1)
     next_page = int(recorde_result.get("next_page", 1))
-    total_page_list = range(1, total_page + 1)
+    if total_page <= 10:
+        total_page_list = xrange(1, total_page + 1)
+    else:
+        total_page_list = xrange(1, total_page + 1)
     pre_page = 0 if cur_page  <= 0 else int(cur_page) - 1
     return render(request, "transaction.html", locals())
 

@@ -72,7 +72,7 @@ class TrasactionView(object):
             line["date_time"] = date_time_to_str(line.get("date_time"))
             line["amazon_fees"] = "%.2f" %(float(line.get("fba_fees", 0.00)) + float(line.get("selling_fees", 0.00)))
             line["product_sales"] = '%.2f' % float(line.get("product_sales"))
-            print line.get("product_sales"), line.get("id")
+            # print line.get("product_sales"), line.get("id")
             line["promotional_rebates"] = '%.2f' % float(line.get("promotional_rebates"))
             line["other"] = '%.2f' % float(line.get("other"))
 
