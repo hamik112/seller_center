@@ -114,19 +114,17 @@ def date_range_reports(request):
         return HttpResponse(json.dumps(result))
     else:
         pageSize = request.GET.get("pageSize",10)
-        cur_page = request.GET.get("cur_page",1)
-
+        cur_page = int(request.GET.get("cur_page",1))
+        pageSize = 10 if pageSize == 10 or pageSize == "10" or pageSize == "Ten" else 10
         recorde_result = StatementViewData(request).statement_data_read(**{"pageSize":pageSize,"cur_page":cur_page})
         recorde_list = recorde_result.get("recorde_list", [])
         start_item = recorde_result.get("start_item",1)
         end_item   = recorde_result.get("end_item",1)
         total_page = recorde_result.get("total_page", 1)
         next_page = recorde_result.get("next_page", 1)
-        total_page_list = range(1,total_page+1)
-        if int(cur_page) < int(total_page):
-            next = 1
-        else:
-            next = 0
+        next_page = int(recorde_result.get("next_page", 1))
+        total_page_list = range(1, total_page + 1)
+        pre_page = 0 if cur_page <= 0 else int(cur_page) - 1
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
 

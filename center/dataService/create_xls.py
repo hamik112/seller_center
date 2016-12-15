@@ -76,12 +76,13 @@ def create_xls(**params):
 def create_csv(**params):
     header = params.get("header", "")
     datas = params.get("datas", "")
-    print len(datas)
+    print "len datas: ",len(datas)
     if not params.get("filename", ""):
         dd = datetime.datetime.now()
         filename = str(dd.strftime('%Y-%m-%d_%H-%M-%S')) + ".xlsx"
     else:
         filename = params.get("filename", "")
+
     csvfile = open(filename,'wb')
     csvfile.write(codecs.BOM_UTF8)
     writer = csv.writer(csvfile)

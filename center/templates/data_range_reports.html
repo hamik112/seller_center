@@ -2368,13 +2368,24 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
                         <td align="right" width="33%" class="smaller">
                     {% endif %}
 
+
                             {% if total_page > 1  %}
 {#                                <span class="currentpagination">{{ cur_page }}</span>#}
-                                {% for i in total_page_list %}
-                                    <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ i }}">{{ i }}</a>&nbsp
-                                {% endfor %}
 
-                                {% if next == 1  %}
+                                {% if cur_page > 1  %}
+                                    <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ pre_page }}">Previous</a>
+                                {% else %}
+                                {% endif   %}
+                                 &nbsp;&nbsp;&nbsp;
+                                {% for i in total_page_list %}
+                                    {% if i == cur_page %}
+                                        <a><span class="currentpagination">{{ i }}</span></a>&nbsp;
+                                    {% else %}
+                                        <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ i }}">{{ i }}</a>&nbsp;
+                                    {% endif %}
+                                {% endfor %}
+                                &nbsp;&nbsp;&nbsp;
+                                {% if cur_page < total_page  %}
                                     <a href="/date-range-reports/?pageSize={{ pageSize }}&cur_page={{ next_page }}">Next</a>
                                 {% else %}
                                 {% endif %}

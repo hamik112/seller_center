@@ -36,7 +36,7 @@ class StatementViewData(object):
             self.year = self.post_dict.get("year")
             self.month = self.post_dict.get("month", "")
             self.current_month = self.get_month_day(self.year, self.month)
-            self.is_custom = ""
+            self.is_custom = "Monthly"
             self.begin_date_str = str(self.current_month.get("day_begin", ""))
             self.end_date_str =  str(self.current_month.get("day_end", ""))
             self.timeRange = str(self.current_month.get("day_begin", "")) +" - "+ str(self.current_month.get("day_end", ""))
@@ -68,7 +68,7 @@ class StatementViewData(object):
             pageSize, cur_page = 10, 1
         start_item = (cur_page - 1) * pageSize + 1
         username = self.request.user.username
-        generate_report_list = GenerateReport.objects.filter(username=username).values()[pageSize * (cur_page -1): pageSize * cur_page + 1]
+        generate_report_list = GenerateReport.objects.filter(username=username).values().order_by("id").reverse()[pageSize * (cur_page -1): pageSize * cur_page + 1]
         # print generate_report_list
         return_report_list = []
         for fline in generate_report_list:
@@ -89,7 +89,7 @@ class StatementViewData(object):
             next_page =  cur_page + 1
         else:
             next_page = total_page
-        return {"recorde_list":return_report_list[::-1], "start_item":start_item,
+        return {"recorde_list":return_report_list, "start_item":start_item,
                 "end_item":end_item, "total_page": total_page, "next_page":next_page}
 
     def request_report(self):
@@ -264,6 +264,7 @@ class StatementViewData(object):
         try:
             file_path_name = os.path.join(generate_path(GenerateReport_PATH), filename)
             filename = create_csv(**{"datas":all_datas, "header": header, "filename":file_path_name})
+            print filename
         except Exception, e:
             statue = False
             msg = "create csv Error: " + str(e)
