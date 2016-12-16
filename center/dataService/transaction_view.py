@@ -56,7 +56,7 @@ class TrasactionView(object):
 
     def get_time_range(self):
         time_range_list = self.post_dict.get("groupId", "").split("-")
-        if len(time_range_list) <= 0:
+        if len(time_range_list) < 2:
             time_range_list = ["" , ""]
         start_date = str_to_datetime(time_range_list[0].strip())
         end_date = str_to_datetime(time_range_list[1].strip())
