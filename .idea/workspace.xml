@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/all_statements.html" afterPath="$PROJECT_DIR$/center/templates/all_statements.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/transaction.html" afterPath="$PROJECT_DIR$/center/templates/transaction.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/views.py" afterPath="$PROJECT_DIR$/center/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/statement_view.html" afterPath="$PROJECT_DIR$/center/templates/statement_view.html" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,11 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all_statements.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="all_statements.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
               <caret line="1862" column="164" selection-start-line="1862" selection-start-column="164" selection-end-line="1862" selection-end-column="164" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="statement_view.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="182">
+              <caret line="2246" column="28" selection-start-line="2246" selection-start-column="28" selection-end-line="2246" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -114,7 +122,6 @@
         <option value="$PROJECT_DIR$/center/templates/orders.html" />
         <option value="$PROJECT_DIR$/center/templates/performance.html" />
         <option value="$PROJECT_DIR$/center/templates/pricing.html" />
-        <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
         <option value="$PROJECT_DIR$/center/dataService/all_statements.py" />
         <option value="$PROJECT_DIR$/manageApp/dataService/dataImport.py" />
         <option value="$PROJECT_DIR$/manageApp/tasks.py" />
@@ -140,6 +147,7 @@
         <option value="$PROJECT_DIR$/center/views.py" />
         <option value="$PROJECT_DIR$/center/templates/transaction.html" />
         <option value="$PROJECT_DIR$/center/templates/all_statements.html" />
+        <option value="$PROJECT_DIR$/center/templates/statement_view.html" />
       </list>
     </option>
   </component>
@@ -694,13 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="3422" column="13" selection-start-line="3422" selection-start-column="13" selection-end-line="3422" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/templates/orders.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="259">
@@ -990,6 +991,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="1862" column="164" selection-start-line="1862" selection-start-column="164" selection-end-line="1862" selection-end-column="164" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/statement_view.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="2246" column="28" selection-start-line="2246" selection-start-column="28" selection-end-line="2246" selection-end-column="28" />
           <folding />
         </state>
       </provider>
