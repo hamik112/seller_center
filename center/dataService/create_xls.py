@@ -111,7 +111,6 @@ def create_csv(**params):
 def create_txt(**params):
     headers = params.get("header", "")
     datas = params.get("datas", [])
-    print "datas:", datas
     if params.get("filename", ""):
         filename = params.get("filename")
     else:

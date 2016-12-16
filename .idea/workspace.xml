@@ -4,10 +4,6 @@
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/create_xls.py" afterPath="$PROJECT_DIR$/center/dataService/create_xls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/transaction_view.py" afterPath="$PROJECT_DIR$/center/dataService/transaction_view.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/transaction.html" afterPath="$PROJECT_DIR$/center/templates/transaction.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/urls.py" afterPath="$PROJECT_DIR$/center/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/views.py" afterPath="$PROJECT_DIR$/center/views.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,13 +77,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="transaction_view.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="transaction_view.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/dataService/transaction_view.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="104" column="31" selection-start-line="104" selection-start-column="31" selection-end-line="104" selection-end-column="31" />
+            <state relative-caret-position="531">
+              <caret line="108" column="27" selection-start-line="108" selection-start-column="27" selection-end-line="108" selection-end-column="27" />
               <folding>
                 <element signature="e#40#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_xls.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/center/dataService/create_xls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="285">
+              <caret line="112" column="35" selection-start-line="112" selection-start-column="35" selection-end-line="112" selection-end-column="35" />
+              <folding>
+                <element signature="e#19#29#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -150,8 +158,8 @@
         <option value="$PROJECT_DIR$/center/templates/transaction.html" />
         <option value="$PROJECT_DIR$/center/urls.py" />
         <option value="$PROJECT_DIR$/center/views.py" />
-        <option value="$PROJECT_DIR$/center/dataService/create_xls.py" />
         <option value="$PROJECT_DIR$/center/dataService/transaction_view.py" />
+        <option value="$PROJECT_DIR$/center/dataService/create_xls.py" />
       </list>
     </option>
   </component>
@@ -961,16 +969,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/create_xls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="513">
-          <caret line="146" column="9" selection-start-line="146" selection-start-column="9" selection-end-line="146" selection-end-column="9" />
-          <folding>
-            <element signature="e#19#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/phantojs_to_pdf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
@@ -997,10 +995,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/transaction_view.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="104" column="31" selection-start-line="104" selection-start-column="31" selection-end-line="104" selection-end-column="31" />
+        <state relative-caret-position="531">
+          <caret line="108" column="27" selection-start-line="108" selection-start-column="27" selection-end-line="108" selection-end-column="27" />
           <folding>
             <element signature="e#40#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/dataService/create_xls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="112" column="35" selection-start-line="112" selection-start-column="35" selection-end-line="112" selection-end-column="35" />
+          <folding>
+            <element signature="e#19#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
