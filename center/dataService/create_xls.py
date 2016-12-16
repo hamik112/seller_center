@@ -123,6 +123,7 @@ def create_txt(**params):
         for listr in line:
             if line.index(listr) == 0:
                 tmp_list.append(datetime_to_str_2(listr))
+                continue
             if line.index(listr) == 5:
                 tmp_list.append("$"+listr)
             else:
