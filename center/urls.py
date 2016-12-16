@@ -8,6 +8,8 @@ urlpatterns = patterns('',
 
             url(r'transaction/$', 'center.views.transaction', name='payment'),
             url(r'transaction/transaction-data/$', 'center.views.transaction_data', name='transaction_data'),
+            url(r'transaction/transaction-data-download/$', 'center.views.transaction_data_download', name='transaction_data_download'),
+
 
             url(r'inventory/$', 'center.views.inventory', name='inventory'),
             url(r'inventory/inventory-reports/$', 'center.views.inventory_reports', name='inventory_reports'),

@@ -108,6 +108,36 @@ def create_csv(**params):
 
 
 
+def create_txt(**params):
+    headers = params.get("header", "")
+    datas = params.get("datas", [])
+    print "datas:", datas
+    if params.get("filename", ""):
+        filename = params.get("filename")
+    else:
+        filename = "report.txt"
+    f = open(filename, "wb")
+    for hd in headers:
+        f.write(hd + "\r\n")
+    for line in datas:
+        tmp_list = []
+        for listr in line:
+            if line.index(listr) == 0:
+                tmp_list.append(datetime_to_str_2(listr))
+            if line.index(listr) == 5:
+                tmp_list.append("$"+listr)
+            else:
+                tmp_list.append(listr)
+        f.write(str("    ".join([str(i) for i in  tmp_list])) + "\n")
+    f.close()
+    return filename
+
+
+
+
+
+
+
 def is_number(strnum):
     """ 判断是否是正常的数字:或者是正常的小数"""
     # regex = re.compile(r"^(-?\d+)(\.\d*)?$")
@@ -163,6 +193,13 @@ def mydeal_number(numstr, tranfer):
 
 def datetime_to_str(dt):
     return dt.strftime("%b %d, %Y %I:%M:%S %p PDT") #PDT, PST
+
+
+
+def datetime_to_str_2(dt):
+    return  dt.strftime("%b %d, %Y")
+
+
 
 
 

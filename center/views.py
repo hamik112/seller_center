@@ -93,6 +93,16 @@ def transaction_data(request):
 #ict: {u'pageSize': [u'Ten'], u'eventType': [u'Refund'], u'mostRecentLast': [u'0'], u'Update': [u''], u'subview': [u'groups'], u'searchLanguage': [u'en_US'], u'groupId': [u'2016290Df-4nXYET2mOMsbCKQkt8Q'], u'view': [u'filter']}>
 
 
+@login_required(login_url="/amazon-login/")
+def transaction_data_download(request):
+    username = request.user.username
+    the_file_name = TrasactionView(username,request.GET).write_report_to_txt()
+    response = StreamingHttpResponse(file_iterator(the_file_name))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format("report.txt")
+    return response
+
+
 
 
 

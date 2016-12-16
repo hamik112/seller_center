@@ -1,12 +1,21 @@
 #!/usr/bin/env python
 # encoding:utf-8
 
+import  os
 from django.db.models import  Q
 
 # from django.contrib.auth.models import User
-
+from django.conf import  settings
 
 from manageApp.models import StatementView, FilenameToStorename
+from center.dataService.create_xls import generate_path, create_txt,datetime_to_str_2
+
+
+
+
+
+
+generate_report_path = settings.GENERATE_REPORT_PATH
 
 
 
@@ -69,7 +78,7 @@ class TrasactionView(object):
         else:
             next_page = total_page
         for line in groups_list:
-            line["date_time"] = date_time_to_str(line.get("date_time"))
+            line["date_time"] = datetime_to_str_2(line.get("date_time"))
             line["amazon_fees"] = "%.2f" %(float(line.get("fba_fees", 0.00)) + float(line.get("selling_fees", 0.00)))
             line["product_sales"] = '%.2f' % float(line.get("product_sales"))
             # print line.get("product_sales"), line.get("id")
@@ -81,6 +90,26 @@ class TrasactionView(object):
 
 
 
+    def write_report_to_txt(self):
+        groupId = self.post_dict.get("groupId", "")
+        pageSize  = self.pageSize
+        print "pageSize: ", pageSize
+        query_select = self.query_select
+        if not self.serial_number:
+            groups_list = []
+        else:
+            try:
+                groups_list = StatementView.objects.filter(query_select).values_list("date_time", "order_id","sku",
+                                                                                 "type", "description",  "total","quantity")[0: 600]
+            except Exception, e:
+                groups_list = []
+        header_list = ["Transaction Summary for December 7, 2016 to December 15, 2016", "Transactions: 10", "",
+                       "Date	Order ID	SKU	Transaction type	Payment Type	Payment Detail	Amount	Quantity	Product Title"]
+        file_path_name = os.path.join(generate_path(generate_report_path), "report.txt")
+        filename = create_txt(**{"header": header_list, "datas": groups_list, "filename":file_path_name})
+        return filename
 
-def date_time_to_str(dt):
-    return dt.strftime("%b %d, %Y")  # PDT, PST
+
+
+
+
