@@ -2535,10 +2535,13 @@ if(!SCUI.hasOwnProperty('marketSwitcherScits')) {
 
 
 <select id="groupId" name="groupId">
-  <option value="2016290Df-4nXYET2mOMsbCKQkt8Q" selected="selected">Oct 15, 2016 - Nov 23, 2016 (Open)</option>
-  <option value="20162769VolwcM1S0WNGmOQ3mVwAw">Oct 1, 2016 - Oct 15, 2016</option>
-  <option value="2016079ecB2SokYTKmFo4G1iMitpg">Mar 19, 2016 - Oct 1, 2016</option>
-  <option value="2016066xIrI32RmRlKY6y7gVJM_-w">Feb 6, 2016 - Mar 19, 2016</option>
+    {% for dline in date_time_list %}
+        {% if dline == groupId %}
+            <option value="{{ dline }}" selected="selected">{{ dline }} (Open)</option>
+        {% else %}
+            <option value="{{ dline }}" >{{ dline }}</option>
+        {% endif %}
+    {% endfor %}
 </select>
 
 

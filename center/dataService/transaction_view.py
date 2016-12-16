@@ -2,13 +2,15 @@
 # encoding:utf-8
 
 import  os
+import  datetime
 from django.db.models import  Q
 
 # from django.contrib.auth.models import User
 from django.conf import  settings
 
 from manageApp.models import StatementView, FilenameToStorename
-from center.dataService.create_xls import generate_path, create_txt,datetime_to_str_2
+from center.dataService.create_xls import generate_path, create_txt
+from center.dataService.create_xls import datetime_to_str_2, str_to_datetime
 
 
 
@@ -34,11 +36,15 @@ class TrasactionView(object):
         pass
 
     def get_query_select(self):
+        start_date, end_date = self.get_time_range()
+        print "start_date:", start_date, "end_date:", end_date
         try:
             serial_number = FilenameToStorename.objects.get(email=self.username).get_serial_number()
         except Exception, e:
             serial_number = ""
         query_select = Q(serial_number=serial_number)
+        if start_date and end_date:
+            query_select = query_select & Q(date_time__range=(start_date,end_date))
         order_type = self.post_dict.get("eventType", "").strip()
         print "order_type: ", order_type
         if order_type == "selected":
@@ -46,6 +52,15 @@ class TrasactionView(object):
         else:
             query_select = query_select & Q(type=order_type)
         return  query_select, serial_number
+
+
+    def get_time_range(self):
+        time_range_list = self.post_dict.get("groupId", "").split("-")
+        if len(time_range_list) <= 0:
+            time_range_list = ["" , ""]
+        start_date = str_to_datetime(time_range_list[0].strip())
+        end_date = str_to_datetime(time_range_list[1].strip())
+        return start_date, end_date
 
     def get_transaction_view(self):
         if self.subview == "groups":

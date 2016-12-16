@@ -199,8 +199,12 @@ def datetime_to_str(dt):
 def datetime_to_str_2(dt):
     return  dt.strftime("%b %d, %Y")
 
-
-
+def str_to_datetime(dt_str):
+    try:
+        dt = datetime.datetime.strptime(dt_str.strip(), "%b %d, %Y")
+    except Exception, e:
+        dt = datetime.datetime.now()
+    return  dt
 
 
 

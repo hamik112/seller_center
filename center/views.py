@@ -73,7 +73,8 @@ def transaction_data(request):
     mostRecentLast = request.GET.get("mostRecentLast","0")
     Update  =  request.GET.get("Update", "")
     subview = request.GET.get("subview", "")
-    groupId = request.GET.get("groupdId", "")
+    groupId = request.GET.get("groupId", "")
+    print groupId
     view = request.GET.get("view", "")
     recorde_result = TrasactionView(username,request.GET).get_transaction_view()
     # print recorde_result
@@ -82,6 +83,8 @@ def transaction_data(request):
     end_item = recorde_result.get("end_item", 1)
     total_page = recorde_result.get("total_page", 1)
     next_page = int(recorde_result.get("next_page", 1))
+    date_time_list = ["Oct 15, 2016 - Nov 23, 2016", "Oct 1, 2016 - Oct 15, 2016",
+                      "Mar 19, 2016 - Oct 1, 2016","Feb 6, 2016 - Mar 19, 2016"]
     if total_page <= 10:
         total_page_list = xrange(1, total_page + 1)
     else:
