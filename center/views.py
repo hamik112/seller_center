@@ -59,6 +59,8 @@ def performance(request):
 def transaction(request):
     username = request.user.username
     store_name = get_storename(username)
+    date_time_list = ["Oct 15, 2016 - Nov 23, 2016", "Oct 1, 2016 - Oct 15, 2016",
+                      "Mar 19, 2016 - Oct 1, 2016", "Feb 6, 2016 - Mar 19, 2016"]
     return render(request, "transaction.html", locals())
 
 
@@ -141,6 +143,7 @@ def date_range_reports(request):
         next_page = int(recorde_result.get("next_page", 1))
         total_page_list = range(1, total_page + 1)
         pre_page = 0 if cur_page <= 0 else int(cur_page) - 1
+
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
 
