@@ -45,6 +45,9 @@ class AllStatements(models.Model):
     amazon_fees_total     = models.CharField( max_length=100, default="", null=False)
     other_total           = models.CharField( max_length=100, default="", null=False)
     deposit_total         = models.CharField( max_length=100, default="", null=False)
+    actions               = models.CharField( max_length=10, default="0", null=False)
+
+    filename              = models.CharField( max_length=200 ,default="", null=False)
 
     date_time             = models.DateTimeField(default=timezone.now())
 

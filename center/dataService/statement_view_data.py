@@ -179,10 +179,10 @@ class StatementViewData(object):
         begin_day_list = str(begin_day).strip().replace(",", "").split(" ")
         end_day_list = str(end_day).strip().replace(",", "").split(" ")
         if self.timeRangeType == "Monthly":
-            filename = str(begin_day_list[2])+str(begin_day_list[0])+"_MonthlyTransaction.pdf"
+            filename = str(begin_day_list[2])+str(begin_day_list[0])+"_MonthlySummary.pdf"
         else:
             filename = str(begin_day_list[2]) + str(begin_day_list[0]) + str(begin_day_list[1]) + "-" +\
-                       str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomTransaction.pdf"
+                       str(end_day_list[2]) + str(end_day_list[0]) + str(end_day_list[1]) + "_CustomSummary.pdf"
         output_file_name = os.path.join(generate_path(GenerateReport_PATH), filename)
         # options = {"year":self.year, "month":self.month,"begin_date":self.}
         try:

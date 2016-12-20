@@ -153,6 +153,11 @@ if not os.path.exists(GENERATE_REPORT_PATH):
     os.mkdir(GENERATE_REPORT_PATH)
 
 
+ALL_STATEMENTS_FILE_PATH = os.path.join(BASE_DIR, "center/ALL_STATEMENTS_FILES")
+if not os.path.exists(ALL_STATEMENTS_FILE_PATH):
+    os.mkdir(ALL_STATEMENTS_FILE_PATH)
+
+
 
 app_path = os.path.join(BASE_DIR, "center")
 

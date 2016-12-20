@@ -11,10 +11,11 @@ from django.contrib import  auth
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
-from center.dataService.data_format import file_iterator
+from center.dataService.data_format import file_iterator, file_iterator_all_statement
 from center.dataService.get_storename import get_storename
 from center.dataService.summary_pdf_data import SummaryPdfData
 from center.dataService.transaction_view import TrasactionView
+from  center.dataService.all_statements import AllStatementsList
 
 # Create your views here.
 
@@ -118,7 +119,30 @@ def transaction_data_download(request):
 def all_statements(request):
     email = request.user.username
     store_name = get_storename(email)
+    all_statements_list = AllStatementsList(email).get_all_statements_file()
+    # print all_statements_list
     return render(request, 'all_statements.html', locals())
+
+@login_required(login_url="/amazon-login/")
+def download_all_statements(request):
+    email = request.user.username
+    print request.GET
+    file_type = request.GET.get("file_type", "octet-stream")    #vnd.ms-excel (.xls),  octet-stream(pdf) 下载文件
+    file_name = request.GET.get("file_name", "not_found_file_name")
+    print "file_type:", file_type, "file_name: ", file_name
+    if not file_name:
+        return HttpResponseRedirect("/all-statements/")
+    try:
+        response = StreamingHttpResponse(file_iterator_all_statement(file_name))
+    except Exception, e:
+        print "file str Error, %s" % str(e)
+        return HttpResponseRedirect("/all-statements/")
+    response['Content-Type'] = 'application/' + str(file_type)
+    response['Content-Disposition'] = 'attachment;filename="{0}"'.format(file_name)
+    return response
+
+
+
 
 @login_required(login_url="/amazon-login/")
 @csrf_exempt

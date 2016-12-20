@@ -93,12 +93,14 @@ def import_one_file_to_statement_view(task_dict):
     print len(value_list)
     n = 0
     for data_line in value_list[8:]:
+        print "current: "+ str(n)
         n += 1
         tmp_dict = {"filename": filename}
         for name in need_header_list:
             if name == u"店铺" or name == "店铺":
                 tmp_dict["store_name"] = data_line[header_dict.get(name)]
             elif name == "date_time":
+                print data_line[header_dict.get("date_time")]
                 tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
             else:
                 dict_name = name.replace(" ", "_")
