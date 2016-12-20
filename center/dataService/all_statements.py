@@ -4,6 +4,7 @@
 from django.conf import  settings
 
 from center.models import  AllStatements
+from center.dataService.create_xls import is_number
 
 
 class AllStatementsList(object):
@@ -18,4 +19,24 @@ class AllStatementsList(object):
             "deposit_total","filename")
         except Exception,e :
             all_statements_list = []
+        all_statements_list = self.dear_list(all_statements_list)
         return all_statements_list
+
+
+    def dear_list(self,file_list):
+        return_list = []
+        for lst in file_list:
+            tmp_dict = {}
+            for k,v in lst.iteritems():
+                if is_number(v):
+                    tmp_dict[k]=self.number_add_dot(v)
+                else:
+                    tmp_dict[k] = v
+            return_list.append(tmp_dict)
+        return return_list
+
+    def number_add_dot(self,num):
+        if float(num) < 0:
+            return "-$"+str(num).replace("-","")
+        else:
+            return "$"+str(num)
