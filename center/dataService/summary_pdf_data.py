@@ -78,12 +78,14 @@ class SummaryPdfData(object):
             product_sale_query_dict = StatementView.objects.filter(query_select).values("product_sales", "other").aggregate(Sum("product_sales"),Sum("other"))
         except Exception, e:
             product_sale_query_dict = {}
-        if product_sale_query_dict.get("product_sales__sum") and product_sale_query_dict.get("other__sum"):
+        print "product_sale: ", product_sale_query_dict
+        if product_sale_query_dict.get("product_sales__sum") != None and product_sale_query_dict.get("other__sum") != None:
             product_sale_sum = product_sale_query_dict.get("product_sales__sum", 0) + product_sale_query_dict.get("other__sum", 0)
         else:
             product_sale_sum = 0
         product_sale_sum = format(product_sale_sum, ",")
         product_sale_html_sum = oredits_number_len(product_sale_sum)
+        print "product_sale_sum", product_sale_sum
         return {"number_length": product_sale_html_sum, "number": product_sale_sum}
 
 
@@ -95,7 +97,7 @@ class SummaryPdfData(object):
             product_refund_query_dict = StatementView.objects.filter(query_select).values("product_sales", "other").aggregate(Sum("product_sales"),Sum("other"))
         except Exception, e:
             product_refund_query_dict = {}
-        if product_refund_query_dict.get("product_sales__sum") and product_refund_query_dict.get("other__sum"):
+        if product_refund_query_dict.get("product_sales__sum") != None and product_refund_query_dict.get("other__sum") != None:
             product_refund_sum = product_refund_query_dict.get("product_sales__sum") + product_refund_query_dict.get("other__sum")
         else:
             product_refund_sum = 0
@@ -112,7 +114,7 @@ class SummaryPdfData(object):
             product_sale_query_dict = StatementView.objects.filter(query_select).values("product_sales", "other").aggregate(Sum("product_sales"),Sum("other"))
         except Exception, e:
             product_sale_query_dict = {}
-        if product_sale_query_dict.get("product_sales__sum") and product_sale_query_dict.get("other__sum"):
+        if product_sale_query_dict.get("product_sales__sum") !=None and product_sale_query_dict.get("other__sum") != None:
             product_sale_sum = product_sale_query_dict.get("product_sales__sum", 0) + product_sale_query_dict.get("other__sum", 0)
         else:
             product_sale_sum = 0
@@ -129,7 +131,7 @@ class SummaryPdfData(object):
             product_refund_query_dict = StatementView.objects.filter(query_select).values("product_sales", "other").aggregate(Sum("product_sales"),Sum("other"))
         except Exception, e:
             product_refund_query_dict = {}
-        if product_refund_query_dict.get("product_sales__sum") and product_refund_query_dict.get("other__sum"):
+        if product_refund_query_dict.get("product_sales__sum") != None and product_refund_query_dict.get("other__sum") != None:
             product_refund_sum = product_refund_query_dict.get("product_sales__sum") + product_refund_query_dict.get("other__sum")
         else:
             product_refund_sum = 0
@@ -146,7 +148,7 @@ class SummaryPdfData(object):
             inventory_credit_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
         except Exception, e:
             inventory_credit_dict = {}
-        if inventory_credit_dict.get("total__sum"):
+        if inventory_credit_dict.get("total__sum") != None:
             products_credit_sum = inventory_credit_dict.get("total__sum", 0)
         else:
             products_credit_sum = 0
@@ -166,7 +168,7 @@ class SummaryPdfData(object):
         except Exception, e:
             shipping_credits_dict = {}
         print shipping_credits_dict
-        if shipping_credits_dict.get("shipping_credits__sum", ""):
+        if shipping_credits_dict.get("shipping_credits__sum", "") != None:
             shipping_credits_sum = shipping_credits_dict.get("shipping_credits__sum", 0)
         else:
             shipping_credits_sum = 0
@@ -182,7 +184,7 @@ class SummaryPdfData(object):
             shipping_credits_refund_dict = StatementView.objects.filter(query_select).values("shipping_credits").aggregate(Sum("shipping_credits"))
         except Exception, e:
             shipping_credits_refund_dict = {}
-        if shipping_credits_refund_dict.get("shipping_credits__sum", ""):
+        if shipping_credits_refund_dict.get("shipping_credits__sum", "") != None:
             shipping_credits_refund_sum = shipping_credits_refund_dict.get("shipping_credits__sum", 0)
         else:
             shipping_credits_refund_sum = 0
@@ -198,7 +200,7 @@ class SummaryPdfData(object):
             gift_wrap_credits_dict = StatementView.objects.filter(query_select).values("gift_wrap_credits").aggregate(Sum("gift_wrap_credits"))
         except Exception, e:
             gift_wrap_credits_dict = {}
-        if gift_wrap_credits_dict.get("gift_wrap_credits__sum"):
+        if gift_wrap_credits_dict.get("gift_wrap_credits__sum") != None:
             gift_wrap_credits_sum = gift_wrap_credits_dict.get("gift_wrap_credits__sum", 0)
         else:
             gift_wrap_credits_sum = 0
@@ -215,7 +217,7 @@ class SummaryPdfData(object):
         except Exception, e:
             gift_wrap_credits_refund_dict = {}
         print gift_wrap_credits_refund_dict
-        if gift_wrap_credits_refund_dict.get("gift_wrap_credits__sum"):
+        if gift_wrap_credits_refund_dict.get("gift_wrap_credits__sum") != None:
             gift_wrap_credits_refund_sum = gift_wrap_credits_refund_dict.get("gift_wrap_credits__sum", 0)
         else:
             gift_wrap_credits_refund_sum = 0
@@ -232,7 +234,7 @@ class SummaryPdfData(object):
         except Exception, e:
             promotional_rebates_dict = {}
         print promotional_rebates_dict
-        if promotional_rebates_dict.get("promotional_rebates__sum"):
+        if promotional_rebates_dict.get("promotional_rebates__sum") != None:
             promotional_rebates_sum = promotional_rebates_dict.get("promotional_rebates__sum", 0)
         else:
             promotional_rebates_sum = 0
@@ -248,7 +250,7 @@ class SummaryPdfData(object):
             promotional_rebates_refund_dict = StatementView.objects.filter(query_select).values("promotional_rebates").aggregate(Sum("promotional_rebates"))
         except Exception, e:
             promotional_rebates_refund_dict = {}
-        if promotional_rebates_refund_dict.get("promotional_rebates__sum"):
+        if promotional_rebates_refund_dict.get("promotional_rebates__sum") != None:
             promotional_rebates_sum = promotional_rebates_refund_dict.get("promotional_rebates__sum", 0)
         else:
             promotional_rebates_sum = 0
@@ -264,7 +266,7 @@ class SummaryPdfData(object):
             a_to_z_gurantee_claim_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
         except Exception, e:
             a_to_z_gurantee_claim_dict = {}
-        if a_to_z_gurantee_claim_dict.get("total__sum"):
+        if a_to_z_gurantee_claim_dict.get("total__sum") != None:
             a_to_z_gurantee_claim_sum = a_to_z_gurantee_claim_dict.get("total__sum", 0)
         else:
             a_to_z_gurantee_claim_sum = 0
@@ -281,7 +283,7 @@ class SummaryPdfData(object):
             chargebacks_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
         except Exception, e:
             chargebacks_dict = {}
-        if chargebacks_dict.get("total__sum"):
+        if chargebacks_dict.get("total__sum") != None:
             chargebacks_sum = chargebacks_dict.get("total__sum", 0)
         else:
             chargebacks_sum = 0
@@ -310,7 +312,7 @@ class SummaryPdfData(object):
             seller_fulfilled_selling_fees_dict = StatementView.objects.filter(query_select).values("selling_fees").aggregate(Sum("selling_fees"))
         except Exception, e:
             seller_fulfilled_selling_fees_dict = {}
-        if seller_fulfilled_selling_fees_dict.get("selling_fees__sum"):
+        if seller_fulfilled_selling_fees_dict.get("selling_fees__sum") != None:
             seller_fulfilled_selling_fees_sum = seller_fulfilled_selling_fees_dict.get("selling_fees__sum", 0)
         else:
             seller_fulfilled_selling_fees_sum = 0
@@ -328,7 +330,7 @@ class SummaryPdfData(object):
             FBA_selling_fees_dict = StatementView.objects.filter(query_select).values("selling_fees").aggregate(Sum("selling_fees"))
         except Exception, e:
             FBA_selling_fees_dict = {}
-        if FBA_selling_fees_dict.get("selling_fees__sum"):
+        if FBA_selling_fees_dict.get("selling_fees__sum") != None:
             FBA_selling_fees_sum = FBA_selling_fees_dict.get("selling_fees__sum", 0)
         else:
             FBA_selling_fees_sum = 0
@@ -345,7 +347,7 @@ class SummaryPdfData(object):
             selling_fee_refund_dict = StatementView.objects.filter(query_select).values("selling_fees").aggregate(Sum("selling_fees"))
         except Exception, e:
             selling_fee_refund_dict = {}
-        if selling_fee_refund_dict.get("selling_fees__sum"):
+        if selling_fee_refund_dict.get("selling_fees__sum") != None:
             selling_fee_refund_sum = selling_fee_refund_dict.get("selling_fees__sum", 0)
         else:
             selling_fee_refund_sum = 0
@@ -362,7 +364,7 @@ class SummaryPdfData(object):
             fba_trasaction_fees_dict = StatementView.objects.filter(query_select).values("fba_fees").aggregate(Sum("fba_fees"))
         except Exception, e:
             fba_trasaction_fees_dict = {}
-        if fba_trasaction_fees_dict.get("fba_fees__sum"):
+        if fba_trasaction_fees_dict.get("fba_fees__sum") != None:
             fba_trasaction_fees_sum = fba_trasaction_fees_dict.get("fba_fees__sum", 0)
         else:
             fba_trasaction_fees_sum = 0
