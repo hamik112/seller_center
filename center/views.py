@@ -120,6 +120,8 @@ def all_statements(request):
     email = request.user.username
     store_name = get_storename(email)
     all_statements_list = AllStatementsList(email).get_all_statements_file()
+    today =  datetime.datetime.now().strftime('%m/%d/%Y');
+    startDate = endDate = today
     # print all_statements_list
     return render(request, 'all_statements.html', locals())
 
