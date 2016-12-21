@@ -2483,11 +2483,11 @@ amznJQ.onReady('JQuery', function() {
               <tr class="list-row-even">
                   <td class="data-display-field" align="center" valign="top"><a href="#">{{ line.settlement_period }}</a></td>
                   <td class="data-display-field" align="right" valign="top">{{ line.beginning_balance }}</td>
-                  <td class="data-display-field" align="right" valign="top"><span class="negative">{{ line.beginning_balance }}</span></td>
-                  <td class="data-display-field" align="right" valign="top">{{ line.product_charges_total }}</td>
+                  <td class="data-display-field" align="right" valign="top"><span class="negative">{{ line.product_charges_total}}</span></td>
                   <td class="data-display-field" align="right" valign="top">{{ line.promo_retates_total }}</td>
                   <td class="data-display-field" align="right" valign="top">{{ line.amazon_fees_total }}</td>
-                  <td class="data-display-field" align="right" valign="top"><span class="negative">{{ line.other_total }}</span></td>
+                  <td class="data-display-field" align="right" valign="top">{{ line.other_total }}</td>
+                  <td class="data-display-field" align="right" valign="top"><span class="negative">{{ line.deposit_total }}</span></td>
                   <td class="data-display-field" align="center" valign="top"><div><a class="buttonImage" name="Download Flat File" href="/all-statements-download/?file_type=octet-stream&file_name={{ line.filename }}"><span class="awesomeButton buttonSmall secondarySmallButton inner_button"><span class="button_label">Download Flat File</span></span></a></div></td>
               </tr>
             {% endfor %}
