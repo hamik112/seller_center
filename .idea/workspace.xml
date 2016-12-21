@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/templates/all_statements.html" afterPath="$PROJECT_DIR$/center/templates/all_statements.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/all_statements.py" afterPath="$PROJECT_DIR$/center/dataService/all_statements.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,39 +27,10 @@
       <file leaf-file-name="summary_pdf_data.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="499" column="42" selection-start-line="499" selection-start-column="42" selection-end-line="499" selection-end-column="42" />
+            <state relative-caret-position="882">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
               <folding>
                 <element signature="e#40#50#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="2016Jun_MonthlySummary.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
-              <caret line="114" column="41" selection-start-line="114" selection-start-column="23" selection-end-line="114" selection-end-column="41" />
-              <folding>
-                <element signature="n#style#0;n#div#24;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#137;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#138;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#148;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#156;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#158;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="all_statements.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="414">
-              <caret line="2489" column="120" selection-start-line="2489" selection-start-column="120" selection-end-line="2489" selection-end-column="120" />
-              <folding>
-                <marker date="1482296388210" expanded="false" signature="89713:89725" ph="..." />
               </folding>
             </state>
           </provider>
@@ -78,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all_statements.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="all_statements.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/center/dataService/all_statements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="236">
-              <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
+            <state relative-caret-position="494">
+              <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
               <folding>
                 <element signature="e#40#73#0" expanded="true" />
               </folding>
@@ -155,10 +125,10 @@
         <option value="$PROJECT_DIR$/center/urls.py" />
         <option value="$PROJECT_DIR$/center/dataService/data_format.py" />
         <option value="$PROJECT_DIR$/center/views.py" />
-        <option value="$PROJECT_DIR$/center/dataService/all_statements.py" />
         <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" />
         <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
         <option value="$PROJECT_DIR$/center/templates/all_statements.html" />
+        <option value="$PROJECT_DIR$/center/dataService/all_statements.py" />
       </list>
     </option>
   </component>
@@ -169,8 +139,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="405" />
-    <option name="y" value="128" />
+    <option name="x" value="256" />
+    <option name="y" value="1" />
     <option name="width" value="1464" />
     <option name="height" value="984" />
   </component>
@@ -606,7 +576,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="405" y="128" width="1464" height="984" extended-state="0" />
+    <frame x="256" y="1" width="1464" height="984" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16149506" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -974,12 +944,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
+    <entry file="file://$PROJECT_DIR$/center/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="499" column="42" selection-start-line="499" selection-start-column="42" selection-end-line="499" selection-end-column="42" />
+        <state relative-caret-position="299">
+          <caret line="121" column="62" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
           <folding>
-            <element signature="e#40#50#0" expanded="true" />
+            <element signature="e#17#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="46" column="17" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="2489" column="120" selection-start-line="2489" selection-start-column="120" selection-end-line="2489" selection-end-column="120" />
+          <folding>
+            <marker date="1482296388210" expanded="false" signature="89713:89725" ph="..." />
           </folding>
         </state>
       </provider>
@@ -999,40 +987,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/views.py">
+    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="121" column="62" selection-start-line="121" selection-start-column="62" selection-end-line="121" selection-end-column="62" />
+        <state relative-caret-position="882">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
           <folding>
-            <element signature="e#17#29#0" expanded="true" />
+            <element signature="e#40#50#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/all_statements.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="16" column="43" selection-start-line="16" selection-start-column="43" selection-end-line="16" selection-end-column="43" />
+        <state relative-caret-position="494">
+          <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
           <folding>
             <element signature="e#40#73#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="46" column="17" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/all_statements.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="414">
-          <caret line="2489" column="120" selection-start-line="2489" selection-start-column="120" selection-end-line="2489" selection-end-column="120" />
-          <folding>
-            <marker date="1482296388210" expanded="false" signature="89713:89725" ph="..." />
           </folding>
         </state>
       </provider>
