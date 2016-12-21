@@ -117,7 +117,7 @@ class SummaryPdfData(object):
             product_refund_sum = product_refund_query_dict.get("product_sales__sum") + product_refund_query_dict.get("other__sum")
         else:
             product_refund_sum = 0
-        product_refund_sum = format(product_refund_sum, ",")
+        product_refund_sum = number_format(product_refund_sum)
         return {"number_length": debits_number_len(product_refund_sum), "number": product_refund_sum}
 
 
