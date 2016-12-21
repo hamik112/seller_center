@@ -45,6 +45,22 @@ def Expenses_len(number_str):
     x = len(str(number_str))
     return -0.452745 * x  + 63.742705
 
+
+
+def number_format(num):
+    if num != 0:
+        num = str("%.2f"%float(num))
+    else:
+        num = 0
+    if float(num) >= 1000 or float(num) <= -1000:
+        num = format(float(num),",")
+    return str(num)
+
+
+
+
+
+
 class SummaryPdfData(object):
     def __init__(self, username, **params):
         self.username = username
@@ -71,7 +87,7 @@ class SummaryPdfData(object):
 
     def product_sales(self):
         # print self.serial_number
-        query_select = Q(serial_number=self.serial_number, type="Order")
+        query_select = Q(serial_number=self.serial_number, type="Order", fulfillment="Seller")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
         try:
@@ -83,14 +99,14 @@ class SummaryPdfData(object):
             product_sale_sum = product_sale_query_dict.get("product_sales__sum", 0) + product_sale_query_dict.get("other__sum", 0)
         else:
             product_sale_sum = 0
-        product_sale_sum = format(product_sale_sum, ",")
+        product_sale_sum = number_format(product_sale_sum)
         product_sale_html_sum = oredits_number_len(product_sale_sum)
         print "product_sale_sum", product_sale_sum
         return {"number_length": product_sale_html_sum, "number": product_sale_sum}
 
 
     def product_refund(self):
-        query_select = Q(serial_number=self.serial_number, type="Refund")
+        query_select = Q(serial_number=self.serial_number, type="Refund", fulfillment="Seller")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
         try:
@@ -118,7 +134,7 @@ class SummaryPdfData(object):
             product_sale_sum = product_sale_query_dict.get("product_sales__sum", 0) + product_sale_query_dict.get("other__sum", 0)
         else:
             product_sale_sum = 0
-        product_sale_sum = format(product_sale_sum, ",")
+        product_sale_sum = number_format(product_sale_sum)
         product_sale_html_sum = oredits_number_len(product_sale_sum)
         return {"number_length": product_sale_html_sum, "number": product_sale_sum}
 
@@ -135,7 +151,8 @@ class SummaryPdfData(object):
             product_refund_sum = product_refund_query_dict.get("product_sales__sum") + product_refund_query_dict.get("other__sum")
         else:
             product_refund_sum = 0
-        product_refund_sum = format(product_refund_sum, ",")
+        # product_refund_sum = format(product_refund_sum, ",")
+        product_refund_sum = number_format(product_refund_sum)
         return {"number_length": debits_number_len(product_refund_sum), "number": product_refund_sum}
 
 
@@ -153,7 +170,8 @@ class SummaryPdfData(object):
         else:
             products_credit_sum = 0
         products_credit_sum = products_credit_sum - 0 # expense中的Adjustments"一般为0
-        products_credit_sum = format(products_credit_sum, ",")
+        # products_credit_sum = format(products_credit_sum, ",")
+        products_credit_sum = number_format(products_credit_sum)
         return {"number_length": oredits_number_len(products_credit_sum), "number": products_credit_sum}
 
 
@@ -172,7 +190,8 @@ class SummaryPdfData(object):
             shipping_credits_sum = shipping_credits_dict.get("shipping_credits__sum", 0)
         else:
             shipping_credits_sum = 0
-        shipping_credits_sum = format(shipping_credits_sum, ",")
+        # shipping_credits_sum = format(shipping_credits_sum, ",")
+        shipping_credits_sum = number_format(shipping_credits_sum)
         return {"number_length": oredits_number_len(shipping_credits_sum), "number": shipping_credits_sum}
 
     def shipping_credits_refund(self):
@@ -188,7 +207,8 @@ class SummaryPdfData(object):
             shipping_credits_refund_sum = shipping_credits_refund_dict.get("shipping_credits__sum", 0)
         else:
             shipping_credits_refund_sum = 0
-        shipping_credits_refund_sum = format(shipping_credits_refund_sum, ",")
+        # shipping_credits_refund_sum = format(shipping_credits_refund_sum, ",")
+        shipping_credits_refund_sum = number_format(shipping_credits_refund_sum)
         return {"number_length": debits_number_len(shipping_credits_refund_sum), "number": shipping_credits_refund_sum}
 
     def gift_wrap_credits(self):
@@ -204,7 +224,8 @@ class SummaryPdfData(object):
             gift_wrap_credits_sum = gift_wrap_credits_dict.get("gift_wrap_credits__sum", 0)
         else:
             gift_wrap_credits_sum = 0
-        gift_wrap_credits_sum = format(gift_wrap_credits_sum, ",")
+        # gift_wrap_credits_sum = format(gift_wrap_credits_sum, ",")
+        gift_wrap_credits_sum = number_format(gift_wrap_credits_sum)
         return {"number_length": oredits_number_len(gift_wrap_credits_sum), "number": gift_wrap_credits_sum}
 
     def gift_wrap_credits_refund(self):
@@ -221,7 +242,8 @@ class SummaryPdfData(object):
             gift_wrap_credits_refund_sum = gift_wrap_credits_refund_dict.get("gift_wrap_credits__sum", 0)
         else:
             gift_wrap_credits_refund_sum = 0
-        gift_wrap_credits_sum = format(gift_wrap_credits_refund_sum, ",")
+        # gift_wrap_credits_sum = format(gift_wrap_credits_refund_sum, ",")
+        gift_wrap_credits_sum = number_format(gift_wrap_credits_refund_sum)
         return {"number_length": debits_number_len(gift_wrap_credits_sum), "number": gift_wrap_credits_sum}
 
     def promotional_rebates(self):
@@ -254,7 +276,7 @@ class SummaryPdfData(object):
             promotional_rebates_sum = promotional_rebates_refund_dict.get("promotional_rebates__sum", 0)
         else:
             promotional_rebates_sum = 0
-        promotional_rebates_sum = format(promotional_rebates_sum, ",")
+        promotional_rebates_sum = number_format(promotional_rebates_sum)
         return {"number_length": oredits_number_len(promotional_rebates_sum), "number": promotional_rebates_sum}
 
     def A_to_z_guarantee_claims(self):
@@ -270,7 +292,7 @@ class SummaryPdfData(object):
             a_to_z_gurantee_claim_sum = a_to_z_gurantee_claim_dict.get("total__sum", 0)
         else:
             a_to_z_gurantee_claim_sum = 0
-        a_to_z_gurantee_claim_sum = format(a_to_z_gurantee_claim_sum, ",")
+        a_to_z_gurantee_claim_sum = number_format(a_to_z_gurantee_claim_sum)
         return {"number_length": debits_number_len(a_to_z_gurantee_claim_sum), "number":a_to_z_gurantee_claim_sum}
 
 
@@ -287,25 +309,25 @@ class SummaryPdfData(object):
             chargebacks_sum = chargebacks_dict.get("total__sum", 0)
         else:
             chargebacks_sum = 0
-        chargebacks_sum = format(chargebacks_sum, ",")
+        chargebacks_sum = number_format(chargebacks_sum)
         return {"number_length": debits_number_len(chargebacks_sum), "number": chargebacks_sum}
 
 
     def income_subtotal_debits(self, subtotal_list):
         income_subtotal_debits_number = sum([float(i.get("number", '0').replace(",", "")) for i in subtotal_list])
-        income_subtotal_debits_number = format(income_subtotal_debits_number,",")
+        income_subtotal_debits_number = number_format(income_subtotal_debits_number)
         return {"number_length": debits_number_len(income_subtotal_debits_number), "number": income_subtotal_debits_number}
 
     def income_subtotal_credits(self, subtotal_list):
         income_subtotal_debits_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        income_subtotal_debits_number = format(income_subtotal_debits_number,",")
+        income_subtotal_debits_number = number_format(income_subtotal_debits_number)
         return  {"number_length": oredits_number_len(income_subtotal_debits_number), "number": income_subtotal_debits_number}
 
 
     #----------------------  Expenses   --------------------------
     def seller_fulfilled_selling_fees(self):
         """ type(Order) + R列数据"""
-        query_select = Q(serial_number = self.serial_number, type="Order")
+        query_select = Q(serial_number = self.serial_number, type="Order", fulfillment="Seller")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
         try:
@@ -316,7 +338,7 @@ class SummaryPdfData(object):
             seller_fulfilled_selling_fees_sum = seller_fulfilled_selling_fees_dict.get("selling_fees__sum", 0)
         else:
             seller_fulfilled_selling_fees_sum = 0
-        seller_fulfilled_selling_fees_sum = format(seller_fulfilled_selling_fees_sum, ",")
+        seller_fulfilled_selling_fees_sum = number_format(seller_fulfilled_selling_fees_sum)
         return {"number_length":expense_debits_len(seller_fulfilled_selling_fees_sum), "number":seller_fulfilled_selling_fees_sum}
 
 
@@ -334,7 +356,7 @@ class SummaryPdfData(object):
             FBA_selling_fees_sum = FBA_selling_fees_dict.get("selling_fees__sum", 0)
         else:
             FBA_selling_fees_sum = 0
-        FBA_selling_fees_sum = format(FBA_selling_fees_sum, ",")
+        FBA_selling_fees_sum = number_format(FBA_selling_fees_sum)
         return {"number_length": expense_debits_len(FBA_selling_fees_sum), "number": FBA_selling_fees_sum}
 
 
@@ -347,17 +369,18 @@ class SummaryPdfData(object):
             selling_fee_refund_dict = StatementView.objects.filter(query_select).values("selling_fees").aggregate(Sum("selling_fees"))
         except Exception, e:
             selling_fee_refund_dict = {}
+        print "selling_fee_refund: ", selling_fee_refund_dict
         if selling_fee_refund_dict.get("selling_fees__sum") != None:
             selling_fee_refund_sum = selling_fee_refund_dict.get("selling_fees__sum", 0)
         else:
             selling_fee_refund_sum = 0
-        selling_fee_refund_sum = format(selling_fee_refund_sum, ",")
+        selling_fee_refund_sum = number_format(selling_fee_refund_sum)
         return {"number_length": expend_credicts_len(selling_fee_refund_sum), "number":selling_fee_refund_sum}
 
 
     def fba_transaction_fees(self):
         """ tyoe(Order)对应的S列 """
-        query_select = Q(serial_number = self.serial_number, type="Order")
+        query_select = Q(serial_number = self.serial_number, type="Order", fulfillment="Amazon")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
         try:
@@ -368,7 +391,7 @@ class SummaryPdfData(object):
             fba_trasaction_fees_sum = fba_trasaction_fees_dict.get("fba_fees__sum", 0)
         else:
             fba_trasaction_fees_sum = 0
-        fba_trasaction_fees_sum = format(fba_trasaction_fees_sum, ",")
+        fba_trasaction_fees_sum = number_format(fba_trasaction_fees_sum)
         return {"number_length": expense_debits_len(fba_trasaction_fees_sum), "number": fba_trasaction_fees_sum}
 
 
@@ -385,7 +408,7 @@ class SummaryPdfData(object):
             fba_transaction_fee_refund_sum = fba_transaction_fee_refund_dict.get("fba_fees__sum", 0)
         else:
             fba_transaction_fee_refund_sum = 0
-        fba_transaction_fee_refund_sum = format(fba_transaction_fee_refund_sum, ",")
+        fba_transaction_fee_refund_sum = number_format(fba_transaction_fee_refund_sum)
         return {"number_length": expend_credicts_len(fba_transaction_fee_refund_sum), "number": fba_transaction_fee_refund_sum}
 
 
@@ -402,7 +425,7 @@ class SummaryPdfData(object):
             other_transaction_fee_sum = other_transaction_fee_dict.get("other_transaction_fees__sum", 0)
         else:
             other_transaction_fee_sum = 0
-        other_transaction_fee_sum = format(other_transaction_fee_sum, ",")
+        other_transaction_fee_sum = number_format(other_transaction_fee_sum)
         return {"number_length": expense_debits_len(other_transaction_fee_sum), "number": other_transaction_fee_sum}
 
 
@@ -419,7 +442,7 @@ class SummaryPdfData(object):
             other_transaction_fee_refund_sum = other_transaction_fee_refund_dict.get("other_transaction_fees__sum", 0)
         else:
             other_transaction_fee_refund_sum = 0
-        other_transaction_fee_refund_sum = format(other_transaction_fee_refund_sum, ",")
+        other_transaction_fee_refund_sum = number_format(other_transaction_fee_refund_sum)
         return {"number_length": expend_credicts_len(other_transaction_fee_refund_sum), "number": other_transaction_fee_refund_sum}
 
 
@@ -432,11 +455,13 @@ class SummaryPdfData(object):
             FBA_inventory_inbound_services_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
         except Exception, e:
             FBA_inventory_inbound_services_dict = {}
+        print "FBA_inventory_inbound_services_dict: ", FBA_inventory_inbound_services_dict
         if FBA_inventory_inbound_services_dict.get("total__sum"):
             FBA_inventory_inbound_services_sum = FBA_inventory_inbound_services_dict.get("total__sum", 0)
         else:
             FBA_inventory_inbound_services_sum = 0
-        FBA_inventory_inbound_services_sum =  format(FBA_inventory_inbound_services_sum, ",")
+        print "FBA_inventory_inbound_services_sum: ", FBA_inventory_inbound_services_sum
+        FBA_inventory_inbound_services_sum =  number_format(FBA_inventory_inbound_services_sum)
         return {"number_length": expense_debits_len(FBA_inventory_inbound_services_sum), "number": FBA_inventory_inbound_services_sum}
 
     def Shipping_label_purchases(self):
@@ -455,7 +480,7 @@ class SummaryPdfData(object):
 
     def Service_fees(self):
         """ type(Service fees) 的total 之和 """
-        query_select = Q(serial_number=self.serial_number, type="Service Fee")
+        query_select = Q(serial_number=self.serial_number, type="Service Fee", description="Subscription Fee")
         if self.begin_date and self.end_date:
             query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
         try:
@@ -466,13 +491,13 @@ class SummaryPdfData(object):
             service_fees_sum = service_fees_dict.get("total__sum", 0)
         else:
             service_fees_sum = 0
-        service_fees_sum = format(service_fees_sum, ",")
+        service_fees_sum = number_format(service_fees_sum)
         return {"number_length": expense_debits_len(service_fees_sum), "number": service_fees_sum}
 
 
     def Refund_administration_fees(self):
         """ 这项不变 """
-        refund_administration_fees_sum = -12
+        refund_administration_fees_sum = 0
         return {"number_length":expense_debits_len(refund_administration_fees_sum), "number":refund_administration_fees_sum}
 
     def Adjustments(self):
@@ -481,6 +506,18 @@ class SummaryPdfData(object):
 
     def cost_of_advertising(self):
         cost_of_advertising_sum = 0
+        query_select = Q(serial_number=self.serial_number, type="Service Fee", description="Cost of Advertising")
+        if self.begin_date and self.end_date:
+            query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
+        try:
+            service_fees_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
+        except Exception, e:
+            service_fees_dict = {}
+        if service_fees_dict.get("total__sum"):
+            cost_of_advertising_sum = service_fees_dict.get("total__sum", 0)
+        else:
+            cost_of_advertising_sum = 0
+            cost_of_advertising_sum = number_format(cost_of_advertising_sum)
         return {"number_length": expense_debits_len(cost_of_advertising_sum), "number": cost_of_advertising_sum}
 
 
@@ -491,35 +528,54 @@ class SummaryPdfData(object):
     def expenses_subtotal_debits(self, subtotal_list):
         """ expenses debits  total """
         income_subtotal_debits_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        income_subtotal_debits_number = format(income_subtotal_debits_number, ",")
+        income_subtotal_debits_number = number_format(income_subtotal_debits_number)
         return {"number_length": expense_debits_len(income_subtotal_debits_number), "number": income_subtotal_debits_number}
 
     def expenses_subtotal_credits(self, subtotal_list):
         """ expenses credits  total """
         income_subtotal_debits_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        income_subtotal_debits_number = format(income_subtotal_debits_number, ",")
+        income_subtotal_debits_number = number_format(income_subtotal_debits_number)
         return {"number_length": expend_credicts_len(income_subtotal_debits_number), "number": income_subtotal_debits_number}
 
 
     def Income(self, subtotal_list):
         Income_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        Income_sum = format(Income_sum, ",")
+        Income_sum = number_format(Income_sum)
         return {"number_length":Income_len(Income_sum), "number": Income_sum}
 
     def summaries_income(self,subtotal_list):
         Income_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        Income_sum = format(Income_sum, ",")
+        Income_sum = number_format(Income_sum)
         return {"number_length":expend_credicts_len(Income_sum), "number": Income_sum}
 
     def Expenses(self, subtotal_list):
         expenses_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        expenses_number = format(expenses_number, ",")
+        expenses_number = number_format(expenses_number)
         return {"number_length": Expenses_len(expenses_number), "number": expenses_number}
 
     def summaries_expenses(self, subtotal_list):
         expenses_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        expenses_number = format(expenses_number, ",")
+        expenses_number = number_format(expenses_number)
         return {"number_length": expend_credicts_len(expenses_number), "number": expenses_number}
+
+    def transfers_to_bank_account(self):
+        query_select = Q(serial_number= self.serial_number, type="Transfer")
+        if self.begin_date and self.end_date:
+            query_select = query_select & Q(date_time__range=(self.begin_date, self.end_date))
+        try:
+            transfers_to_bank_account_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
+        except Exception,e:
+            transfers_to_bank_account_dict = {}
+        if transfers_to_bank_account_dict.get("total__sum") != None:
+            transfers_to_bank_account_sum = transfers_to_bank_account_dict.get("total__sum", 0)
+        else:
+            transfers_to_bank_account_sum = 0
+        transfers_to_bank_account_sum = number_format(transfers_to_bank_account_sum)
+        return {"number_length": debits_number_len(transfers_to_bank_account_sum), "number":transfers_to_bank_account_sum}
+
+    def failed_transfer_to_bank_account(self):
+        failed_transfer_to_bank_account_sum = 0
+        return {"number_length":debits_number_len(failed_transfer_to_bank_account_sum), "number":failed_transfer_to_bank_account_sum}
 
 
     def charges_to_credit_card(self):
@@ -530,23 +586,28 @@ class SummaryPdfData(object):
             charges_to_credit_dict = StatementView.objects.filter(query_select).values("total").aggregate(Sum("total"))
         except Exception, e:
             charges_to_credit_dict = {}
+        print "charges_to_credit_card: ", charges_to_credit_dict
         if charges_to_credit_dict.get("total__sum"):
-            product_sale_sum = charges_to_credit_dict.get("product_sales__sum", 0) + charges_to_credit_dict.get("other__sum",
-                                                                                                                  0)
+            product_sale_sum = charges_to_credit_dict.get("total__sum",0)
         else:
             product_sale_sum = 0
-        product_sale_sum = format(product_sale_sum, ",")
+        product_sale_sum = number_format(product_sale_sum)
         product_sale_html_sum = oredits_number_len(product_sale_sum)
         return {"number_length": product_sale_html_sum, "number": product_sale_sum}
 
     def Transfers(self, subtotal_list):
         transfers_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        transfers_sum = format(transfers_sum, ",")
+        transfers_sum = number_format(transfers_sum)
+        print "transfers_sum:", transfers_sum
         return {"number_length":Income_len(transfers_sum), "number": transfers_sum}
+    def sub_credits_transfers(self, subtotal_list):
+        transfers_sum = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
+        transfers_sum = number_format(transfers_sum)
+        return {"number_length": oredits_number_len(transfers_sum), "number": transfers_sum}
 
     def summaries_transfers(self,subtotal_list):
         transfers_number = sum([float(str(i.get("number", '0')).replace(",", "")) for i in subtotal_list])
-        transfers_number = format(transfers_number, ",")
+        transfers_number = number_format(transfers_number)
         return {"number_length": expend_credicts_len(transfers_number), "number": transfers_number}
 
 
@@ -618,8 +679,11 @@ def generate_dict(**param_dict):
     Exception = spd.Expenses([expense_subtotal_credits, expense_subtotal_debits])
     summaries_expenses = spd.summaries_expenses([expense_subtotal_credits, expense_subtotal_debits])
     Charges_to_credit_card = spd.charges_to_credit_card()
-    Transfers = spd.Transfers([Charges_to_credit_card])
-    summaries_transfers = spd.summaries_transfers([Charges_to_credit_card])
+    transfers_to_bank_account_sum = spd.transfers_to_bank_account()
+    Failed_transfers_to_bank_account = spd.failed_transfer_to_bank_account()
+    Transfers = spd.Transfers([Charges_to_credit_card, transfers_to_bank_account_sum])
+    subtotal_transfers  = spd.sub_credits_transfers([Charges_to_credit_card, Failed_transfers_to_bank_account])
+    summaries_transfers = spd.summaries_transfers([Charges_to_credit_card, transfers_to_bank_account_sum])
 
 
 
@@ -628,19 +692,20 @@ def generate_dict(**param_dict):
             "FBA_invenbry_credit":FBA_invenbry_credit,"shipping_credits":shipping_credits,
             "shipping_credits_refund":shipping_credits_refund, "gift_wrap_credits":gift_wrap_credits,
             "gift_wrap_credits_refund":gift_wrap_credits_refund,"promotional_rebates":promotional_rebates,
-            "promotional_rebates_refund":promotional_rebates_refund,"a_to_z_guanrantee_chaims":a_to_z_guarantee_chaims,
+            "promotional_rebates_refund":promotional_rebates_refund,"a_to_z_guarantee_chaims":a_to_z_guarantee_chaims,
             "chargebacks":chargebacks,"income_subtotal_debits":income_subtotal_debits,
             "income_subtotal_credits":income_subtotal_credits, "seller_fulfilled_selling_fees":seller_fulfilled_selling_fees,
             "FBA_selling_fees":FBA_selling_fees,"selling_fee_refund":selling_fee_refund,
             "fba_transaction_fee_refunds":fba_transaction_fee_refunds, "fba_transaction_fees":fba_transaction_fees,
-            "FBFBA_inventory_inbound_services_fees":FBA_inventory_inbound_services_fees, "Shipping_label_purchases":Shipping_label_purchases,
+            "FBA_inventory_inbound_services_fees":FBA_inventory_inbound_services_fees, "Shipping_label_purchases":Shipping_label_purchases,
             "Shipping_label_refunds":Shipping_label_refunds, "carrier_shipping_label_adjustments":carrier_shipping_label_adjustments,
             "Service_fees":Service_fees,"Adjustments":Adjustments, "Refund_administration_fees":Refund_administration_fees,
             "cost_of_advertising":cost_of_advertising, "refund_for_advertiser":refund_for_advertiser,
             "expense_subtotal_debits":expense_subtotal_debits, "expense_subtotal_credits":expense_subtotal_credits,
             "Income":Income, "Exception":Exception, "Charges_to_credit_card": Charges_to_credit_card,
+            "transfers_to_bank_account_sum": transfers_to_bank_account_sum, "Failed_transfers_to_bank_account":Failed_transfers_to_bank_account,
             "summaries_income": summaries_income, "summaries_expenses": summaries_expenses,
-            "Transfers":Transfers, "summaries_transfers": summaries_transfers,
+            "Transfers":Transfers, "summaries_transfers": summaries_transfers,"subtotal_transfers":subtotal_transfers,
             "begin_date_str": begin_date_str, "end_date_str":end_date_str}
 
 
