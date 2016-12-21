@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/all_statements.py" afterPath="$PROJECT_DIR$/center/dataService/all_statements.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" afterPath="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="summary_pdf_data.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="summary_pdf_data.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="882">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+            <state relative-caret-position="306">
+              <caret line="50" column="40" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
               <folding>
                 <element signature="e#40#50#0" expanded="true" />
               </folding>
@@ -48,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="all_statements.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="all_statements.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/dataService/all_statements.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="494">
-              <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+            <state relative-caret-position="180">
+              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="40" />
               <folding>
                 <element signature="e#40#73#0" expanded="true" />
               </folding>
@@ -126,9 +128,9 @@
         <option value="$PROJECT_DIR$/center/dataService/data_format.py" />
         <option value="$PROJECT_DIR$/center/views.py" />
         <option value="$PROJECT_DIR$/center/templates/pdf_hml/2016Jun_MonthlySummary.html" />
-        <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
         <option value="$PROJECT_DIR$/center/templates/all_statements.html" />
         <option value="$PROJECT_DIR$/center/dataService/all_statements.py" />
+        <option value="$PROJECT_DIR$/center/dataService/summary_pdf_data.py" />
       </list>
     </option>
   </component>
@@ -987,22 +989,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
+    <entry file="file://$PROJECT_DIR$/center/dataService/all_statements.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="882">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="57" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="40" />
           <folding>
-            <element signature="e#40#50#0" expanded="true" />
+            <element signature="e#40#73#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/dataService/all_statements.py">
+    <entry file="file://$PROJECT_DIR$/center/dataService/summary_pdf_data.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="53" column="36" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="36" />
+        <state relative-caret-position="306">
+          <caret line="50" column="40" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
           <folding>
-            <element signature="e#40#73#0" expanded="true" />
+            <element signature="e#40#50#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -48,7 +48,7 @@ def Expenses_len(number_str):
 
 
 def number_format(num):
-    if num != 0:
+    if float(num) > 0 or float(num) < 0:
         num = str("%.2f"%float(num))
     else:
         num = 0
