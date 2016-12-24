@@ -61,6 +61,7 @@ def files_action(request):
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
+            print filename
             result = StatementViewImport([filename]).import_files_to_statement_view()
             result = result[0]
             return HttpResponse(json.dumps(result))

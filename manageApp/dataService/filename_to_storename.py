@@ -86,7 +86,7 @@ class FilenameStoreName(object):
 
 
     def post_add_line(self, post_dict):
-        keys_list = ["serial_number", "storename", "email", "password"]
+        keys_list = ["serial_number", "storename", "email", "password", "manager"]
         params_dict = {}.fromkeys(keys_list, "")
         for name in keys_list:
             params_dict[name] = post_dict.get(name, "").strip()
@@ -112,8 +112,8 @@ class FilenameStoreName(object):
         """ 批量导入对应关系 """
         fud_name = FileUpload(ufils,username=username).write_file(file_to_store=True)
         _value_list = read_xls(fud_name[0])
-        need_header_list = [u"序号", u"店名", u"账号email"]
-        value_list = ["serial_number", "storename", "email"]
+        need_header_list = [u"序号", u"店名", u"账号email", u"负责人"]
+        value_list = ["serial_number", "storename", "email", "manager"]
         key_value_dict = dict(zip(need_header_list, value_list))
         try:
             data = _value_list.get("data",[])[0].get("values",[])

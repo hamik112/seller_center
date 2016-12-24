@@ -35,6 +35,8 @@ class FilenameToStorename(models.Model):
     email           =  models.CharField( max_length= 50, default="",unique=True, null=False)      #email即是用户名不能重复
     password        =  models.CharField( max_length= 100, default="starmerx", null=False)
 
+    manager         =  models.CharField( max_length= 100, default="", null=False)       #负责人
+
     create_time     =  models.DateTimeField( default=timezone.now())
     update_time     =  models.DateTimeField( default=timezone.now())
 

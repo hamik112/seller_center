@@ -117,6 +117,12 @@
                                 </div>
                             </div>
                            <div class="form-group">
+                                <label for="dtp_input1" class="col-md-2 control-label">负责人</label>
+                                <div class="col-md-9">
+                                  <input class="form-control"  type="text" name="manager" value="" placeholder="负责人"  value="{{ result.email }}" required="required">
+                                </div>
+                            </div>
+                           <div class="form-group">
                                 <label for="dtp_input2" class="col-md-2 control-label">密码</label>
                                 <div class="col-md-9">
                                   <input class="form-control" size="16" type="text" name="password" value="starmerx"  readonly required="required">
@@ -164,7 +170,7 @@
                  <div class="modal-body">
                      <div class="row">
                        <div class="col-md-12">
-                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email</h3>
+                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email,负责人</h3>
                        </div>
                          <hr />
                          <br />
@@ -243,6 +249,11 @@
             align: 'center',
             valign: 'middle'
         }, {
+            field: 'manager',
+            title: '负责人',
+            align: 'center',
+            valign: 'middle'
+        },{
             field: 'password',
             title: 'password',
             align: 'center',
@@ -344,10 +355,11 @@
         var storename  = $("[name='storename']").val();
         var email  =  $("[name='email']").val();
         var password = $("[name='password']").val()
+        var manager = $("[name='manager']").val();
         var csrf_token = $("[name='csrfmiddlewaretoken']").val();
         post_dict = {"action_type":action_type, "serial_number": serial_number,
-            "storename":storename, "email": email, "is_update": is_update,
-            "password": password, "csrfmiddlewaretoken":csrf_token}
+            "storename":storename, "email": email, "is_update": is_update,"manager":manager,
+            "password": password, "csrfmiddlewaretoken":csrf_token};
         $.ajax({
             url: "/manage/filename-to-storename/",
             type: "POST",
@@ -416,12 +428,14 @@
         $("[name='storename']").val(infos.storename);
         $("[name='email']").val(infos.email);
         $("[name='serial_number']").val(infos.serial_number);
+        $("[name='manager']").val(infos.manager);
     }
 
     function delete_modal_data(){
         $("[name='storename']").val("");
         $("[name='email']").val("");
         $("[name='serial_number']").val("");
+        $("[name='manager']").val("");
     }
 
     function showMask(){

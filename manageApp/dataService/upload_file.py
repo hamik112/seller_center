@@ -3,7 +3,7 @@ import  time
 import  os
 from django.conf import  settings
 from manageApp.models import  UploadFileRecorde, StatementView
-
+from manageApp.dataService.dataImport import  StatementViewImport
 
 
 UPLOAD_PATH = settings.UPLOAD_PATH
@@ -50,8 +50,10 @@ class FileUpload(object):
             ufr.save()
         except Exception,e:
             print e
-
-
+        try:
+            StatementViewImport([filename]).import_files_to_statement_view()
+        except Exception, e:
+            print str(e)
 
 
 def list_files(**params):
