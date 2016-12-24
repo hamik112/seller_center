@@ -7,6 +7,8 @@ import  locale
 import xlrd
 import  codecs
 import  datetime
+import unicodedata
+
 from openpyxl import Workbook, styles
 
 import csv
@@ -140,14 +142,27 @@ def create_txt(**params):
 
 
 
-def is_number(strnum):
-    """ 判断是否是正常的数字:或者是正常的小数"""
+#def is_number(strnum):
+#    """ 判断是否是正常的数字:或者是正常的小数"""
     # regex = re.compile(r"^(-?\d+)(\.\d*)?$")
-    regex = re.compile(r"^[-+]{0,1}[0-9]{1,}.{0,1}[0-9]{0,}")
-    if re.match(regex, strnum):
+#    regex = re.compile(r"^[-+]{0,1}[0-9]{1,}.{0,1}[0-9]{0,}")
+#    if re.match(regex, strnum):
+#        return True
+#    else:
+#        return False
+        
+def is_number(numstr):
+    try:
+        float(numstr)
         return True
-    else:
-        return False
+    except ValueError:
+        pass
+    try:
+        unicodedata.numeric(numstr)
+        return True
+    except (TypeError, ValueError):
+        pass
+    return False
 
 
 def deal_number(mnumber):
