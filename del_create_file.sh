@@ -2,6 +2,7 @@
 
 rmpyc.py .
 rm -rf center/GENERATE_REPORT/*
+rm -rf center/static//GENERATE_REPORT/*
 rm -rf center/log/*
 rm -rf manageApp/UploadFilePath/*
 rm  ghostdriver.log
