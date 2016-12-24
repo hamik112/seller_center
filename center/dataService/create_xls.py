@@ -213,7 +213,7 @@ def split_number(numberstr):
     if not is_number(numberstr):
         return numberstr
     try:
-        return re.sub(r"(?<=\d)(?=(?:\d\d\d)+$)", ",", numberstr)
+        return re.sub(r"(\d)(?=(\d\d\d)+(?!\d))", r"\1,", numberstr)
     except Exception,e:
         return numberstr
 
