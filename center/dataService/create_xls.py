@@ -95,7 +95,7 @@ def create_csv(**params):
         for i in lst:
             if lst.index(i) == 0:
                 tmp_list.append(datetime_to_str(i))
-            elif lst.index(i) > 9:
+            elif lst.index(i) > 11:
                 tmp_list.append(split_number(i))
             elif lst[2].replace(" ","").lower() == "transfer":
                 tmp_list.append(csv_deal_number(i, tranfer=True))
@@ -198,10 +198,7 @@ def split_number(numberstr):
     if not is_number(numberstr):
         return numberstr
     try:
-        if float(numberstr) >= 1000 or float(numberstr) <= -1000:
-            return re.sub(r"(?<=\d)(?=(?:\d\d\d)+$)", ",", numberstr)
-        else:
-            return  numberstr
+        return re.sub(r"(?<=\d)(?=(?:\d\d\d)+$)", ",", numberstr)
     except Exception,e:
         return numberstr
 
