@@ -178,7 +178,9 @@ def statement_view(request):
     email = request.user.username
     store_name = get_storename(email)
     # result_dict = StatementViewData(request).test_return()
-
+    groupid = request.GET.get("groupId", "")
+    print "groupid: ", groupid
+    result_dict = {"unsuccessful_charges": 700, "seller_repayment":800}
     return  render(request, 'statement_view.html', locals())
 
 
@@ -273,9 +275,7 @@ def pdf_file_view(request):
     month = request.GET.get("month", "")
     year = request.GET.get("year", "")
     begin_date_str, end_date_str = request.GET.get("begin_date", ""), request.GET.get("end_date", "")
-
     # print username, month, year, begin_date_str,"||", end_date_str
-
     if not begin_date_str or not end_date_str:
         return render(request, "pdf_hml/2016Jun_MonthlySummary.back.html", locals())
     # print username, month, year, begin_date, end_date

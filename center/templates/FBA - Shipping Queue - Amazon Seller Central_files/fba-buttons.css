@@ -1,0 +1,310 @@
+@charset "utf-8";
+/* CSS Document */
+.amznBtn {
+	background-position: left;
+	border: 0;
+    color: #006;
+	cursor: pointer;
+	margin: 0;
+	overflow: visible;
+	padding: 0;
+    position: relative;
+	vertical-align: middle;
+	width: auto;
+}
+.amznBtn::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.amznBtn span {
+  border: 0;
+  display: block;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  margin: 0;
+  position: relative;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.amznBtn.btn-lg-pri-ghost,
+.amznBtn.btn-lg-sec-ghost,
+.amznBtn.btn-md-pri-ghost,
+.amznBtn.btn-md-sec-ghost,
+.amznBtn.btn-sm-pri-ghost,
+.amznBtn.btn-sm-sec-ghost,
+.amznBtn.btn-lg-pri-arrowl-ghost,
+.amznBtn.btn-lg-pri-arrowr-ghost,
+.amznBtn.btn-lg-sec-arrowl-ghost,
+.amznBtn.btn-lg-sec-arrowr-ghost,
+.amznBtn.btn-md-pri-arrowl-ghost,
+.amznBtn.btn-md-pri-arrowr-ghost,
+.amznBtn.btn-md-sec-arrowl-ghost,
+.amznBtn.btn-md-sec-arrowr-ghost {
+    cursor: inherit;
+}
+
+.amznBtn,
+.amznBtn span {
+  background-color: transparent;
+  background-image: url('images/fba/btn-sprite.png');
+  background-repeat: no-repeat;
+}
+.amznBtn span img {
+	margin-right: 4px;
+	vertical-align: middle;
+}
+.amznBtn > span {
+	background-position: right;
+}
+.amznBtn.btn-lg-pri,
+.amznBtn.btn-lg-sec,
+.amznBtn.btn-lg-pri-ghost,
+.amznBtn.btn-lg-sec-ghost,
+.amznBtn.btn-lg-pri-arrowl,
+.amznBtn.btn-lg-sec-arrowl,
+.amznBtn.btn-lg-pri-arrowl-ghost,
+.amznBtn.btn-lg-sec-arrowl-ghost,
+.amznBtn.btn-lg-pri-arrowr,
+.amznBtn.btn-lg-sec-arrowr,
+.amznBtn.btn-lg-pri-arrowr-ghost,
+.amznBtn.btn-lg-sec-arrowr-ghost {
+	height: 27px;
+	padding-right: 5px;
+}
+.amznBtn.btn-lg-pri-arrowr,
+.amznBtn.btn-lg-sec-arrowr,
+.amznBtn.btn-lg-pri-arrowr-ghost,
+.amznBtn.btn-lg-sec-arrowr-ghost {
+	padding-right: 24px;
+}
+.amznBtn.btn-lg-pri span,
+.amznBtn.btn-lg-sec span,
+.amznBtn.btn-lg-pri-ghost span,
+.amznBtn.btn-lg-sec-ghost span,
+.amznBtn.btn-lg-pri-arrowl span,
+.amznBtn.btn-lg-sec-arrowl span,
+.amznBtn.btn-lg-pri-arrowr span,
+.amznBtn.btn-lg-sec-arrowr span,
+.amznBtn.btn-lg-pri-arrowl-ghost span,
+.amznBtn.btn-lg-sec-arrowl-ghost span,
+.amznBtn.btn-lg-pri-arrowr-ghost span,
+.amznBtn.btn-lg-sec-arrowr-ghost span {
+	font-size: 12px;
+	padding: 5px 9px 8px 14px;
+}
+.amznBtn.btn-lg-pri-arrowl span,
+.amznBtn.btn-lg-sec-arrowl span,
+.amznBtn.btn-lg-pri-arrowl-ghost span,
+.amznBtn.btn-lg-sec-arrowl-ghost span {
+	padding-left: 32px;
+}
+.amznBtn.btn-md-pri,
+.amznBtn.btn-md-sec,
+.amznBtn.btn-md-pri-ghost,
+.amznBtn.btn-md-sec-ghost,
+.amznBtn.btn-md-pri-arrowl,
+.amznBtn.btn-md-sec-arrowl,
+.amznBtn.btn-md-pri-arrowr,
+.amznBtn.btn-md-sec-arrowr,
+.amznBtn.btn-md-pri-arrowl-ghost,
+.amznBtn.btn-md-sec-arrowl-ghost,
+.amznBtn.btn-md-pri-arrowr-ghost,
+.amznBtn.btn-md-sec-arrowr-ghost {
+	height: 22px;
+	padding-right: 5px;
+}
+.amznBtn.btn-md-pri-arrowr,
+.amznBtn.btn-md-sec-arrowr,
+.amznBtn.btn-md-pri-arrowr-ghost,
+.amznBtn.btn-md-sec-arrowr-ghost {
+	padding-right: 20px;
+}
+.amznBtn.btn-md-pri span,
+.amznBtn.btn-md-sec span,
+.amznBtn.btn-md-pri-ghost span,
+.amznBtn.btn-md-sec-ghost span,
+.amznBtn.btn-md-pri-arrowl span,
+.amznBtn.btn-md-sec-arrowl span,
+.amznBtn.btn-md-pri-arrowr span,
+.amznBtn.btn-md-sec-arrowr span,
+.amznBtn.btn-md-pri-arrowl-ghost span,
+.amznBtn.btn-md-sec-arrowl-ghost span,
+.amznBtn.btn-md-pri-arrowr-ghost span,
+.amznBtn.btn-md-sec-arrowr-ghost span {
+	font-size: 12px;
+	padding: 3px 6px 5px 11px;
+}
+.amznBtn.btn-md-pri-arrowl span,
+.amznBtn.btn-md-sec-arrowl span,
+.amznBtn.btn-md-pri-arrowl-ghost span,
+.amznBtn.btn-md-sec-arrowl-ghost span {
+	padding-left: 26px;
+}
+.amznBtn.btn-sm-pri,
+.amznBtn.btn-sm-sec,
+.amznBtn.btn-sm-pri-ghost,
+.amznBtn.btn-sm-sec-ghost {
+	height: 17px;
+	padding-right: 5px;
+}
+.amznBtn.btn-sm-pri span,
+.amznBtn.btn-sm-sec span,
+.amznBtn.btn-sm-pri-ghost span,
+.amznBtn.btn-sm-sec-ghost span {
+	font-size: 10px;
+	padding: 2px 3px 3px 8px;
+}
+.amznBtn.btn-lg-pri-ghost,
+.amznBtn.btn-md-pri-ghost,
+.amznBtn.btn-sm-pri-ghost,
+.amznBtn.btn-lg-sec-ghost,
+.amznBtn.btn-md-sec-ghost,
+.amznBtn.btn-sm-sec-ghost,
+.amznBtn.btn-lg-pri-arrowl-ghost,
+.amznBtn.btn-lg-pri-arrowr-ghost,
+.amznBtn.btn-md-pri-arrowl-ghost,
+.amznBtn.btn-md-pri-arrowr-ghost,
+.amznBtn.btn-lg-sec-arrowl-ghost,
+.amznBtn.btn-lg-sec-arrowr-ghost,
+.amznBtn.btn-md-sec-arrowl-ghost,
+.amznBtn.btn-md-sec-arrowr-ghost {
+	color: #999;
+}
+.amznBtn.btn-lg-pri,
+.amznBtn.btn-lg-pri-arrowl {
+	background-position: right -30px;
+}
+.amznBtn.btn-lg-pri span,
+.amznBtn.btn-lg-pri-arrowr span {
+	background-position: left 0;	
+}
+.amznBtn.btn-lg-pri-arrowr {
+	background-position: right -90px;
+}
+.amznBtn.btn-lg-pri-arrowl span {
+	background-position: left -60px;
+}
+.amznBtn.btn-md-pri,
+.amznBtn.btn-md-pri-arrowl {
+	background-position: right -150px;
+}
+.amznBtn.btn-md-pri span,
+.amznBtn.btn-md-pri-arrowr span {
+	background-position: left -120px;
+}
+.amznBtn.btn-md-pri-arrowr {
+	background-position: right -210px;	
+}
+.amznBtn.btn-md-pri-arrowl span {
+	background-position: left -180px;	
+}
+.amznBtn.btn-sm-pri {
+	background-position: right -260px;
+}
+.amznBtn.btn-sm-pri span {
+	background-position: left -240px;	
+}
+
+.amznBtn.btn-lg-sec,
+.amznBtn.btn-lg-sec-arrowl {
+	background-position: right -310px;
+}
+.amznBtn.btn-lg-sec span,
+.amznBtn.btn-lg-sec-arrowr span {
+	background-position: left -280px;
+}
+.amznBtn.btn-lg-sec-arrowr {
+	background-position: right -370px;	
+}
+.amznBtn.btn-lg-sec-arrowl span {
+	background-position: left -340px;	
+}
+.amznBtn.btn-md-sec,
+.amznBtn.btn-md-sec-arrowl {
+	background-position: right -430px;
+}
+.amznBtn.btn-md-sec span,
+.amznBtn.btn-md-sec-arrowr span {
+	background-position: left -400px;	
+}
+.amznBtn.btn-md-sec-arrowr {
+	background-position: right -490px;	
+}
+.amznBtn.btn-md-sec-arrowl span {
+	background-position: left -460px;	
+}
+.amznBtn.btn-sm-sec {
+	background-position: right -540px;
+}
+.amznBtn.btn-sm-sec span {
+	background-position: left -520px;
+}
+.amznBtn.btn-lg-pri-ghost,
+.amznBtn.btn-lg-pri-arrowl-ghost {
+	background-position: right -590px;
+}
+.amznBtn.btn-lg-pri-ghost span ,
+.amznBtn.btn-lg-pri-arrowr-ghost span {
+	background-position: left -560px;	
+}
+.amznBtn.btn-lg-pri-arrowr-ghost {
+	background-position: right -910px;
+}
+.amznBtn.btn-lg-pri-arrowl-ghost span {
+	background-position: left -880px;
+}
+.amznBtn.btn-md-pri-ghost,
+.amznBtn.btn-md-pri-arrowl-ghost {
+	background-position: right -650px;
+}
+.amznBtn.btn-md-pri-ghost span,
+.amznBtn.btn-md-pri-arrowr-ghost span {
+	background-position: left -620px;	
+}
+.amznBtn.btn-md-pri-arrowr-ghost {
+	background-position: right -970px;
+}
+.amznBtn.btn-md-pri-arrowl-ghost span {
+	background-position: left -940px;
+}
+.amznBtn.btn-sm-pri-ghost {
+	background-position: right -700px;
+}
+.amznBtn.btn-sm-pri-ghost span {
+	background-position: left -680px;	
+}
+.amznBtn.btn-lg-sec-ghost,
+.amznBtn.btn-lg-sec-arrowl-ghost {
+	background-position: right -750px;
+}
+.amznBtn.btn-lg-sec-ghost span,
+.amznBtn.btn-lg-sec-arrowr-ghost span {
+	background-position: left -720px;	
+}
+.amznBtn.btn-lg-sec-arrowr-ghost {
+	background-position: right -1030px;
+}
+.amznBtn.btn-lg-sec-arrowl-ghost span {
+	background-position: left -1000px;
+}
+.amznBtn.btn-md-sec-ghost,
+.amznBtn.btn-md-sec-arrowl-ghost {
+	background-position: right -810px;
+}
+.amznBtn.btn-md-sec-ghost span,
+.amznBtn.btn-md-sec-arrowr-ghost span {
+	background-position: left -780px;	
+}
+.amznBtn.btn-md-sec-arrowr-ghost {
+	background-position: right -1090px;
+}
+.amznBtn.btn-md-sec-arrowl-ghost span {
+	background-position: left -1060px;
+}
+.amznBtn.btn-sm-sec-ghost {
+	background-position: right -860px;
+}
+.amznBtn.btn-sm-sec-ghost span {
+	background-position: left -840px;	
+}

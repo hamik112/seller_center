@@ -2346,7 +2346,10 @@ amznJQ.available('jQuery', function() {
 	}
 </style>
 
-    <form action="https://sellercentral.amazon.com/gp/payments-account/settlement-summary.html" method="get" id="change_settlement" name="change_settlement">
+    <!--<form action="https://sellercentral.amazon.com/gp/payments-account/settlement-summary.html" method="get" id="change_settlement" name="change_settlement">
+    -->
+
+    <form action="/statement-view/" method="get" id="change_settlement" name="change_settlement">
 
 
 			<div class="pStatementNav">
@@ -2360,15 +2363,15 @@ amznJQ.available('jQuery', function() {
 
 
 <select id="groupId" name="groupId" onchange="this.form.submit();">
-  <option value="2016290Df-4nXYET2mOMsbCKQkt8Q" selected="selected">Oct 15, 2016 - Nov 23, 2016 (Open)</option>
-  <option value="20162769VolwcM1S0WNGmOQ3mVwAw">Oct 1, 2016 - Oct 15, 2016</option>
-  <option value="2016079ecB2SokYTKmFo4G1iMitpg">Mar 19, 2016 - Oct 1, 2016</option>
-  <option value="2016066xIrI32RmRlKY6y7gVJM_-w">Feb 6, 2016 - Mar 19, 2016</option>
+  <option value="Oct 15, 2016 - Nov 23, 2016" selected="selected">Oct 15, 2016 - Nov 23, 2016 (Open)</option>
+  <option value="Oct 1, 2016 - Oct 15, 2016">Oct 1, 2016 - Oct 15, 2016</option>
+  <option value="Mar 19, 2016 - Oct 1, 2016">Mar 19, 2016 - Oct 1, 2016</option>
+  <option value="Feb 6, 2016 - Mar 19, 2016">Feb 6, 2016 - Mar 19, 2016</option>
 </select>
 
 
 	    			<div class="pStatementSerial" style="float:left; margin:0 5px;">
-				<a href="https://sellercentral.amazon.com/gp/payments-account/settlement-summary.html?ie=UTF8&amp;groupId=20162769VolwcM1S0WNGmOQ3mVwAw">Previous</a> 
+				<a href="/statement-view/#">Previous</a>
 		 	<a href="#" class="gridhid">Next</a> 
 
 				</div>

@@ -1,0 +1,428 @@
+div.fba-core{font-size:12px;font-family:arial,helvetica,sans-serif;color:#444}
+div.fba-core,div.fba-core *{margin:0;padding:0}
+div.fba-core a{color:#004b91;text-decoration:none}
+div.fba-core a:hover{text-decoration:underline}
+div.fba-core table{width:100%;border-collapse:collapse;border-spacing:0}
+div.fba-core table thead th{text-align:left;font-weight:normal}
+div.fba-core table thead th,div.fba-core table tbody td,div.fba-core table tfoot td{font-size:12px;color:#444}
+div.fba-core fieldset,div.fba-core img{border:0}
+div.fba-core img,div.fba-core input,div.fba-core textarea,div.fba-core select{vertical-align:middle}
+div.fba-core li{list-style:none}
+div.fba-core .problems-hide{display:none}
+div.fba-core p.actionButton{text-align:right}
+div.fba-core .awesomeButton{margin:0 4px}
+div.fba-core .buttonLarge{padding-right:6px}
+div.fba-core .buttonLarge span{padding:3px 4px 7px 10px}
+div.fba-core .buttonSmall{padding-right:6px}
+div.fba-core .buttonSmall span{padding:1px 4px 7px 10px}
+#fba-core-tertiary-nav{overflow:hidden;padding:5px 2.5%;margin-bottom:15px;background:#f4f4f4;border:1px solid #dfdfdf;border-left:none;border-right:0}
+* html #fba-core-tertiary-nav{height:1%}
+#fba-core-tertiary-nav li{float:left;border-right:1px solid #9f9f9f;padding-right:10px;margin-right:10px}
+#fba-core-tertiary-nav li.last{border-right:0;padding-right:0;margin-right:0}
+#fba-core-page{width:95%;margin:15px auto;margin-bottom:50px}
+#fba-core-page h1,#fba-core-page h2,#fba-core-page h3{margin-bottom:15px;color:#c60}
+#fba-core-page h1{margin-bottom:15px}
+#fba-core-page h1{font-size:22px}
+#fba-core-page h2{font-size:18px}
+#fba-core-page h3{font-size:18px;color:#004b91;font-weight:normal}
+#fba-core-page h1 a{font-size:11px;margin-left:5px;font-weight:normal}
+#fba-core-page .not-applicable{text-decoration:line-through}
+#fba-core-page .heading-sub-text{margin-top:2px;font-size:14px;color:#666;font-weight:normal}
+#fba-core-page .heading-sub-text a{font-size:12px}
+#fba-core-page .extra-info{margin-bottom:15px}
+#fba-core-page .flat-file-validation{margin-top:3px}
+#fba-core-page-action{float:right;margin-top:5px}
+#fba-core-page-action-secondary{float:right;margin:5px 0 0 10px}
+div.fba-core-page-mask-container{position:relative;margin-top:25px}
+div.fba-core-page-mask-container .fba-core-page-mask{display:block;position:absolute;z-index:2;top:0;left:0;width:100%;height:100%;background:#FFF;zoom:1;opacity:.7;filter:alpha(opacity=70)}
+div.fba-core-page-mask-container .fba-core-page-mask-content{z-index:1}
+.apf-container{width:100%;display:table}
+.apf-container-child{display:table-cell}
+.apf-athena-controlled-width-area{width:0}
+.fba-scrollable-popover{max-height:900px;overflow-y:auto}
+.fba-dispute-popover{height:600px;width:650px;border:0 solid white;padding:0;z-index:201}
+.fba-dispute-iframe{height:600px;width:650px;border:0 solid white;padding:0;visibility:visible}
+.fba-preorder-popover{padding:28px 17px 8px 17px}
+#fba-core-workflow-steps{font-size:14px;margin-bottom:10px;border-bottom:3px solid #999;zoom:1}
+#fba-core-workflow-steps:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html #fba-core-workflow-steps{height:1%}
+#fba-core-workflow-steps li{float:left;font-weight:bold;padding:0 0 3px 30px;position:relative;margin-bottom:-3px}
+#fba-core-workflow-steps li a{float:left;padding-bottom:10px;color:#666;text-decoration:none}
+#fba-core-workflow-steps li.current,#fba-core-workflow-steps li.previous{border-bottom:3px solid #c60;padding-bottom:0}
+#fba-core-workflow-steps li.current a{color:#c60;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/workflow-steps-arrow._V393410860_.gif") bottom center no-repeat}
+#fba-core-workflow-steps li.previous a{color:#146eb4}
+#fba-core-workflow-steps li.previous a:hover{color:#146eb4;text-decoration:underline}
+#fba-core-workflow-steps li.first{padding-left:0}
+#fba-core-workflow-steps li.last{border-right:3px solid #fff}
+form.fba-core-input{position:relative}
+form.fba-core-input h2,h2.fba-core-input-header{border-bottom:1px solid #ccc;padding:0 10px 5px 10px}
+form.fba-core-input table{width:auto;margin-bottom:15px}
+form.fba-core-input table.w100p,form.fba-core-input table.fba-core-data{width:100%}
+form.fba-core-input table thead tr th,form.fba-core-input table tbody tr th,form.fba-core-input table tbody tr td,form.fba-core-input table tfoot tr td{padding:5px;font-family:arial,helvetica,sans-serif}
+form.fba-core-input table thead tr th.align-top,form.fba-core-input table tbody tr th.align-top,form.fba-core-input table tbody tr td.align-top,form.fba-core-input table tfoot tr td.align-top,form.fba-core-input table.align-top thead tr th,form.fba-core-input table.align-top tbody tr th,form.fba-core-input table.align-top tbody tr td,form.fba-core-input table.align-top tfoot tr td{vertical-align:top}
+form.fba-core-input table tbody tr td.content{vertical-align:top;padding:0}
+form.fba-core-input table thead tr th{padding-top:0}
+form.fba-core-input table tfoot tr th,form.fba-core-input table tfoot tr td{padding-bottom:0}
+form.fba-core-input table tbody tr th{text-align:right}
+form.fba-core-input table tbody tr th.content{text-align:left}
+form.fba-core-input table thead tr th,form.fba-core-input table tbody tr th{font-size:12px;color:#666;font-weight:bold}
+form.fba-core-input table tbody tr td.header{font-size:12px;color:#666}
+form.fba-core-input table thead tr th{vertical-align:bottom}
+form.fba-core-input table.fba-core-data thead tr th{color:#444;font-weight:normal}
+form.fba-core-input table thead tr th.number,form.fba-core-input table tbody tr td.number,form.fba-core-input table tfoot tr td.number{text-align:right}
+form.fba-core-input table tbody tr td.number input{text-align:right}
+form.fba-core-input .action{text-align:right}
+form.fba-core-input table tbody tr td p.action{margin-top:10px;text-align:left}
+form.fba-core-input table tfoot tr td.action .fba-core-alert-label{float:right}
+form.fba-core-input table tfoot tr td.action .fba-core-alert-label-success-action{background-position:left -993px}
+form.fba-core-input table thead tr th.disabled,form.fba-core-input table tbody tr td.disabled,form.fba-core-input table tfoot tr td.disabled{color:#999}
+form.fba-core-input table tbody tr td strong.important{font-size:14px}
+form.fba-core-input table thead tr th.w10{width:10px}
+form.fba-core-input table thead tr th.w20{width:20px}
+form.fba-core-input table thead tr th.w30{width:30px}
+form.fba-core-input table thead tr th.w40{width:40px}
+form.fba-core-input table thead tr th.w50{width:50px}
+form.fba-core-input table thead tr th.w60{width:60px}
+form.fba-core-input table thead tr th.w70{width:70px}
+form.fba-core-input table thead tr th.w80{width:80px}
+form.fba-core-input table thead tr th.w90{width:90px}
+form.fba-core-input table thead tr th.w100{width:100px}
+form.fba-core-input table thead tr th.w110{width:110px}
+form.fba-core-input table thead tr th.w120{width:120px}
+form.fba-core-input table thead tr th.w130{width:130px}
+form.fba-core-input table thead tr th.w140{width:140px}
+form.fba-core-input table thead tr th.w150{width:150px}
+form.fba-core-input table thead tr th.w160{width:160px}
+form.fba-core-input table thead tr th.w170{width:170px}
+form.fba-core-input table thead tr th.w180{width:180px}
+form.fba-core-input table thead tr th.w190{width:190px}
+form.fba-core-input table thead tr th.w200{width:200px}
+form.fba-core-input table thead tr th.w210{width:210px}
+form.fba-core-input table thead tr th.w220{width:220px}
+form.fba-core-input table thead tr th.w230{width:230px}
+form.fba-core-input table thead tr th.w240{width:240px}
+form.fba-core-input table thead tr th.w250{width:250px}
+form.fba-core-input table thead tr th.w260{width:260px}
+form.fba-core-input table thead tr th.w270{width:270px}
+form.fba-core-input table thead tr th.w280{width:280px}
+form.fba-core-input table thead tr th.w290{width:290px}
+form.fba-core-input table thead tr th.w300{width:300px}
+div.fba-core input.fba-core-input,div.fba-core select.fba-core-input,div.fba-core textarea.fba-core-input,form.fba-core-input input,form.fba-core-input select,form.fba-core-input textarea{padding:5px;font-family:arial,helvetica,sans-serif;font-size:12px}
+form.fba-core-input select option,div.fba-core select.fba-core-input option{font-family:arial,helvetica,sans-serif;font-size:12px}
+input.fba-core-input-error,select.fba-core-input-error,textarea.fba-core-input-error,form.fba-core-input input.error,form.fba-core-input select.error,form.fba-core-input textarea.error,form.fba-core-input table tbody tr.error td input{border:1px solid #c33;color:#000}
+input.fba-core-input-error-red-background,select.fba-core-input-error-red-background,textarea.fba-core-input-error-red-background{border:1px solid #c33;color:#000;background-color:#f5e6e7}
+input.fba-core-input-warning,select.fba-core-input-warning,textarea.fba-core-input-warning,form.fba-core-input input.warning,form.fba-core-input select.warning,form.fba-core-input textarea.warning,form.fba-core-input table tbody tr.warning td input{border:1px solid #f90;color:#000}
+div.fba-core table tbody tr td .fba-core-input-label-error,.fba-core-input-label-error,label.fba-core-input-error,form.fba-core-input label.error,form.fba-core-input table tbody tr.error th label,form.fba-core-input table tbody tr.error td label{color:#c33}
+div.fba-core table thead tr td .fba-core-input-label-warning,div.fba-core table tbody tr td .fba-core-input-label-warning,div.fba-core table tfoot tr td .fba-core-input-label-warning{color:#f90}
+input.fba-core-input-label,form.fba-core-input input.label{color:#999}
+input.fba-core-input-number,select.fba-core-input-number,form.fba-core-input input.number,form.fba-core-input select.number{width:50px;font-size:12px}
+input.fba-core-input-small,select.fba-core-input-small,form.fba-core-input input.small,form.fba-core-input select.small{width:100px;font-size:12px}
+table.fba-core-data tbody tr td select.fba-core-input-small{padding-left:0;padding-right:0;width:105px}
+input.fba-core-input-medium,select.fba-core-input-medium,form.fba-core-input input.medium,form.fba-core-input select.medium{width:150px;font-size:12px}
+input.fba-core-input-large,select.fba-core-input-large,form.fba-core-input input.large,form.fba-core-input select.large{width:200px;font-size:12px}
+input.fba-core-input-extra-large,select.fba-core-input-extra-large,form.fba-core-input input.extra-large,form.fba-core-input select.extra-large{width:400px;font-size:12px}
+div.fba-core-input-buttons{text-align:right}
+form.fba-core-input div.disabled{background:#fff;opacity:.75;position:absolute;width:100%;height:100%;top:0;left:0}
+input.fba-core-input-text{margin-left:18px}
+li.fba-core-input{height:35px}
+table thead tr td input.dimension-input-box,table tbody tr td input.dimension-input-box{width:30px;font-size:12px;padding:5px}
+table tbody tr td input.expiration-date,table tbody tr td dl dt input.expiration-date{width:60px;padding:5px}
+table tbody tr td input.box-quantity,table tbody tr td input.dimension-input,table tbody tr td input.weight-input,table tbody tr td dl dt input.box-quantity{width:25px;padding:5px}
+table tbody tr td dl dt input.cli-box-quantity{width:35px}
+div.fba-core input.multi-asin-carton-num-boxes{margin-left:20px;margin-right:20px;width:20px}
+input.fba-core-input-date{width:80px;text-align:center}
+#cartonInputTable{margin-top:10px}
+input.carton-dimension-check-box-error{outline:1px solid #c33}
+#fba-core-page-meta{overflow:hidden;margin-bottom:10px;font-size:12px}
+* html #fba-core-page-meta{height:1%}
+#fba-core-page div.fba-core-page-meta-landing-page{font-size:12px}
+#fba-core-page-meta dl{float:left;margin-right:20px;width:168px;margin-bottom:10px}
+#fba-core-page-meta dl dt{color:#666;font-weight:bold;margin-bottom:3px}
+#fba-core-page-meta dl dt img{margin-left:5px}
+#fba-core-page-meta dl dt a.external-link{font-weight:normal}
+#fba-core-page-meta dl dd{word-wrap:break-word}
+#fba-core-page-meta dl.tiny{font-size:12px;width:112px}
+#fba-core-page-meta dl.small{font-size:12px;width:168px}
+#fba-core-page-meta dl.medium{font-size:12px;width:262px}
+#fba-core-page-meta dl.large{font-size:12px;width:356px}
+#fba-core-page div.fba-core-page-meta-landing-page dl.small,#fba-core-page div.fba-core-page-meta-landing-page dl.medium,#fba-core-page div.fba-core-page-meta-landing-page dl.large{font-size:12px}
+#fba-core-page div.fba-core-page-meta-container{border:1px solid #ccc;position:relative}
+#fba-core-page div.fba-core-page-meta-container div.content{padding:15px}
+#fba-core-page div.fba-core-page-meta-container div.content-float{overflow:auto}
+#fba-core-page div.fba-core-page-meta-container div.content-msg-box{padding-bottom:25px}
+#fba-core-page div.fba-core-page-meta-container div.title{background:#ddd;background:#eee;background:-moz-linear-gradient(top,#eee,#ddd);background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#eee),color-stop(100%,#ddd));background:-webkit-linear-gradient(top,#eee,#ddd);background:-o-linear-gradient(top,#eee,#ddd);background:-ms-linear-gradient(top,#eee,#ddd);background:linear-gradient(top,#eee,#ddd);border-bottom:1px solid #ccc;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee',endColorstr='#dddddd',GradientType=0);-webkit-box-shadow:0 1px 0 rgba(255,255,255,0.5) inset,0 -1px 0 rgba(255,255,255,0.4) inset;-moz-box-shadow:0 1px 0 rgba(255,255,255,0.5) inset,0 -1px 0 rgba(255,255,255,0.4) inset;box-shadow:0 1px 0 rgba(255,255,255,0.5) inset,0 -1px 0 rgba(255,255,255,0.4) inset;padding:5px 5px;text-align:left;font-size:13px;font-weight:bold;white-space:nowrap}
+#fba-core-page div.fba-core-page-meta-container div.action{bottom:15px;right:15px;position:absolute}
+#fba-core-page-meta dl dt.number,#fba-core-page-meta dl dd.number{text-align:right}
+#fba-core-page-meta dl dd.action{margin-top:3px;font-size:12px}
+#meta-data-show-hide{float:right}
+#fba-core-page-meta-primary{overflow:hidden}
+#fba-core-page-meta-secondary{display:none}
+#meta-data-show-hide{display:none;margin-bottom:10px;border-top:1px solid #ccc;width:100%}
+#meta-data-show-hide a{float:right}
+div.fba-metadata-plan-type-tag{margin:5px 0 8px 0;font-weight:bold}
+#fba-core-page-meta #fba-inbound-manifest-workflow-view-new-manifest-shipping-modes dt{white-space:nowrap}
+#fba-core-tabs{position:relative;font-size:12px;margin-bottom:15px;border-bottom:1px solid #999;zoom:1}
+#fba-core-tabs:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html #fba-core-tabs{height:1%;width:100%}
+#fba-core-tabs li{float:left;margin-right:15px}
+#fba-core-tabs li.current{border:1px solid #999;border-bottom-color:#fff;position:relative;margin-bottom:-1px}
+#fba-core-tabs li a{color:#004b91;float:left;line-height:30px;padding:0 15px}
+* html #fba-core-tabs li a{height:30px}
+#fba-core-tabs li.current a{color:#666;font-weight:bold;text-decoration:none}
+#fba-core-tabs li a img{margin-left:5px}
+* html #fba-core-tabs li a img{margin-top:7px}
+#fba-core-tabs li.action{position:absolute;right:0;font-size:11px}
+#fba-core-tabs li.action form.fba-core-input{margin-bottom:0}
+#fba-core-tabs li.last,#fba-core-tabs li.action{margin-right:0}
+#fba-core-tabs li.icon a{padding:0 15px 0 36px;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/alert-label-icons-with-info-icon._V329468899_.png") 15px 9px no-repeat}
+#fba-core-tabs li.icon-success a{background-position:15px -992px}
+#fba-core-tabs li.icon-error a{background-position:15px -492px}
+#fba-core-tabs li.icon-warning a{background-position:15px 8px}
+#fba-core-tab-actions{padding-bottom:15px;position:relative}
+#fba-core-tab-actions:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+* html #fba-core-tab-actions{height:1%;width:100%}
+#fba-core-tab-actions p{float:left;font-weight:bold;margin-right:10px}
+#fba-core-tab-actions ul{float:left}
+#fba-core-tab-actions ul li{float:left;padding:0 10px}
+#fba-core-tab-actions ul li.action{margin-top:-5px}
+#fba-core-tab-actions ul li.current a{font-weight:bold}
+#fba-core-tab-actions form.fba-core-input{position:absolute;margin-bottom:0;right:0}
+#fba-core-date-filters{padding-bottom:15px;position:relative}
+#fba-core-date-filters p{float:left;font-weight:bold;margin-left:1px;margin-right:10px;margin-top:5px}
+div.fba-core-alert-msg{margin-bottom:15px;padding:1px 10px 1px 55px;border:1px solid #777;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/alert-msg-icons._V393459348_.png") left top no-repeat}
+div.fba-core-alert-msg p{margin:10px 0}
+div.fba-core-alert-msg a{font-weight:bold}
+div.fba-core-alert-msg-info{color:#064c72;background-position:left -1500px;border-color:#89bdd9}
+div.fba-core-alert-msg-success{color:#3b995a;background-position:left -2000px;border-color:#8bc39d}
+div.fba-core-alert-msg-error{color:#c33;background-position:left -1000px;border-color:#c33}
+div.fba-core-alert-msg-warning{color:#009;background-position:left -500px;border-color:#ffb00e}
+div.fba-core-alert-msg-strong-warning,div.fba-core-alert-msg-critical-warning{color:#c33;background-position:left top;border-color:#c33}
+div.fba-core-alert-msg-critical-warning{color:#fff;background-color:#c33}
+div.fba-core-alert-msg-critical-warning a{color:#fff}
+i.fba-core-icon{display:inline-block;vertical-align:top;background-size:400px 650px;background-repeat:no-repeat;background-image:url("https://images-na.ssl-images-amazon.com/images/G/01/AUIClients/AmazonUIBaseCSS-sprite_1x-769b217e87bb50e13cac4cddab5ced142197bb43._V2_.png")}
+i.fba-core-icon-alert-inline-info{position:relative;background-position:-166px -130px;width:14px;height:13px}
+i.fba-core-icon-alert-inline-tiny-red-exclamation-mark{position:relative;background-position:-136px -130px;width:14px;height:13px}
+i.fba-core-icon-alert-inline-tiny-green-checkmark{position:relative;background-position:-116px -130px;width:14px;height:13px}
+i.fba-core-icon-alert-inline-tiny-yellow-alert{position:relative;background-position:-148px -86px;width:14px;height:13px}
+div.fba-core .fba-core-alert-label{display:block;padding:5px 0 5px 21px;margin:0;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/alert-label-icons-with-info-icon._V329468899_.png") left 5px no-repeat}
+div.fba-core .fba-core-alert-label-success{color:#3b995a;background-position:left -995px}
+div.fba-core .fba-core-alert-label-error{color:#c33;background-position:left -495px}
+div.fba-core .fba-core-alert-label-warning{color:#009;background-position:left 5px}
+div.fba-core .fba-core-alert-label-notification{color:#000;background-position:left 5px}
+div.fba-core .fba-core-alert-label-event{color:#500}
+div.fba-core .fba-core-alert-label-info{background-position:left -1495px}
+div.clear-both{clear:both}
+div.fba-core-content{overflow:hidden}
+* html div.fba-core-content{height:1%}
+div.fba-core-content h1,div.fba-core-content h2,div.fba-core-content h3,div.fba-core-content h4,div.fba-core-content h5,div.fba-core-content h6{margin-bottom:10px}
+div.fba-core-content div.section{margin-bottom:20px}
+div.fba-core-content p{margin-bottom:10px}
+div.fba-core-content p.msku-limit-note-emphasize{color:red;font-weight:bold}
+div.fba-core-content ul{margin-bottom:10px}
+div.fba-core-content ul li{list-style:disc outside;margin-left:15px}
+div.fba-core-content div.column-left{float:left;margin-right:1%}
+div.fba-core-content div.column-right{float:right;margin-left:1%}
+div.fba-core-content div.column-small{width:32%}
+div.fba-core-content div.column-medium{width:49%}
+* html div.fba-core-content div.column-medium{width:45%}
+div.fba-core-content div.column-large{width:65%}
+div.fba-core-content div.column-medium-fixed{width:750px}
+div.fba-core-content div.process-step img{position:relative;float:left;padding-right:10px;width:75px;height:75px}
+div.fba-core-content div.process-step p{margin-left:85px}
+div.fba-core-content div.popover-images img.popover-image{display:none;width:100%}
+div.fba-core-content div.popover-images img.popover-image.selected{display:block}
+div.fba-core-content div.popover-thumbnails{clear:both;padding:20px 20px 0;text-align:center;width:260px}
+div.fba-core-content div.popover-thumbnails img.popover-thumbnail{margin:0 1px;height:30px;width:30px;border:1px solid #999}
+div.fba-core-content div.popover-thumbnails img.popover-thumbnail.selected{margin:0 1px;height:30px;width:30px;border-color:#900}
+div.fba-core-content div#prep-categories-container div.prep-instructions div.prep-images{height:75px;margin:20px 50px;background:#fff url('https://images-na.ssl-images-amazon.com/images/G/01/fba/usw/prep-categories-2._V368674984_.jpg') no-repeat}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-adult{display:none}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-liquid{background-position:0 -101px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-small{background-position:0 -407px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-textile{background-position:0 -180px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-hanger{display:none}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-baby{background-position:0 -260px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-fragile{background-position:0 -11px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-sharp{background-position:0 -335px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-granular{background-position:0 -480px}
+div.fba-core-content div#prep-categories-container div.prep-instructions div#prep-image-perforated{background-position:0 -559px}
+div.fba-core-content .shipment-summary-problem-head{font-size:13px;padding-top:15px}
+.fba-content-prep-dispute-yellow{color:#eb8c11}
+table.print-document-table th,table.print-document-table td{width:1%;white-space:nowrap}
+table.print-document-table th:last-child,table.print-document-table td:last-child{width:auto;white-space:normal}
+div.fba-core .content-module .titlebar th,div.fba-core .content-module .data-display-field{padding:6px}
+div.fba-core .content-module{margin-top:15px}
+div.fba-core p.multi-asin-carton-num-boxes{font-weight:700;font-size:12px;color:#666}
+div.fba-core p.margin-top-10px{margin-top:10px}
+div.fba-core p.margin-bottom-10px{margin-bottom:10px}
+div.fba-core p.cli-hmd{padding-bottom:20px;padding-top:20px}
+div.fba-core div.content-block{margin-top:20px;margin-bottom:20px}
+div.fba-core-data-pagination{margin-bottom:15px;overflow:hidden}
+* html div.fba-core-data-pagination{height:1%}
+div.pagination-totals p.totals{float:left;width:33%}
+div.pagination-show-more p.show-more{float:left;width:33%;text-align:center}
+div.pagination-show-more p.show-more button{width:80%}
+div.fba-core-data-pagination p.totals{float:left;width:49%}
+div.fba-core-data-pagination p.nav{float:right;width:49%;text-align:right}
+div.fba-core-data-pagination p.nav a{padding-left:5px}
+div.fba-core-data-pagination p.nav span.pages{padding-left:5px}
+div.fba-core-data-pagination p.nav span.pages a{padding-left:0}
+table.fba-core-data{margin-bottom:15px}
+table.fba-core-data.with-bottom-border{border-bottom:2px solid #999}
+table.fba-core-data thead tr th{border-bottom:2px solid #999}
+* html table.fba-core-data thead tr th a{position:relative;float:left}
+table.fba-core-data tbody tr td{border-top:1px solid #ccc}
+table.fba-core-data tbody tr td.right-border{border-right:1px solid #ccc}
+table.fba-core-data tbody tr td.no-top-border{border-top:0}
+table.fba-core-data tfoot tr td{font-weight:bold;border-top:2px solid #999}
+form.fba-core-input table.fba-core-data thead tr th,form.fba-core-input table.fba-core-data tbody tr td,form.fba-core-input table.fba-core-data tfoot tr td,table.fba-core-data thead tr th,table.fba-core-data tbody tr td,table.fba-core-data tfoot tr td{padding:10px;vertical-align:top;font-family:arial,helvetica,sans-serif}
+table.fba-core-data thead tr th{vertical-align:bottom}
+form.fba-core-input table.fba-core-data thead tr th,table.fba-core-data thead tr th{padding-top:0}
+form.fba-core-input table.fba-core-data tfoot tr td,table.fba-core-data tfoot tr td{padding-bottom:0}
+table.fba-core-data thead tr th.label,table.fba-core-data tbody tr td.label,table.fba-core-data tfoot tr td.label{font-weight:bold;color:#666}
+table.fba-core-data thead tr th.action,table.fba-core-data tbody tr td.action,table.fba-core-data tfoot tr td.action{text-align:right}
+table.fba-core-data thead tr th.number,table.fba-core-data tbody tr td.number,table.fba-core-data tfoot tr td.number{text-align:right}
+table.fba-core-data tbody tr td.number input{text-align:right}
+table.fba-core-data thead tr th.heading-label{text-align:right}
+table.fba-core-data tbody tr td.heading-label{text-align:right;vertical-align:middle}
+form.fba-core-input table.fba-core-data thead tr th.w1,table.fba-core-data thead tr th.w1{width:1%}
+form.fba-core-input table.fba-core-data thead tr th.w2,table.fba-core-data thead tr th.w2{width:2%}
+form.fba-core-input table.fba-core-data thead tr th.w3,table.fba-core-data thead tr th.w3{width:3%}
+form.fba-core-input table.fba-core-data thead tr th.w4,table.fba-core-data thead tr th.w4{width:4%}
+form.fba-core-input table.fba-core-data thead tr th.w5,table.fba-core-data thead tr th.w5{width:5%}
+form.fba-core-input table.fba-core-data thead tr th.w10,table.fba-core-data thead tr th.w10{width:10%}
+form.fba-core-input table.fba-core-data thead tr th.w15,table.fba-core-data thead tr th.w15{width:15%}
+form.fba-core-input table.fba-core-data thead tr th.w20,table.fba-core-data thead tr th.w20{width:20%}
+form.fba-core-input table.fba-core-data thead tr th.w25,table.fba-core-data thead tr th.w25{width:25%}
+form.fba-core-input table.fba-core-data thead tr th.w30,table.fba-core-data thead tr th.w30{width:30%}
+form.fba-core-input table.fba-core-data thead tr th.w35,table.fba-core-data thead tr th.w35{width:35%}
+form.fba-core-input table.fba-core-data thead tr th.w40,table.fba-core-data thead tr th.w40{width:40%}
+form.fba-core-input table.fba-core-data thead tr th.w45,table.fba-core-data thead tr th.w45{width:45%}
+form.fba-core-input table.fba-core-data thead tr th.w50,table.fba-core-data thead tr th.w50{width:50%}
+form.fba-core-input table.fba-core-data thead tr th.w55,table.fba-core-data thead tr th.w55{width:55%}
+form.fba-core-input table.fba-core-data thead tr th.w60,table.fba-core-data thead tr th.w60{width:60%}
+form.fba-core-input table.fba-core-data thead tr th.w65,table.fba-core-data thead tr th.w65{width:65%}
+form.fba-core-input table.fba-core-data thead tr th.w70,table.fba-core-data thead tr th.w70{width:70%}
+form.fba-core-input table.fba-core-data thead tr th.w75,table.fba-core-data thead tr th.w75{width:75%}
+form.fba-core-input table.fba-core-data thead tr th.w80,table.fba-core-data thead tr th.w80{width:80%}
+form.fba-core-input table.fba-core-data thead tr th.w85,table.fba-core-data thead tr th.w85{width:85%}
+form.fba-core-input table.fba-core-data thead tr th.w90,table.fba-core-data thead tr th.w90{width:90%}
+form.fba-core-input table.fba-core-data thead tr th.w95,table.fba-core-data thead tr th.w95{width:95%}
+form.fba-core-input table.fba-core-data thead tr th.w100,table.fba-core-data thead tr th.w100{width:100%}
+table.fba-core-data tbody tr.child td.no-border{border-top:0}
+table.fba-core-data tbody tr.actions td{background:#dfdfdf;border-bottom:2px solid #999}
+table.fba-core-data tbody tr.actions td a.toggle-attr{width:150px;display:inline-block}
+table.fba-core-data tbody tr.actions td a.toggle-attr.hide>span.hide-text{display:none}
+table.fba-core-data tbody tr.actions td a.toggle-attr.show>span.show-text{display:none}
+table.fba-core-data tbody tr.actions-footer td{background:#efefef;border-top:2px solid #999}
+table.fba-core-data tbody tr.active td{background:#ffffe5}
+table.fba-core-data tbody tr.inactive td{background:#f4f4f4}
+table.fba-core-data tbody tr.extra-info td{border-top:0;padding-top:0}
+table.fba-core-data tbody tr.actions-footer td.action{text-align:center}
+table.fba-core-data tbody tr.actions-footer td.left-action{text-align:right;width:50%}
+table.fba-core-data tbody tr.actions-footer td.right-action{width:50%}
+table.fba-core-data tbody tr.actions-footer .action-info{margin-top:5px}
+table.fba-core-data tbody tr.child td.sub-view{padding-left:40px}
+table.fba-core-data tbody tr.actions td.toggle-edit{text-align:right}
+table.fba-core-data tbody tr td.shipment-contents-cell{padding-left:85px;padding-right:85px}
+table.fba-core-data tbody tr td a.show-children,table.fba-core-data tbody tr td a.hide-children{padding-left:15px;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/data-expand-arrows._V393470910_.gif") left -240px no-repeat;text-decoration:none}
+table.fba-core-data tbody tr td a.hide-children{background-position:left 2px}
+table.fba-core-data thead tr th a.sort-asc,table.fba-core-data thead tr th a.sort-desc{padding-right:13px;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/core-styles/data-sort-arrows._V393380266_.gif") right 5px no-repeat}
+table.fba-core-data thead tr th a.sort-asc{background-position:right -240px}
+table.fba-core-data thead tr th a.sort-current{font-weight:bold}
+table.fba-core-data tbody tr td div.extra-info{display:none}
+table.fba-core-data tbody tr td p.action-links{margin-top:10px}
+table.fba-core-data tbody tr td ul.child-action-links{margin-left:20px;margin-top:10px}
+table.fba-core-data tbody tr td span.tool-tip{border-bottom:1px dotted #999;cursor:help}
+table.fba-core-data tfoot tr.extra-info td{border-top:0;padding-top:5px;font-weight:normal}
+table.fba-core-data .sku-identifiers{display:none}
+table.fba-core-data td div.shipment-extra-information{margin-top:5px}
+table.fba-core-data tr.remove{background-color:#ccc}
+table.fba-core-data tbody tr td div.package-dimensions{margin-top:10px}
+table.fba-core-data tbody tr td div.per-unit-estimate{color:#666;font-size:11px}
+table.fba-core-data tbody tr td p.legend{font-size:10px;margin-top:10px}
+table.fba-core-data tbody tr td span.attr-label{color:#666}
+table.fba-core-data tbody tr td span.item-attr{margin-right:10px}
+table.fba-core-data tbody tr td.items-added{color:#008500}
+table.fba-core-data tbody tr td.items-added p.fba-core-alert-label{float:right}
+table thead tr th.qty-header-input,table tbody tr th.qty-header-input{min-width:50px;font-size:12px;padding:5px}
+table thead tr th.dimensions-input,table tbody tr th.dimensions-input{min-width:180px;font-size:12px;padding:5px}
+table thead tr th.box-contents,table tbody tr th.box-contents{min-width:250px;font-size:12px;padding:5px}
+table thead tr th.align-right,table tbody tr td.align-right{text-align:right}
+table thead tr th.align-center,table tbody tr td.align-center{text-align:center}
+table.vertical-align-middle,table tbody tr td.vertical-align-middle{vertical-align:middle}
+table.configration-row{font-size:12px;padding-top:25px}
+table tbody tr td dl dt.configration-row{padding-top:2px;vertical-align:middle;height:35px}
+table tbody tr td dl dt.configration-row.pad-left{float:left;padding-left:43px}
+table tbody tr td div div.configration-row{padding-top:2px;vertical-align:middle;height:35px;white-space:nowrap;overflow:hidden}
+table tbody tr td div div span.addConfiguration{white-space:nowrap;overflow:hidden}
+table thead tr th div.wrapper,table tbody tr td div.wrapper,table tbody tr td div div.wrapper{widht:100%;overflow:auto}
+table thead tr th div div.unitsPerBoxHeader{width:60%;float:left;text-algin:right}
+table thead tr th div div.numBoxesHeader{width:40%;float:left;text-algin:right}
+table tbody tr td div div.unitsPerBoxRow,table tbody tr td div div div.unitsPerBoxRow{width:60%;float:left}
+table tbody tr td div div.numBoxesRow,table tbody tr td div div div.numBoxesRow{width:40%;float:left}
+table tbody tr td dl dt.remove-configuration{height:35px;width:15px;padding-top:2px}
+table.carton-info-border{padding-top:25px;padding-bottom:25px}
+table.carton-info-border,table tr.carton-info-border,table tr td.carton-info-border,table.fba-core-data tr td.carton-info-border{border-top:2px solid #999;border-bottom:2px solid #999}
+table td dl dt.carton-info-readonly-border{border-top:1px solid #ccc;padding-top:20px;border-spacing:0}
+table tbody tr td.carton-background{background:#efefef}
+table tbody tr td dl dt.remove-configuration-row-padding{padding-top:17px}
+table tbody tr td dl dt.remove-configuration-row{width:10x;height:35px}
+table thead tr th.remove-configuration-width,table tbody tr td dl dt.remove-configuration-row-width{width:10x}
+table tbody tr td dl dt.remove-dimensions-padding{padding-top:7px}
+table thead tr th.header-padding,table tbody tr td dl.shipment-item,table tbody tr td dl dt.configuration-row-padding{padding-top:10px}
+table tbody tr td dl dt.configuration-row-height{height:35px}
+table tbody tr td.border-top-none{border-top:0}
+table tbody tr td.border-bottom-none{border-bottom:0}
+table.fba-core-data .non-breakable-content{white-space:nowrap}
+#fba-core-workflow-actions{border-top:1px solid #999;padding-top:15px;margin-bottom:15px;overflow:hidden}
+* html #fba-core-workflow-actions{height:1%}
+#fba-core-page div.fba-core-workflow-actions-landing-page{border-top:0;border-bottom:1px solid #999;padding-bottom:15px}
+#fba-core-page div.shipment-contents{margin-top:35px;margin-bottom:35px}
+#fba-core-workflow-actions p.previous{float:left;width:49%;line-height:27px}
+#fba-core-workflow-actions p.next{float:right;width:49%;text-align:right;line-height:27px}
+#fba-core-workflow-actions p.next .over-msku-limit-message{color:red}
+#fba-core-workflow-actions p.previous a.inner-button{margin-left:15px}
+#fba-core-workflow-actions p.next a.inner-button{margin-right:15px}
+#fba-core-workflow-actions p.next-action-ack-checkbox{float:right;width:70%;text-align:right;line-height:27px}
+#fba-core-workflow-actions .content{line-height:1.25em;display:block;margin-top:5px}
+#fba-core-workflow-actions p button.btn-lg-pri span,#fba-core-workflow-actions p button.btn-lg-sec span,#fba-core-workflow-actions p button.btn-lg-pri-arrowr span,#fba-core-workflow-actions p button.btn-lg-pri-arrowl span,#fba-core-workflow-actions p button.btn-lg-sec-arrowr span,#fba-core-workflow-actions p button.btn-lg-sec-arrowl span,#fba-core-workflow-actions p button.btn-lg-pri-ghost span,#fba-core-workflow-actions p button.btn-lg-sec-ghost span,#fba-core-workflow-actions p button.btn-lg-pri-arrowr-ghost span,#fba-core-workflow-actions p button.btn-lg-pri-arrowl-ghost span,#fba-core-workflow-actions p button.btn-lg-sec-arrowr-ghost span,#fba-core-workflow-actions p button.btn-lg-sec-arrowl-ghost span{line-height:14px}
+div.fba-enable-hcpo-button{margin-top:7px}
+#fba-core-inbound-performance{z-index:100;overflow:hidden;position:fixed;bottom:0;left:0;width:100%;padding:5px 10px;border-top:2px solid #aaa;background:#efefef;border-radius:5px}
+* html #fba-core-inbound-performance{height:1%}
+#fba-core-inbound-performance div.title{float:left;text-align:right;width:150px}
+#fba-core-inbound-performance div.title h2{color:#c60;font-size:13px;margin:0 0 5px 0}
+#fba-core-inbound-performance div.capacity-usage{float:left;margin-left:26px;padding-left:26px;width:250px}
+#fba-core-inbound-performance div.capacity-usage h3{color:#444;font-size:11px;margin:0 0 5px 0}
+#fba-core-inbound-performance div.capacity-usage div.bar{overflow:hidden;margin-bottom:5px}
+* #fba-core-inbound-performance div.capacity-usage div.bar{height:1%}
+#fba-core-inbound-performance div.capacity-usage div.bar span{height:20px;line-height:20px}
+#fba-core-inbound-performance div.capacity-usage div.bar div{float:left;width:135px;height:20px;background:#dedede;margin-right:10px}
+#fba-core-inbound-performance div.capacity-usage div.bar div span{display:block;background:#42be04}
+#fba-core-inbound-performance div.capacity-usage div.bar div.warning span{background-color:#f2d655}
+#fba-core-inbound-performance div.capacity-usage div.bar div.risk span,#fba-core-inbound-performance div.capacity-usage div.bar div.limit span{background-color:#e67d68}
+#fba-core-inbound-performance div.capacity-usage p.msg{color:#cf2202;margin:0;padding-left:22px;line-height:14px;font-size:11px;font-weight:bold;background:url("https://images-na.ssl-images-amazon.com/images/G/01/fba/capacity-widget/capacity-widget-alert-icon._V177699832_.png") left top no-repeat}
+#fba-core-inbound-performance div.capacity-usage p.msg-warning{color:#444}
+#fba-core-inbound-performance div.capacity-usage p.msg-limit{background-position:left -56px}
+#storage-report{margin-top:10px}
+.remove-item-icon{background:url("https://images-na.ssl-images-amazon.com/images/G/01/javascripts/lib/popover/images/light/sprite-h._V219326280_.png") no-repeat 0 -136px;display:block;height:15px;overflow:hidden;position:relative;vertical-align:top;width:15px;float:right;text-decoration:none}
+#fba-core-workflow-shipment-summary-shipments-inbound-cross-dock-fc-warning-message{display:none}
+div.fba-core .optional-weights-dimensions{margin-bottom:15px}
+div.create-add-manifest-content-alert-box{padding:1px 3px 35px 0}
+div.create-add-manifest-import-content-alert-box{padding:1px 3px 0 0}
+span.fba-core-span-right{float:right}
+div.fba-core span.new-feature-flag{color:#C60;font-size:9px}
+#ap-container{width:0;height:0;overflow:hidden}
+#sc-sidepanel{background-color:#fff;z-index:201}
+#sc-sidepanel span.new{color:#eb7e10;font-size:10px;text-transform:uppercase}
+#sc-sidepanel .level-separator{margin-top:5px;width:200px;border-top:1px solid #dfdfdf}
+#sc-sidepanel .level2-header,#sc-sidepanel .level3-header,#sc-sidepanel .level4-header{padding:3px 5px 3px;font-size:12px}
+#sc-sidepanel.sc-sp-expanded .level3-header,#sc-sidepanel.sc-sp-expanded .level4-header,#sc-sidepanel.sc-sp-expanded span.new{cursor:pointer}
+#sc-sidepanel .level1-header{margin:8px 0 3px 10px;padding-right:5px;width:185px;font-size:14px;color:#333}
+#sc-sidepanel .level2-header{width:180px;padding-left:15px;color:#666}
+#sc-sidepanel .level3-header{width:160px;padding-left:20px;padding-right:20px}
+#sc-sidepanel .level4-header{width:155px;padding-left:25px;padding-right:20px}
+#sc-sidepanel .level3-header a,#sc-sidepanel .level4-header a{color:#124c90}
+#sc-sidepanel .header-active{background-color:#6999ca}
+#sc-sidepanel .header-active a{color:#fff}
+#sc-sidepanel .header-active span.new{color:#afc7df}
+#fba-inbound-sc-footer-no-lang-switcher{padding-bottom:50px}
