@@ -2248,4 +2248,31 @@ if (typeof uet == 'function') { uet('be'); }
 </script> 
 </div>
 
-<div id="a-popover-root" style="z-index:-1;position:absolute;"></div><div style="z-index:-1;position:absolute;"></div></body></html>
+<div id="a-popover-root" style="z-index:-1;position:absolute;"></div><div style="z-index:-1;position:absolute;"></div>
+
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+      $("#sc-top-nav-root li").hover(function(){
+         $(this).attr("class","sc-level1 sc-drop-nav sc-hover-nav nav-open");
+         $.each($(this).find("ul li"), function(){
+             $(this).attr("class", "sc-level1 sc-drop-nav sc-hover-nav");
+         })
+      });
+      $("#sc-top-nav-root li").mouseleave(function(){
+         $(this).attr("class","sc-level1 sc-drop-nav sc-hover-nav");
+      });
+      $("#sc-quicklink-settings").hover(function(){
+         $(this).attr("class","sc-quicklink sc-drop-nav sc-hover-nav nav-open");
+      });
+      $("#sc-quicklink-settings").mouseleave(function(){
+         $(this).attr("class","sc-quicklink sc-drop-nav sc-hover-nav");
+      });
+  });
+
+</script>
+
+</body></html>

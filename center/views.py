@@ -20,11 +20,32 @@ from  center.dataService.all_statements import AllStatementsList
 # Create your views here.
 
 
+@csrf_exempt
 @login_required(login_url="/amazon-login/")
 def home(request):
     email = request.user.username
     store_name = get_storename(email)
     return render(request, "Home.html", locals())
+
+
+@login_required(login_url="/amazon-login/")
+def inventory_reports(request):
+    email = request.user.username
+    store_name = get_storename(email)
+    return render(request, "inventory_reports.html", locals())
+
+
+
+@login_required(login_url="/amazon-login/")
+def inventory_FBA_shipping(request):
+    email = request.user.username
+    store_name = get_storename(email)
+    return render(request, "inventory_FBA_shipping.html", locals())
+
+
+
+
+
 
 @login_required(login_url="/amazon-login/")
 def inventory(request):
@@ -169,10 +190,11 @@ def date_range_reports(request):
         next_page = int(recorde_result.get("next_page", 1))
         total_page_list = range(1, total_page + 1)
         pre_page = 0 if cur_page <= 0 else int(cur_page) - 1
-
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
 
+
+    
 @login_required(login_url="/amazon-login/")
 def statement_view(request):
     email = request.user.username
@@ -262,10 +284,12 @@ def amazon_register(request):
 
 
 
-def inventory_reports(request):
-    email = request.user.username
-    store_name = get_storename(email)
-    return render(request, "inventory_reports.html", locals())
+
+
+
+
+
+
 
 
 

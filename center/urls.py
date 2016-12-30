@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
             url(r'inventory/$', 'center.views.inventory', name='inventory'),
             url(r'inventory/inventory-reports/$', 'center.views.inventory_reports', name='inventory_reports'),
+            url(r'inventory/inventory-FBA-shipping/$','center.views.inventory_FBA_shipping', name='inventory_FBA_shipping'),
             url(r'all-statements/$', 'center.views.all_statements', name='all_statements'),
             url(r'all-statements-download/$', 'center.views.download_all_statements', name='download_all_statements'),
             url(r'date-range-reports/$', 'center.views.date_range_reports', name='date_range_reports'),

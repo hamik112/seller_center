@@ -3982,4 +3982,32 @@ if (typeof uet == 'function') { uet('be'); }
 
 <div id="a-popover-root" style="z-index:-1;position:absolute;"></div><div style="z-index:-1;position:absolute;"></div><div class="a-popover a-dropdown a-dropdown-common a-declarative" data-action="a-popover-a11y" id="a-popover-1" aria-hidden="true" style="z-index: 299; visibility: visible; top: 173.872px; left: 733.545px; display: none; width: auto;"><span tabindex="0" role="dialog" class="a-popover-start a-popover-a11y-offscreen"></span><div class="a-popover-wrapper"><div class="a-popover-inner" style="height: auto; overflow-y: auto; min-width: 191px; width: auto;"><ul tabindex="-1" class="a-nostyle a-list-link" role="application" aria-multiselectable="false"><li tabindex="0" role="option" aria-checked="false" aria-labelledby="dropdown1_0" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;107&quot;}" id="dropdown1_0" class="a-dropdown-link">Inventory Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_1" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;300&quot;}" id="dropdown1_1" class="a-dropdown-link">Active Listings Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_2" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;302&quot;}" id="dropdown1_2" class="a-dropdown-link">Open Listings Report Lite</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_3" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;303&quot;}" id="dropdown1_3" class="a-dropdown-link">Open Listings Report Liter</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_4" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;304&quot;}" id="dropdown1_4" class="a-dropdown-link">Open Listings Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_5" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;309&quot;}" id="dropdown1_5" class="a-dropdown-link">Cancelled Listings Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_6" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;312&quot;}" id="dropdown1_6" class="a-dropdown-link">Sold Listings Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_7" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;314&quot;}" id="dropdown1_7" class="a-dropdown-link">Listing Quality and Suppressed Listing Report
                       (NEW)
-                    </a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_8" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;315&quot;}" id="dropdown1_8" class="a-dropdown-link">Referral Fee Preview Report (BETA)</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_9" class="a-dropdown-item" aria-checked="true"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;301&quot;}" id="dropdown1_9" class="a-dropdown-link a-active">Amazon-fulfilled Inventory Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_10" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;321&quot;}" id="dropdown1_10" class="a-dropdown-link">High Volume Listings Report</a></li></ul></div></div><span tabindex="0" class="a-popover-end a-popover-a11y-offscreen"></span></div></body></html>
+                    </a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_8" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;315&quot;}" id="dropdown1_8" class="a-dropdown-link">Referral Fee Preview Report (BETA)</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_9" class="a-dropdown-item" aria-checked="true"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;301&quot;}" id="dropdown1_9" class="a-dropdown-link a-active">Amazon-fulfilled Inventory Report</a></li><li tabindex="0" role="option" aria-labelledby="dropdown1_10" class="a-dropdown-item"><a tabindex="-1" href="javascript:void(0)" data-value="{&quot;stringVal&quot;:&quot;321&quot;}" id="dropdown1_10" class="a-dropdown-link">High Volume Listings Report</a></li></ul></div></div><span tabindex="0" class="a-popover-end a-popover-a11y-offscreen"></span></div>
+
+
+
+
+<script src="/static/js/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+
+      $("#sc-top-nav-root li").hover(function(){
+         $(this).attr("class","sc-level1 sc-drop-nav sc-hover-nav nav-open");
+         $.each($(this).find("ul li"), function(){
+             $(this).attr("class", "sc-level1 sc-drop-nav sc-hover-nav");
+         })
+      });
+      $("#sc-top-nav-root li").mouseleave(function(){
+         $(this).attr("class","sc-level1 sc-drop-nav sc-hover-nav");
+      });
+      $("#sc-quicklink-settings").hover(function(){
+         $(this).attr("class","sc-quicklink sc-drop-nav sc-hover-nav nav-open");
+      });
+      $("#sc-quicklink-settings").mouseleave(function(){
+         $(this).attr("class","sc-quicklink sc-drop-nav sc-hover-nav");
+      });
+  });
+
+</script>
+
+</body></html>
