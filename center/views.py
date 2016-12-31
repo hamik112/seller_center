@@ -3,6 +3,7 @@ import  json
 import  datetime
 
 from django.http import StreamingHttpResponse
+# from django.http import JsonResponse
 from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from center.dataService.statement_view_data import StatementViewData
 from django.views.decorators.csrf import csrf_exempt
@@ -16,6 +17,7 @@ from center.dataService.get_storename import get_storename
 from center.dataService.summary_pdf_data import SummaryPdfData
 from center.dataService.transaction_view import TrasactionView
 from  center.dataService.all_statements import AllStatementsList
+from center.dataService.inventory_data import manage_fba_shipments, manage_fba_manifests
 
 # Create your views here.
 
@@ -42,8 +44,19 @@ def inventory_FBA_shipping(request):
     store_name = get_storename(email)
     return render(request, "inventory_FBA_shipping.html", locals())
 
+@csrf_exempt
+@login_required(login_url="/amazon-login/")
+def inventory_FBA_shipping_shipments(request):
+    # if request.method == "POST":
+    datas = manage_fba_shipments()
+    return HttpResponse(datas)
 
 
+@csrf_exempt
+@login_required(login_url="/amazon-login/")
+def inventory_FBA_shipping_manifests(request):
+    datas = manage_fba_manifests()
+    return HttpResponse(datas)
 
 
 
