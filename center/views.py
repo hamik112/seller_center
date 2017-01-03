@@ -29,7 +29,7 @@ def home(request):
     store_name = get_storename(email)
     return render(request, "Home.html", locals())
 
-
+@csrf_exempt
 @login_required(login_url="/amazon-login/")
 def inventory_reports(request):
     email = request.user.username

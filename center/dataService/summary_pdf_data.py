@@ -339,6 +339,7 @@ class SummaryPdfData(object):
         else:
             seller_fulfilled_selling_fees_sum = 0
         seller_fulfilled_selling_fees_sum = number_format(seller_fulfilled_selling_fees_sum)
+        print "seller_fulfilled_selling_fees_sum: ", seller_fulfilled_selling_fees_sum
         return {"number_length":expense_debits_len(seller_fulfilled_selling_fees_sum), "number":seller_fulfilled_selling_fees_sum}
 
 
