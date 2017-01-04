@@ -19,6 +19,8 @@ from center.dataService.transaction_view import TrasactionView
 from  center.dataService.all_statements import AllStatementsList
 from center.dataService.inventory_data import manage_fba_shipments, manage_fba_manifests
 
+from center.dataService.inventory_report import InventoryReport
+
 # Create your views here.
 
 
@@ -34,6 +36,7 @@ def home(request):
 def inventory_reports(request):
     email = request.user.username
     store_name = get_storename(email)
+    InventoryReport(username=email).get_inventory_report()
     return render(request, "inventory_reports.html", locals())
 
 
