@@ -27,12 +27,12 @@ utc = pytz.timezone("GMT")
 
 
 @task
-def get_amazon_report(store_obj,type, fileName, line_id):
+def get_amazon_report(store_obj,rep_type, fileName, line_id):
     AMAZON_MWS = Amazon_MWS()
     print "report tasks start ......"
     #gevent.joinall([gevent.spawn(AMAZON_MWS.get_product_report,store_obj,type,fileName)])
     try:
-        result = AMAZON_MWS.get_product_report(store_obj,type,fileName)
+        result = AMAZON_MWS.get_product_report(store_obj,rep_type,fileName)
     except Exception, e:
         result = {"result": False, "error_message": str(e)}
         print "AMAZON_MWS API Request Error: ",str(e)
