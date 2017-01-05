@@ -1,6 +1,6 @@
 #encoding:utf-8
 from django.conf.urls import patterns, include, url
-
+from django.conf import  settings
 
 urlpatterns = patterns('',
             url(r'^$', 'center.views.home', name='home'),
@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
             url(r'inventory/$', 'center.views.inventory', name='inventory'),
             url(r'inventory/inventory-reports/$', 'center.views.inventory_reports', name='inventory_reports'),
+            url(r'inventory/inventory-reports-data/$', 'center.views.inventory_reports_data', name='inventory_report_data'),
             url(r'inventory/inventory-FBA-shipping/$','center.views.inventory_FBA_shipping', name='inventory_FBA_shipping'),
             url(r'gp/fba/core/data/collections/shipments.html', 'center.views.inventory_FBA_shipping_shipments', name='inventory_FBA_shipping_shipments'),
             url(r'gp/fba/core/data/collections/manifests.html', 'center.views.inventory_FBA_shipping_manifests', name='inventory_FBA_shipping_manifests'),
@@ -35,3 +36,11 @@ urlpatterns = patterns('',
             url(r'amazon-register/$', 'center.views.amazon_register', name='amazon_register'),
             url(r'amazon-logout/$', 'center.views.amazon_logout', name='amazon_logout'),
                       )
+
+
+urlpatterns += patterns('',
+                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+                            {'document_root': settings.STATICFILES_DIRS[0],
+                             }),
+                        )
+

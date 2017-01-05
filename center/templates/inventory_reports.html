@@ -1787,8 +1787,8 @@ if (typeof uet == 'function') { uet('ns'); }
 <br>
 <br>
 
-<div class="a-box-group"><form id="request-form" method="POST" enctype="multipart/form-data" action="https://sellercentral.amazon.com/listing/reports/request?ref_=xx_inventoryreports_cont_inventory-reports">
-
+<div class="a-box-group"><form id="request-form" method="POST" enctype="multipart/form-data" action="/inventory/inventory-reports-data/">
+    {% csrf_token %}
     <div class="a-box a-box-title inventory-reports-request-title"><div class="a-box-inner a-padding-small"><b>Request an Inventory Report</b>
     </div></div><div class="a-box a-color-alternate-background inventory-reports-request-selectors"><div class="a-box-inner a-padding-none"><div class="a-row a-spacing-top-small a-grid-vertical-align a-grid-center"><div class="a-column a-span5 a-text-right"><b>Select Report Type:</b>
         </div><div class="a-column a-span7 a-span-last"><span id="reportVariantClick" class="a-declarative" data-action="show-reportvariant-pref">

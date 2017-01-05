@@ -239,6 +239,7 @@ def str_to_datetime(dt_str):
 
 
 def generate_path(root_path):
+    """ 生成目录"""
     one_p_num = 1000
     two_p_num = 200
     i, j, k= 0, 0, 0

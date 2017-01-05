@@ -1,6 +1,6 @@
 #encoding:utf-8
 from django.conf.urls import patterns, include, url
-
+from django.conf import settings
 
 
 urlpatterns = patterns('',
@@ -15,3 +15,10 @@ urlpatterns = patterns('',
             url(r'^get-update-error-msg/$', 'manageApp.views.get_update_error_msg', name="get_update_error_msg"),
 
                        )
+
+urlpatterns += patterns('',
+                        url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
+                            {'document_root': settings.STATICFILES_DIRS[1],
+                            }),
+                        )
+

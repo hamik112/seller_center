@@ -36,9 +36,17 @@ def home(request):
 def inventory_reports(request):
     email = request.user.username
     store_name = get_storename(email)
-    InventoryReport(username=email).get_inventory_report()
     return render(request, "inventory_reports.html", locals())
 
+
+@csrf_exempt
+@login_required(login_url="/amazon-login/")
+def inventory_reports_data(request):
+    email = request.user.username
+    store_name = get_storename(email)
+    if request.method == "POST":
+        InventoryReport(username=email).get_inventory_report()
+    return HttpResponseRedirect("/inventory/inventory-reports/?from=inventory-reports-data")
 
 
 @login_required(login_url="/amazon-login/")

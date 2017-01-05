@@ -3,13 +3,15 @@
 
 import os
 import datetime
-from gevent import  monkey
-gevent.patch_all()
-import  gevent
 
 
-from center.Amazon.Amazon_api  import Amazon_MWS
+from django.conf import settings
 
+
+from center.dataService.create_xls import generate_path
+from center.tasks import get_amazon_report
+
+GENERATE_REPORT_PATH = settings.GENERATE_REPORT_PATH
 
 
 
@@ -27,7 +29,7 @@ class InventoryReport():
         self.region = region if region else "US"  #美国市场
 
     def get_inventory_report(self):
-        AMAZON_MWS  = Amazon_MWS()
+
         access_key  = 'AKIAI4QSPO5ISDC2GJYQ'
         secret_key  = '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'
         store_key   = 'A2TFDJE5MM2YVC'
@@ -37,11 +39,13 @@ class InventoryReport():
                            region=region)
         type = '_GET_AFN_INVENTORY_DATA_'
         now = datetime.datetime.now().strftime('%Y-%m-%d_%H')
-        fileName = str(now) +  '_FBA.txt'
+        fileName = os.path.join(generate_path(GENERATE_REPORT_PATH),  str(now) +  '_FBA.txt')
         if not os.path.exists(fileName):
             os.system("touch %s"%fileName)
-        result = AMAZON_MWS.get_product_report(store_obj,type=type,fileName=fileName)
-        print result, fileName
+        # gevent.joinall([gevent.spawn(AMAZON_MWS.get_product_report,store_obj,type,fileName)])
+        # result = AMAZON_MWS.get_product_report(store_obj,type=type,fileName=fileName)
+        get_amazon_report.delay(store_obj,type, fileName)
+        print fileName
 
 
 ###
@@ -70,6 +74,16 @@ url_list =  ["https://www.python.org/", "https://www.yahoo.com","https://github.
 
 gevent.joinall([gevent.spawn(f, url) for url in url_list])
 
+
+
+#!/usr/bin/env python
+from gevent import monkey;
+monkey.patch_all()
+from gevent import wsgi
+from mysite.wsgi import application
+HOST = '127.0.0.1'
+PORT = 8080# set spawn=None
+for memcachewsgi.WSGIServer((HOST, PORT), application).serve_forever()
 """
 
 
