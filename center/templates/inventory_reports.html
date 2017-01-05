@@ -1792,26 +1792,83 @@ if (typeof uet == 'function') { uet('ns'); }
     <div class="a-box a-box-title inventory-reports-request-title"><div class="a-box-inner a-padding-small"><b>Request an Inventory Report</b>
     </div></div><div class="a-box a-color-alternate-background inventory-reports-request-selectors"><div class="a-box-inner a-padding-none"><div class="a-row a-spacing-top-small a-grid-vertical-align a-grid-center"><div class="a-column a-span5 a-text-right"><b>Select Report Type:</b>
         </div><div class="a-column a-span7 a-span-last"><span id="reportVariantClick" class="a-declarative" data-action="show-reportvariant-pref">
-            <span class="a-dropdown-container"><select name="reportVariant" autocomplete="off" tabindex="-1" class="a-native-dropdown"><option value="107">Inventory Report</option><option value="300">Active Listings Report</option><option value="302">Open Listings Report Lite</option><option value="303">Open Listings Report Liter</option><option value="304">Open Listings Report</option><option value="309">Cancelled Listings Report</option><option value="312">Sold Listings Report</option><option value="314">Listing Quality and Suppressed Listing Report
-                      (NEW)
-                    </option><option value="315">Referral Fee Preview Report (BETA)</option><option value="301">Amazon-fulfilled Inventory Report</option><option value="321">High Volume Listings Report</option></select><span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-0" style="min-width: 0.818182%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-0-announce" aria-pressed="false"><span class="a-dropdown-prompt">Amazon-fulfilled Inventory Report</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></span>
+            <span class="a-dropdown-container">
+                <select name="reportVariant" autocomplete="off" tabindex="-1" class="a-native-dropdown">
+                 {% if report_type %}
+                     {% if report_type == "107" %}
+                        <option value="107" selected="selected">Inventory Report</option>
+                     {% else %}
+                        <option value="107">Inventory Report</option>
+                     {% endif %}
+                     {% if report_type == "300" %}
+                         <option value="300" selected="selected">Active Listings Report</option>
+                     {% else %}
+                         <option value="300">Active Listings Report</option>
+                     {% endif %}
+                     {% if report_type == "302" %}
+                        <option value="302" selected="selected">Open Listings Report Lite</option>
+                     {% else %}
+                        <option value="302">Open Listings Report Lite</option>
+                     {% endif %}
+                     {% if report_type == "303" %}
+                        <option value="303" selected="selected">Open Listings Report Liter</option>
+                     {% else %}
+                        <option value="303">Open Listings Report Liter</option>
+                     {% endif %}                        
+                    {% if report_type == "304" %}
+                       <option value="304" selected="selected">Open Listings Report</option>
+                    {% else %}    
+                       <option value="304">Open Listings Report</option>
+                    {% endif %}
+                    {% if report_type == "309" %}   
+                      <option value="309" selected="selected">Cancelled Listings Report</option>
+                    {% else %}
+                      <option value="309">Cancelled Listings Report</option>
+                    {% endif %}
+                    {% if report_type == "312" %}  
+                       <option value="312" selected="selected">Sold Listings Report</option>
+                    {% else %}  
+                       <option value="312">Sold Listings Report</option>
+                    {% endif %}
+                    {% if report_type  == "314" %}   
+                       <option value="314" selected="selected">Listing Quality and Suppressed Listing Report(NEW)</option>
+                    {% else %}
+                       <option value="314">Listing Quality and Suppressed Listing Report(NEW)</option>
+                    {% endif %}
+                    {% if report_type == "315" %}   
+                       <option value="315" selected="selected">Referral Fee Preview Report (BETA)</option>
+                    {% else %}   
+                       <option value="315">Referral Fee Preview Report (BETA)</option>
+                    {% endif %}
+                    {% if report_type == "301" %}   
+                       <option value="301" selected="selected">Amazon-fulfilled Inventory Report</option>
+                    {% else %}
+                       <option value="301">Amazon-fulfilled Inventory Report</option>
+                    {% endif %}
+                    {% if report_type == "321" %}   
+                       <option value="321" selected="selected">High Volume Listings Report</option>
+                    {% else %}   
+                       <option value="321">High Volume Listings Report</option>
+                    {% endif %}
+
+                 {% else %}
+                    <option value="107">Inventory Report</option>
+                    <option value="300">Active Listings Report</option>
+                    <option value="302">Open Listings Report Lite</option>
+                    <option value="303">Open Listings Report Liter</option>
+                    <option value="304">Open Listings Report</option>
+                    <option value="309">Cancelled Listings Report</option>
+                    <option value="312">Sold Listings Report</option>
+                    <option value="314">Listing Quality and Suppressed Listing Report(NEW)</option>
+                    <option value="315">Referral Fee Preview Report (BETA)</option>
+                    <option value="301">Amazon-fulfilled Inventory Report</option>
+                    <option value="321">High Volume Listings Report</option>
+                 {% endif %}
+                </select>
+                <span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-0" style="min-width: 0.818182%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-0-announce" aria-pressed="false"><span class="a-dropdown-prompt">{{ report_type_text }}</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></span>
         </div></div><div class="a-row a-spacing-top-small a-grid-vertical-align a-grid-center"><div class="a-column a-span5"></div><div class="a-column a-span7 a-span-last"><span class="a-declarative" id="report_descriptions">
             <div id="107_DESC" class="hidden">
                   Download an Inventory Report for a summary of your product listings with the price and quantity for each SKU.<b>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <span class="tiny a-size-base">
     
@@ -3446,177 +3503,119 @@ if (typeof uet == 'function') { uet('ns'); }
             
         
     
-</div></th></tr><tr id="50051017148" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50051017148-report_type" data-column="report_type" data-row="50051017148" class="mt-cell mt-center">
+</div></th></tr>
 
 
 
-    
-    
-        
+            <tr id="50050017148" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50050017148-report_type" data-column="report_type" data-row="50050017148" class="mt-cell mt-center">
+
+
+
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Inventory Report
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50051017148-batch_id" data-column="batch_id" data-row="50051017148" class="mt-cell mt-center">
 
 
 
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                50051017148
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50051017148-requested" data-column="requested" data-row="50051017148" class="mt-cell mt-center">2016/12/13 18:10:08 GMT+0800 (中国标准时间)</td><td id="50051017148-completed" data-column="completed" data-row="50051017148" class="mt-cell mt-center">2016/12/13 18:11:25 GMT+0800 (中国标准时间)</td><td id="50051017148-status" data-column="status" data-row="50051017148" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Ready
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50051017148-report_download" data-column="report_download" data-row="50051017148" class="mt-cell mt-center">    
-
-
-<div class="mt-link mt-wrap-bw">
-    <a class="a-link-normal mt-link-content" href="https://sellercentral.amazon.com/listing/reports/download?document_code=amzn1.tortuga.2.942a18e1-3562-4fd6-b758-21ce8ee403f7.RD3DUL173O8GDDR&amp;reportType=107&amp;completed=1481623885082&amp;ref_=ag_inventory_report_conr_status">
-        Download
-    </a>
-</div>
-</td></tr><tr id="50050017148" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50050017148-report_type" data-column="report_type" data-row="50050017148" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
                 <span class="mt-text-content">
                 Amazon-fulfilled Inventory Report
             </span>
-            
-        
+
+
         </div>
-    
+
 </td><td id="50050017148-batch_id" data-column="batch_id" data-row="50050017148" class="mt-cell mt-center">
 
 
 
-    
-    
-        
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
+
+
+
                 <span class="mt-text-content">
                 50050017148
             </span>
-            
-        
+
+
         </div>
-    
+
 </td><td id="50050017148-requested" data-column="requested" data-row="50050017148" class="mt-cell mt-center">2016/12/13 17:50:23 GMT+0800 (中国标准时间)</td><td id="50050017148-completed" data-column="completed" data-row="50050017148" class="mt-cell mt-center">2016/12/13 17:50:40 GMT+0800 (中国标准时间)</td><td id="50050017148-status" data-column="status" data-row="50050017148" class="mt-cell mt-center">
 
 
 
-    
-    
-        
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
+
+
+
                 <span class="mt-text-content">
                 Cancelled
             </span>
-            
-        
+
+
         </div>
-    
+
 </td><td id="50050017148-download" data-column="download" data-row="50050017148" class="mt-cell mt-left"></td></tr><tr id="50031017133" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50031017133-report_type" data-column="report_type" data-row="50031017133" class="mt-cell mt-center">
 
 
 
-    
-    
-        
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
+
+
+
                 <span class="mt-text-content">
                 Inventory Report
             </span>
-            
-        
+
+
         </div>
-    
+
 </td><td id="50031017133-batch_id" data-column="batch_id" data-row="50031017133" class="mt-cell mt-center">
 
 
 
-    
-    
-        
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
+
+
+
                 <span class="mt-text-content">
                 50031017133
             </span>
-            
-        
+
+
         </div>
-    
+
 </td><td id="50031017133-requested" data-column="requested" data-row="50031017133" class="mt-cell mt-center">2016/11/28 10:42:15 GMT+0800 (中国标准时间)</td><td id="50031017133-completed" data-column="completed" data-row="50031017133" class="mt-cell mt-center">2016/11/28 10:42:49 GMT+0800 (中国标准时间)</td><td id="50031017133-status" data-column="status" data-row="50031017133" class="mt-cell mt-center">
 
 
 
-    
-    
-        
+
+
+
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
+
+
+
                 <span class="mt-text-content">
                 Ready
             </span>
-            
-        
+
+
         </div>
-    
-</td><td id="50031017133-report_download" data-column="report_download" data-row="50031017133" class="mt-cell mt-center">    
+
+</td><td id="50031017133-report_download" data-column="report_download" data-row="50031017133" class="mt-cell mt-center">
 
 
 <div class="mt-link mt-wrap-bw">
@@ -3624,193 +3623,45 @@ if (typeof uet == 'function') { uet('ns'); }
         Download
     </a>
 </div>
-</td></tr><tr id="50028017129" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50028017129-report_type" data-column="report_type" data-row="50028017129" class="mt-cell mt-center">
+</td></tr>
 
+            <!------------------------------------------------------------------------------------------------------->
+        {% for line in datas_list %}
 
-
-    
-    
-        
+            <tr id="50050017148" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50050017148-report_type" data-column="report_type" data-row="50050017148" class="mt-cell mt-center">
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
                 <span class="mt-text-content">
-                Inventory Report
+                {{ line.report_type }}
             </span>
-            
-        
+
         </div>
-    
-</td><td id="50028017129-batch_id" data-column="batch_id" data-row="50028017129" class="mt-cell mt-center">
-
-
-
-    
-    
-        
+</td><td id="50050017148-batch_id" data-column="batch_id" data-row="50050017148" class="mt-cell mt-center">
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
                 <span class="mt-text-content">
-                50028017129
+                {{ line.batch_id }}
             </span>
-            
-        
         </div>
-    
-</td><td id="50028017129-requested" data-column="requested" data-row="50028017129" class="mt-cell mt-center">2016/11/24 11:31:34 GMT+0800 (中国标准时间)</td><td id="50028017129-completed" data-column="completed" data-row="50028017129" class="mt-cell mt-center">2016/11/24 11:31:51 GMT+0800 (中国标准时间)</td><td id="50028017129-status" data-column="status" data-row="50028017129" class="mt-cell mt-center">
-
-
-
-    
-    
-        
+</td><td id="{{ line.batch_id }}-requested" data-column="requested" data-row="50050017148" class="mt-cell mt-center">{{ line.date_time_request }}</td><td id="{{ line.batch_id }}-completed" data-column="completed" data-row="{{ line.batch_id }}" class="mt-cell mt-center">{{ line.date_time_completed }}</td><td id="{{ line.batch_id }}-status" data-column="status" data-row="{{ line.batch_id }}" class="mt-cell mt-center">
         <div class="mt-text mt-wrap-bw">
-        
-            
-            
                 <span class="mt-text-content">
-                Ready
+                {% if line.report_status == "Request Submitted" %}
+                    {{ line.date_time_completed }}
+                {% else %}
+                    Ready
+                {% endif %}
             </span>
-            
-        
         </div>
-    
-</td><td id="50028017129-report_download" data-column="report_download" data-row="50028017129" class="mt-cell mt-center">    
+</td><td id="{{ line.batch_id }}-download" data-column="download" data-row="{{ line.batch_id }}" class="mt-cell mt-left"></td>
+            </tr>
+        {% endfor %}
 
 
-<div class="mt-link mt-wrap-bw">
-    <a class="a-link-normal mt-link-content" href="https://sellercentral.amazon.com/listing/reports/download?document_code=amzn1.tortuga.2.7f68d529-d797-4dc9-a297-a2e112ef0d53.RDBOYJ9IU9A5EU&amp;reportType=107&amp;completed=1479958311320&amp;ref_=ag_inventory_report_conr_status">
-        Download
-    </a>
-</div>
-</td></tr><tr id="50016017123" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50016017123-report_type" data-column="report_type" data-row="50016017123" class="mt-cell mt-center">
+            <!---------------------------------------------------------------------------------->
 
 
 
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Inventory Report
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50016017123-batch_id" data-column="batch_id" data-row="50016017123" class="mt-cell mt-center">
 
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                50016017123
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50016017123-requested" data-column="requested" data-row="50016017123" class="mt-cell mt-center">2016/11/18 09:00:00 GMT+0800 (中国标准时间)</td><td id="50016017123-completed" data-column="completed" data-row="50016017123" class="mt-cell mt-center">2016/11/18 09:00:17 GMT+0800 (中国标准时间)</td><td id="50016017123-status" data-column="status" data-row="50016017123" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Ready
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50016017123-report_download" data-column="report_download" data-row="50016017123" class="mt-cell mt-center">    
-
-
-<div class="mt-link mt-wrap-bw">
-    <a class="a-link-normal mt-link-content" href="https://sellercentral.amazon.com/listing/reports/download?document_code=amzn1.tortuga.2.adb13107-189d-450c-91e3-deefc41f1d48.RDVVJHV9QAYE09&amp;reportType=107&amp;completed=1479430817886&amp;ref_=ag_inventory_report_conr_status">
-        Download
-    </a>
-</div>
-</td></tr><tr id="50014017115" data-delayed-row-data="" data-row-data="" class="mt-row"><td id="50014017115-report_type" data-column="report_type" data-row="50014017115" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Inventory Report
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50014017115-batch_id" data-column="batch_id" data-row="50014017115" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                50014017115
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50014017115-requested" data-column="requested" data-row="50014017115" class="mt-cell mt-center">2016/11/10 09:13:40 GMT+0800 (中国标准时间)</td><td id="50014017115-completed" data-column="completed" data-row="50014017115" class="mt-cell mt-center">2016/11/10 09:13:54 GMT+0800 (中国标准时间)</td><td id="50014017115-status" data-column="status" data-row="50014017115" class="mt-cell mt-center">
-
-
-
-    
-    
-        
-        <div class="mt-text mt-wrap-bw">
-        
-            
-            
-                <span class="mt-text-content">
-                Ready
-            </span>
-            
-        
-        </div>
-    
-</td><td id="50014017115-report_download" data-column="report_download" data-row="50014017115" class="mt-cell mt-center">    
-
-
-<div class="mt-link mt-wrap-bw">
-    <a class="a-link-normal mt-link-content" href="https://sellercentral.amazon.com/listing/reports/download?document_code=amzn1.tortuga.2.12bfa202-65fc-4e17-a687-6c50687c738d.RDW73J04YFBY78&amp;reportType=107&amp;completed=1478740434391&amp;ref_=ag_inventory_report_conr_status">
-        Download
-    </a>
-</div>
-</td></tr></tbody></table></div>
+</tbody></table></div>
     </div>
     
     

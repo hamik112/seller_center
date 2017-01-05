@@ -19,7 +19,7 @@ from center.dataService.transaction_view import TrasactionView
 from  center.dataService.all_statements import AllStatementsList
 from center.dataService.inventory_data import manage_fba_shipments, manage_fba_manifests
 
-from center.dataService.inventory_report import InventoryReport
+from center.dataService.inventory_report import InventoryReport, ReportType
 
 # Create your views here.
 
@@ -36,6 +36,10 @@ def home(request):
 def inventory_reports(request):
     email = request.user.username
     store_name = get_storename(email)
+    report_type = request.GET.get("report_type", "")
+    report_type_text = ReportType().get_report_type(report_type)
+    print report_type_text
+    datas_list = InventoryReport(username=email).get_report_recorde()
     return render(request, "inventory_reports.html", locals())
 
 
@@ -44,9 +48,17 @@ def inventory_reports(request):
 def inventory_reports_data(request):
     email = request.user.username
     store_name = get_storename(email)
+    report_type = request.GET.get("report_type", "")
+    report_type_text = ReportType().get_report_type(report_type)
+    print  report_type_text
     if request.method == "POST":
-        InventoryReport(username=email).get_inventory_report()
-    return HttpResponseRedirect("/inventory/inventory-reports/?from=inventory-reports-data")
+        print "inventory_reports_data:", request.POST
+        report_type = request.POST.get("reportVariant", "")
+        print report_type
+        InventoryReport(username=email).get_inventory_report(report_type)
+        #return HttpResponseRedirect("/inventory/inventory-reports/?from=inventory-reports-data&report_type="+report_type)
+    datas_list = InventoryReport(username=email).get_report_recorde()
+    return HttpResponseRedirect("/inventory/inventory-reports/?from=inventory-reports-data&report_type="+report_type)
 
 
 @login_required(login_url="/amazon-login/")

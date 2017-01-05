@@ -463,8 +463,6 @@ class Amazon_MWS(object):
             print 'FeedSubmissionId:',FeedSubmissionId
             while True:
                 print 'start'
-                time.sleep(30)
-                print 'sleep(30)'
                 orders = amazon.get_report_request_list([FeedSubmissionId])
                 data = orders.response.content
                 print 'data:',data
@@ -472,6 +470,8 @@ class Amazon_MWS(object):
                 print 'status:',get_element_by_tag(next_dom,'ReportProcessingStatus')
                 if get_element_by_tag(next_dom,'ReportProcessingStatus') == '_DONE_':
                     break
+                print 'sleep(30)'
+                time.sleep(30)
 
             FeedSubmissionId = get_element_by_tag(next_dom,'GeneratedReportId')
             orders = amazon.get_report(FeedSubmissionId)
@@ -504,13 +504,12 @@ class Amazon_MWS(object):
             FeedSubmissionId = next_dom.getElementsByTagName("ReportRequestId")[0].childNodes[0].data
         
             while True:
-                time.sleep(30)
                 orders = amazon.get_report_request_list([FeedSubmissionId])
                 data = orders.response.content
                 next_dom = parseString(data)
                 if next_dom.getElementsByTagName("ReportProcessingStatus")[0].childNodes[0].data == '_DONE_':
                     break
-        
+                time.sleep(30)
             FeedSubmissionId = next_dom.getElementsByTagName("GeneratedReportId")[0].childNodes[0].data
             orders = amazon.get_report(FeedSubmissionId)
             data = orders.response.content
@@ -604,7 +603,6 @@ class Amazon_MWS(object):
             FeedSubmissionId = next_dom.getElementsByTagName("FeedSubmissionId")[0].childNodes[0].data
 #            FeedSubmissionId = '10799861466'
             while True:
-                time.sleep(5)
                 orders = amazon.get_feed_submission_list(feedids=[FeedSubmissionId])
                 data = orders.response.content
                 print 'data:',data
@@ -613,6 +611,7 @@ class Amazon_MWS(object):
 #                print '123'
                 if next_dom.getElementsByTagName("FeedProcessingStatus")[0].childNodes[0].data == '_DONE_':
                     break
+                time.sleep(5)
         
             sub_result_list = amazon.get_feed_submission_result(feedid = FeedSubmissionId)
             
@@ -876,7 +875,6 @@ class Amazon_MWS(object):
 #             return
 #             FeedSubmissionId = '59897016421' 
             while True:
-
 #                 print 'sleep 60s'
                 orders = amazon.get_report_request_list([FeedSubmissionId])
                 data = orders.response.content

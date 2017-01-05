@@ -106,3 +106,5 @@ class InventoryReports(models.Model):
 
 
 
+
+
