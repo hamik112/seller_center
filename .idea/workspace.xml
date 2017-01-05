@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/center/Amazon/2017-01-05_16-FBA.txt" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/center/dataService/center_share.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SellerCenter/settings.py" afterPath="$PROJECT_DIR$/SellerCenter/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/center/Amazon/Amazon_api.py" afterPath="$PROJECT_DIR$/center/Amazon/Amazon_api.py" />
@@ -34,24 +36,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="inventory_reports.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="inventory_reports.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/center/templates/inventory_reports.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5148">
-              <caret line="3662" column="0" selection-start-line="3662" selection-start-column="0" selection-end-line="3662" selection-end-column="0" />
+            <state relative-caret-position="756">
+              <caret line="3509" column="10" selection-start-line="3509" selection-start-column="10" selection-end-line="3509" selection-end-column="10" />
               <folding>
                 <element signature="n#style#0;n#span#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1483615167329" expanded="false" signature="122318:122332" ph="..." />
-                <marker date="1483615167329" expanded="false" signature="123773:123802" ph="..." />
-                <marker date="1483615167329" expanded="false" signature="123822:123851" ph="..." />
-                <marker date="1483615167329" expanded="false" signature="123997:124092" ph="..." />
-                <marker date="1483615167329" expanded="false" signature="124250:124312" ph="..." />
+                <marker date="1483616259757" expanded="false" signature="119341:119355" ph="..." />
+                <marker date="1483616259757" expanded="false" signature="120796:120825" ph="..." />
+                <marker date="1483616259757" expanded="false" signature="120845:120874" ph="..." />
+                <marker date="1483616259757" expanded="false" signature="121020:121115" ph="..." />
+                <marker date="1483616259757" expanded="false" signature="121273:121335" ph="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="inventory_report.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="inventory_report.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/center/dataService/inventory_report.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="492">
@@ -194,8 +196,8 @@
         <option value="$PROJECT_DIR$/center/dataService/center_share.py" />
         <option value="$PROJECT_DIR$/center/tasks.py" />
         <option value="$PROJECT_DIR$/center/views.py" />
-        <option value="$PROJECT_DIR$/center/templates/inventory_reports.html" />
         <option value="$PROJECT_DIR$/center/dataService/inventory_report.py" />
+        <option value="$PROJECT_DIR$/center/templates/inventory_reports.html" />
       </list>
     </option>
   </component>
@@ -626,7 +628,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-2" y="-1" width="1924" height="1057" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14727855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -635,7 +637,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32799146" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.5277778" sideWeight="0.48776978" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14529915" sideWeight="0.48776978" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1064,21 +1066,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/center/templates/inventory_reports.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5148">
-          <caret line="3662" column="0" selection-start-line="3662" selection-start-column="0" selection-end-line="3662" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#span#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1483615167329" expanded="false" signature="122318:122332" ph="..." />
-            <marker date="1483615167329" expanded="false" signature="123773:123802" ph="..." />
-            <marker date="1483615167329" expanded="false" signature="123822:123851" ph="..." />
-            <marker date="1483615167329" expanded="false" signature="123997:124092" ph="..." />
-            <marker date="1483615167329" expanded="false" signature="124250:124312" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/center/dataService/center_share.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -1093,6 +1080,21 @@
           <caret line="112" column="34" selection-start-line="112" selection-start-column="34" selection-end-line="112" selection-end-column="34" />
           <folding>
             <element signature="e#40#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/center/templates/inventory_reports.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="3509" column="10" selection-start-line="3509" selection-start-column="10" selection-end-line="3509" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#span#0;n#span#0;n#span#0;n#div#1;n#div#0;n#div#0;n#div#1;n#form#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1483616259757" expanded="false" signature="119341:119355" ph="..." />
+            <marker date="1483616259757" expanded="false" signature="120796:120825" ph="..." />
+            <marker date="1483616259757" expanded="false" signature="120845:120874" ph="..." />
+            <marker date="1483616259757" expanded="false" signature="121020:121115" ph="..." />
+            <marker date="1483616259757" expanded="false" signature="121273:121335" ph="..." />
           </folding>
         </state>
       </provider>
