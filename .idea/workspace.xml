@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b30b4c5-aa01-4366-9c2a-caccb604399c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/start.sh" afterPath="$PROJECT_DIR$/start.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/stop.sh" afterPath="$PROJECT_DIR$/stop.sh" />
     </list>
     <ignored path="SellerCenter.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,7 +29,17 @@
         <entry file="file://$PROJECT_DIR$/start.sh">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
-              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+              <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="stop.sh" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/stop.sh">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="72">
+              <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -76,7 +87,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/center/templates/amazon_register.html" />
         <option value="$PROJECT_DIR$/center/templates/amazon_login.html" />
         <option value="$PROJECT_DIR$/center/templates/orders.html" />
         <option value="$PROJECT_DIR$/manageApp/dataService/dataImport.py" />
@@ -125,8 +135,9 @@
         <option value="$PROJECT_DIR$/center/templates/inventory_reports.html" />
         <option value="$PROJECT_DIR$/center/dataService/inventory_report.py" />
         <option value="$PROJECT_DIR$/center/tasks.py" />
-        <option value="$PROJECT_DIR$/start.sh" />
         <option value="$PROJECT_DIR$/start_server.py" />
+        <option value="$PROJECT_DIR$/start.sh" />
+        <option value="$PROJECT_DIR$/stop.sh" />
       </list>
     </option>
   </component>
@@ -566,7 +577,7 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32799146" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24955542" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3429487" sideWeight="0.48776978" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3429487" sideWeight="0.48776978" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21813871" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -629,7 +640,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/center/templates/Home.html.back" />
     <entry file="file://$PROJECT_DIR$/center/templates/Home-1.html" />
     <entry file="file://$PROJECT_DIR$/center/templates/performance.html">
       <provider selected="true" editor-type-id="text-editor">
@@ -1013,7 +1023,15 @@
     <entry file="file://$PROJECT_DIR$/start.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stop.sh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding />
         </state>
       </provider>
