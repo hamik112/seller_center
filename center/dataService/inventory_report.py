@@ -51,7 +51,6 @@ class InventoryReport():
         # result = AMAZON_MWS.get_product_report(store_obj,type=type,fileName=fileName)
         line_id = self.inventory_report_recorde(report_type)
         get_amazon_report.delay(store_obj,rep_type , fileName, line_id)
-
         print fileName
 
     def inventory_report_recorde(self, report_type):
@@ -60,7 +59,8 @@ class InventoryReport():
                     "date_time_request": dt_to_str(datetime.datetime.now(tz=utc)),
                     "date_time_completed": "Not Completed",   #== Not Completed if request submitted
                     "report_status": "Request Submitted",
-                    "batch_id": self.get_batch_id()}
+                    "batch_id": self.get_batch_id(),
+                    }
         try:
             itr = InventoryReports(**tmp_dict)
             itr.save()
@@ -75,9 +75,18 @@ class InventoryReport():
         return "500" + "".join([str(random.randrange(0,9)) for i in range(8)])
 
 
-    def get_report_recorde(self):
+    def get_report_recorde(self, count=None, page=None):
+        if not count and not page:
+            count,page = 10, 1
+        elif not count and page:
+            count, page = 10, page
+        elif count and not page:
+            count, page = count, 1
+        else:
+            count, page = count, page 
+        page, count = int(page) - 1, int(count)
         try:
-            recored_list = InventoryReports.objects.filter()
+            recored_list = InventoryReports.objects.filter(username=self.username).order_by("-id")[page * count:( page +1 ) * count]
         except Exception, e:
             print "get recorde error: "+str(e)
             recored_list = []
@@ -89,6 +98,7 @@ class InventoryReport():
             tmp_dict["date_time_completed"] = li.date_time_completed
             tmp_dict["batch_id"] = li.batch_id
             tmp_dict["report_status"] = li.report_status
+            tmp_dict["fileName"] = str(li.fileName).strip()
             return_recored_list.append(tmp_dict)
         return list(return_recored_list)
 

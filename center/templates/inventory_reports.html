@@ -2143,7 +2143,28 @@ if (typeof uet == 'function') { uet('ns'); }
 </b>
             </span>
           </div><div class="a-column a-span7 a-span-last"><span id="soldlisting_input" class="hidden">
-            <span class="a-dropdown-container"><select name="soldlisting" autocomplete="off" tabindex="-1" class="a-native-dropdown"><option value="7">7</option><option value="15">15</option><option value="30">30</option><option value="60">60</option></select><span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-1" style="min-width: 0%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-1-announce"><span class="a-dropdown-prompt">7</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></span>
+              <span class="a-dropdown-container"><select name="soldlisting" autocomplete="off" tabindex="-1" class="a-native-dropdown">
+                  {% if report_count == "10" %}
+                      <option value="10" selected="selected">10</option>
+                  {% else %}
+                      <option value="10">10</option>                      
+                  {% endif %}    
+                  {% if report_count == "15" %}    
+                      <option value="15" selected="selected">15</option>
+                  {% else %}    
+                      <option value="15">15</option>
+                  {% endif %}
+                  {% if report_count == "30" %}    
+                      <option value="30" selected="selected">30</option>
+                  {% else %}    
+                      <option value="30">30</option>
+                  {% endif %}
+                  {% if report_count == "60" %}    
+                      <option value="60" selected="selected">60</option>
+                  {% else %}
+                      <option value="60">60</option>                      
+                  {% endif %}    
+                </select><span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-1" style="min-width: 0%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-1-announce"><span class="a-dropdown-prompt">7</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></span>
           <span id="reverse_input" class="hidden">
             <span class="a-dropdown-container"><select name="reverse" autocomplete="off" tabindex="-1" class="a-native-dropdown"><option value="Clothing">
 
@@ -3372,7 +3393,28 @@ if (typeof uet == 'function') { uet('ns'); }
 </div><br>
 
 <div class="a-box-group"><div class="a-box a-box-title"><div class="a-box-inner a-padding-small"><div class="a-row a-grid-vertical-align a-grid-center"><div class="a-column a-span12"><b>Check Report Status &amp; Download</b>
-      </div><div class="a-column a-span12 a-text-right"><span class="a-dropdown-container"><select name="reportCountDropDown" autocomplete="off" tabindex="-1" class="a-native-dropdown"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select><span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-4" style="min-width: 0%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-4-announce"><span class="a-dropdown-prompt">10</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></div></div></div></div><div class="a-box"><div class="a-box-inner a-padding-none"><div id="reports-table" class="mt-container clearfix" data-scroll-on-refresh="body" data-max-retries="10">
+        </div><div class="a-column a-span12 a-text-right"><span class="a-dropdown-container"><select name="reportCountDropDown" autocomplete="off" tabindex="-1" class="a-native-dropdown">
+              {% if report_count == "10" %}
+                 <option value="10" selected="">10</option>
+              {% else %}
+                 <option value="10" >10</option>              
+              {% endif %}
+              {% if report_count == "25" %}   
+                  <option value="25" selected="">25</option>
+              {% else %}
+                  <option value="25">25</option>              
+              {% endif %}
+              {% if report_count == "50" %}    
+                  <option value="50" selected="">50</option>
+              {% else %}
+                  <option value="50">50</option>              
+              {% endif %}
+              {% if report_count == "100" %}    
+                  <option value="100" selected="">100</option>
+              {% else %}
+                  <option value="100">100</option>              
+              {% endif %}
+            </select><span tabindex="-1" class="a-button a-button-dropdown a-button-small" id="a-autoid-4" style="min-width: 0%;"><span class="a-button-inner"><span class="a-button-text a-declarative" data-action="a-dropdown-button" role="button" tabindex="0" aria-hidden="true" id="a-autoid-4-announce"><span class="a-dropdown-prompt">{{ report_count }}</span></span><i class="a-icon a-icon-dropdown"></i></span></span></span></div></div></div></div><div class="a-box"><div class="a-box-inner a-padding-none"><div id="reports-table" class="mt-container clearfix" data-scroll-on-refresh="body" data-max-retries="10">
     <div class="mt-loading-overlay" style="display: none;">
         <div class="mt-loading-image a-popover-loading"></div>
     </div>
@@ -3529,13 +3571,20 @@ if (typeof uet == 'function') { uet('ns'); }
         <div class="mt-text mt-wrap-bw">
                 <span class="mt-text-content">
                 {% if line.report_status == "Request Submitted" %}
-                    {{ line.date_time_completed }}
+                    {{ line.report_status }}
                 {% else %}
                     Ready
                 {% endif %}
             </span>
         </div>
-</td><td id="{{ line.batch_id }}-download" data-column="download" data-row="{{ line.batch_id }}" class="mt-cell mt-left"></td>
+              </td>
+              <td id="{{ line.batch_id }}-download" data-column="download" data-row="{{ line.batch_id }}" class="mt-cell mt-left">
+                {% if line.report_status == "Ready" and line.fileName != "" %}
+                    <a href="/inventory/inventory-reports/?download-report=1&filename={{ line.fileName }}" style="cursor:pointer;">Download</a>
+                {% else %}
+
+                {% endif %}
+              </td>
             </tr>
         {% endfor %}
 

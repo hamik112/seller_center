@@ -92,6 +92,7 @@ class InventoryReports(models.Model):
     date_time_request     =   models.CharField( max_length=100, default="", null=False)
     date_time_completed   =   models.CharField( max_length=100, default="", null=False)
     report_status         =   models.CharField( max_length=100, default="", null=False)
+    fileName              =   models.CharField( max_length=100, default="", null=False)
 
     class Meta:
         db_table = "inventory_reports_tb"

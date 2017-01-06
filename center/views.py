@@ -36,12 +36,30 @@ def home(request):
 def inventory_reports(request):
     email = request.user.username
     store_name = get_storename(email)
-    report_type = request.GET.get("report_type", "")
-    report_type_text = ReportType().get_report_type(report_type)
-    print report_type_text
-    datas_list = InventoryReport(username=email).get_report_recorde()
-    return render(request, "inventory_reports.html", locals())
+    if request.GET.get("download-report") and request.GET.get("filename","") != "":
+        the_file_name = request.GET.get("filename", "")
+        print "the_file_name: ", the_file_name
+        fname = the_file_name.split("/")[-1]
+        response = StreamingHttpResponse(file_iterator(the_file_name))
+        response['Content-Type'] = 'application/octet-stream'
+        response['Content-Disposition'] = 'attachment;filename="%s"'%str(fname)
+        return response
+    else:
+        report_type = request.GET.get("report_type", "")
+        report_type_text = ReportType().get_report_type(report_type)
+        print report_type_text
+        datas_list = InventoryReport(username=email).get_report_recorde()
+        return render(request, "inventory_reports.html", locals())
 
+@login_required(login_url="/amazon-login/")
+def listing_reports(request):
+    email = request.user.username
+    store_name = get_storename(email)
+    report_count = request.GET.get("report_count", "10")
+    page = request.GET.get("page", 1)
+    datas_list = InventoryReport(username=email).get_report_recorde(count=report_count,page=page)
+    return render(request, "inventory_reports.html", locals())
+    
 
 @csrf_exempt
 @login_required(login_url="/amazon-login/")

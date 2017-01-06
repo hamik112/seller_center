@@ -38,8 +38,14 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
         print "AMAZON_MWS API Request Error: ",str(e)
     if result.get("result", False) and line_id:
         try:
+            fname = fileName.split("GENERATE_REPORT/")[1]
+        except Exception, e:
+            print str(e)
+            fname = ""
+        try:
             InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
-                                                       report_status = "Ready")
+                                                               report_status = "Ready",
+                                                               fileName = fname)
         except Exception, e:
             print "rewrite InventoryReports Error: ", str(e)
     else:
