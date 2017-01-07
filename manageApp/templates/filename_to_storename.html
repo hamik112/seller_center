@@ -11,7 +11,7 @@
 {#    width:160px;#}
 {#    height:56px;#}
     position: absolute;
-    top:50%;
+    top:10%;
     left:45%;
     margin-left:auto;margin-right:auto;
     opacity: 0.7;
@@ -63,7 +63,8 @@
 
                 <div class="ibox-content">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add_line">添加</button>
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">表格导入</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">店铺导入</button>
+                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_token_id">Token导入</button>
                     <div class="project-list">
                         {% csrf_token %}
                         <table class="table table-hover" id="filename-to-storename-table-id">
@@ -162,7 +163,7 @@
                           &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                       <h2>添加卡</h2>
+                       <h2>添加店铺</h2>
                     </h4>
                  </div>
 
@@ -186,6 +187,51 @@
                        data-dismiss="modal">关闭
                     </button>
                     <button type="button" class="btn btn-primary" onclick=javascript:add_many_line(this); >
+                       确认
+                    </button>
+                 </div>
+                 </form>
+               </div>
+             </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+
+             <!-- 模态框（Modal） -->
+        <div class="modal fade bd-example-modal-lg" id="add_token_id" tabindex="-1" role="dialog"
+           aria-labelledby="myModalLabel" aria-hidden="true">
+           <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+               <form class="form-horizontal" method="post" action="/manage/filename-to-token/">
+                    {% csrf_token %}
+                 <div class="modal-header">
+                    <button type="button" class="close"
+                       data-dismiss="modal" aria-hidden="true">
+                          &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                       <h2>添加Token</h2>
+                    </h4>
+                 </div>
+
+
+                 <div class="modal-body">
+                     <div class="row">
+                       <div class="col-md-12">
+                           <h3>表格必须含有这些字段表头:name,  ACCESS KEY,  SECRET KEY,  ACCOUNT ID,  MKPLACEID,  MWSAuthToken</h3>
+                       </div>
+                         <hr />
+                         <br />
+                       <div class="col-md-12" style="min-height: 300px;">
+                            <label class="control-label">选择文件</label>
+                            <input type="file" name="filename" id="filename-token-id">
+                        </div>
+
+                     </div>
+                 </div>
+                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default"
+                       data-dismiss="modal">关闭
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick=javascript:add_token(this); >
                        确认
                     </button>
                  </div>
@@ -258,6 +304,20 @@
             title: 'password',
             align: 'center',
             valign: 'middle'
+        },{
+            field: "has_token",
+            title: "是否有token",
+            align: 'center',
+            valign: "middle",
+            formatter:function(value, row, index){
+                html_str = "";
+                if (value == "1"){
+                    html_str += "有"
+                }else{
+                    html_str += "无"
+                }
+                return html_str;
+            }
         },{
             field: "action",
             title: '更新',
@@ -417,10 +477,43 @@
             }, error: function (edata) {
                 console.log(edata);
                 showBody();
-                alert("操作失败!" + edata);
+                alert("操作失败!");
             }
         });
 
+    }
+    
+    function  add_token() {
+        var csrf_token = $("[name='csrfmiddlewaretoken']").val();
+        var formData = new FormData();
+        formData.append("filename", document.getElementById("filename-token-id").files[0]);
+        formData.append("csrfmiddlewaretoken", csrf_token);
+        $.ajax({
+            url: "/manage/filename-to-token/",
+            type: "POST",
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+               $("#add_token_id").modal('hide');
+            },
+            success: function (sdata) {
+                showBody();
+                if (sdata.statue == '0'){
+                    alert("操作成功!"+sdata.msg);
+                    location.reload();
+                }else{
+                    alert("操作失败: "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                showBody();
+                alert("操作失败!");
+            }
+        });
     }
     
     

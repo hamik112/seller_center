@@ -7,7 +7,7 @@ import  datetime
 from openpyxl import Workbook
 
 
-log2 = logging.getLogger("test2")
+log2 = logging.getLogger("scripts")
 
 def create_xls(**params):
     header = params.get("header", "")

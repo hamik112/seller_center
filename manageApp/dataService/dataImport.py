@@ -12,6 +12,9 @@ from manageApp.models import StatementView, UploadFileRecorde
 from manageApp.tasks import import_one_file_to_statement_view
 from manageApp.dataService.tasks_util import update_file_statue, get_update_file_statue
 
+import  logging
+log = logging.getLogger("scripts")
+
 
 class StatementViewImport(object):
     def __init__(self, files_list):
@@ -51,7 +54,8 @@ class StatementViewImport(object):
                     except Exception, e:
                         statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
             else:
-                print "not found .xls file"
+                # print "not found .xls file"
+                log.error("not found .xls file ...")
                 statue_dict = {"filename": filename, "statue": -1, "msg": u"文件不是.xls或.xlsx文件"}
             statue_list.append(statue_dict)
         return statue_list

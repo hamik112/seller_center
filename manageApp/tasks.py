@@ -14,7 +14,7 @@ from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 
 logger = get_task_logger(__name__)
 
-log1 = logging.getLogger("test1")
+log1 = logging.getLogger("tasks")
 
 
 @task

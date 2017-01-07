@@ -18,6 +18,11 @@ from manageApp.dataService.filename_to_storename import FilenameStoreName
 from manageApp.dataService.dataImport import get_update_error_str
 # Create your views here.
 
+import  logging
+log = logging.getLogger("django.request")
+
+
+
 def login(request):
     if request.method == "POST":
         username = request.POST.get("username", "")
@@ -30,6 +35,7 @@ def login(request):
             return render(request, 'login.html', locals())
     else:
         print "run login ..."
+        log.info("run login ...")
         return render(request, 'login.html', locals())
 
 def logout(request):
@@ -45,7 +51,8 @@ def home(request):
     username = request.user.username
     if request.method == "POST":
         ufiles = request.FILES.getlist("file[]", "")
-        print ufiles
+        # print ufiles
+        log.info(ufiles)
         upload_files = FileUpload(ufiles,username=username).write_file()
         return HttpResponse(json.dumps(upload_files))
     return  render(request, 'manage_index.html', locals())
@@ -61,7 +68,7 @@ def files_action(request):
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
-            print filename
+            # print filename
             result = StatementViewImport([filename]).import_files_to_statement_view()
             result = result[0]
             return HttpResponse(json.dumps(result))
@@ -93,18 +100,38 @@ def filename_to_storename(request):
             result = fsn.post_add_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "update":
-            print "update ..........."
+            # print "update ..........."
+            log.info("update ...")
             result = fsn.post_update_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "file_storename":
-            print "file to storename ..."
+            # print "file to storename ..."
+            log.info("file to storename ...")
             ufiles = request.FILES.getlist("filename", "")
-            print ufiles
+            # print ufiles
             result = fsn.post_add_many_line(ufiles,username , request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         return render(request,"filename_to_storename.html", locals())
     else:
         return render(request, 'filename_to_storename.html', locals())
+
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def filename_to_token(request):
+    log.info("file to token ...")
+    username = request.user.username
+    print request.POST
+    if request.method == "POST":
+        print ".."*100
+        ufiles = request.FILES.getlist("filename", "")
+        fsn = FilenameStoreName()
+        result = fsn.upload_token(ufiles, username, request.POST)
+        return HttpResponse(json.dumps(result, default=json_serial))
+    else:
+        log.info("file to token method error...")
+        return HttpResponse(json.dumps({"status":"-1","msg":"method error!"}))
+
 
 
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")

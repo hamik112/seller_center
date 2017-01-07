@@ -20,7 +20,7 @@ from center.models import  InventoryReports
 from center.Amazon.Amazon_api  import Amazon_MWS
 
 logger = get_task_logger(__name__)
-log1 = logging.getLogger("test1")
+log = logging.getLogger("tasks")
 
 
 utc = pytz.timezone("GMT")
@@ -35,21 +35,25 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
         result = AMAZON_MWS.get_product_report(store_obj,rep_type,fileName)
     except Exception, e:
         result = {"result": False, "error_message": str(e)}
-        print "AMAZON_MWS API Request Error: ",str(e)
+        #print "AMAZON_MWS API Request Error: ",str(e)
+        log.info("AMAZON_MWS API Request Error: ",str(e))
     if result.get("result", False) and line_id:
         try:
             fname = fileName.split("GENERATE_REPORT/")[1]
         except Exception, e:
-            print str(e)
+            #print str(e)
+            log.info(str(e))
             fname = ""
         try:
             InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
                                                                report_status = "Ready",
                                                                fileName = fname)
         except Exception, e:
-            print "rewrite InventoryReports Error: ", str(e)
+            #print "rewrite InventoryReports Error: ", str(e)
+            log.info("rewrite InventoryReports Error: ", str(e))
     else:
-        print result.get("result", True), result.get("error_message","")
+        #print result.get("result", True), result.get("error_message","")
+        log.info(result.get("result", True), result.get("error_message",""))
 
 
 

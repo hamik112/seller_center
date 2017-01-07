@@ -11,6 +11,7 @@ urlpatterns = patterns('',
             url(r'^files-list/$', 'manageApp.views.files_action', name='files_list'),
             url(r'^list-files-json/$', 'manageApp.views.list_fils_json', name='list_fils_json'),
             url(r'^filename-to-storename/$', 'manageApp.views.filename_to_storename', name='filename_to_storename'),
+            url(r'^filename-to-token/$', 'manageApp.views.filename_to_token', name='filename_to_token'),
             url(r'^filename-to-storename-json/$', 'manageApp.views.filename_to_storename_json', name="filename_to_storename_json"),
             url(r'^get-update-error-msg/$', 'manageApp.views.get_update_error_msg', name="get_update_error_msg"),
 

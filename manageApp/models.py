@@ -32,10 +32,12 @@ class FilenameToStorename(models.Model):
     filename        =  models.CharField( max_length= 300, null=False)
     serial_number   =  models.CharField( max_length=50, default="", unique=True,null=False)
     storename       =  models.CharField( max_length= 100,default="", null=False)
-    email           =  models.CharField( max_length= 50, default="",unique=True, null=False)      #email即是用户名不能重复
+    email           =  models.CharField( max_length= 100, default="",unique=True, null=False)      #email即是用户名不能重复
     password        =  models.CharField( max_length= 100, default="starmerx", null=False)
 
     manager         =  models.CharField( max_length= 100, default="", null=False)       #负责人
+
+
 
     create_time     =  models.DateTimeField( default=timezone.now())
     update_time     =  models.DateTimeField( default=timezone.now())
@@ -48,6 +50,33 @@ class FilenameToStorename(models.Model):
 
     def get_serial_number(self):
         return u'%s' % (self.serial_number)
+
+
+
+class StoreKeys(models.Model):
+    """ key 的"""
+    id              = models.AutoField( primary_key= True, null=False)
+    email           = models.CharField( max_length= 100 ,default="", unique=True, null=False)
+    storename       = models.CharField( max_length=100, default="", null=False)
+
+    access_key      = models.CharField( max_length=50 , default="", null=False)
+    secret_key      = models.CharField( max_length=100, default="", null=False)
+    account_id      = models.CharField( max_length=100, default="", null=False)
+    mkplaceid       = models.CharField( max_length=50, default="", null=False)
+    mws_authtoken   = models.CharField( max_length=150, default="", unique=True,null=False)
+
+    create_time = models.DateTimeField(default=timezone.now())
+    update_time = models.DateTimeField(default=timezone.now())
+
+    class Meta:
+        db_table = "store_key"
+
+    def __unicode__(self):
+        return self.mws_authtoken
+
+
+
+
 
 
 
