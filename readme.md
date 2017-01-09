@@ -13,8 +13,13 @@
 
 
 启动:
+1. #单独使用
+    nohup python manage.py celery worker -q -c 4  --loglevel=info
+    python manage.py runserver 0.0.0.0:8080
 
-#./start
+
+2. #配合nginx使用
+    #./start
 
 
 

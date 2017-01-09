@@ -1,7 +1,7 @@
 <uwsgi>
     <socket>:8088</socket>
-    <!-- <chdir>/home/seller_center/seller_center/</chdir> -->
-    <chdir>/home/wood/PycharmProjects/seller_center/</chdir> 
+    <chdir>/home/seller_center/seller_center/</chdir> 
+<!--    <chdir>/home/wood/PycharmProjects/seller_center/</chdir>  -->
     <module>start_server</module>
     <processes>1</processes> <!-- 进程数 -->
     <daemonize>center/log/seller_center_uwsgi.log</daemonize>
