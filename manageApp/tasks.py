@@ -106,8 +106,9 @@ def import_one_file_to_statement_view(task_dict):
                 dict_name = name.replace(" ", "_")
                 tmp_dict[dict_name] = data_line[header_dict.get(name)]
         tmp_dict["serial_number"] = serial_number
-        if not tmp_dict.get("order_id"):
-            tmp_dict["order_id"] = tmp_dict.get("date_time", "")
+        #if not tmp_dict.get("order_id"):
+            #tmp_dict["order_id"] = tmp_dict.get("date_time", "")
+            #tmp_dict["order_id"] = ""
         tmp_dict["area"] = area
         # tmp_dict["unique_id"] = str(tmp_dict.get("date_time", "")) +"_" +str(tmp_dict.get("order_id", "")) + "_" + str(tmp_dict.get("sku","")) + str(tmp_dict.get("total",""))
         try:

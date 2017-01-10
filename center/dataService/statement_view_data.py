@@ -42,14 +42,23 @@ class StatementViewData(object):
             self.timeRange = str(self.current_month.get("day_begin", "")) +" - "+ str(self.current_month.get("day_end", ""))
         elif self.timeRangeType == "Custom" :
             self.is_custom = "Custom"
-            self.startDateYear = self.post_dict.get("startDateYear","")
-            self.endDateYear = self.post_dict.get("endDateYear", "")
-            self.startDateMonth = self.post_dict.get("startDateMonth", "")
-            self.endDateMonth = self.post_dict.get("endDateMonth", "")
-            self.startDateDay = self.post_dict.get("startDateDay", "")
-            self.endDateDay = self.post_dict.get("endDateDay", "")
-            start_dateArray = datetime.datetime.utcfromtimestamp(float(self.post_dict.get("startDate","0")))
-            end_dateArray = datetime.datetime.utcfromtimestamp(float(self.post_dict.get("endDate", "0")))
+            self.startDateYear = self.post_dict.get("startDate[year]", "")
+            self.startDateMonth = self.post_dict.get("startDate[month]", "")
+            self.startDateDay   = self.post_dict.get("startDate[date]", "")
+            self.endDateYear    = self.post_dict.get("endDate[year]", "")
+            self.endDateMonth   = self.post_dict.get("endDate[month]", "")
+            self.endDateDay     = self.post_dict.get("endDate[date]", "")
+
+            # self.startDateYear = self.post_dict.get("startDateYear","")
+            # self.endDateYear = self.post_dict.get("endDateYear", "")
+            # self.startDateMonth = self.post_dict.get("startDateMonth", "")
+            # self.endDateMonth = self.post_dict.get("endDateMonth", "")
+            # self.startDateDay = self.post_dict.get("startDateDay", "")
+            # self.endDateDay = self.post_dict.get("endDateDay", "")
+            self.begin_date_str = "%s %s, %s"%(self.startDateMonth, self.startDateDay, self.startDateYear)
+            self.end_date_str = "%s %s, %s"%(self.endDateMonth, self.endDateDay, self.endDateYear)
+            start_dateArray = datetime.datetime.strptime(self.begin_date_str, "%m %d, %Y")
+            end_dateArray = datetime.datetime.strptime(self.end_date_str, "%m %d, %Y")
             self.begin_date_str = datetime.datetime.strftime(start_dateArray, "%b %d, %Y")
             self.end_date_str = datetime.datetime.strftime(end_dateArray, "%b %d, %Y")
             self.year = self.endDateYear
@@ -89,7 +98,7 @@ class StatementViewData(object):
             next_page =  cur_page + 1
         else:
             next_page = total_page
-        return {"recorde_list":return_report_list, "start_item":start_item,
+        return {"recorde_list":return_report_list, "start_item":start_item, "total_count": total_count,
                 "end_item":end_item, "total_page": total_page, "next_page":next_page}
 
     def request_report(self):
@@ -111,14 +120,16 @@ class StatementViewData(object):
             return_dict = self.write_recorde_generate_report()
             result = self.create_xls_reports(**return_dict)
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
-            return update_statue
+            return {"status": update_statue, "message":""}
             pass
 
         elif self.reportType == "Transaction" and self.timeRangeType == "Monthly":   #导出表格
             return_dict = self.write_recorde_generate_report()
             result = self.create_xls_reports(**return_dict)
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
-            return update_statue
+            return {"status": update_statue, "message":""}
+        else:
+            return {"statusCode":"OK"}
         # statement_list = StatementView.objects.filter()
 
 

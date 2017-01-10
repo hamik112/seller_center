@@ -227,9 +227,10 @@ def date_range_reports(request):
     email = request.user.username
     store_name = get_storename(email)
     if request.method == "POST":
-        # print request.POST
+        print "="* 100
+        print "request post: ",request.POST
         result = StatementViewData(request).request_report()
-        # print result
+        result["statusCode"] = "OK"
         return HttpResponse(json.dumps(result))
     else:
         pageSize = request.GET.get("pageSize",10)
@@ -244,6 +245,7 @@ def date_range_reports(request):
         next_page = int(recorde_result.get("next_page", 1))
         total_page_list = range(1, total_page + 1)
         pre_page = 0 if cur_page <= 0 else int(cur_page) - 1
+        total_count = recorde_result.get("total_count",0)
         # print recorde_list
         return  render(request, "data_range_reports.html", locals())
 
