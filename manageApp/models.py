@@ -37,6 +37,8 @@ class FilenameToStorename(models.Model):
 
     manager         =  models.CharField( max_length= 100, default="", null=False)       #负责人
 
+    really_store    =  models.CharField( max_length= 10, default="0", null=False)       #是否是真实的店铺
+    payment_time    =  models.CharField( max_length= 30, default="",  null=False)       #回款时间
 
 
     create_time     =  models.DateTimeField( default=timezone.now())

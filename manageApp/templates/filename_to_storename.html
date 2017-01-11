@@ -38,7 +38,7 @@
         <li ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a>
         </li>
         <li class="active"><a href="/manage/filename-to-storename/"   class="J_pro"><i class="fa fa-link"></i> <span>文件名对应店铺</span></a></li>
-
+        <li ><a href="/manage/inventory-report-import/"   class="J_pro"><i class="fa fa-link"></i> <span>InventoryReport导入</span></a></li>
 {% endblock %}
 
 
@@ -171,7 +171,7 @@
                  <div class="modal-body">
                      <div class="row">
                        <div class="col-md-12">
-                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email,负责人</h3>
+                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email,负责人, 是否真实店铺, 回款时间</h3>
                        </div>
                          <hr />
                          <br />
@@ -318,6 +318,25 @@
                 }
                 return html_str;
             }
+        },{
+            filed: "really_store",
+            title: "是否真实店铺",
+            align: 'center',
+            valign: 'middle',
+            formatter: function (value, row, index) {
+                html_str = "";
+                if (value == "0"){
+                    html_str += "否"
+                }else{
+                    html_str += "是"
+                }
+                return html_str;
+            }
+        },{
+            field: "payment_time",
+            title: "回款时间",
+            align: 'center',
+            valign: 'middle'
         },{
             field: "action",
             title: '更新',

@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 # encoding:utf-8
 
+import  datetime
+import pytz
+
 from django.contrib.auth.models import User
 from manageApp.models import  FilenameToStorename, StoreKeys
 from manageApp.dataService.upload_file import FileUpload
 from manageApp.dataService.deal_xls import read_xls
+
 
 import  logging
 log = logging.getLogger("scripts")
@@ -113,8 +117,11 @@ class FilenameStoreName(object):
 
 
 
-    def post_add_line(self, post_dict):
-        keys_list = ["serial_number", "storename", "email", "password", "manager"]
+    def post_add_line(self, post_dict, keys_list=None):
+        if keys_list:
+            keys_list = keys_list
+        else:
+            keys_list = ["serial_number", "storename", "email", "manager"]
         params_dict = {}.fromkeys(keys_list, "")
         for name in keys_list:
             params_dict[name] = post_dict.get(name, "").strip()
@@ -141,8 +148,8 @@ class FilenameStoreName(object):
     def post_add_many_line(self, ufils, username ,post_dict):
         """ 批量导入对应关系 """
         fud_name = FileUpload(ufils,username=username).write_file(file_upload=True)
-        need_header_list = [u"序号", u"店名", u"账号email", u"负责人"]
-        value_list = ["serial_number", "storename", "email", "manager"]
+        need_header_list = [u"序号", u"店名", u"账号email", u"负责人",u"是否真实店铺", u"回款时间"]
+        value_list = ["serial_number", "storename", "email", "manager" , "really_store","payment_time"]
         key_value_dict = dict(zip(need_header_list, value_list))
         try:
             _value_list = read_xls(fud_name[0])
@@ -173,9 +180,10 @@ class FilenameStoreName(object):
                     error_list.append(str(n)+":"+str(line) )
                     continue
             tmp_dict["password"] = "starmerx"
+            tmp_dict["payment_time"] = str(getdate(tmp_dict.get("payment_time", "")))
             if "" in tmp_dict.values():
                 continue
-            self.post_add_line(tmp_dict)
+            self.post_add_line(tmp_dict, keys_list=value_list)
         if len(error_list) > 0:
             msg = "还有 %s 没有添加!" % (str(len(error_list)))
         else:
@@ -245,3 +253,30 @@ class FilenameStoreName(object):
         except Exception, e:
             email = ""
         return email
+
+
+
+
+
+def getdate(x, tz=None):
+    """
+    convert Gregorian float of the date , preserving hours, minutes,
+    seconds and microseconds. return value is a datetime
+    """
+    __s_date = datetime.date(1899, 12, 31).toordinal() - 1
+    if tz is None: tz = pytz._UTC()
+    ix = int(x)
+    dt = datetime.datetime.fromordinal(ix + __s_date)
+    remainder = float (x) - ix
+    hour, remainder = divmod(24*remainder, 1)
+    minute, remainder = divmod(60*remainder, 1)
+    second, remainder = divmod(60*remainder, 1)
+    microsecond = int(1e6*remainder)
+    if microsecond<10: microsecond=0 # compensate for rounding errors
+    dt = datetime.datetime(
+        dt.year, dt.month, dt.day, int(hour), int(minute), int(second),
+        microsecond, tzinfo=pytz.utc).astimezone(tz)
+    if microsecond>999990: # compensate for rounding errors
+        dt += datetime.timedelta(microseconds=1e6-microsecond)
+    return dt
+

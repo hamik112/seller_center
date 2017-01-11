@@ -149,6 +149,13 @@ def get_update_error_msg(request):
     result = {"statue": 0, "msg": error_msg}
     return HttpResponse(json.dumps(result))
 
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def inventory_import(request):
+
+    return render(request, "inventory_report_import.html", locals())
+
+
 
 
 
