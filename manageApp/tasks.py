@@ -90,10 +90,10 @@ def import_one_file_to_statement_view(task_dict):
         area  = filename.split(".")[0].split("-")[-1]
     except Exception, e:
         area = ""
-    print len(value_list)
+    log1.info(len(value_list))
     n = 0
     for data_line in value_list[8:]:
-        print "current: "+ str(n)
+        log1.info("current: "+ str(n))
         n += 1
         tmp_dict = {"filename": filename}
         for name in need_header_list:
@@ -124,7 +124,7 @@ def import_one_file_to_statement_view(task_dict):
                 log1.error(msg)
                 update_file_statue(filename, -1, error_msg=msg)
                 return {"statue": -1, "msg": str(e)}
-    print n
+    log1.info(str(n))
     update_file_statue(filename, 2)
     return {"statue": 0, "msg": ""}
 

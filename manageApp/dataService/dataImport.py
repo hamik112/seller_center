@@ -41,13 +41,14 @@ class StatementViewImport(object):
                 else:
                     try:
                         file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
-                        datas = read_xls(file_path)
-                        update_file_statue(filename,1)
                         try:
+                            datas = read_xls(file_path)
+                            update_file_statue(filename, 1)
                             import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
                             statue_dict = {"filename": filename, "statue": 0, "msg": ""}
                         except Exception, e:
                             print e
+                            log.info(str(e))
                             statue_dict = {"filename": filename, "statue": 0, "msg": str(e)}
                             update_file_statue(filename, -1, error_msg=str(e))
                         # statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}

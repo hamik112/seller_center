@@ -5,7 +5,7 @@ import logging
 import xlrd
 import  datetime
 from openpyxl import Workbook
-
+import  time
 
 log2 = logging.getLogger("scripts")
 
@@ -31,6 +31,7 @@ def create_xls(**params):
 
 
 def read_xls(filename):
+    time.sleep(1)
     _value_list = []
     if not os.path.exists(filename):
         return {"statue": -1, "msg":"not found file...", "data":_value_list}

@@ -4,7 +4,7 @@ import  os
 from django.conf import  settings
 from manageApp.models import  UploadFileRecorde, StatementView
 from manageApp.dataService.dataImport import  StatementViewImport
-
+from manageApp.dataService.tasks_util import update_file_statue
 
 import  logging
 
@@ -46,7 +46,7 @@ class FileUpload(object):
         try:
             statue = UploadFileRecorde.objects.filter(filename=filename,file_path=file_path)
         except Exception, e:
-            print e
+            log.info(str(e))
             statue = []
         if statue:
             print "文件记录已经存在!"
@@ -56,12 +56,13 @@ class FileUpload(object):
         try:
             ufr.save()
         except Exception,e:
-            print e
+            log.info(str(e))
         try:
+            time.sleep(1)
             StatementViewImport([filename]).import_files_to_statement_view()
         except Exception, e:
-            print str(e)
-
+            log.info(str(e))
+            update_file_statue(filename, 0, error_msg=str(e))
 
 def list_files(**params):
     file_list = UploadFileRecorde.objects.filter().values()

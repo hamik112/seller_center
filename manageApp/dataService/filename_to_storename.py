@@ -121,10 +121,10 @@ class FilenameStoreName(object):
         if keys_list:
             keys_list = keys_list
         else:
-            keys_list = ["serial_number", "storename", "email", "manager"]
+            keys_list = ["serial_number", "storename", "email", "manager", "payment_time"]
         params_dict = {}.fromkeys(keys_list, "")
         for name in keys_list:
-            params_dict[name] = post_dict.get(name, "").strip()
+            params_dict[name] = str(post_dict.get(name, "")).strip()
         if post_dict.get("is_update") == "update":
             result = self.add_line(update=True, **params_dict)
         else:
@@ -148,8 +148,12 @@ class FilenameStoreName(object):
     def post_add_many_line(self, ufils, username ,post_dict):
         """ 批量导入对应关系 """
         fud_name = FileUpload(ufils,username=username).write_file(file_upload=True)
-        need_header_list = [u"序号", u"店名", u"账号email", u"负责人",u"是否真实店铺", u"回款时间"]
-        value_list = ["serial_number", "storename", "email", "manager" , "really_store","payment_time"]
+        need_header_list = [u"序号",u"网关代码", u"店名", u"legal人名",u"账号email",
+            u"新富国银行卡",u"KDT",u"未更换老富国卡", u"卖家ID", u"亚马逊Key ID",
+            u"亚马逊密钥",u"真假", u"时间"]
+        value_list = ["serial_number", "gateway_name","storename", "manager" , "email",
+                      "new_card","kdt_card","old_card","seller_id", "amazon_key_id",
+                      "amazon_key","really_store","payment_time"]
         key_value_dict = dict(zip(need_header_list, value_list))
         try:
             _value_list = read_xls(fud_name[0])
@@ -166,8 +170,9 @@ class FilenameStoreName(object):
                 msg = "没有找到字段: %s" % str(name)
                 log.error(str(msg))
                 return {"statue":-1, "msg": msg}
-        n, error_list = 1, []
+        n, error_list = 0, []
         for line in data[1:]:
+            if "".join([str(i) for i in line]) == "": continue
             tmp_dict = {}
             for name in need_header_list:
                 try:
@@ -175,17 +180,29 @@ class FilenameStoreName(object):
                 except Exception, e:
                     print str(e)
                     error_list.append(str(n) + str(line))
+                    n += 1
                     continue
                 if not line[header_dict.get(name)]:
                     error_list.append(str(n)+":"+str(line) )
+                    n +=1
                     continue
             tmp_dict["password"] = "starmerx"
-            tmp_dict["payment_time"] = str(getdate(tmp_dict.get("payment_time", "")))
-            if "" in tmp_dict.values():
+            if str(tmp_dict["payment_time"]) == "42":
+                tmp_dict["payment_time"] = ""
+            else:
+                tmp_dict["payment_time"] = str(getdate(tmp_dict.get("payment_time", "")))
+            if tmp_dict["really_store"] == u"假" or tmp_dict["really_store"] == "假":
+                tmp_dict["really_store"] = "0"
+
+            if tmp_dict["serial_number"] == "" or tmp_dict["gateway_name"] == "" or tmp_dict["email"] == "":
+                error_list.append(str(n) + ":" + str(line))
+                n += 1
                 continue
+            # if "" in tmp_dict.values():
+            #     continue
             self.post_add_line(tmp_dict, keys_list=value_list)
         if len(error_list) > 0:
-            msg = "还有 %s 没有添加!" % (str(len(error_list)))
+            msg = "还有 %s 没有添加!" % (str(n))
         else:
             msg = "所有都已经添加完成"
         log.info(str(msg))

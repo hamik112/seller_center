@@ -8,7 +8,7 @@
 
 3. 安装redis-server
   # yum install redis (#apt-get install redis-server)
-
+  # nohup redis-server /etc/redis.conf   >/dev/null 2>&1 &
 
 
 

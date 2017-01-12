@@ -31,12 +31,17 @@ class FilenameToStorename(models.Model):
     id              =  models.AutoField( primary_key=True, null=False)
     filename        =  models.CharField( max_length= 300, null=False)
     serial_number   =  models.CharField( max_length=50, default="", unique=True,null=False)
+    gateway_name    =  models.CharField( max_length=50, default="", null=False)                    #网关
     storename       =  models.CharField( max_length= 100,default="", null=False)
+    manager         =  models.CharField( max_length= 100, default="", null=False)                  #负责人
     email           =  models.CharField( max_length= 100, default="",unique=True, null=False)      #email即是用户名不能重复
+    new_card        =  models.CharField( max_length= 100, default="", null=False)                  #新富国银行卡
+    kdt_card        =  models.CharField( max_length= 100, default="", null=False)                  # kdt 卡
+    old_card        =  models.CharField( max_length= 100, default="", null=False)
+    seller_id       =  models.CharField( max_length= 50, default="", null=False)
+    amazon_key_id   =  models.CharField( max_length= 50, default="", null=False)
+    amazon_key      =  models.CharField( max_length= 50, default="", null=False)
     password        =  models.CharField( max_length= 100, default="starmerx", null=False)
-
-    manager         =  models.CharField( max_length= 100, default="", null=False)       #负责人
-
     really_store    =  models.CharField( max_length= 10, default="0", null=False)       #是否是真实的店铺
     payment_time    =  models.CharField( max_length= 30, default="",  null=False)       #回款时间
 

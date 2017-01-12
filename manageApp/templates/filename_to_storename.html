@@ -5,6 +5,10 @@
 {% block links %}
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
+<link href="{% static 'admin/css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+
+<link href="{% static 'admin/css/plugins/clockpicker/clockpicker.css' %}" rel="stylesheet">
+<link href="{% static 'admin/css/plugins/daterangepicker/daterangepicker-bs3.css' %}" rel="stylesheet">
 
 <style type="text/css">
 .loading{
@@ -123,12 +127,23 @@
                                   <input class="form-control"  type="text" name="manager" value="" placeholder="负责人"  value="{{ result.email }}" required="required">
                                 </div>
                             </div>
+                            <div class="form-group" id="data_1">
+                                <label  class="col-md-2 control-label" >回款时间</label>
+                                <div class="input-group date col-md-8">
+                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    <input type="text"  name="payment_time" class="form-control" value="" required>
+                                </div>
+                            </div>
+
                            <div class="form-group">
                                 <label for="dtp_input2" class="col-md-2 control-label">密码</label>
                                 <div class="col-md-9">
                                   <input class="form-control" size="16" type="text" name="password" value="starmerx"  readonly required="required">
                                 </div>
                             </div>
+
+
+
                             <input type="hidden" name="action_type" value="">
                         </div>
 
@@ -253,6 +268,8 @@
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 
+<script src="{% static 'admin/js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
     $('#filename-to-storename-table-id').bootstrapTable({
@@ -290,6 +307,11 @@
             align: 'center',
             valign: 'middle'
         },{
+            field: "gateway_name",
+            title: "网关名字",
+            align: 'center',
+            valign: 'middle'
+        },{
             field: 'email',
             title: 'email',
             align: 'center',
@@ -319,16 +341,16 @@
                 return html_str;
             }
         },{
-            filed: "really_store",
+            field: "really_store",
             title: "是否真实店铺",
             align: 'center',
             valign: 'middle',
             formatter: function (value, row, index) {
                 html_str = "";
-                if (value == "0"){
-                    html_str += "否"
+                if (value == "0" ){
+                    html_str += "假"
                 }else{
-                    html_str += "是"
+                    html_str += "真"
                 }
                 return html_str;
             }
@@ -541,6 +563,7 @@
         $("[name='email']").val(infos.email);
         $("[name='serial_number']").val(infos.serial_number);
         $("[name='manager']").val(infos.manager);
+        $("[name='payment_time']").val(infos.payment_time);
     }
 
     function delete_modal_data(){
@@ -562,6 +585,15 @@
 {#        $("#cover").show();#}
     }
 
+
+    $('#data_1 .input-group.date').datepicker({
+        todayBtn: "linked",
+        keyboardNavigation: false,
+        forceParse: false,
+        calendarWeeks: true,
+        autoclose: true,
+        format: "yyyy-mm-dd"
+    });
 
 
     function init() {
