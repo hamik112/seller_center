@@ -48,6 +48,7 @@ def import_one_file_to_statement_view(task_dict):
         except Exception, e:
             msg = "没有找到文件!" + str(e)
             print msg
+            log1.info(msg)
             update_file_statue(filename, -1, error_msg=msg)
     if not value_list:
         msg = "表格无数据或请查看是否在第一个sheet里面或查看sheet名称是sheet1"
