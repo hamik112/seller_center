@@ -17,11 +17,11 @@ logger = get_task_logger(__name__)
 log1 = logging.getLogger("tasks")
 
 
-@task
-def import_one_file_to_statement_view(task_dict):
+@task(max_retries=3,default_retry_delay=1 * 6)
+def import_one_file_to_statement_view(datas, filename):
     logger.info("running ...")
-    datas = task_dict.get("datas",{})
-    filename = task_dict.get("filename", "")
+    # datas = task_dict.get("datas",{})
+    # filename = task_dict.get("filename", "")
     datas = datas.get("data", {})
 
     if isinstance(datas, dict) and  datas.get("statue", "") == -1 and datas.get("msg", ""):

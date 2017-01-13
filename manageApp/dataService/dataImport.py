@@ -3,7 +3,7 @@
 
 import  datetime
 import threading
-
+import  os
 
 
 from manageApp.dataService.deal_xls import read_xls
@@ -41,19 +41,22 @@ class StatementViewImport(object):
                 else:
                     try:
                         file_path = UploadFileRecorde.objects.filter(filename=filename)[0].file_path
+                    except Exception, e:
+                        file_path = ""
+                        statue_dict = {"filename": filename, "statue": -1, "msg": str(e)}
+                    if os.path.exists(file_path):
                         try:
                             datas = read_xls(file_path)
                             update_file_statue(filename, 1)
-                            import_one_file_to_statement_view.delay({"datas":datas,"filename":filename})
+                            import_one_file_to_statement_view.delay(datas, filename)
                             statue_dict = {"filename": filename, "statue": 0, "msg": ""}
                         except Exception, e:
                             print e
                             log.info(str(e))
                             statue_dict = {"filename": filename, "statue": 0, "msg": str(e)}
                             update_file_statue(filename, -1, error_msg=str(e))
-                        # statue_dict = {"filename": filename, "statue": statue.get("statue"), "msg": statue.get("msg","")}
-                    except Exception, e:
-                        statue_dict = {"filename": filename, "statue":-1, "msg": str(e)}
+                    else:
+                        statue_dict = {"filename": filename, "statue": -3, "msg": "没有找到文件"}
             else:
                 # print "not found .xls file"
                 log.error("not found .xls file ...")
@@ -69,3 +72,11 @@ def get_update_error_str(uid):
         print str(e)
         error_msg = u"没有找到这条记录!"
     return error_msg
+
+
+
+def inventory_report():
+
+    pass
+
+

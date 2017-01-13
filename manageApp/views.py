@@ -68,11 +68,9 @@ def files_action(request):
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
-            # print filename
             result = StatementViewImport([filename]).import_files_to_statement_view()
             result = result[0]
             return HttpResponse(json.dumps(result))
-
         else:
             return HttpResponse(json.dumps({"statue": -1, "msg":""}))
     else:
@@ -100,15 +98,12 @@ def filename_to_storename(request):
             result = fsn.post_add_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "update":
-            # print "update ..........."
             log.info("update ...")
             result = fsn.post_update_line(request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         elif request.POST.get("action_type", "") == "file_storename":
-            # print "file to storename ..."
             log.info("file to storename ...")
             ufiles = request.FILES.getlist("filename", "")
-            # print ufiles
             result = fsn.post_add_many_line(ufiles,username , request.POST)
             return HttpResponse(json.dumps(result, default=json_serial))
         return render(request,"filename_to_storename.html", locals())
@@ -116,14 +111,15 @@ def filename_to_storename(request):
         return render(request, 'filename_to_storename.html', locals())
 
 
+
+
+
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def filename_to_token(request):
     log.info("file to token ...")
     username = request.user.username
-    print request.POST
     if request.method == "POST":
-        print ".."*100
         ufiles = request.FILES.getlist("filename", "")
         fsn = FilenameStoreName()
         result = fsn.upload_token(ufiles, username, request.POST)

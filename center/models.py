@@ -86,7 +86,6 @@ class InventoryReports(models.Model):
     id            =   models.AutoField( primary_key=True,null=False)
     username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
-
     report_type   =   models.CharField( max_length=100, default="", null=False)
     batch_id      =   models.CharField( max_length=100, default="", null=False)
     date_time_request     =   models.CharField( max_length=100, default="", null=False)
@@ -99,6 +98,12 @@ class InventoryReports(models.Model):
     def __unicode__(self):
         return  self.report_type
 
+
+class InventoryReportsData(models.Model):
+    """ Inventory Report的数据 """
+    id            =  models.AutoField( primary_key=True, null=False)
+    username      =  models.CharField( max_length=200, default="", null=False)
+    
 
 
 

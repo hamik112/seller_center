@@ -92,7 +92,7 @@ class StatementView(models.Model):
     id              =  models.AutoField( primary_key=True, null=False)
     # date_time    =  models.CharField( max_length=50, default="", null=False)
     # unique_id       = models.CharField( max_length=200, default="", unique=True, null=False)   #时间加order_id为唯一标识
-    date_time       = models.DateTimeField( default=timezone.now(), null=False)
+    date_time       = models.DateTimeField( default=timezone.now(), null=False)      #报表里面的时间
 
     filename        =  models.CharField( max_length=100, default="", null=False)
 
