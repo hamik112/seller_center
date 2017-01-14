@@ -2,10 +2,10 @@
 import  time
 import  os
 from django.conf import  settings
-from manageApp.models import  UploadFileRecorde, StatementView
-from manageApp.dataService.dataImport import  StatementViewImport
+from manageApp.models import  UploadFileRecorde, StatementView, InventoryUploadRecorde
+from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 from manageApp.dataService.tasks_util import update_file_statue
-
+from center.models import InventoryReportsData
 import  logging
 
 log = logging.getLogger("scripts")
@@ -64,6 +64,61 @@ class FileUpload(object):
             log.info(str(e))
             update_file_statue(filename, 0, error_msg=str(e))
 
+
+
+class InventoryUpload(object):
+    def __init__(self, fileobj_list):
+        self.fileobj_list = fileobj_list
+
+
+    def write_file(self, file_upload=None):
+        file_list = []
+        for fileobj in self.fileobj_list:
+            filename = fileobj.name.replace(" ", "")
+            file_path = os.path.join(get_path(UPLOAD_PATH), filename)
+            with open(file_path, "wb+") as f:
+                for chunk in fileobj.chunks():
+                    f.write(chunk)
+            file_list.append(file_path)
+            if not file_upload:
+                print "1"*100
+                self.write_recorde(file_path, filename)
+        return file_list
+
+    def write_recorde(self, file_path, filename):
+        # print filename
+        write_dict = {"filename": filename, "file_path": file_path}
+        try:
+            statue = InventoryUploadRecorde.objects.filter(filename=filename, file_path=file_path)
+        except Exception, e:
+            log.info(str(e))
+            statue = []
+        if statue:
+            print "文件记录已经存在!"
+            log.info("文件: %s 已经存在" % filename)
+            return
+        ufr = InventoryUploadRecorde(**write_dict)
+        try:
+            ufr.save()
+        except Exception, e:
+            log.info(str(e))
+        try:
+            time.sleep(1)
+            #StatementViewImport([filename]).import_files_to_statement_view()
+            InventoryReportImport([filename]).import_file()
+        except Exception, e:
+            log.info(str(e))
+            update_file_statue(filename, 0, error_msg=str(e))
+
+
+
+
+def inventory_list_files(**params):
+    file_list = InventoryUploadRecorde.objects.filter().values()
+    return list(file_list)[::-1]
+
+
+
 def list_files(**params):
     file_list = UploadFileRecorde.objects.filter().values()
     return  list(file_list)[::-1]
@@ -79,25 +134,45 @@ def list_files(**params):
 
 
 
-def delete_file(filename):
+def delete_file(filename, inventory=None):
     statue = 0
     # print  "filename:", filename
     log.info("delete filename: %s" % filename)
     msg = ""
-    try:
-        StatementView.objects.filter(filename=filename).delete()
-        ffile= UploadFileRecorde.objects.filter(filename=filename)
-        file_path = ffile[0].file_path
-        os.remove(file_path)
-        ffile.delete()
-    except Exception, e:
-        # print "delete file error: %s" %(e)
-        log.info(" delete file error: %s " % (e))
-        msg = str(e)
-        statue = -1
-        if "No such file or directory:" in str(e):
-            UploadFileRecorde.objects.filter(filename=filename).delete()
+    if inventory:
+        try:
+            InventoryReportsData.objects.filter(filename=filename).delete()
+            ffile = InventoryUploadRecorde.objects.filter(filename=filename)
+            file_path = ffile[0].file_path
+            os.remove(file_path)
+            ffile.delete()
+        except Exception ,e:
+            log.info("删除文件失败: %s" %(str(e)))
+            msg = str(e)
+            statue = -1
+            if "No such file or directory:" in str(e):
+                InventoryUploadRecorde.objects.filter(filename=filename).delete()
+        pass
+    else:
+        try:
+            StatementView.objects.filter(filename=filename).delete()
+            ffile= UploadFileRecorde.objects.filter(filename=filename)
+            file_path = ffile[0].file_path
+            os.remove(file_path)
+            ffile.delete()
+        except Exception, e:
+            # print "delete file error: %s" %(e)
+            log.info(" delete file error: %s " % (e))
+            msg = str(e)
+            statue = -1
+            if "No such file or directory:" in str(e):
+                UploadFileRecorde.objects.filter(filename=filename).delete()
     return {"statue": statue, "msg": msg }
+
+
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 # encoding:utf-8
 
 import  datetime
-from manageApp.models import UploadFileRecorde
+from manageApp.models import UploadFileRecorde, InventoryUploadRecorde
 
 
 
@@ -11,6 +11,10 @@ def update_file_statue(filename, statue, error_msg= ""):
         UploadFileRecorde.objects.filter(filename=filename).update(file_statue=str(statue), error_msg=error_msg)
     except Exception, e:
         print str(e)
+
+
+
+
 
 def get_update_file_statue(filename):
     try:
@@ -28,3 +32,23 @@ def str_to_datetime( date_str):
         print e
         dt = datetime.datetime.now()
     return dt
+
+
+
+
+def inventory_update_file_statue(filename, statue, error_msg= ""):
+    try:
+        InventoryUploadRecorde.objects.filter(filename=filename).update(file_statue=str(statue), error_msg=error_msg)
+    except Exception, e:
+        print str(e)
+
+
+def inventory_get_update_file_statue(filename):
+    try:
+        file_statue = InventoryUploadRecorde.objects.filter(filename=filename).values_list("file_statue", flat=True)[0]
+    except Exception,e :
+        file_statue = ""
+    return file_statue
+
+
+

@@ -6,13 +6,15 @@ from django.shortcuts import HttpResponseRedirect, HttpResponse
 
 from django.contrib.auth.models import User
 from django.contrib import  auth
+from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
 from manageApp.dataService.upload_file import FileUpload, list_files, delete_file
+from manageApp.dataService.upload_file import InventoryUpload, inventory_list_files
 from manageApp.dataService.deal_xls import read_xls
 from manageApp.dataService.JSON_serial import json_serial
-from manageApp.dataService.dataImport import  StatementViewImport
+from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 
 from manageApp.dataService.filename_to_storename import FilenameStoreName
 from manageApp.dataService.dataImport import get_update_error_str
@@ -64,11 +66,20 @@ def files_action(request):
     if request.method == "POST":
         if request.POST.get("action_type", "") == "delete":
             filename =  request.POST.get("filename", "")
-            result = delete_file(filename)
+            inventory = request.POST.get("inventory", "")
+            if inventory:
+                result = delete_file(filename, inventory)
+            else:
+                result = delete_file(filename)
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
             result = StatementViewImport([filename]).import_files_to_statement_view()
+            result = result[0]
+            return HttpResponse(json.dumps(result))
+        elif request.POST.get("action_type", "") == "update_report":
+            filename = request.POST.get("filename", "")
+            result =InventoryReportImport([filename]).import_file()
             result = result[0]
             return HttpResponse(json.dumps(result))
         else:
@@ -147,9 +158,23 @@ def get_update_error_msg(request):
 
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
+@csrf_exempt
 def inventory_import(request):
-
+    if request.method == "POST":
+        files_list = inventory_list_files()
+        return HttpResponse(json.dumps(files_list, default=json_serial))
     return render(request, "inventory_report_import.html", locals())
+
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def inventory_import_upload(request):
+    if request.method == "POST":
+        ufiles = request.FILES.getlist("file[]", "")
+        upload_files = InventoryUpload(ufiles).write_file()
+        return HttpResponse(json.dumps(upload_files))
+    else:
+        return render(request, "inventory_report_upload.html", locals())
 
 
 

@@ -43,8 +43,8 @@ class InventoryReport():
         store_obj = Stores(access_key=access_key, secret_key=secret_key, store_key=store_key, store_token=store_token,
                            region=region)
         rep_type = '_GET_AFN_INVENTORY_DATA_'
-        now = datetime.datetime.now().strftime('%Y-%m-%d_%H')
-        fileName = os.path.join(generate_path(GENERATE_REPORT_PATH),  str(now) +  '_FBA.txt')
+        now = datetime.datetime.now().strftime("%m-%d-%Y")
+        fileName = os.path.join(generate_path(GENERATE_REPORT_PATH),  "Inventory+Report+"+str(now) + '.txt')
         if not os.path.exists(fileName):
             os.system("touch %s"%fileName)
         # gevent.joinall([gevent.spawn(AMAZON_MWS.get_product_report,store_obj,type,fileName)])

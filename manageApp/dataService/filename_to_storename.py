@@ -5,7 +5,7 @@ import  datetime
 import pytz
 
 from django.contrib.auth.models import User
-from manageApp.models import  FilenameToStorename, StoreKeys
+from manageApp.models import  FilenameToStorename, StoreKeys, InventoryUploadRecorde
 from manageApp.dataService.upload_file import FileUpload
 from manageApp.dataService.deal_xls import read_xls
 
@@ -135,7 +135,6 @@ class FilenameStoreName(object):
 
     def post_delete_line(self, post_dict):
         dele_id = post_dict.get("dele_id", "")
-        # print dele_id
         log.info(" delete id: %s" % str(dele_id))
         return self.delete_line(**{"dele_id":dele_id})
 

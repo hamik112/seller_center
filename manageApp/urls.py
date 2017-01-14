@@ -15,6 +15,7 @@ urlpatterns = patterns('',
             url(r'^filename-to-storename-json/$', 'manageApp.views.filename_to_storename_json', name="filename_to_storename_json"),
             url(r'^get-update-error-msg/$', 'manageApp.views.get_update_error_msg', name="get_update_error_msg"),
             url(r'^inventory-report-import/$', 'manageApp.views.inventory_import', name="inventory_import"),
+            url(r'^inventory-report-upload/$', 'manageApp.views.inventory_import_upload', name="inventory_import_upload"),
 
                        )
 

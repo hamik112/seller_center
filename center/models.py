@@ -103,7 +103,21 @@ class InventoryReportsData(models.Model):
     """ Inventory Report的数据 """
     id            =  models.AutoField( primary_key=True, null=False)
     username      =  models.CharField( max_length=200, default="", null=False)
-    
+
+    filename      =  models.CharField( max_length=100, default="", null=False)    #锁属于的文件名
+
+    sku           =  models.CharField( max_length=100, default="", null=False)    #
+    asin          =  models.CharField( max_length=50,  default="", null=False)    #
+    price         =  models.CharField( max_length=50,  default="", null=False)    #
+    quantity      =  models.CharField( max_length=50,  default="", null=False)    #
+
+    class Meta:
+        db_table = "inventory_report_data"
+
+    def __unicode__(self):
+        return self.sku
+
+
 
 
 

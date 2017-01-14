@@ -26,6 +26,25 @@ class UploadFileRecorde(models.Model):
 
 
 
+
+class InventoryUploadRecorde(models.Model):
+    """ Inventory 上传文件记录 """
+    id         =  models.AutoField(primary_key=True,null=False)
+    filename   =  models.CharField( max_length=255, default="", unique=True, null=False)
+    file_path  =  models.CharField( max_length=500, default="", null=False)
+    file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
+    error_msg   = models.CharField( max_length= 300, default="", null=False)
+
+    uploadtime =  models.DateTimeField( default= timezone.now())
+
+    class Meta:
+        db_table = "inventory_upload_recorde"
+    def __unicode__(self):
+        return self.filename
+
+
+
+
 class FilenameToStorename(models.Model):
     """ 文件名与店铺的对应 """
     id              =  models.AutoField( primary_key=True, null=False)

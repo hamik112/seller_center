@@ -10,7 +10,9 @@ from celery import  task
 from celery.utils.log import get_task_logger
 
 from manageApp.models import  StatementView
+from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
+from manageApp.dataService.tasks_util import inventory_update_file_statue
 
 logger = get_task_logger(__name__)
 
@@ -130,3 +132,23 @@ def import_one_file_to_statement_view(datas, filename):
     return {"statue": 0, "msg": ""}
 
 
+@task(max_retries=3,default_retry_delay=1 * 6)
+def inventory_import(datas, filename):
+    datas = datas.get("data", [])
+    username = filename.split("__")[0]    #所属用户，从文件名里面获取
+    n = 0
+    for line in datas:
+        log1.info("current: "+ str(n))
+        n += 1
+        tmp_dict = {"sku":line[0], "asin":line[1],
+                    "price":line[2], "quantity":line[3],
+                    "filename":username}
+        try:
+            InventoryReportsData(**tmp_dict).save()
+        except Exception, e:
+            msg = "文件 %s 写入inveotry report错误: %s " % (filename,str(e))
+            log1.error(msg)
+            inventory_update_file_statue(filename,-1, error_msg=msg)
+    log1.info(str(n))
+    inventory_update_file_statue(filename, 2)
+    return {"status": 0, "msg": ""}

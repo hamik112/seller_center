@@ -58,6 +58,9 @@
 
 <div class="loading" id="loading"></div>
 
+
+
+
 <div class="row" >
     <div class="col-lg-12">
             <div class="alert alert-error" id="alert-error-id" style="display: none">
@@ -66,14 +69,16 @@
         <div class="wrapper wrapper-content animated fadeInUp">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h5>文件名对应店铺名</h5>
+                    <h3>Inventory-Reports导入</h3>
                 </div>
 
                 <div class="ibox-content">
 {#                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_line">添加</button>#}
 {#                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">店铺导入</button>#}
 {#                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_token_id">Token导入</button>#}
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">inventory_report导入</button>
+
+{#                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">inventory_report导入</button>#}
+                    <button class="btn btn-primary" data-toggle="modal"  onclick="javascript:location.href='/manage/inventory-report-upload/'">inventory_report导入</button>
                     <div class="project-list">
                         {% csrf_token %}
                         <table class="table table-hover" id="filename-to-storename-table-id">
@@ -87,86 +92,6 @@
 
 
 
-        <!-- 模态框（Modal） -->
-        <div class="modal fade bd-example-modal-lg" id="add_line" tabindex="-1" role="dialog"
-           aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog modal-lg">
-             <div class="modal-content">
-               <form class="form-horizontal" method="post" action="/manage/filename-to-storename/">
-                    {% csrf_token %}
-                 <div class="modal-header">
-                    <button type="button" class="close"
-                       data-dismiss="modal" aria-hidden="true">
-                          &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                       <h2>添加卡</h2>
-                    </h4>
-                 </div>
-
-
-                 <div class="modal-body">
-                     <div class="row">
-                       <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="dtp_input2" class="col-md-2 control-label">序号</label>
-                                <div class="col-md-9">
-                                  <input class="form-control" size="16" type="text" name="serial_number"  value="{{ result.serial_number }}" placeholder="序号"  required="required">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="dtp_input2" class="col-md-2 control-label">店名</label>
-                                <div class="col-md-9">
-                                  <input class="form-control" size="16" type="text" name="storename" placeholder="店名"  value="{{ result.storename }}" required="required">
-                                </div>
-                            </div>
-                             <div class="form-group">
-                                <label for="dtp_input1" class="col-md-2 control-label">email</label>
-                                <div class="col-md-9">
-                                  <input class="form-control"  type="text" name="email" value="" placeholder="email"  value="{{ result.email }}" required="required">
-                                </div>
-                            </div>
-                           <div class="form-group">
-                                <label for="dtp_input1" class="col-md-2 control-label">负责人</label>
-                                <div class="col-md-9">
-                                  <input class="form-control"  type="text" name="manager" value="" placeholder="负责人"  value="{{ result.email }}" required="required">
-                                </div>
-                            </div>
-                            <div class="form-group" id="data_1">
-                                <label  class="col-md-2 control-label" >回款时间</label>
-                                <div class="input-group date col-md-8">
-                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    <input type="text"  name="payment_time" class="form-control" value="" required>
-                                </div>
-                            </div>
-
-                           <div class="form-group">
-                                <label for="dtp_input2" class="col-md-2 control-label">密码</label>
-                                <div class="col-md-9">
-                                  <input class="form-control" size="16" type="text" name="password" value="starmerx"  readonly required="required">
-                                </div>
-                            </div>
-
-
-
-                            <input type="hidden" name="action_type" value="">
-                        </div>
-
-                     </div>
-                 </div>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
-                       data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" onclick=javascript:add_line(this); class="btn btn-primary">
-                       确认
-                    </button>
-                 </div>
-                 </form>
-               </div>
-             </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
-
 
 
 
@@ -175,7 +100,7 @@
            aria-labelledby="myModalLabel" aria-hidden="true">
            <div class="modal-dialog modal-lg">
              <div class="modal-content">
-               <form class="form-horizontal" method="post" action="/manage/filename-to-storename/">
+               <form class="form-horizontal" method="post" action="/manage/inventory-report-import/">
                     {% csrf_token %}
                  <div class="modal-header">
                     <button type="button" class="close"
@@ -183,21 +108,22 @@
                           &times;
                     </button>
                     <h4 class="modal-title" id="myModalLabel">
-                       <h2>添加店铺</h2>
+                       <h2>Inventory-Report导入</h2>
                     </h4>
                  </div>
 
 
                  <div class="modal-body">
+
                      <div class="row">
                        <div class="col-md-12">
-                           <h3>表格必须含有这些字段表头: 序号, 店名, 账号email,负责人, 是否真实店铺, 回款时间</h3>
+{#                           <h3>表格必须含有这些字段表头: </h3>#}
                        </div>
                          <hr />
                          <br />
                        <div class="col-md-12" style="min-height: 300px;">
                             <label class="control-label">选择文件</label>
-                            <input type="file" name="filename" id="filename-id">
+                            <input type="file" name="filename" id="report-filename-id">
                         </div>
 
                      </div>
@@ -206,7 +132,7 @@
                     <button type="button" class="btn btn-default"
                        data-dismiss="modal">关闭
                     </button>
-                    <button type="button" class="btn btn-primary" onclick=javascript:add_many_line(this); >
+                    <button type="button" class="btn btn-primary" onclick=javascript:report_import(this); >
                        确认
                     </button>
                  </div>
@@ -215,50 +141,6 @@
              </div><!-- /.modal-content -->
         </div><!-- /.modal -->
 
-             <!-- 模态框（Modal） -->
-        <div class="modal fade bd-example-modal-lg" id="add_token_id" tabindex="-1" role="dialog"
-           aria-labelledby="myModalLabel" aria-hidden="true">
-           <div class="modal-dialog modal-lg">
-             <div class="modal-content">
-               <form class="form-horizontal" method="post" action="/manage/filename-to-token/">
-                    {% csrf_token %}
-                 <div class="modal-header">
-                    <button type="button" class="close"
-                       data-dismiss="modal" aria-hidden="true">
-                          &times;
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                       <h2>添加Token</h2>
-                    </h4>
-                 </div>
-
-
-                 <div class="modal-body">
-                     <div class="row">
-                       <div class="col-md-12">
-                           <h3>表格必须含有这些字段表头:name,  ACCESS KEY,  SECRET KEY,  ACCOUNT ID,  MKPLACEID,  MWSAuthToken</h3>
-                       </div>
-                         <hr />
-                         <br />
-                       <div class="col-md-12" style="min-height: 300px;">
-                            <label class="control-label">选择文件</label>
-                            <input type="file" name="filename" id="filename-token-id">
-                        </div>
-
-                     </div>
-                 </div>
-                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default"
-                       data-dismiss="modal">关闭
-                    </button>
-                    <button type="button" class="btn btn-primary" onclick=javascript:add_token(this); >
-                       确认
-                    </button>
-                 </div>
-                 </form>
-               </div>
-             </div><!-- /.modal-content -->
-        </div><!-- /.modal -->
 
 
 {% endblock %}
@@ -275,10 +157,12 @@
 
 <script src="{% static 'admin/js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
 
+
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
     $('#filename-to-storename-table-id').bootstrapTable({
-        url: '/manage/',
+        url: '/manage/inventory-report-import/',
+        method: 'post',
         toolbar: '#toolbar', //工具按钮用哪个容器
         search: true,
         strictSearch: true,
@@ -292,7 +176,7 @@
         pageSize: 12, //每页的记录行数（*）
         pageList: [20, 50, 100, 150], //可供选择的每页的行数（*）
         dataType: "json",
-        queryParams: {"is_query": "1", "platform":'amazon'},
+        queryParams: {"is_query": "1", "platform":'amazon', "csrfmiddlewaretoken":csrf_token},
         pagination: true,
         singleSelect: false,
     {#    sidePagination: "server",#}
@@ -302,78 +186,69 @@
             align: 'center',
             valign: 'middle'
         },{
-            field: "serial_number",
-            title: "序号",
-            align: 'center',
-            valign: 'middle'
-        },{
-            field: 'storename',
-            title: '店名',
-            align: 'center',
-            valign: 'middle'
-        },{
-            field: "has_token",
-            title: "是否有token",
-            align: 'center',
-            valign: "middle",
-            formatter:function(value, row, index){
-                html_str = "";
-                if (value == "1"){
-                    html_str += "有"
-                }else{
-                    html_str += "无"
-                }
-                return html_str;
-            }
-        },{
-            field: "really_store",
-            title: "是否真实店铺",
-            align: 'center',
-            valign: 'middle',
-            formatter: function (value, row, index) {
-                html_str = "";
-                if (value == "0" ){
-                    html_str += "假"
-                }else{
-                    html_str += "真"
-                }
-                return html_str;
-            }
-        },{
-            field: "payment_time",
-            title: "回款时间",
-            align: 'center',
-            valign: 'middle'
-        },{
-            field: "action",
-            title: '更新',
-            align: 'center',
-            valign: 'middle',
-            formatter:function (value, row, index) {
-                html_str = "<button class='btn btn-primary' onclick=javascript:update_line(this);>修改</button>";
-                return html_str;
-            }
-        }, {
-            field: 'action',
-            title: "删除",
+            field: 'filename',
+            title: '文件名',
             align: 'center',
             valign:'middle',
             formatter: function (value, row, index) {
-                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_line(this);>删除</button>";
+                fvalue = value.split("__");
+                filename = fvalue[fvalue.length-1];
+                return filename;
+            }
+        },{
+            field: 'uploadtime',
+            title: '上传时间',
+            align: 'center',
+            valign: 'middle'
+        },{
+            field: 'file_statue',
+            title: "状态",
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                if (value == '0'){
+                    htm_str =  "<span >正常</span>";
+                }else if(value == '1'){
+                  htm_str =  "<span style='color:green'>正在更新..</span>";
+                }else if(value == '2') {
+                    htm_str =  "<span style='color:blue'>已更新</span>";
+                }else{
+                    htm_str =  "<a onclick=javascript:error_detail(this); ><span style='color:red'>异常</span></a>";
+                }
+                return htm_str;
+            }
+        },{
+            field: "file_path",
+            title: 'statement更新',
+            align: 'center',
+            valign: 'middle',
+            formatter:function (value, row, index) {
+                filename = value.split("/");
+                filename = filename[filename.length-1].replace(" ","");
+                html_str = "<button class='btn btn-primary' onclick=javascript:report_update_file(\'"+filename+"\');>更新</button>";
+                return html_str;
+            }
+        }, {
+            field: 'file_path',
+            title: "操作",
+            align: 'center',
+            valign:'middle',
+            formatter: function (value, row, index) {
+                filename = value.split("/");
+                filename = filename[filename.length-1].replace(" ","");
+                htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file(\'"+filename+"\');>删除</button>";
                 return htm_str;
             }
         }],
     });
 
 
-    function  delete_line(thisobj) {
-        dele_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
-        console.log(dele_id);
-        post_dict = {"dele_id": dele_id,
-            "action_type": "delete",
+       function  delete_file(filename) {
+        post_dict = {"filename": filename,
+            "action_type": "delete", "inventory":"1",
             "csrfmiddlewaretoken": csrf_token};
         $.ajax({
-            url: "/manage/filename-to-storename/",
+            url: "/manage/files-list/",
             type: "POST",
             data: post_dict,
             dataType: "json",
@@ -383,31 +258,30 @@
             },
             success: function (sdata) {
                 console.log(sdata);
-                showBody();
                 if (sdata.statue == '0'){
-                    $('#myModal').modal('hide');
-                    alert("删除成功!");
+                    showBody();
+                    alert("删除文件成功!");
                 }else{
-                    alert("删除失败: " + sdata.msg);
+                    showBody();
+                    alert("删除文件失败: " + sdata.msg);
                 }
                 location.reload();
             }, error: function (edata) {
                 showBody();
-                console.log(edata)
-                alert("删除失败" + edata);
+                alert("删除文件失败" + edata);
 
             }
         });
     }
 
-    function  update_line(thisobj) {
-        update_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
-        var post_dict = {"update_id": update_id,
-            "action_type": "update",
+    
+    function  report_update_file(filename) {
+        var post_dict = {"filename": filename,
+            "action_type": "update_report",
             "csrfmiddlewaretoken": csrf_token};
         console.log(post_dict);
         $.ajax({
-           url: "/manage/filename-to-storename/",
+           url: "/manage/files-list/",
             type: "POST",
             data: post_dict,
             dataType: "json",
@@ -416,14 +290,12 @@
                showMask();
             },
             success: function (sdata) {
-{#                console.log(sdata)#}
+                console.log(sdata)
+                 showBody();
                 if (sdata.statue == '0'){
-                    infos_to_modal(sdata.infos);
-                    showBody();
-                    $("[name='action_type']").val("update");
-                    $('#add_line').modal('show');
+{#                    alert("更新成功!");#}
+                    location.reload()
                 }else{
-                    showBody();
                     alert("更新失败, "+sdata.msg);
                 }
             }, error: function (edata) {
@@ -434,54 +306,20 @@
         });
     }
 
-    function  add_line() {
-        var is_update = $("[name='action_type']").val();
-        var action_type = "add";
-        var serial_number = $("[name='serial_number']").val();
-        var storename  = $("[name='storename']").val();
-        var email  =  $("[name='email']").val();
-        var password = $("[name='password']").val()
-        var manager = $("[name='manager']").val();
-        var csrf_token = $("[name='csrfmiddlewaretoken']").val();
-        post_dict = {"action_type":action_type, "serial_number": serial_number,
-            "storename":storename, "email": email, "is_update": is_update,"manager":manager,
-            "password": password, "csrfmiddlewaretoken":csrf_token};
-        $.ajax({
-            url: "/manage/filename-to-storename/",
-            type: "POST",
-            data: post_dict,
-            dataType: "json",
-            beforeSend:function(XMLHttpRequest){
-               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
-               showMask();
-            },
-            success: function (sdata) {
-                showBody();
-                if (sdata.statue == '0'){
-                    $("#add_line").modal('hide');
-                    alert("操作成功!")
-                    location.reload();
-                }else{
-                    alert("操作失败: "+sdata.msg);
-                }
-            }, error: function (edata) {
-                console.log(edata);
-                showBody();
-                alert("操作失败!" + edata);
-            }
-        });
-    }
 
-    function add_many_line() {
-        var action_type = "file_storename";
+
+
+
+    function report_import() {
+        var action_type = "report_file";
         var csrf_token = $("[name='csrfmiddlewaretoken']").val();
         var formData = new FormData();
-        formData.append("filename", document.getElementById("filename-id").files[0]);
+        formData.append("filename", document.getElementById("report-filename-id").files[0]);
         formData.append("action_type", action_type);
         formData.append("csrfmiddlewaretoken", csrf_token);
 
         $.ajax({
-            url: "/manage/filename-to-storename/",
+            url: "/manage/inventory-report-import/",
             type: "POST",
             data: formData,
             dataType: "json",
@@ -581,6 +419,9 @@
     });
 
 
+
+
+
     function init() {
         if ("{{ result.statue }}" == "0"){
             $("#alert-error-id").css("display", "block");
@@ -590,6 +431,8 @@
     }
     init();
     </script>
+
+
 
 
 {% endblock %}

@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+
+{% block links %}
+    <link href="{% static 'admin/css/plugins/dropzone/basic.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/plugins/dropzone/dropzone.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+
+
+
+{% block active_list %}
+    <li ><a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span></a></li>
+    <li ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a>
+    </li>
+     <li><a href="/manage/filename-to-storename/"   class="J_pro"><i class="fa fa-link"></i> <span>文件名对应店铺</span></a></li>
+    <li class="active"><a href="/manage/inventory-report-import/"   class="J_pro"><i class="fa fa-link"></i> <span>InventoryReport导入</span></a></li>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="row" >
+    <div class="col-lg-12">
+            <div class="alert alert-error" id="alert-error-id" style="display: none">
+                <a class="alert-link">{{ result.msg }}</a>
+           </div>
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-title">
+                     <h3><a href="/manage/inventory-report-import/">Inventory-Reports导入</a></h3>
+                </div>
+
+                <div class="ibox-content">
+                    <div class="wrapper wrapper-content animated fadeIn">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h4>Dropzone Area(请一次性不要上传超过10个文件，所有文件大小不要超过10M)</h4>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-user">
+                                                <li>
+                                                    <a href="#">Config option 1</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#">Config option 2</a>
+                                                </li>
+                                            </ul>
+                                            <a class="close-link">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <form id="my-awesome-dropzone" class="dropzone" action="/manage/inventory-report-upload/">
+                                            {% csrf_token %}
+                                            <div class="dropzone-previews"></div>
+                                            <button type="submit" class="btn btn-primary pull-right">提交</button>
+                                        </form>
+                                        <div>
+                                            <div class="m text-right">
+                                                <small>点击或者拖文件到上面区域即可上传文件</small>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+{% block footer %}
+
+    <!-- DROPZONE -->
+    <script src="{% static 'admin/js/plugins/dropzone/dropzone.js' %}"></script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            Dropzone.options.myAwesomeDropzone = {
+
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                parallelUploads: 100,
+                maxFiles: 100,
+
+                // Dropzone settings
+                init: function () {
+                    var myDropzone = this;
+
+                    this.element.querySelector("button[type=submit]").addEventListener("click", function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        myDropzone.processQueue();
+                    });
+                    this.on("sendingmultiple", function () {
+                    });
+                    this.on("successmultiple", function (files, response) {
+                    });
+                    this.on("errormultiple", function (files, response) {
+                    });
+                }
+
+            }
+
+        });
+    </script>
+
+{% endblock %}

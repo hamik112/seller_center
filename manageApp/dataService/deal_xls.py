@@ -50,3 +50,21 @@ def read_xls(filename):
 
 
 
+def inventory_read_txt(filename):
+    _value_list = []
+    if not os.path.exists(filename):
+        return {"status": -1, "msg":"not found file ...", "data":_value_list}
+    try:
+        data = open(filename,"r")
+    except Exception, e:
+        errors = "open %s error" %str(filename)
+        log2.error(errors)
+        return {'status': -2, "msg":"", "data": _value_list}
+    for line in data:
+        line = line.replace("\r\n", "")
+        _value_list.append(line.split("\t"))
+    try:
+        data.close()
+    except:
+        pass
+    return {"status": 1, "msg": "", "data": _value_list}
