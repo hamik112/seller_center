@@ -42,14 +42,14 @@
                             <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{% if request.user.username %}{{ request.user.username }}{% else %}Not Login{% endif %}</strong>
                              </span> <span class="text-muted text-xs block">{% if request.user.username %}{{ request.user.username }}{% else %}Not Login{% endif %}<b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="/#/">个人信息</a></li>
-                                <li><a href="/#/">修改密码</a></li>
+                                <li><a href="#">个人信息</a></li>
+                                <li><a href="#">修改密码</a></li>
                                 <li class="divider"></li>
                                 <li><a href="/manage/user-logout/">退出</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
-                            <a href="/#/">M</a>
+                            <a href="#">M</a>
                         </div>
                     </li>
                     {% block active_list %}

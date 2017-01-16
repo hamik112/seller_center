@@ -293,7 +293,7 @@ def amazon_logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/amazon-login/")
 
-
+@csrf_exempt
 def amazon_login(request):
     email = request.user.username
     store_name = get_storename(email)

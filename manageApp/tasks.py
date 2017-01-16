@@ -9,7 +9,7 @@ import  logging
 from celery import  task
 from celery.utils.log import get_task_logger
 
-from manageApp.models import  StatementView
+from manageApp.models import  StatementView, FilenameToStorename
 from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
@@ -77,18 +77,22 @@ def import_one_file_to_statement_view(datas, filename):
                 msg = "没有找到字段: " + str(name)
             update_file_statue(filename, -1, error_msg=msg)
             return {"statue": -1, "msg": msg}
-    try:
-        header_dict[u"店铺"] = header_list.index(u"店铺")
-    except Exception, e:
-        msg = "没有找到字段: 店铺"
-        update_file_statue(filename, -1, error_msg=msg)
-        return {"statue": -1, "msg": msg}
-
+    # try:
+    #     header_dict[u"店铺"] = header_list.index(u"店铺")
+    # except Exception, e:
+    #     msg = "没有找到字段: 店铺"
+    #     update_file_statue(filename, -1, error_msg=msg)
+    #     return {"statue": -1, "msg": msg}
 
     filename_split_list = filename.split("-")
     if len(filename_split_list) < 2:
         return {"statue": -1, "msg": "文件名错误:文件名格式不正确!"}
     serial_number = "-".join(filename.split("-")[:2])
+    try:
+        store_name = FilenameToStorename.objects.get(serial_number=serial_number).storename
+    except Exception ,e:
+        log1.info("filename: %s not found store_name"%str(filename))
+        store_name = ""
     try:
         area  = filename.split(".")[0].split("-")[-1]
     except Exception, e:
@@ -100,20 +104,17 @@ def import_one_file_to_statement_view(datas, filename):
         n += 1
         tmp_dict = {"filename": filename}
         for name in need_header_list:
-            if name == u"店铺" or name == "店铺":
-                tmp_dict["store_name"] = data_line[header_dict.get(name)]
-            elif name == "date_time":
+            # if name == u"店铺" or name == "店铺":
+            #     tmp_dict["store_name"] = data_line[header_dict.get(name)]
+            if name == "date_time":
                 print data_line[header_dict.get("date_time")]
                 tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
             else:
                 dict_name = name.replace(" ", "_")
                 tmp_dict[dict_name] = data_line[header_dict.get(name)]
         tmp_dict["serial_number"] = serial_number
-        #if not tmp_dict.get("order_id"):
-            #tmp_dict["order_id"] = tmp_dict.get("date_time", "")
-            #tmp_dict["order_id"] = ""
+        tmp_dict["store_name"] = store_name
         tmp_dict["area"] = area
-        # tmp_dict["unique_id"] = str(tmp_dict.get("date_time", "")) +"_" +str(tmp_dict.get("order_id", "")) + "_" + str(tmp_dict.get("sku","")) + str(tmp_dict.get("total",""))
         try:
             stv = StatementView(**tmp_dict)
             stv.save()

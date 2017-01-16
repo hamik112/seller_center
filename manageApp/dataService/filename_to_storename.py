@@ -31,7 +31,7 @@ def user_add(update=None, **parmas):
         try:
             User.objects.create_user(username=parmas.get("email", ""),
                                      email=parmas.get("email", ""),
-                                     password=parmas.get("password"))
+                                     password=parmas.get("password", ""))
         except Exception, e:
             # print str(e)
             log.info(str(e))
@@ -88,6 +88,7 @@ class FilenameStoreName(object):
         # print "update: ",update
         fts = FilenameToStorename(**params)
         statue, msg = 0, ""
+        params["password"] = "starmerx"
         try:
             fts.save()
             statue, msg = user_add(update=update, **params)
@@ -121,7 +122,7 @@ class FilenameStoreName(object):
         if keys_list:
             keys_list = keys_list
         else:
-            keys_list = ["serial_number", "storename", "email", "manager", "payment_time"]
+            keys_list = ["serial_number", "storename", "email","password" ,"manager", "payment_time"]
         params_dict = {}.fromkeys(keys_list, "")
         for name in keys_list:
             params_dict[name] = str(post_dict.get(name, "")).strip()
