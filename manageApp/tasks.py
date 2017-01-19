@@ -29,8 +29,7 @@ def import_one_file_to_statement_view(file_path, filename):
         datas = read_xls(file_path)
     except Exception, e:
         print str(e)
-        datas = {"data": []}
-    # datas = task_dict.get("datas",{})
+        datas = {"data": [], "msg": "文件去读失败"}
     # filename = task_dict.get("filename", "")
     datas = datas.get("data", {})
 
