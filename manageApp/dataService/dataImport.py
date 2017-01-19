@@ -6,7 +6,7 @@ import threading
 import  os
 
 
-from manageApp.dataService.deal_xls import read_xls, inventory_read_txt
+from manageApp.dataService.deal_xls import inventory_read_txt
 from manageApp.models import StatementView, UploadFileRecorde, InventoryUploadRecorde
 
 
@@ -50,9 +50,8 @@ class StatementViewImport(object):
                         statue_dict = {"filename": filename, "statue": -1, "msg": str(e)}
                     if os.path.exists(file_path):
                         try:
-                            datas = read_xls(file_path)
                             update_file_statue(filename, 1)
-                            import_one_file_to_statement_view.delay(datas, filename)
+                            import_one_file_to_statement_view.delay(file_path, filename)
                             statue_dict = {"filename": filename, "statue": 0, "msg": ""}
                         except Exception, e:
                             log.info(str(e))

@@ -13,6 +13,8 @@ from manageApp.models import  StatementView, FilenameToStorename
 from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
+from manageApp.dataService.deal_xls import read_xls
+
 
 logger = get_task_logger(__name__)
 
@@ -20,8 +22,14 @@ log1 = logging.getLogger("tasks")
 
 
 @task(max_retries=3,default_retry_delay=1 * 6)
-def import_one_file_to_statement_view(datas, filename):
+def import_one_file_to_statement_view(file_path, filename):
     logger.info("running ...")
+    print file_path, filename
+    try:
+        datas = read_xls(file_path)
+    except Exception, e:
+        print str(e)
+        datas = {"data": []}
     # datas = task_dict.get("datas",{})
     # filename = task_dict.get("filename", "")
     datas = datas.get("data", {})
