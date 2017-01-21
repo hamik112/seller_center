@@ -65,14 +65,23 @@ def import_one_file_to_statement_view(file_path, filename):
         msg = "表格无数据或请查看是否在第一个sheet里面或查看sheet名称是sheet1"
         return {"statue": -1, "msg": msg}
         update_file_statue(filename, -1, error_msg=msg)
-    header_list = value_list[7]
+    if len(value_list[3]) > 20:
+        header_list = value_list[0]
+        datas_list = value_list[1:]
+    else:
+        header_list = value_list[7]
+        datas_list = value_list[8:]
     need_header_list = ['date_time', 'settlement id', 'type', 'order id', 'sku', 'description', 'quantity',
                         'marketplace', 'fulfillment', 'order city', 'order state', 'order postal',
                         'product sales', "shipping credits", "gift wrap credits", "promotional rebates",
                         "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                         "other", "total" ]
     header_dict = {}
-    # print header_list
+    # print header_list, 
+    header_num_list = [0, 1, 2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20,21]
+    header_dict = dict(zip(need_header_list,header_num_list))
+    """
+    #实在没办法，根据头部字段来判断位置，他们写的不统一，实在难搞，直接上数字
     for name in need_header_list:
         try:
             if name == "date_time":
@@ -86,6 +95,7 @@ def import_one_file_to_statement_view(file_path, filename):
                 msg = "没有找到字段: " + str(name)
             update_file_statue(filename, -1, error_msg=msg)
             return {"statue": -1, "msg": msg}
+    """
     # try:
     #     header_dict[u"店铺"] = header_list.index(u"店铺")
     # except Exception, e:
@@ -108,7 +118,7 @@ def import_one_file_to_statement_view(file_path, filename):
         area = ""
     log1.info(len(value_list))
     n = 0
-    for data_line in value_list[8:]:
+    for data_line in datas_list:
         log1.info("current: "+ str(n))
         n += 1
         tmp_dict = {"filename": filename}
