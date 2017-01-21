@@ -14,7 +14,7 @@ from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
 from manageApp.dataService.deal_xls import read_xls
-
+from manageApp.dataService.csv_to_excel import csv_to_xls
 
 logger = get_task_logger(__name__)
 
@@ -25,11 +25,13 @@ log1 = logging.getLogger("tasks")
 def import_one_file_to_statement_view(file_path, filename):
     logger.info("running ...")
     print file_path, filename
+    if filename.endswith(".csv"):
+        file_path = csv_to_xls(file_path)
     try:
         datas = read_xls(file_path)
     except Exception, e:
         print str(e)
-        datas = {"data": [], "msg": "文件去读失败"}
+        datas = {"data": [],"statue": -1 ,"msg": "文件格式错误,请重新文件另外存为.xls文件再上传"}
     # filename = task_dict.get("filename", "")
     datas = datas.get("data", {})
 

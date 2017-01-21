@@ -6,6 +6,7 @@ from manageApp.models import  UploadFileRecorde, StatementView, InventoryUploadR
 from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 from manageApp.dataService.tasks_util import update_file_statue
 from center.models import InventoryReportsData
+from manageApp.dataService.csv_to_excel import csv_to_xls
 import  logging
 
 log = logging.getLogger("scripts")
@@ -35,9 +36,14 @@ class FileUpload(object):
             with open(file_path, "wb+") as f:
                 for chunk in fileobj.chunks():
                     f.write(chunk)
-            file_list.append(file_path)
+            if file_path.endswith(".csv"):
+                file_path_name = csv_to_xls(file_path)
+                filename = str(filename.split(".csv")[0]) + ".xls"
+            else:
+                file_path_name = file_path
+            file_list.append(file_path_name)
             if not file_upload:
-                self.write_recorde(file_path, filename)
+                self.write_recorde(file_path_name, filename)
         return file_list
 
     def write_recorde(self, file_path, filename):
