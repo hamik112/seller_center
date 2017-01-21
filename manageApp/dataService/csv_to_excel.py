@@ -31,6 +31,7 @@ def csv_to_xls(filename):
         excel_filename = str(filename.split(".")[0]) + ".xls"
         print excel_filename
         myexcel.save(excel_filename)
+        csvfile.close()
     except Exception, e:
         print str(e)
         myexcel = xlwt.Workbook(encoding = 'utf-8')
@@ -53,7 +54,7 @@ def csv_to_xls(filename):
         #最后保存到excel
         excel_filename = str(filename.split(".")[0]) + ".xls"
         myexcel.save(excel_filename)
-
+        csvfile.close()
     return excel_filename
 
 
