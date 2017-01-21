@@ -3,7 +3,7 @@
 python  change_auth_user_length.py &
 
 
-nohup python manage.py celery worker -q -c 2  --loglevel=info  >/dev/null 2>&1 &
+#nohup python manage.py celery worker -q -c 2  --loglevel=info  >/dev/null 2>&1 &
 
 
 #python manage.py runserver 0.0.0.0:8080 &
