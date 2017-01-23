@@ -2,6 +2,7 @@
 import  time
 import  os
 from django.conf import  settings
+from django.db.models import Q
 from manageApp.models import  UploadFileRecorde, StatementView, InventoryUploadRecorde
 from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 from manageApp.dataService.tasks_util import update_file_statue
@@ -125,24 +126,36 @@ def inventory_list_files(**params):
 
 
 
-def list_files(**params):
-    file_list = UploadFileRecorde.objects.filter().values()
-    return  list(file_list)[::-1]
-    tmp_file_list = []
-    for fn in file_list:
-        tmp_dict = {}
-        tmp_dict["filename"] = fn.filename.split("__")[-1]
-        tmp_dict["file_path"] = fn.file_path
-        tmp_dict["upload_date"] = fn.uploadtime
-        tmp_file_list.append(tmp_dict)
-    return list(tmp_file_list)[::-1]
+def list_files(params):
+    pageSize = params.get("pageSize", "10")
+    pageNumber = params.get("pageNumber", "1")
+    searchText = params.get("searchText","")
+    query_select = Q()
+    if searchText:
+        try:
+            query_select = query_select &Q(id=int(searchText))
+        except Exception, e:
+            query_select = query_select &Q(filename__contains=searchText)
+    else:
+        query_select = query_select
+
+    if int(pageSize) < 0:
+        pageSize = 12
+    else:
+        pageSize = int(pageSize)
+    if int(pageNumber) < 1:
+        pageNumber = 1
+    else:
+        pageNumber = int(pageNumber)
+    file_list = UploadFileRecorde.objects.filter(query_select).values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
+    total = UploadFileRecorde.objects.filter(query_select).count()
+    return  {"rows": list(file_list)[::-1], "total": total}
 
 
 
 
 def delete_file(filename, inventory=None):
     statue = 0
-    # print  "filename:", filename
     log.info("delete filename: %s" % filename)
     msg = ""
     if inventory:
@@ -160,19 +173,21 @@ def delete_file(filename, inventory=None):
                 InventoryUploadRecorde.objects.filter(filename=filename).delete()
         pass
     else:
+        id_list = filename #删除上传记录的时候，传递的是id列表
         try:
-            StatementView.objects.filter(filename=filename).delete()
-            ffile= UploadFileRecorde.objects.filter(filename=filename)
-            file_path = ffile[0].file_path
-            os.remove(file_path)
-            ffile.delete()
+            file_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("filename",flat=True)
+            file_path_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("file_path",flat=True)
+            StatementView.objects.filter(filename__in=file_list).delete()
+            UploadFileRecorde.objects.filter(id__in=id_list).delete()
+            for file_path in file_path_list:
+                os.remove(file_path)
         except Exception, e:
-            # print "delete file error: %s" %(e)
             log.info(" delete file error: %s " % (e))
             msg = str(e)
             statue = -1
             if "No such file or directory:" in str(e):
-                UploadFileRecorde.objects.filter(filename=filename).delete()
+                #UploadFileRecorde.objects.filter(filename=filename).delete()
+                UploadFileRecorde.objects.filter(id__in=filename).delete()
     return {"statue": statue, "msg": msg }
 
 

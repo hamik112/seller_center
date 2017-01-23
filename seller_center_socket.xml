@@ -5,6 +5,6 @@
     <module>start_server</module>
     <processes>1</processes> <!-- 进程数 -->
     <daemonize>center/log/seller_center_uwsgi.log</daemonize>
-    <log-maxsize>2097152</log-maxsize> <!--2 M 分块: 2097152 = 1024 * 1024 *2 -->
+    <log-maxsize>10485760</log-maxsize> <!--2 M 分块: 2097152 = 1024 * 1024 *2 -->
 </uwsgi>
 

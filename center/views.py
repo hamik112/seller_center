@@ -364,6 +364,7 @@ def pdf_file_view(request):
     parmas = {"month": month, "year": year, "begin_date": begin_date, "end_date": end_date}
     spd = SummaryPdfData(username=username, **parmas)
     storename = spd.get_storename()
+    legal_name = spd.get_legal_name()
     product_sales = spd.product_sales()
     product_refund = spd.product_refund()
     FBA_product_sales = spd.FBA_product_sales()

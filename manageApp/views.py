@@ -67,10 +67,11 @@ def files_action(request):
         if request.POST.get("action_type", "") == "delete":
             filename =  request.POST.get("filename", "")
             inventory = request.POST.get("inventory", "")
-            if inventory:
-                result = delete_file(filename, inventory)
+            id_list = request.POST.getlist("filename[]", [])
+            if id_list:
+                result = delete_file(id_list)                
             else:
-                result = delete_file(filename)
+                result = delete_file(filename, inventory)
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
@@ -91,7 +92,8 @@ def files_action(request):
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login/")
 @login_required(login_url="/manage/user-login/")
 def list_fils_json(request):
-    files_list = list_files()
+    #files_list = list_files(**{"pageSize":pageSize, "pageNumber":pageNumber})
+    files_list = list_files(request.GET)
     return HttpResponse(json.dumps(files_list, default=json_serial))
 
 

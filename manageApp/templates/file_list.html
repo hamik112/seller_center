@@ -61,7 +61,17 @@
 
                     <div class="project-list">
                         {% csrf_token %}
-                        <table class="table table-hover" id="list-files-table-id">
+                        <div id="toolbar">
+                          <button id="remove" class="btn btn-danger" disabled>
+                            <i class="glyphicon glyphicon-remove"></i> Delete
+                          </button>
+                        </div>
+                        <table class="table table-hover" 
+                               id="list-files-table-id"  
+                               data-show-export="true"
+                               data-show-columns="true"
+                               data-show-pagination-switch="true"
+                               >
                         </table>
                     </div>
                 </div>
@@ -82,33 +92,62 @@
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
 
-    <script>
+<script src="http://issues.wenzhixin.net.cn/bootstrap-table/assets/bootstrap-table/src/extensions/export/bootstrap-table-export.js"></script>
+<script src="http://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js"></script>
+
+
+
+
+<script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
-    $('#list-files-table-id').bootstrapTable({
+    var $table = $('#list-files-table-id');
+    var $remove = $('#remove');
+    selections = [];
+
+ function initTable() {
+    $table.bootstrapTable({
         url: '/manage/list-files-json/',
-        toolbar: '#toolbar', //工具按钮用哪个容器
+        toolbar: '#toolbar',               //工具按钮用哪个容器
         search: true,
         strictSearch: true,
         showRefresh: true,
         showToggle: true,
-        striped: true, //是否显示行间隔色
-    {#    cache: false, //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）#}
-        sortable: true, //是否启用排序
-        sortOrder: "trade_id", //排序方式
-        pageNumber: 1, //初始化加载第一页，默认第一页
-        pageSize: 12, //每页的记录行数（*）
-        pageList: [20, 50, 100, 150], //可供选择的每页的行数（*）
+        striped: true,                    //是否显示行间隔色
+    
+        sortable: true,                   //是否启用排序
+        sortOrder: "trade_id",            //排序方式
+        pageNumber: 1,                    //初始化加载第一页，默认第一页
+        pageSize: 10,                     //每页的记录行数（*）
+        pageList: [10, 20, 500, 100,150], //可供选择的每页的行数（*）
         dataType: "json",
-        queryParams: {"is_query": "1", "platform":'amazon'},
+        queryParamsType: "",
+        //queryParams: {"is_query": "1", "platform":'amazon'},
         pagination: true,
         singleSelect: false,
-    {#    sidePagination: "server",#}
-        columns: [{
-            field: "id",
-            title: 'id',
-            align: 'center',
-            valign: 'middle'
-        },{
+        sidePagination: "server",         //服务器分页
+        columns: [
+        [
+                    {
+                        field: 'state',
+                        checkbox: true,
+                        rowspan: 2,
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: 'Item ID',
+                        field: 'id',
+                        rowspan: 2,
+                        align: 'center',
+                        valign: 'middle',
+                        sortable: true,
+                        //footerFormatter: totalTextFormatter
+                    }, {
+                        title: 'Item Detail',
+                        colspan: 5,
+                        align: 'center'
+                    }
+        ],
+        [{
             field: 'filename',
             title: '文件名',
             align: 'center',
@@ -151,7 +190,8 @@
                 html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>更新</button>";
                 return html_str;
             }
-        }, {
+        }
+        /*, {
             field: 'file_path',
             title: "操作",
             align: 'center',
@@ -162,14 +202,54 @@
                 htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file(\'"+filename+"\');>删除</button>";
                 return htm_str;
             }
-        }],
+        }*/
+    ],]
+    });
+   }
+
+        $table.on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+            selections = getIdSelections();
+        });
+        $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+            if (index % 2 == 1) {
+                $detail.html('Loading from ajax request...');
+                $.get('LICENSE', function (res) {
+                    $detail.html(res.replace(/\n/g, '<br>'));
+                });
+            }
+        });
+
+
+    $remove.click(function () {
+        var ids = getIdSelections();
+        console.log(ids);
+        delete_file(ids);
+
     });
 
+    function getIdSelections() {
+        return $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.id
+        });
+    }
 
-    function  delete_file(filename) {
-        post_dict = {"filename": filename,
+
+    function totalTextFormatter(data) {
+        return 'Total';
+    }
+
+
+
+
+
+
+    function  delete_file(ids) {
+        post_dict = {"filename": ids,
             "action_type": "delete",
             "csrfmiddlewaretoken": csrf_token};
+        console.log(post_dict);
         $.ajax({
             url: "/manage/files-list/",
             type: "POST",
@@ -192,7 +272,12 @@
             }, error: function (edata) {
                 showBody();
                 alert("删除文件失败" + edata);
-
+            },complete: function(){
+                $table.bootstrapTable('remove', {
+                    field: 'id',
+                    values: ids
+                });
+                $remove.prop('disabled', true);
             }
         });
     }
@@ -270,6 +355,12 @@
         $("#loading").empty();
 {#        $("#cover").show();#}
     }
+
+
+
+$(function (){
+    initTable();
+});
     </script>
 
 

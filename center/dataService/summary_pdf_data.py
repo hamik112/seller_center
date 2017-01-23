@@ -85,6 +85,14 @@ class SummaryPdfData(object):
             storename = ""
         return storename
 
+    def get_legal_name(self):
+        try:
+            legal_name = FilenameToStorename.objects.filter(serial_number=self.serial_number).values_list("manager",flat=True)[0]
+        except Exception, e:
+            legal_name = ""
+        return legal_name
+
+
     def product_sales(self):
         # print self.serial_number
         query_select = Q(serial_number=self.serial_number, type="Order", fulfillment="Seller")
