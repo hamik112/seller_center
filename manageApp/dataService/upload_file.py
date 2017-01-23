@@ -130,15 +130,6 @@ def list_files(params):
     pageSize = params.get("pageSize", "10")
     pageNumber = params.get("pageNumber", "1")
     searchText = params.get("searchText","")
-    query_select = Q()
-    if searchText:
-        try:
-            query_select = query_select &Q(id=int(searchText))
-        except Exception, e:
-            query_select = query_select &Q(filename__contains=searchText)
-    else:
-        query_select = query_select
-
     if int(pageSize) < 0:
         pageSize = 12
     else:
@@ -147,6 +138,15 @@ def list_files(params):
         pageNumber = 1
     else:
         pageNumber = int(pageNumber)
+
+    query_select = Q()
+    if searchText:
+        try:
+            query_select = query_select &Q(id=int(searchText))
+        except Exception, e:
+            query_select = query_select &(Q(filename=searchText)| Q(serial_number=searchText))
+    else:
+        query_select = query_select
     file_list = UploadFileRecorde.objects.filter(query_select).values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
     total = UploadFileRecorde.objects.filter(query_select).count()
     return  {"rows": list(file_list)[::-1], "total": total}

@@ -12,6 +12,7 @@ from django.utils import timezone
 class UploadFileRecorde(models.Model):
     """ 记录上传的文件 """
     id         =  models.AutoField(primary_key=True,null=False)
+    serial_number = models.CharField( max_length=50, default="", null=False )
     filename   =  models.CharField( max_length=255, default="", unique=True, null=False)
     file_path  =  models.CharField( max_length=500, default="", null=False)
     file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
