@@ -49,7 +49,8 @@ class FileUpload(object):
 
     def write_recorde(self, file_path, filename):
         # print filename
-        write_dict = {"filename":filename, "file_path": file_path}
+        serial_number = "-".join(filename.split("-")[:2])
+        write_dict = {"filename":filename, "file_path": file_path, "serial_number":serial_number}
         try:
             statue = UploadFileRecorde.objects.filter(filename=filename,file_path=file_path)
         except Exception, e:
@@ -147,7 +148,7 @@ def list_files(params):
             query_select = query_select &(Q(filename=searchText)| Q(serial_number=searchText))
     else:
         query_select = query_select
-    file_list = UploadFileRecorde.objects.filter(query_select).values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
+    file_list = UploadFileRecorde.objects.filter(query_select).order_by("-id").values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
     total = UploadFileRecorde.objects.filter(query_select).count()
     return  {"rows": list(file_list)[::-1], "total": total}
 
@@ -193,6 +194,15 @@ def delete_file(filename, inventory=None):
 
 
 
+def download_file(filename):
+    try:
+        the_file_name = UploadFileRecorde.objects.filter(filename=filename).values_list("file_path",flat=True)[0]
+    except Exception, e:
+        the_file_name = ""
+    if os.path.exists(the_file_name):
+        return the_file_name
+    else:
+        return ""
 
 
 

@@ -8,6 +8,7 @@ ALL_STATEMENTS_FILE_PATH =  settings.ALL_STATEMENTS_FILE_PATH
 
 
 def file_iterator(file_name, chunk_size=512):
+    print "file_name",file_name
     file_name_path = os.path.join(GENERATOR_PATH, file_name)
     with open(file_name_path) as f:
         while True:
