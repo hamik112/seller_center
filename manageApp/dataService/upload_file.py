@@ -208,7 +208,6 @@ def download_file(filename, inventory_file=None):
             the_file_name = UploadFileRecorde.objects.filter(filename=filename).values_list("file_path",flat=True)[0]
         except Exception, e:
             the_file_name = ""
-
     if os.path.exists(the_file_name):
         return the_file_name
     else:

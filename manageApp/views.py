@@ -151,7 +151,6 @@ def ajax_download_filename(request):
 
 
 
-
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def filename_to_token(request):
