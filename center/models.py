@@ -83,6 +83,7 @@ class TransactionView(models.Model):
 
 
 class InventoryReports(models.Model):
+    
     id            =   models.AutoField( primary_key=True,null=False)
     username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
@@ -106,16 +107,19 @@ class InventoryReportsData(models.Model):
 
     filename      =  models.CharField( max_length=100, default="", null=False)    #锁属于的文件名
 
-    sku           =  models.CharField( max_length=100, default="", null=False)    #
-    asin          =  models.CharField( max_length=50,  default="", null=False)    #
-    price         =  models.CharField( max_length=50,  default="", null=False)    #
-    quantity      =  models.CharField( max_length=50,  default="", null=False)    #
+    seller_sku              = models.CharField( max_length=100, default="", null=False)    #
+    fulfillment_channel_sku = models.CharField( max_length=100, default="", null=False)
+    asin                    = models.CharField( max_length=50,  default="", null=False)    #
+    condition_type          = models.CharField( max_length=100, default="", null=False)
+    Warehouse_Condition_code= models.CharField( max_length=100, default="", null=False)
+    Quantity_Available      = models.CharField( max_length=50,  default="", null=False)
+
 
     class Meta:
         db_table = "inventory_report_data"
 
     def __unicode__(self):
-        return self.sku
+        return self.seller_sku
 
 
 

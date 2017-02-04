@@ -34,10 +34,11 @@ def home(request):
 @csrf_exempt
 @login_required(login_url="/amazon-login/")
 def inventory_reports(request):
+    """INVENTORY -> Inventory Reports  """
     email = request.user.username
     store_name = get_storename(email)
     if request.GET.get("download-report") and request.GET.get("filename","") != "":
-        the_file_name = request.GET.get("filename", "")
+        the_file_name = request.GET.get("filename", "").replace(" ", "+")
         print "the_file_name: ", the_file_name
         fname = the_file_name.split("/")[-1]
         response = StreamingHttpResponse(file_iterator(the_file_name))

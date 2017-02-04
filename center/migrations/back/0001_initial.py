@@ -26,7 +26,7 @@ class Migration(migrations.Migration):
                 ('deposit_total', models.CharField(default=b'', max_length=100)),
                 ('actions', models.CharField(default=b'0', max_length=10)),
                 ('filename', models.CharField(default=b'', max_length=200)),
-                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 209851, tzinfo=utc))),
+                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 4, 507958, tzinfo=utc))),
             ],
             options={
                 'db_table': 'all_statements_tb',
@@ -68,23 +68,6 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='InventoryReportsData',
-            fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True)),
-                ('username', models.CharField(default=b'', max_length=200)),
-                ('filename', models.CharField(default=b'', max_length=100)),
-                ('seller_sku', models.CharField(default=b'', max_length=100)),
-                ('fulfillment_channel_sku', models.CharField(default=b'', max_length=100)),
-                ('asin', models.CharField(default=b'', max_length=50)),
-                ('condition_type', models.CharField(default=b'', max_length=100)),
-                ('Warehouse_Condition_code', models.CharField(default=b'', max_length=100)),
-                ('Quantity_Available', models.CharField(default=b'', max_length=50)),
-            ],
-            options={
-                'db_table': 'inventory_report_data',
-            },
-        ),
-        migrations.CreateModel(
             name='TransactionView',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True)),
@@ -98,7 +81,7 @@ class Migration(migrations.Migration):
                 ('amazon_fees', models.CharField(default=b'0.00', max_length=100)),
                 ('other', models.CharField(default=b'0.00', max_length=100)),
                 ('total', models.CharField(default=b'0.00', max_length=100)),
-                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 210368, tzinfo=utc))),
+                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 4, 508545, tzinfo=utc))),
             ],
             options={
                 'db_table': 'transaction_view_tb',

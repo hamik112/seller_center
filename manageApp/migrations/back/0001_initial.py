@@ -31,32 +31,18 @@ class Migration(migrations.Migration):
                 ('password', models.CharField(default=b'starmerx', max_length=100)),
                 ('really_store', models.CharField(default=b'0', max_length=10)),
                 ('payment_time', models.CharField(default=b'', max_length=30)),
-                ('create_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 212864, tzinfo=utc))),
-                ('update_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 212882, tzinfo=utc))),
+                ('create_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 669654, tzinfo=utc))),
+                ('update_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 669672, tzinfo=utc))),
             ],
             options={
                 'db_table': 'filename_to_storename',
             },
         ),
         migrations.CreateModel(
-            name='InventoryUploadRecorde',
-            fields=[
-                ('id', models.AutoField(serialize=False, primary_key=True)),
-                ('filename', models.CharField(default=b'', unique=True, max_length=255)),
-                ('file_path', models.CharField(default=b'', max_length=500)),
-                ('file_statue', models.CharField(default=b'0', max_length=10)),
-                ('error_msg', models.CharField(default=b'', max_length=300)),
-                ('uploadtime', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 212289, tzinfo=utc))),
-            ],
-            options={
-                'db_table': 'inventory_upload_recorde',
-            },
-        ),
-        migrations.CreateModel(
             name='StatementView',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True)),
-                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 213894, tzinfo=utc))),
+                ('date_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 670739, tzinfo=utc))),
                 ('filename', models.CharField(default=b'', max_length=100)),
                 ('settlement_id', models.CharField(default=b'', max_length=50)),
                 ('type', models.CharField(default=b'', max_length=200)),
@@ -98,8 +84,8 @@ class Migration(migrations.Migration):
                 ('account_id', models.CharField(default=b'', max_length=100)),
                 ('mkplaceid', models.CharField(default=b'', max_length=50)),
                 ('mws_authtoken', models.CharField(default=b'', unique=True, max_length=150)),
-                ('create_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 213488, tzinfo=utc))),
-                ('update_time', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 213506, tzinfo=utc))),
+                ('create_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 670335, tzinfo=utc))),
+                ('update_time', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 670353, tzinfo=utc))),
             ],
             options={
                 'db_table': 'store_key',
@@ -109,12 +95,11 @@ class Migration(migrations.Migration):
             name='UploadFileRecorde',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True)),
-                ('serial_number', models.CharField(default=b'', max_length=50)),
                 ('filename', models.CharField(default=b'', unique=True, max_length=255)),
                 ('file_path', models.CharField(default=b'', max_length=500)),
                 ('file_statue', models.CharField(default=b'0', max_length=10)),
                 ('error_msg', models.CharField(default=b'', max_length=300)),
-                ('uploadtime', models.DateTimeField(default=datetime.datetime(2017, 2, 4, 5, 54, 4, 211889, tzinfo=utc))),
+                ('uploadtime', models.DateTimeField(default=datetime.datetime(2017, 1, 12, 1, 39, 9, 669154, tzinfo=utc))),
             ],
             options={
                 'db_table': 'upload_file_recorde',

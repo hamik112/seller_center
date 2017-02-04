@@ -5,6 +5,7 @@ import  datetime
 import pytz
 
 from django.contrib.auth.models import User
+from django.db.models import Q
 from manageApp.models import  FilenameToStorename, StoreKeys, InventoryUploadRecorde
 from manageApp.dataService.upload_file import FileUpload
 from manageApp.dataService.deal_xls import read_xls
@@ -55,14 +56,44 @@ class FilenameStoreName(object):
     def __init__(self):
         pass
 
-    def read_data(self):
-        file_store_list = FilenameToStorename.objects.filter()
+    def read_data(self, params):
+        pageSize = params.get("pageSize", "10")
+        pageNumber = params.get("pageNumber", "1")
+        searchText = params.get("searchText", "")
+        #query_select = Q()
+        if int(pageSize) < 0:
+            pageSize = 1
+        else:
+            pageSize = int(pageSize)
+        if int(pageNumber) < 1:
+            pageNumber = 1
+        else:
+            pageNumber = int(pageNumber)
+        query_select = Q()
+        if searchText:
+            try:
+                query_select = query_select & Q(id=int(searchText))
+            except Exception, e:
+                query_select = query_select & (Q(filename=searchText) | 
+                                               Q(serial_number = searchText) |
+                                               Q(gateway_name = searchText) | 
+                                               Q(storename = searchText) | 
+                                               Q(manager= searchText) |
+                                               Q(email = searchText) | 
+                                               Q(really_store=searchText)
+                                               )
+        else:
+            query_select = query_select
+        file_store_list = FilenameToStorename.objects.filter(query_select)[(pageNumber - 1) * pageSize:pageNumber * pageSize]
+        total = FilenameToStorename.objects.filter(query_select).count()
         return_file_store_list = []
         for i in xrange(file_store_list.count()):
             tmp_dict = file_store_list.values()[i]
             tmp_dict["has_token"] = self.judge_has_token(email=tmp_dict.get("email"),storename=tmp_dict.get("storename"))
             return_file_store_list.append(tmp_dict)
-        return list(return_file_store_list)
+        return {"rows":list(return_file_store_list), "total":total}
+
+
         # return list(file_store_list.values())
     def judge_has_token(self, email, storename):
         token, has_key = "",""
@@ -135,9 +166,27 @@ class FilenameStoreName(object):
         return  result
 
     def post_delete_line(self, post_dict):
-        dele_id = post_dict.get("dele_id", "")
+        dele_id = post_dict.getlist("dele_id[]", "")
         log.info(" delete id: %s" % str(dele_id))
-        return self.delete_line(**{"dele_id":dele_id})
+        success_list, error_list = [], []
+        for did in dele_id:
+            status = self.delete_line(**{"dele_id": did})
+            print "1"*100
+            print "status:", status
+            if status.get("statue",0) == "-1" or status.get("statue", 0) == -1:
+                error_list.append(status)
+            else:
+                success_list.append(status)
+        if len(success_list) == 0:
+            if not error_list: 
+                error_list = [{"msg":"删除错误!"}]
+            msg = error_list[0].get("msg", "")
+            status = -1
+        else:
+            status = 0
+            msg = "成功了%s条，失败了%s条"%(str(len(success_list)),str(len(error_list)))
+        return {"statue":status, "msg": msg}
+        #return self.delete_line(**{"dele_id":dele_id})
 
     def post_update_line(self, post_dict):
         update_id = post_dict.get("update_id", "")

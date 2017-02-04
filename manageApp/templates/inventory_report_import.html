@@ -79,8 +79,14 @@
 
 {#                    <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">inventory_report导入</button>#}
                     <button class="btn btn-primary" data-toggle="modal"  onclick="javascript:location.href='/manage/inventory-report-upload/'">inventory_report导入</button>
+
                     <div class="project-list">
                         {% csrf_token %}
+                        <div id="toolbar">
+                          <button id="remove" class="btn btn-danger" disabled>
+                            <i class="glyphicon glyphicon-remove"></i> Delete
+                          </button>
+                        </div>
                         <table class="table table-hover" id="filename-to-storename-table-id">
                         </table>
                     </div>
@@ -160,7 +166,13 @@
 
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
-    $('#filename-to-storename-table-id').bootstrapTable({
+    
+    var $table = $('#filename-to-storename-table-id');
+    var $remove = $('#remove');
+    selections = [];
+
+ function initTable(){
+    $table.bootstrapTable({
         url: '/manage/inventory-report-import/',
         method: 'post',
         toolbar: '#toolbar', //工具按钮用哪个容器
@@ -180,7 +192,22 @@
         pagination: true,
         singleSelect: false,
     {#    sidePagination: "server",#}
-        columns: [{
+        columns: [
+        [
+            {
+                field: 'state',
+                checkbox: true,
+                rowspan: 2,
+                align: 'center',
+                valign: 'middle'
+            },
+            {
+                title: 'Item Detail',
+                colspan: 7,
+                align: 'center'
+            }
+        ],
+        [{
             field: "id",
             title: 'id',
             align: 'center',
@@ -191,9 +218,12 @@
             align: 'center',
             valign:'middle',
             formatter: function (value, row, index) {
-                fvalue = value.split("__");
+                //fvalue = value.split("__");
+                fvalue = value.split("/");
                 filename = fvalue[fvalue.length-1];
-                return filename;
+                html_str = "<a href=javascript:ajax_download('"+filename+"')>"+filename+"</a>";
+                return html_str;
+                //return filename;
             }
         },{
             field: 'uploadtime',
@@ -209,7 +239,7 @@
                 if (value == '0'){
                     htm_str =  "<span >正常</span>";
                 }else if(value == '1'){
-                  htm_str =  "<span style='color:green'>正在更新..</span>";
+                    htm_str =  "<span style='color:green'>正在更新..</span>";
                 }else if(value == '2') {
                     htm_str =  "<span style='color:blue'>已更新</span>";
                 }else{
@@ -228,7 +258,8 @@
                 html_str = "<button class='btn btn-primary' onclick=javascript:report_update_file(\'"+filename+"\');>更新</button>";
                 return html_str;
             }
-        }, {
+        }
+        /*, {
             field: 'file_path',
             title: "操作",
             align: 'center',
@@ -239,40 +270,13 @@
                 htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_file(\'"+filename+"\');>删除</button>";
                 return htm_str;
             }
-        }],
+        }
+        */
+        ],
+      ]
     });
+}
 
-
-       function  delete_file(filename) {
-        post_dict = {"filename": filename,
-            "action_type": "delete", "inventory":"1",
-            "csrfmiddlewaretoken": csrf_token};
-        $.ajax({
-            url: "/manage/files-list/",
-            type: "POST",
-            data: post_dict,
-            dataType: "json",
-            beforeSend:function(XMLHttpRequest){
-               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
-              showMask();
-            },
-            success: function (sdata) {
-                console.log(sdata);
-                if (sdata.statue == '0'){
-                    showBody();
-                    alert("删除文件成功!");
-                }else{
-                    showBody();
-                    alert("删除文件失败: " + sdata.msg);
-                }
-                location.reload();
-            }, error: function (edata) {
-                showBody();
-                alert("删除文件失败" + edata);
-
-            }
-        });
-    }
 
     
     function  report_update_file(filename) {
@@ -381,6 +385,128 @@
     }
 
 
+    function ajax_download(filename){
+        var form=$("<form>");//定义一个form表单
+        form.attr("style","display:none");
+        form.attr("target","");
+        form.attr("method","get");
+        form.attr("action","/manage/ajax-download-filename/");
+
+        var input1=$("<input>");
+        input1.attr("type","hidden");
+        input1.attr("name","filename");
+        input1.attr("value",filename);
+
+        var input2=$("<input>");
+        input2.attr("type", "hidden");
+        input2.attr("name", "download_report");
+        input2.attr("value", "1")
+
+        $("body").append(form);//将表单放置在web中
+        form.append(input1);
+        form.append(input2);
+        form.submit();//表单提交 
+    }
+
+   $table.on('check.bs.table uncheck.bs.table ' +
+         'check-all.bs.table uncheck-all.bs.table', function () {
+         $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+         selections = getIdSelections();
+    });
+    $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+        if (index % 2 == 1) {
+            $detail.html('Loading from ajax request...');
+            $.get('LICENSE', function (res) {
+                $detail.html(res.replace(/\n/g, '<br>'));
+            });
+        }
+    });
+
+
+    $remove.click(function () {
+        var ids = getIdSelections();
+        console.log(ids);
+        delete_file(ids);
+
+    });
+
+    function getIdSelections() {
+        return $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.id
+        });
+    }
+
+
+    function totalTextFormatter(data) {
+        return 'Total';
+    }
+
+
+    function  delete_file(ids) {
+        post_dict = {"ids": ids,
+            "action_type": "delete", "inventory":"1",
+            "csrfmiddlewaretoken": csrf_token};
+        $.ajax({
+            url: "/manage/files-list/",
+            type: "POST",
+            data: post_dict,
+            dataType: "json",
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+              showMask();
+            },
+            success: function (sdata) {
+                console.log(sdata);
+                if (sdata.statue == '0'){
+                    showBody();
+                    alert("删除文件成功!");
+                }else{
+                    showBody();
+                    alert("删除文件失败: " + sdata.msg);
+                }
+                location.reload();
+            }, error: function (edata) {
+                showBody();
+                alert("删除文件失败" + edata);
+
+            }
+        });
+    }
+
+
+
+    function error_detail(thisobj) {
+        line_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+        $.ajax({
+            url: "/manage/get-update-error-msg/",
+            type: "GET",
+            data: {"uid":line_id},
+            dateType:"json",
+            beforeSend:function(XMLHttpRequest){
+               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
+               showMask();
+            },
+            success: function (sdata) {
+                 showBody();
+                sdata = JSON.parse(sdata)
+                if (sdata.statue == '0' || sdata.statue == 0){
+                    if (sdata.msg.length == 0){
+                        alert("没有异常信息!");
+                    }else {
+                        alert("异常信息是: " + sdata.msg);
+                    }
+                }else{
+                    alert("查看失败:  "+sdata.msg);
+                }
+            }, error: function (edata) {
+                console.log(edata);
+                showBody();
+                alert("查看失败!" + edata);
+            }
+        })
+    }
+
+
     function infos_to_modal(infos){
         $("[name='storename']").val(infos.storename);
         $("[name='email']").val(infos.email);
@@ -423,6 +549,7 @@
 
 
     function init() {
+        initTable();
         if ("{{ result.statue }}" == "0"){
             $("#alert-error-id").css("display", "block");
             $("#alert-error-id > a").text("{{ result.msg }}");

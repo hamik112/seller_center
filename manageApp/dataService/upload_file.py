@@ -49,7 +49,8 @@ class FileUpload(object):
 
     def write_recorde(self, file_path, filename):
         # print filename
-        write_dict = {"filename":filename, "file_path": file_path}
+        serial_number = "-".join(filename.split("-")[:2])
+        write_dict = {"filename":filename, "file_path": file_path, "serial_number":serial_number}
         try:
             statue = UploadFileRecorde.objects.filter(filename=filename,file_path=file_path)
         except Exception, e:
@@ -147,38 +148,41 @@ def list_files(params):
             query_select = query_select &(Q(filename=searchText)| Q(serial_number=searchText))
     else:
         query_select = query_select
-    file_list = UploadFileRecorde.objects.filter(query_select).values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
+    file_list = UploadFileRecorde.objects.filter(query_select).order_by("-id").values()[(pageNumber - 1) * pageSize: pageNumber * pageSize]
     total = UploadFileRecorde.objects.filter(query_select).count()
     return  {"rows": list(file_list)[::-1], "total": total}
 
 
 
 
-def delete_file(filename, inventory=None):
+def delete_file(ids, inventory=None):
     statue = 0
-    log.info("delete filename: %s" % filename)
+    log.info("delete filename: %s" % ids)
     msg = ""
     if inventory:
+        id_list = ids
         try:
-            InventoryReportsData.objects.filter(filename=filename).delete()
-            ffile = InventoryUploadRecorde.objects.filter(filename=filename)
-            file_path = ffile[0].file_path
-            os.remove(file_path)
-            ffile.delete()
-        except Exception ,e:
-            log.info("删除文件失败: %s" %(str(e)))
+            file_list = InventoryUploadRecorde.objects.filter(id__in=id_list).values_list("filename",flat=True)
+            file_path_list = InventoryUploadRecorde.objects.filter(id__in=id_list).values_list("file_path",flat=True)
+            if file_list and file_path_list:
+                InventoryReportsData.objects.filter(filename__in=file_list).delete()
+                InventoryUploadRecorde.objects.filter(id__in=id_list).delete()
+            for file_path in file_path_list:
+                os.remove(file_path)
+        except Exception, e:
+            log.info(" delete inventory file error: %s" %(e))
             msg = str(e)
             statue = -1
             if "No such file or directory:" in str(e):
                 InventoryUploadRecorde.objects.filter(filename=filename).delete()
-        pass
     else:
-        id_list = filename #删除上传记录的时候，传递的是id列表
+        id_list = ids #删除上传记录的时候，传递的是id列表
         try:
             file_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("filename",flat=True)
             file_path_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("file_path",flat=True)
-            StatementView.objects.filter(filename__in=file_list).delete()
-            UploadFileRecorde.objects.filter(id__in=id_list).delete()
+            if file_list and file_path_list:
+                StatementView.objects.filter(filename__in=file_list).delete()
+                UploadFileRecorde.objects.filter(id__in=id_list).delete()
             for file_path in file_path_list:
                 os.remove(file_path)
         except Exception, e:
@@ -193,6 +197,22 @@ def delete_file(filename, inventory=None):
 
 
 
+def download_file(filename, inventory_file=None):
+    if inventory_file:
+        try:
+            the_file_name = InventoryUploadRecorde.objects.filter(filename=filename).values_list("file_path", flat=True)[0]
+        except Exception, e:
+            the_file_name = ""
+    else:
+        try:
+            the_file_name = UploadFileRecorde.objects.filter(filename=filename).values_list("file_path",flat=True)[0]
+        except Exception, e:
+            the_file_name = ""
+
+    if os.path.exists(the_file_name):
+        return the_file_name
+    else:
+        return ""
 
 
 

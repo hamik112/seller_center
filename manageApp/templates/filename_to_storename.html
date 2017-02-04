@@ -66,6 +66,9 @@
                 </div>
 
                 <div class="ibox-content">
+                    <button id="remove" class="btn btn-danger" disabled>
+                      <i class="glyphicon glyphicon-remove"></i> 删除
+                    </button>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add_line">添加</button>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add_many_line">店铺导入</button>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#add_token_id">Token导入</button>
@@ -272,7 +275,11 @@
 
     <script>
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
-    $('#filename-to-storename-table-id').bootstrapTable({
+    var $table = $('#filename-to-storename-table-id');
+    var $remove = $("#remove");
+
+function initTable(){
+    $table.bootstrapTable({
         url: '/manage/filename-to-storename-json/',
         toolbar: '#toolbar', //工具按钮用哪个容器
         search: true,
@@ -287,11 +294,24 @@
         pageSize: 12, //每页的记录行数（*）
         pageList: [20, 50, 100, 150], //可供选择的每页的行数（*）
         dataType: "json",
-        queryParams: {"is_query": "1", "platform":'amazon'},
+        queryParamsType: "",
+        //queryParams: {"is_query": "1", "platform":'amazon'},
         pagination: true,
         singleSelect: false,
-    {#    sidePagination: "server",#}
-        columns: [{
+        sidePagination: "server",
+        columns: [ [
+            {
+             field: 'state',
+             checkbox: true,
+             rowspan: 2,
+             align: 'center',
+             valign: 'middle'
+            },{
+             title: 'Item Detail',
+             colspan: 11,
+             align: 'center'
+            } 
+        ],[{
             field: "id",
             title: 'id',
             align: 'center',
@@ -368,7 +388,8 @@
                 html_str = "<button class='btn btn-primary' onclick=javascript:update_line(this);>修改</button>";
                 return html_str;
             }
-        }, {
+        }
+         /*, {
             field: 'action',
             title: "删除",
             align: 'center',
@@ -377,14 +398,48 @@
                 htm_str =  "<button class='btn btn-primary' onclick=javascript:delete_line(this);>删除</button>";
                 return htm_str;
             }
-        }],
+        } */
+       ],
+      ]
+    });
+}
+
+
+        $table.on('check.bs.table uncheck.bs.table ' +
+                'check-all.bs.table uncheck-all.bs.table', function () {
+            $remove.prop('disabled', !$table.bootstrapTable('getSelections').length);
+            selections = getIdSelections();
+        });
+        $table.on('expand-row.bs.table', function (e, index, row, $detail) {
+            if (index % 2 == 1) {
+                $detail.html('Loading from ajax request...');
+                $.get('LICENSE', function (res) {
+                    $detail.html(res.replace(/\n/g, '<br>'));
+                });
+            }
+        });
+
+
+    $remove.click(function () {
+        var ids = getIdSelections();
+        console.log(ids);
+        //delete_file(ids);
+        delete_line(ids);
     });
 
+    function getIdSelections() {
+        return $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.id
+        });
+    }
 
-    function  delete_line(thisobj) {
-        dele_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
-        console.log(dele_id);
-        post_dict = {"dele_id": dele_id,
+
+
+
+    function  delete_line(ids) {
+        //dele_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+
+        post_dict = {"dele_id": ids,
             "action_type": "delete",
             "csrfmiddlewaretoken": csrf_token};
         $.ajax({
@@ -416,7 +471,7 @@
     }
 
     function  update_line(thisobj) {
-        update_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
+        update_id = $(thisobj).parent("td").parent("tr").children("td:first").next("td").text();
         var post_dict = {"update_id": update_id,
             "action_type": "update",
             "csrfmiddlewaretoken": csrf_token};
@@ -597,11 +652,13 @@
 
 
     function init() {
+        initTable();
         if ("{{ result.statue }}" == "0"){
             $("#alert-error-id").css("display", "block");
             $("#alert-error-id > a").text("{{ result.msg }}");
         }
         delete_modal_data();
+
     }
     init();
     </script>

@@ -4,13 +4,14 @@ import  json
 from django.shortcuts import render
 from django.shortcuts import HttpResponseRedirect, HttpResponse
 
+from django.http import StreamingHttpResponse
 from django.contrib.auth.models import User
 from django.contrib import  auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
 
-from manageApp.dataService.upload_file import FileUpload, list_files, delete_file
+from manageApp.dataService.upload_file import FileUpload, list_files, delete_file, download_file
 from manageApp.dataService.upload_file import InventoryUpload, inventory_list_files
 from manageApp.dataService.deal_xls import read_xls
 from manageApp.dataService.JSON_serial import json_serial
@@ -18,6 +19,7 @@ from manageApp.dataService.dataImport import  StatementViewImport, InventoryRepo
 
 from manageApp.dataService.filename_to_storename import FilenameStoreName
 from manageApp.dataService.dataImport import get_update_error_str
+from center.dataService.data_format import file_iterator
 # Create your views here.
 
 import  logging
@@ -65,13 +67,14 @@ def files_action(request):
     username = request.user.username
     if request.method == "POST":
         if request.POST.get("action_type", "") == "delete":
-            filename =  request.POST.get("filename", "")
+            #filename =  request.POST.get("filename", "")
             inventory = request.POST.get("inventory", "")
-            id_list = request.POST.getlist("filename[]", [])
-            if id_list:
-                result = delete_file(id_list)                
+            id_list = request.POST.getlist("ids[]", [])
+            print id_list
+            if id_list and inventory:
+                result = delete_file(id_list, inventory)
             else:
-                result = delete_file(filename, inventory)
+                result = delete_file(id_list)                
             return HttpResponse(json.dumps(result))
         elif request.POST.get("action_type", "") == "update_statement":
             filename = request.POST.get("filename", "")
@@ -124,6 +127,28 @@ def filename_to_storename(request):
         return render(request, 'filename_to_storename.html', locals())
 
 
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def ajax_download_filename(request):
+    filename = request.GET.get("filename", "")
+    print "filename: ", filename
+    download_report = request.GET.get("download_report", "")  #下载上传的report文件
+    if download_report:
+        the_file_name = download_file(filename,inventory_file=True)
+    else:
+        the_file_name = download_file(filename)                   #在数据库找到文件上传的绝对路径
+
+    if download_report and not  the_file_name:
+        return HttpResponseRedirect("/manage/inventory-report-import/")
+    if not the_file_name:
+        return HttpResponseRedirect("/manage/files-list/")
+    print the_file_name
+    response = StreamingHttpResponse(file_iterator(the_file_name))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="%s"'%str(filename)
+    return response
+
+
 
 
 
@@ -146,7 +171,7 @@ def filename_to_token(request):
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def filename_to_storename_json(request):
-    result = FilenameStoreName().read_data()
+    result = FilenameStoreName().read_data(request.GET)
     return HttpResponse(json.dumps(result, default=json_serial))
 
 

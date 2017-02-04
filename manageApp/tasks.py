@@ -13,7 +13,7 @@ from manageApp.models import  StatementView, FilenameToStorename
 from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
-from manageApp.dataService.deal_xls import read_xls
+from manageApp.dataService.deal_xls import read_xls, inventory_read_txt
 from manageApp.dataService.csv_to_excel import csv_to_xls
 
 logger = get_task_logger(__name__)
@@ -153,16 +153,26 @@ def import_one_file_to_statement_view(file_path, filename):
 
 
 @task(max_retries=3,default_retry_delay=1 * 6)
-def inventory_import(datas, filename):
-    datas = datas.get("data", [])
+def inventory_import(file_path, filename):
+    if len(filename.split("__")) < 2:
+        msg = u"文件名格式不对"
+        inventory_update_file_statue(filename, -2, error_msg=msg)
+        return {"status":-2, "msg":msg}
+
     username = filename.split("__")[0]    #所属用户，从文件名里面获取
+
+    datas = inventory_read_txt(file_path)
+    datas = datas.get("data", [])
+
     n = 0
     for line in datas:
         log1.info("current: "+ str(n))
         n += 1
-        tmp_dict = {"sku":line[0], "asin":line[1],
-                    "price":line[2], "quantity":line[3],
-                    "filename":username}
+        tmp_dict = {"seller_sku": line[0], "fulfillment_channel_sku":line[1],
+                    "asin":line[2],        "condition_type": line[3], 
+                    "Warehouse_Condition_code":line[4], "Quantity_Available":line[5],
+                    "filename":filename, "username":username
+        }
         try:
             InventoryReportsData(**tmp_dict).save()
         except Exception, e:

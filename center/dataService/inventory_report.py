@@ -12,6 +12,7 @@ from django.conf import settings
 from center.dataService.create_xls import generate_path
 from center.tasks import get_amazon_report
 from center.models import InventoryReports
+from manageApp.models import FilenameToStorename
 from center.dataService.center_share import dt_to_str
 
 GENERATE_REPORT_PATH = settings.GENERATE_REPORT_PATH
@@ -34,25 +35,37 @@ class InventoryReport():
         self.region = region if region else "US"  #美国市场
 
     def get_inventory_report(self, report_type):
+        try:
+            user  = FilenameToStorename.objects.get(email=self.username)
+            really_store = user.really_store
+        except Exception, e:
+            user = ""
+            really_store = "0"
+        if really_store == "0":  #等于0，则是不是真实店铺
+            self.download_import_report(report_type)
+            pass
+        if user and really_store != "0":
+            access_key  = 'AKIAI4QSPO5ISDC2GJYQ'
+            secret_key  = '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'
+            store_key   = 'A2TFDJE5MM2YVC'
+            store_token = 'amzn.mws.2ea9e504-eb46-815c-bbe6-c19ea0ff9192'
+            region = self.region
+            store_obj = Stores(access_key=access_key, secret_key=secret_key, store_key=store_key, store_token=store_token,
+                               region=region)
+            rep_type = '_GET_AFN_INVENTORY_DATA_'
+            now = datetime.datetime.now().strftime("%m-%d-%Y")
+            fileName = os.path.join(generate_path(GENERATE_REPORT_PATH),  "Inventory+Report+"+str(now) + '.txt')
+            if not os.path.exists(fileName):
+                os.system("touch %s"%fileName)
+            # gevent.joinall([gevent.spawn(AMAZON_MWS.get_product_report,store_obj,type,fileName)])
+            # result = AMAZON_MWS.get_product_report(store_obj,type=type,fileName=fileName)
+            line_id = self.inventory_report_recorde(report_type)
+            get_amazon_report.delay(store_obj,rep_type , fileName, line_id)
+            print fileName
 
-        access_key  = 'AKIAI4QSPO5ISDC2GJYQ'
-        secret_key  = '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'
-        store_key   = 'A2TFDJE5MM2YVC'
-        store_token = 'amzn.mws.2ea9e504-eb46-815c-bbe6-c19ea0ff9192'
-        region = self.region
-        store_obj = Stores(access_key=access_key, secret_key=secret_key, store_key=store_key, store_token=store_token,
-                           region=region)
-        rep_type = '_GET_AFN_INVENTORY_DATA_'
-        now = datetime.datetime.now().strftime("%m-%d-%Y")
-        fileName = os.path.join(generate_path(GENERATE_REPORT_PATH),  "Inventory+Report+"+str(now) + '.txt')
-        if not os.path.exists(fileName):
-            os.system("touch %s"%fileName)
-        # gevent.joinall([gevent.spawn(AMAZON_MWS.get_product_report,store_obj,type,fileName)])
-        # result = AMAZON_MWS.get_product_report(store_obj,type=type,fileName=fileName)
-        line_id = self.inventory_report_recorde(report_type)
-        get_amazon_report.delay(store_obj,rep_type , fileName, line_id)
-        print fileName
-
+    def download_import_report(self, report_type):
+        
+        pass
     def inventory_report_recorde(self, report_type):
         tmp_dict = {"username":self.username,
                     "report_type":report_type if report_type else "",

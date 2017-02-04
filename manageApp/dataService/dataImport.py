@@ -107,9 +107,9 @@ class InventoryReportImport(object):
                         statue_dict = {"filename": filename, "statue": -1, "msg": str(e)}
                     if os.path.exists(file_path):
                         try:
-                            datas = inventory_read_txt(file_path)
+                            #datas = inventory_read_txt(file_path)
                             inventory_update_file_statue(filename, 1)
-                            inventory_import.delay(datas, filename)
+                            inventory_import.delay(file_path, filename)
                             statue_dict = {"filename": filename, "statue": 0, "msg": ""}
                         except Exception, e:
                             log.info(str(e))
