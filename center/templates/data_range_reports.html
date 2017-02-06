@@ -1826,7 +1826,7 @@ P.when("A", "a-popover").execute(function(A, popover) {
             </td><td id="0-ddrRequestDate" data-column="ddrRequestDate" data-row="0" class="mt-cell mt-left">
                     <div class="mt-text mt-wrap-bw">
                             <span class="mt-text-content">
-                            {{ line.request_date }}
+                            {{ line.request_date  }}
                         </span>
                     </div>
             </td><td id="0-ddrDateRange" data-column="ddrDateRange" data-row="0" class="mt-cell mt-left">
@@ -1836,8 +1836,17 @@ P.when("A", "a-popover").execute(function(A, popover) {
                         </span>
                     </div>
             </td><td id="0-ddrAction" data-column="ddrAction" data-row="0" class="mt-cell mt-left">
+                {% if line.action_statue == "0" %}
                        <span id="downloadButton" class="a-button a-button-primary a-button-small"><span class="a-button-inner"><a id="downloadButton-announce" href="/download-file/?file_name={{ line.report_file_path }}{% if line.reportType == 'Summary' %}&file_type=octet-stream{% else %}&file_type=vnd.ms-excel{% endif %}" class="a-button-text" role="button">
-                           Download
+                             Download
+               {% elif line.action_statue == "1" %}
+                       <span>      
+                             In Progress <br/>
+                             <a href="/date-range-reports/">Refresh</a>
+               {% else %}
+                             <span id="downloadButton" class="a-button a-button-primary a-button-small"><span class="a-button-inner"><a id="downloadButton-announce" href="/date-range-reports/request-report-again/?line_id={{line.id}}" class="a-button-text" role="button">
+                             Request Report
+              {% endif %}
                        </a></span></span>
                 </td>
             </tr>

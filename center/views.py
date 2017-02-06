@@ -20,6 +20,7 @@ from  center.dataService.all_statements import AllStatementsList
 from center.dataService.inventory_data import manage_fba_shipments, manage_fba_manifests
 
 from center.dataService.inventory_report import InventoryReport, ReportType
+from center.dataService.data_range_report_data import  generate_data_range_reports, generate_reports_again
 
 # Create your views here.
 
@@ -54,6 +55,7 @@ def inventory_reports(request):
 
 @login_required(login_url="/amazon-login/")
 def listing_reports(request):
+    """分页列出 data range reports 里面的generate reports 列"""
     email = request.user.username
     store_name = get_storename(email)
     report_count = request.GET.get("report_count", "10")
@@ -220,24 +222,34 @@ def download_all_statements(request):
     return response
 
 
+@login_required(login_url="/amazon-login/")
+@csrf_exempt
+def request_report_again(request):
+    """再次生成report_pdf """
+    line_id = request.GET.get("line_id", "")
+    username = request.user.username
+    generate_reports_again(line_id, username)
+    return HttpResponseRedirect("/date-range-reports/")
 
 
 @login_required(login_url="/amazon-login/")
 @csrf_exempt
 def date_range_reports(request):
+    """导出pdf的 """
     email = request.user.username
     store_name = get_storename(email)
     if request.method == "POST":
         print "="* 100
         print "request post: ",request.POST
-        result = StatementViewData(request).request_report()
-        result["statusCode"] = "OK"
+        result = generate_data_range_reports(request)
+        #result = {"statusCode":"OK"}  #用这个字典，前端才会正常
         return HttpResponse(json.dumps(result))
     else:
         pageSize = request.GET.get("pageSize",10)
         cur_page = int(request.GET.get("cur_page",1))
         pageSize = 10 if pageSize == 10 or pageSize == "10" or pageSize == "Ten" else 10
-        recorde_result = StatementViewData(request).statement_data_read(**{"pageSize":pageSize,"cur_page":cur_page})
+        username,post_dict,return_dict = request.user.username, request.POST, {}
+        recorde_result = StatementViewData(username, post_dict, return_dict).statement_data_read(**{"pageSize":pageSize,"cur_page":cur_page})
         recorde_list = recorde_result.get("recorde_list", [])
         start_item = recorde_result.get("start_item",1)
         end_item   = recorde_result.get("end_item",1)

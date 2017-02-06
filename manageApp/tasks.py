@@ -154,6 +154,8 @@ def import_one_file_to_statement_view(file_path, filename):
 
 @task(max_retries=3,default_retry_delay=1 * 6)
 def inventory_import(file_path, filename):
+    print "filename:", filename
+    print "file_path:",file_path
     if len(filename.split("__")) < 2:
         msg = u"文件名格式不对"
         inventory_update_file_statue(filename, -2, error_msg=msg)
@@ -163,20 +165,22 @@ def inventory_import(file_path, filename):
 
     datas = inventory_read_txt(file_path)
     datas = datas.get("data", [])
-
     n = 0
     for line in datas:
         log1.info("current: "+ str(n))
         n += 1
-        tmp_dict = {"seller_sku": line[0], "fulfillment_channel_sku":line[1],
+        if len(line) < 6:
+            continue
+        try:
+            tmp_dict = {"seller_sku": line[0], "fulfillment_channel_sku":line[1],
                     "asin":line[2],        "condition_type": line[3], 
                     "Warehouse_Condition_code":line[4], "Quantity_Available":line[5],
                     "filename":filename, "username":username
-        }
-        try:
+            }
             InventoryReportsData(**tmp_dict).save()
         except Exception, e:
             msg = "文件 %s 写入inveotry report错误: %s " % (filename,str(e))
+            print msg
             log1.error(msg)
             inventory_update_file_statue(filename,-1, error_msg=msg)
     log1.info(str(n))

@@ -26,9 +26,10 @@ GenerateReport_PATH = settings.GENERATE_REPORT_PATH
 
 
 class StatementViewData(object):
-    def __init__(self, request):
-        self.request =  request
-        self.post_dict = request.POST if request.POST else {}
+    def __init__(self, username, post_dict, return_dict):
+        self.username = username
+        self.return_dict = return_dict
+        self.post_dict = post_dict if post_dict else {}
         self.reportType = self.post_dict.get("reportType")
         self.timeRangeType = self.post_dict.get("timeRangeType", "")
         # print reportType, year, timeRangeType, month
@@ -76,13 +77,14 @@ class StatementViewData(object):
         except:
             pageSize, cur_page = 10, 1
         start_item = (cur_page - 1) * pageSize + 1
-        username = self.request.user.username
+        username = self.username
         generate_report_list = GenerateReport.objects.filter(username=username).values().order_by("id").reverse()[pageSize * (cur_page -1): pageSize * cur_page + 1]
         # print generate_report_list
         return_report_list = []
         for fline in generate_report_list:
             if not os.path.exists(os.path.join(GenerateReport_PATH, fline.get("report_file_path",""))):
-                continue
+                fline["report_status"] = "1"
+                return_report_list.append(fline)
             else:
                 return_report_list.append(fline)
         if len(return_report_list) > 10:
@@ -112,19 +114,22 @@ class StatementViewData(object):
             # print pdf_url
             # date = datetime.datetime.now()
             # datestr = date.strftime("%Y-%m-%d_%H-%M-%S")
-            return_dict = self.write_recorde_generate_report()
+            #return_dict = self.write_recorde_generate_report()
+            return_dict = self.return_dict
             result = self.web_html_to_pdf()
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return result
         elif self.reportType == "Transaction" and self.timeRangeType =="Custom":
-            return_dict = self.write_recorde_generate_report()
+            #return_dict = self.write_recorde_generate_report()
+            return_dict = self.return_dict
             result = self.create_xls_reports(**return_dict)
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return {"status": update_statue, "message":""}
             pass
 
         elif self.reportType == "Transaction" and self.timeRangeType == "Monthly":   #导出表格
-            return_dict = self.write_recorde_generate_report()
+            #return_dict = self.write_recorde_generate_report()
+            return_dict = self.return_dict
             result = self.create_xls_reports(**return_dict)
             update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
             return {"status": update_statue, "message":""}
@@ -135,14 +140,18 @@ class StatementViewData(object):
 
 
 
-    def write_recorde_generate_report(self):
-        username = self.request.user.username
+    def write_recorde_generate_report(self,action_statue=None):
+        if not action_statue:
+            action_statue = 0
+        else:
+            action_statue = action_statue
+        username = self.username
         request_date = datetime.datetime.now().strftime("%b %m, %Y")
         recorde_dict = {"reportType": self.reportType, "year": self.year, "is_custom": self.is_custom, "timeRange": self.timeRange,
-                        "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": 0,"request_date":request_date,
+                        "timeRangeType": self.timeRangeType, "month": self.month, "action_statue": action_statue,"request_date":request_date,
                         "username":username}
         return_id = -1
-        # print "recorde_dict: ", recorde_dict
+        print "recorde_dict: ", recorde_dict
         gr = GenerateReport(**recorde_dict)
         try:
             gr.save()
@@ -185,7 +194,7 @@ class StatementViewData(object):
 
     def web_html_to_pdf(self):
         statue, msg, output_file_name = True, "", ""
-        user_email = self.request.user.username
+        user_email = self.username
         begin_day, end_day = self.timeRange.split("-")
         begin_day_list = str(begin_day).strip().replace(",", "").split(" ")
         end_day_list = str(end_day).strip().replace(",", "").split(" ")
@@ -203,7 +212,7 @@ class StatementViewData(object):
             print msg
             statue = False
             return {"statue": statue, "msg": msg, "file_path_name": output_file_name}
-        params = {"username":self.request.user.username,"month":self.month,"year":self.year,
+        params = {"username":self.username,"month":self.month,"year":self.year,
                   "begin_date_str":str(self.begin_date_str),
                   "end_date_str": str(self.end_date_str),
                   "filename":output_file_name}
@@ -250,7 +259,7 @@ class StatementViewData(object):
         file_end_date = end_date + datetime.timedelta(days=1)  #date_time__range不包含最后一天
         print begin_date, end_date
         statue, msg, file_path_name = True, "", ""
-        user_email = self.request.user.username
+        user_email = self.username
         try:
             serial_number = FilenameToStorename.objects.get(email=user_email).serial_number
         except Exception, e:

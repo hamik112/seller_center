@@ -48,8 +48,9 @@
         exitcodes=1
 
   (3)启动
-   #supervisorctl start mredis
-   #supervisorctl start celery
+   # supervisord -c supervisord.conf &  #启动supervisord
+   #supervisorctl start mredis          #启动redis
+   #supervisorctl start celery          #启动celery
 
 
 

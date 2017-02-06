@@ -20,7 +20,7 @@ class GenerateReport(models.Model):
     # request_date      = models.DateTimeField(default=timezone.now())
     request_date      =  models.CharField( max_length= 50, default="", null=False)
 
-    action_statue     =  models.CharField( max_length= 20, default=0, null=False)
+    action_statue     =  models.CharField( max_length= 20, default=0, null=False)     #0,已经处理完毕, 1正在处理中, -1 错误
 
     username          =  models.CharField( max_length=200, default="", null=False)    #属于哪个用户的记录
 
@@ -113,7 +113,6 @@ class InventoryReportsData(models.Model):
     condition_type          = models.CharField( max_length=100, default="", null=False)
     Warehouse_Condition_code= models.CharField( max_length=100, default="", null=False)
     Quantity_Available      = models.CharField( max_length=50,  default="", null=False)
-
 
     class Meta:
         db_table = "inventory_report_data"

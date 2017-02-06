@@ -3570,10 +3570,12 @@ if (typeof uet == 'function') { uet('ns'); }
 </td><td id="{{ line.batch_id }}-requested" data-column="requested" data-row="50050017148" class="mt-cell mt-center">{{ line.date_time_request }}</td><td id="{{ line.batch_id }}-completed" data-column="completed" data-row="{{ line.batch_id }}" class="mt-cell mt-center">{{ line.date_time_completed }}</td><td id="{{ line.batch_id }}-status" data-column="status" data-row="{{ line.batch_id }}" class="mt-cell mt-center">
         <div class="mt-text mt-wrap-bw">
                 <span class="mt-text-content">
-                {% if line.report_status == "Request Submitted" %}
-                    {{ line.report_status }}
-                {% else %}
+                {% if line.report_status == "1" %}
+                    Request Submitted
+                {% elif line.report_status == "0" %}
                     Ready
+                {% else %}
+                    Not Ready
                 {% endif %}
             </span>
         </div>
@@ -3599,12 +3601,12 @@ if (typeof uet == 'function') { uet('ns'); }
     
     
 
-    <input type="hidden" name="" value="/listing/reports/tabela/refresh-reports-table/**" class="refresh-endpoint"><input type="hidden" name="" class="fromTag"><input type="hidden" name="" class="featureSetTag"><input type="hidden" name="" class="delayed-endpoint"><input type="hidden" name="" value="false" class="mt-allow-multi-page-select"><input type="hidden" name="" value="Your unsaved changes will be lost. Do you want to continue?" class="unsaved-changes-confirm-label"><input type="hidden" name="" value="Your selected rows will be unselected. Do you want to continue?" class="selected-rows-confirm-label"><input type="hidden" name="" class="default-error-message-label"><input type="hidden" name="" value="false" class="mt-enable-floating-bar"></div>
+    <input type="hidden" name="" value="#" class="refresh-endpoint"><input type="hidden" name="" class="fromTag"><input type="hidden" name="" class="featureSetTag"><input type="hidden" name="" class="delayed-endpoint"><input type="hidden" name="" value="false" class="mt-allow-multi-page-select"><input type="hidden" name="" value="Your unsaved changes will be lost. Do you want to continue?" class="unsaved-changes-confirm-label"><input type="hidden" name="" value="Your selected rows will be unselected. Do you want to continue?" class="selected-rows-confirm-label"><input type="hidden" name="" class="default-error-message-label"><input type="hidden" name="" value="false" class="mt-enable-floating-bar"></div>
 
 <script>
-P.when('tabela-manager').register('tabela-table-reports-table', function(TabelaManager) {
-    TabelaManager.create('reports-table');
-});
+//P.when('tabela-manager').register('tabela-table-reports-table', function(TabelaManager) {
+//    TabelaManager.create('reports-table');
+//});
 </script>
 
 </div></div></div></div></div></div>
