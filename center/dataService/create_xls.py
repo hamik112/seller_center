@@ -263,7 +263,11 @@ def generate_path(root_path):
             else:
                 three_path = os.path.join(two_path, str(k))
                 if not os.path.exists(three_path):
-                    os.mkdir(three_path)
+                    try:
+                        os.mkdir(three_path)
+                    except:
+                        k += 1
+                        continue
                     return three_path
                 else:
                     k += 1

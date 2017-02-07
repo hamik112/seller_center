@@ -90,6 +90,7 @@ class SummaryPdfData(object):
             legal_name = FilenameToStorename.objects.filter(serial_number=self.serial_number).values_list("manager",flat=True)[0]
         except Exception, e:
             legal_name = ""
+        print "legal_name:", legal_name
         return legal_name
 
 
@@ -693,10 +694,11 @@ def generate_dict(**param_dict):
     Transfers = spd.Transfers([Charges_to_credit_card, transfers_to_bank_account_sum])
     subtotal_transfers  = spd.sub_credits_transfers([Charges_to_credit_card, Failed_transfers_to_bank_account])
     summaries_transfers = spd.summaries_transfers([Charges_to_credit_card, transfers_to_bank_account_sum])
-
+    legal_name = spd.get_legal_name()
 
 
     return {"storename":storename,"product_sales":product_sales,"product_refund":product_refund,
+            "legal_name": legal_name,
             "FBA_product_sales":FBA_product_sales, "FBA_product_refund":FBA_product_refund,
             "FBA_invenbry_credit":FBA_invenbry_credit,"shipping_credits":shipping_credits,
             "shipping_credits_refund":shipping_credits_refund, "gift_wrap_credits":gift_wrap_credits,

@@ -91,7 +91,7 @@ class StatementViewData(object):
             end_item = cur_page * pageSize
         else:
             end_item = start_item-1 + len(return_report_list)
-        total_count = GenerateReport.objects.count()
+        total_count = GenerateReport.objects.filter(username=self.username).count()
         if total_count % pageSize != 0:
             total_page = total_count / pageSize + 1
         else:
@@ -117,13 +117,22 @@ class StatementViewData(object):
             #return_dict = self.write_recorde_generate_report()
             return_dict = self.return_dict
             result = self.web_html_to_pdf()
-            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
+            if result.get("statue", False):
+                action_statue = "0"
+            else:
+                action_statue = "-1"
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""),action_statue=action_statue)
             return result
         elif self.reportType == "Transaction" and self.timeRangeType =="Custom":
             #return_dict = self.write_recorde_generate_report()
             return_dict = self.return_dict
             result = self.create_xls_reports(**return_dict)
-            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
+            print "create xls report result:", result
+            if result.get("statue", False):
+                action_statue = "0"
+            else:
+                action_statue = "-1"
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""), action_statue=action_statue)
             return {"status": update_statue, "message":""}
             pass
 
@@ -131,7 +140,11 @@ class StatementViewData(object):
             #return_dict = self.write_recorde_generate_report()
             return_dict = self.return_dict
             result = self.create_xls_reports(**return_dict)
-            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""))
+            if result.get("statue", False):
+                action_statue = "0"
+            else:
+                action_statue = "-1"
+            update_statue = self.update_recorde_generate_report_statue(return_dict.get("return_id"), result.get("file_path_name",""), action_statue=action_statue)
             return {"status": update_statue, "message":""}
         else:
             return {"statusCode":"OK"}
@@ -162,8 +175,12 @@ class StatementViewData(object):
                 "timeRange":self.timeRange}
 
 
-    def update_recorde_generate_report_statue(self, recorde_id, file_path_name):
+    def update_recorde_generate_report_statue(self, recorde_id, file_path_name, action_statue=None):
         """ 更新记录 """
+        if not action_statue:
+            action_statue = 1
+        else:
+            action_statue = action_statue
         statue = True
         if not os.path.exists(file_path_name):
             statue = False
@@ -175,7 +192,7 @@ class StatementViewData(object):
             report_file_path = ""
 
         try:
-            GenerateReport.objects.filter(id=recorde_id).update(action_statue=1,report_file_path=report_file_path)
+            GenerateReport.objects.filter(id=recorde_id).update(action_statue=action_statue,report_file_path=report_file_path)
         except Exception, e:
             print str(e)
             statue = False
