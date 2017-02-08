@@ -12,7 +12,7 @@ from django.conf import settings
 from center.dataService.create_xls import generate_path
 from center.tasks import get_amazon_report, download_import_report_task
 from center.models import InventoryReports
-from manageApp.models import FilenameToStorename
+from manageApp.models import FilenameToStorename, StoreKeys
 from center.dataService.center_share import dt_to_str
 
 
@@ -50,10 +50,18 @@ class InventoryReport():
             os.system("touch %s"%fileName)
 
         if user and really_store != "0":
-            access_key = user.access_key
-            secret_key = user.secret_key
-            store_key  = user.store_key
-            store_token= user.store_token
+            try:
+                store = StoreKeys.objects.filter(email=self.username)[0]
+                access_key = store.access_key
+                secret_key = store.secret_key
+                store_key  = store.account_id
+                store_token= store.mws_authtoken
+            except Exception, e:
+                store = ""
+                access_key = ""
+                secret_key = ""
+                store_key = ""
+                store_token = ""
 
             region = self.region
             store_obj = Stores(access_key=access_key, secret_key=secret_key,
