@@ -27,7 +27,7 @@ log = logging.getLogger("tasks")
 utc = pytz.timezone("GMT")
 
 
-@task
+@task(queue="download", routing_key="download_key")
 def get_amazon_report(store_obj,rep_type, fileName, line_id):
     """task:真实店铺，去amazon获取信息, 请求有时候好慢"""
     AMAZON_MWS = Amazon_MWS()
@@ -57,7 +57,7 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
         #print result.get("result", True), result.get("error_message","")
         log.info(result.get("result", True), result.get("error_message",""))
 
-@task
+@task(queue="download", routing_key="download_key")
 def download_import_report_task(username, report_type, fileName, line_id):
     """task:非真实店铺，从数据库获取, 数据量大的时候，好慢"""
     datas_list = InventoryReportsData.objects.filter(username=username).values("seller_sku","fulfillment_channel_sku","asin", "condition_type", "Warehouse_Condition_code", "Quantity_Available")
@@ -72,7 +72,7 @@ def download_import_report_task(username, report_type, fileName, line_id):
             line_str += line.get("Quantity_Available", "") + "\n"
             f.write(line_str)
 
-    #---
+    #------------------------------
     try:
         InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)))
     except Exception, e:
@@ -82,12 +82,13 @@ def download_import_report_task(username, report_type, fileName, line_id):
 
 
 
-@task
+@task(queue="download", routing_key="download_key")
 def data_range_reports_tasks(username, post_dict, return_dict):
     """tasks: data_range_reports页面, 生成pdf部分,量大好慢,还卡死了整个server,所以用task"""
     print "+"*100
     print "task request:", username, post_dict
     result = StatementViewData(username, post_dict, return_dict).request_report()
+    
     
 
 

@@ -55,10 +55,6 @@ class InventoryReport():
             store_key  = user.store_key
             store_token= user.store_token
 
-            access_key  = 'AKIAI4QSPO5ISDC2GJYQ'
-            secret_key  = '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'
-            store_key   = 'A2TFDJE5MM2YVC'
-            store_token = 'amzn.mws.2ea9e504-eb46-815c-bbe6-c19ea0ff9192'
             region = self.region
             store_obj = Stores(access_key=access_key, secret_key=secret_key,
                                store_key=store_key, store_token=store_token,

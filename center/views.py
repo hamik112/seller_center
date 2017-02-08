@@ -364,6 +364,7 @@ def amazon_register(request):
 
 
 def pdf_file_view(request):
+    """ 这里是显示页面, 真正生成pdf的html在summary_pdf_data.py里面的create_pdf_from_html"""
     username = request.user.username
     month = request.GET.get("month", "")
     year = request.GET.get("year", "")

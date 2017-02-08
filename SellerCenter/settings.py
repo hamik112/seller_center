@@ -37,6 +37,7 @@ else:
 
 
 #djcelery+broker配置
+from kombu import Queue, Exchange
 import djcelery
 djcelery.setup_loader()
 
@@ -47,6 +48,36 @@ BROKER_URL = 'redis://127.0.0.1:6379/0'
 #BROKER_USER = ""
 #BROKER_PASSWORD = ""
 #BROKER_VHOST = "0"
+
+CELERYD_MAX_TASKS_PER_CHILD = 40 # 每个worker执行了多少任务就会死掉
+
+CELERY_QUEUES = (
+    #"default_task": {
+    #    "queue": "default"
+    #},
+    #"download_task":{
+    #    "queue": "download"
+    #}
+    Queue("celery", routing_key="celery"),
+    Queue('download',
+          exchange=Exchange('download', type='direct'),
+          routing_key='download_key'),
+)
+
+CELERY_ROUTES = {
+    "center.tasks.get_amazon_report": {
+        "queue": "download",
+        "routing_key": "download_key",
+    },
+    "center.tasks.download_import_report_task":{
+        "queue": "download",
+        "routing_key": "download_key",
+    },
+    "center.tasks.data_range_reports_tasks": {
+        "queue": "download",
+        "routing_key": "download_key",
+    }
+}
 
 
 

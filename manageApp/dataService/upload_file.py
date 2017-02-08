@@ -191,7 +191,7 @@ def delete_file(ids, inventory=None):
             statue = -1
             if "No such file or directory:" in str(e):
                 #UploadFileRecorde.objects.filter(filename=filename).delete()
-                UploadFileRecorde.objects.filter(id__in=filename).delete()
+                UploadFileRecorde.objects.filter(id__in=ids).delete()
     return {"statue": statue, "msg": msg }
 
 
