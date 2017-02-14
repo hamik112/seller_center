@@ -3581,7 +3581,7 @@ if (typeof uet == 'function') { uet('ns'); }
         </div>
               </td>
               <td id="{{ line.batch_id }}-download" data-column="download" data-row="{{ line.batch_id }}" class="mt-cell mt-left">
-                {% if line.report_status == "Ready" and line.fileName != "" %}
+                {% if line.report_status == "0" and line.fileName != "" %}
                     <a href="/inventory/inventory-reports/?download-report=1&filename={{ line.fileName }}" style="cursor:pointer;">Download</a>
                 {% else %}
 
