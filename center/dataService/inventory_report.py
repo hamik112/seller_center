@@ -62,6 +62,9 @@ class InventoryReport():
                 secret_key = ""
                 store_key = ""
                 store_token = ""
+            
+            print "3" * 100
+            print "user, really_store:", access_key, secret_key, store_key, store_token
 
             region = self.region
             store_obj = Stores(access_key=access_key, secret_key=secret_key,
@@ -85,7 +88,7 @@ class InventoryReport():
                     "report_type":report_type if report_type else "",
                     "date_time_request": dt_to_str(datetime.datetime.now(tz=utc)),
                     "date_time_completed": "Not Completed",   #== Not Completed if request submitted
-                    "report_status": "Request Submitted",
+                    "report_status": "1",   #Request Submitted
                     "batch_id": self.get_batch_id(),
                     }
         try:

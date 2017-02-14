@@ -17,10 +17,16 @@ class Stores():
         self.region = region
 def main():
     AMAZON_MWS = Amazon_MWS()
+    """
     access_key = 'AKIAI4QSPO5ISDC2GJYQ'
     secret_key = '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'
     store_key = 'A2TFDJE5MM2YVC'
     store_token = 'amzn.mws.2ea9e504-eb46-815c-bbe6-c19ea0ff9192'
+    """
+    access_key = 'AKIAI4QSPO5ISDC2GJYQ'
+    secret_key = '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'
+    store_key = 'A1DSJJ6WH96BRG'
+    store_token = 'amzn.mws.44ab27df-40a1-97da-31ca-8dd065b7d4ab'
     region = 'US'  #美国市场
     store_obj = Stores(access_key=access_key, secret_key=secret_key, store_key=store_key, store_token=store_token,
                        region=region)
