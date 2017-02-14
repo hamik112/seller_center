@@ -89,16 +89,16 @@ class FilenameStoreName(object):
         return_file_store_list = []
         for i in xrange(file_store_list.count()):
             tmp_dict = file_store_list.values()[i]
-            tmp_dict["has_token"] = self.judge_has_token(email=tmp_dict.get("email"),storename=tmp_dict.get("storename"))
+            tmp_dict["has_token"] = self.judge_has_token(tmp_dict.get("email"),tmp_dict.get("gateway_name"))
             return_file_store_list.append(tmp_dict)
         return {"rows":list(return_file_store_list), "total":total}
 
 
         # return list(file_store_list.values())
-    def judge_has_token(self, email, storename):
+    def judge_has_token(self, email, gateway_name):
         token, has_key = "",""
         try:
-            token = StoreKeys.objects.filter(email=email,storename=storename).values("mws_authtoken")
+            token = StoreKeys.objects.filter(email=email,storename=gateway_name).values("mws_authtoken")
         except Exception, e:
             token = ""
         if token:
@@ -292,13 +292,14 @@ class FilenameStoreName(object):
                 if not line[header_dict.get(name)]:
                     error_list.append(str(n)+":"+str(line) )
                     continue
-            tmp_dict["email"] = self.get_storename_email(tmp_dict.get("storename"))
+            tmp_dict["email"] = self.get_storename_email(tmp_dict.get("storename"))   #这个，应该是网关名字
             if "" in tmp_dict.values():
                 error_list.append(str(n) + ":" + str(line))
                 continue
             try:
                 stk = StoreKeys(**tmp_dict)
                 stk.save()
+
             except Exception ,e:
                 log.error(str(e))
                 try:
@@ -315,7 +316,8 @@ class FilenameStoreName(object):
 
     def get_storename_email(self,storename):
         try:
-            email = FilenameToStorename.objects.get(storename=storename).email
+            #email = FilenameToStorename.objects.get(storename=storename).email
+            email = FilenameToStorename.objects.get(gateway_name=storename).email
         except Exception, e:
             email = ""
         return email

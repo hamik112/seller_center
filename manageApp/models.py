@@ -84,7 +84,8 @@ class StoreKeys(models.Model):
     """ key 的"""
     id              = models.AutoField( primary_key= True, null=False)
     email           = models.CharField( max_length= 100 ,default="", unique=True, null=False)
-    storename       = models.CharField( max_length=100, default="", null=False)
+    storename       = models.CharField( max_length=100, default="", null=False)   #这里应该是网关
+    #gateway_name     = models.CharField( max_length=100, default="", null=False)   #网关
 
     access_key      = models.CharField( max_length=50 , default="", null=False)
     secret_key      = models.CharField( max_length=100, default="", null=False)
