@@ -130,7 +130,9 @@ def import_one_file_to_statement_view(file_path, filename):
                 tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
             else:
                 dict_name = name.replace(" ", "_")
+                print "name:", name
                 tmp_dict[dict_name] = data_line[header_dict.get(name)]
+
         tmp_dict["serial_number"] = serial_number
         tmp_dict["store_name"] = store_name
         tmp_dict["area"] = area

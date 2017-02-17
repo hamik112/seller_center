@@ -29,7 +29,7 @@ SECRET_KEY = 'bw(d18y*zpt!r()bsu45c_=_o%+pi398=mtq89v0s65j)=xo1j'
 cur_user = getpass.getuser()
 if cur_user == "seller_center":
     DEBUG = False
-    ALLOWED_HOSTS = ["47.89.49.243"]
+    ALLOWED_HOSTS = ["sellercentral.amazocn.com","amazocn.com"] #对应的在nginx里面设置
 else:
     DEBUG = True
     ALLOWED_HOSTS = []

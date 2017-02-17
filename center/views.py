@@ -21,6 +21,7 @@ from center.dataService.inventory_data import manage_fba_shipments, manage_fba_m
 
 from center.dataService.inventory_report import InventoryReport, ReportType
 from center.dataService.data_range_report_data import  generate_data_range_reports, generate_reports_again
+from center.dataService.statement_view import StatementView
 
 # Create your views here.
 
@@ -271,7 +272,11 @@ def statement_view(request):
     # result_dict = StatementViewData(request).test_return()
     groupid = request.GET.get("groupId", "")
     print "groupid: ", groupid
+    stv = StatementView()
+    
     result_dict = {"unsuccessful_charges": 700, "seller_repayment":800}
+    
+    
     return  render(request, 'statement_view.html', locals())
 
 
