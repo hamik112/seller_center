@@ -69,6 +69,8 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
 @task(queue="download", routing_key="download_key")
 def download_import_report_task(username, report_type, fileName, line_id):
     """task:非真实店铺，从数据库获取, 数据量大的时候，好慢"""
+    print "download ..."
+    log.info("download ..., not really store ...")
     datas_list = InventoryReportsData.objects.filter(username=username).values("seller_sku","fulfillment_channel_sku","asin", "condition_type", "Warehouse_Condition_code", "Quantity_Available")
     with open(fileName, "w") as f:
         for line in datas_list:

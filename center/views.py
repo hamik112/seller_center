@@ -320,8 +320,7 @@ def amazon_login(request):
         password = request.POST.get("password", "")
         print email, password
         user = auth.authenticate(username=email, password=password)
-        print user
-        if user:
+        if user and email != "root@starmerx.com":
             auth.login(request, user)
             return HttpResponseRedirect("/")
         else:

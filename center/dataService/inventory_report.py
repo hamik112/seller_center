@@ -75,6 +75,8 @@ class InventoryReport():
             print fileName
         #if really_store == "0":  #等于0，则是不是真实店铺
         else:
+            print "1"*100
+            print "不是真实店铺"
             username = self.username
             self.download_import_report(username,report_type, fileName,line_id)
 
