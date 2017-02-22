@@ -49,13 +49,12 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
             log.info(str(e))
             fname = ""
         try:
-            InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
+            InventoryReports.objects.filter(id=line_id).update( date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
                                                                report_status = "0",  # == 0 表示页面已经Ready
                                                                fileName = fname)
-
         except Exception, e:
             #print "rewrite InventoryReports Error: ", str(e)
-            log.info("rewrite InventoryReports Error: ", str(e))
+            log.info("rewrite InventoryReports Error: "+ str(e))
     else:
         print result.get("result", True), result.get("error_message","")
         log.info(result.get("result", True)) 
@@ -64,8 +63,11 @@ def get_amazon_report(store_obj,rep_type, fileName, line_id):
             InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
                                                                report_status = "-1")  # == 0 表示页面已经
         except Exception, e:
-            log.info("rewrite InventoryReports Error: ", str(e))
+            import traceback
+            traceback.print_exc()
+            log.info("rewrite InventoryReports Error: "+ str(e))
 
+            
 @task(queue="download", routing_key="download_key")
 def download_import_report_task(username, report_type, fileName, line_id):
     """task:非真实店铺，从数据库获取, 数据量大的时候，好慢"""
@@ -85,9 +87,11 @@ def download_import_report_task(username, report_type, fileName, line_id):
 
     #------------------------------
     try:
-        InventoryReports.objects.filter(id=line_id).update(date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)))
+        InventoryReports.objects.filter(id=line_id).update( date_time_completed = dt_to_str(datetime.datetime.now(tz=utc)),
+                                                               report_status = "0",  # == 0 表示页面已经Ready
+                                                               fileName = fileName)        
     except Exception, e:
-        log.info("rewrite InventoryReports Error: ", str(e))
+        log.info("rewrite InventoryReports Error: " + str(e))
     
 
 
