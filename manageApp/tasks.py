@@ -15,7 +15,7 @@ from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
 from manageApp.dataService.deal_xls import read_xls, inventory_read_txt
 from manageApp.dataService.csv_to_excel import csv_to_xls
-
+from manageApp.dataService.statement_view_by_month import create_statement_month
 logger = get_task_logger(__name__)
 
 log1 = logging.getLogger("tasks")
@@ -65,19 +65,19 @@ def import_one_file_to_statement_view(file_path, filename):
         msg = "表格无数据或请查看是否在第一个sheet里面或查看sheet名称是sheet1"
         return {"statue": -1, "msg": msg}
         update_file_statue(filename, -1, error_msg=msg)
-    if len(value_list[3]) > 20:
-        header_list = value_list[0]
-        datas_list = value_list[1:]
-    else:
-        header_list = value_list[7]
-        datas_list = value_list[8:]
+    # if len(value_list[3]) > 20:
+    #     header_list = value_list[0]
+    #     datas_list = value_list[1:]
+    # else:
+    header_list = value_list[7]
+    datas_list = value_list[8:]
     need_header_list = ['date_time', 'settlement id', 'type', 'order id', 'sku', 'description', 'quantity',
                         'marketplace', 'fulfillment', 'order city', 'order state', 'order postal',
                         'product sales', "shipping credits", "gift wrap credits", "promotional rebates",
                         "sales tax collected", "selling fees", "fba fees", "other transaction fees",
                         "other", "total" ]
     header_dict = {}
-    # print header_list, 
+    # print header_list,
     header_num_list = [0, 1, 2,3,4,5,6,7,8,9,10, 11,12,13,14,15,16,17,18,19,20,21]
     header_dict = dict(zip(need_header_list,header_num_list))
     """
@@ -90,7 +90,7 @@ def import_one_file_to_statement_view(file_path, filename):
                 header_dict[name] = header_list.index(name)
         except :
             if name == "date_time":
-                msg = "没有找到字段: date/time" 
+                msg = "没有找到字段: date/time"
             else:
                 msg = "没有找到字段: " + str(name)
             update_file_statue(filename, -1, error_msg=msg)
@@ -118,6 +118,9 @@ def import_one_file_to_statement_view(file_path, filename):
         area = ""
     log1.info(len(value_list))
     n = 0
+    stvs = []
+    year = None
+    month = None
     for data_line in datas_list:
         log1.info("current: "+ str(n))
         n += 1
@@ -128,6 +131,8 @@ def import_one_file_to_statement_view(file_path, filename):
             if name == "date_time":
                 print data_line[header_dict.get("date_time")]
                 tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
+                year = str_to_datetime(data_line[header_dict.get("date_time")]).year
+                month = str_to_datetime(data_line[header_dict.get("date_time")]).month
             else:
                 dict_name = name.replace(" ", "_")
                 print "name:", name
@@ -138,6 +143,7 @@ def import_one_file_to_statement_view(file_path, filename):
         tmp_dict["area"] = area
         try:
             stv = StatementView(**tmp_dict)
+            stvs.append(stv)
             stv.save()
         except Exception, e:
             print str(e)
@@ -151,6 +157,7 @@ def import_one_file_to_statement_view(file_path, filename):
                 return {"statue": -1, "msg": str(e)}
     log1.info(str(n))
     update_file_statue(filename, 2)
+    create_statement_month(serial_number,year,month,stvs,)
     return {"statue": 0, "msg": ""}
 
 

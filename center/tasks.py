@@ -102,6 +102,7 @@ def data_range_reports_tasks(username, post_dict, return_dict):
     """tasks: data_range_reports页面, 生成pdf部分,量大好慢,还卡死了整个server,所以用task"""
     print "+"*100
     print "task request:", username, post_dict
+    log.info(username)
     result = StatementViewData(username, post_dict, return_dict).request_report()
     
     

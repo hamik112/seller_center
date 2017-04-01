@@ -184,7 +184,7 @@ class StatementViewData(object):
         statue = True
         if not os.path.exists(file_path_name):
             statue = False
-            return statue
+            # return statue
         try:
             report_file_path = file_path_name.split("GENERATE_REPORT/")[1]
         except Exception, e:

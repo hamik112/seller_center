@@ -91,12 +91,12 @@
 					<div class="stl_01" style="top:18.5053em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0003em;">Seller fulfilled selling fees &nbsp;</span></div>
 					<div class="stl_01" style="top:19.4386em; left:33.92em;"><span class="stl_20 stl_08 stl_11" style="word-spacing:0.0002em;">FBA selling fees &nbsp;</span></div>
                 {% if  FBA_selling_fees %}
-                    <div class="stl_01" style="top:18.5053em; left:{{ FBA_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ FBA_selling_fees.number }} &nbsp;</span></div>
+                    <div class="stl_01" style="top:18.5053em; left:{{ FBA_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_11">{{ seller_fulfilled_selling_fees.number }} &nbsp;</span></div>
                 {% else %}
 					<div class="stl_01" style="top:18.5053em; left:55.775em;"><span class="stl_20 stl_08 stl_11">0 &nbsp;</span></div>
 			    {% endif %}
                 {% if seller_fulfilled_selling_fees %}
-                    <div class="stl_01" style="top:19.4386em; left:{{ seller_fulfilled_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ seller_fulfilled_selling_fees.number }}</span></div>
+                    <div class="stl_01" style="top:19.4386em; left:{{ seller_fulfilled_selling_fees.number_length }}em;"><span class="stl_20 stl_08 stl_09">{{ FBA_selling_fees.number }}</span></div>
                 {% else %}
 					<div class="stl_01" style="top:19.4386em; left:57.8892em;"><span class="stl_20 stl_08 stl_09">0</span></div>
                 {% endif %}

@@ -18,7 +18,7 @@ class UploadFileRecorde(models.Model):
     file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
     error_msg   = models.CharField( max_length= 300, default="", null=False)
 
-    uploadtime =  models.DateTimeField( default= timezone.now())
+    uploadtime =  models.DateTimeField( default= timezone.now)
 
     class Meta:
         db_table = "upload_file_recorde"
@@ -36,7 +36,7 @@ class InventoryUploadRecorde(models.Model):
     file_statue = models.CharField( max_length= 10, default="0", null=False)  #状态，是否正在更新
     error_msg   = models.CharField( max_length= 300, default="", null=False)
 
-    uploadtime =  models.DateTimeField( default= timezone.now())
+    uploadtime =  models.DateTimeField( default= timezone.now)
 
     class Meta:
         db_table = "inventory_upload_recorde"
@@ -66,8 +66,8 @@ class FilenameToStorename(models.Model):
     payment_time    =  models.CharField( max_length= 30, default="",  null=False)       #回款时间
 
 
-    create_time     =  models.DateTimeField( default=timezone.now())
-    update_time     =  models.DateTimeField( default=timezone.now())
+    create_time     =  models.DateTimeField( default=timezone.now)
+    update_time     =  models.DateTimeField( default=timezone.now)
 
     class Meta:
         db_table = "filename_to_storename"
@@ -93,8 +93,8 @@ class StoreKeys(models.Model):
     mkplaceid       = models.CharField( max_length=50, default="", null=False)
     mws_authtoken   = models.CharField( max_length=150, default="", unique=True,null=False)
 
-    create_time = models.DateTimeField(default=timezone.now())
-    update_time = models.DateTimeField(default=timezone.now())
+    create_time = models.DateTimeField(default=timezone.now)
+    update_time = models.DateTimeField(default=timezone.now)
 
     class Meta:
         db_table = "store_key"
@@ -113,7 +113,7 @@ class StatementView(models.Model):
     id              =  models.AutoField( primary_key=True, null=False)
     # date_time    =  models.CharField( max_length=50, default="", null=False)
     # unique_id       = models.CharField( max_length=200, default="", unique=True, null=False)   #时间加order_id为唯一标识
-    date_time       = models.DateTimeField( default=timezone.now(), null=False)      #报表里面的时间
+    date_time       = models.DateTimeField( default=timezone.now, null=False)      #报表里面的时间
 
     filename        =  models.CharField( max_length=100, default="", null=False)
 
@@ -150,3 +150,64 @@ class StatementView(models.Model):
     def __unicode__(self):
         return self.store_name
 
+
+class StatementViewMonth(models.Model):
+    id = models.AutoField(primary_key=True, null=False)
+    serial_number = models.CharField( max_length=45, default="0", null=False)
+    product_sales = models.CharField(max_length=45, default="0", null=False)
+    product_refund = models.CharField(max_length=45, default="0", null=False)
+    legal_name = models.CharField(max_length=45, default="", null=False)
+    FBA_product_sales = models.CharField(max_length=45, default="0", null=False)
+    FBA_product_refund = models.CharField(max_length=45, default="0", null=False)
+    shipping_credits = models.CharField(max_length=45, default="0", null=False)
+    shipping_credits_refund = models.CharField(max_length=45, default="0", null=False)
+    gift_wrap_credits = models.CharField(max_length=45, default="0", null=False)
+    gift_wrap_credits_refund = models.CharField(max_length=45, default="0", null=False)
+    promotional_rebates = models.CharField(max_length=45, default="0", null=False)
+    promotional_rebates_refund = models.CharField(max_length=45, default="0", null=False)
+    a_to_z_guarantee_chaims = models.CharField(max_length=45, default="0", null=False)
+    chargebacks = models.CharField(max_length=45, default="0", null=False)
+    income_subtotal_debits = models.CharField(max_length=45, default="0", null=False)
+    income_subtotal_credits = models.CharField(max_length=45, default="0", null=False)
+    seller_fulfilled_selling_fees = models.CharField(max_length=45, default="0", null=False)
+    FBA_selling_fees = models.CharField(max_length=45, default="0", null=False)
+    selling_fee_refund = models.CharField(max_length=45, default="0", null=False)
+    fba_transaction_fees = models.CharField(max_length=45, default="0", null=False)
+    fba_transaction_fee_refunds = models.CharField(max_length=45, default="0", null=False)
+    other_transaction_fees = models.CharField(max_length=45, default="0", null=False)
+    other_transaction_fee_refunds = models.CharField(max_length=45, default="0", null=False)
+    FBA_invenbry_credit = models.CharField(max_length=45, default="0", null=False)
+    FBA_inventory_inbound_services_fees = models.CharField(max_length=45, default="0", null=False)
+    Shipping_label_purchases = models.CharField(max_length=45, default="0", null=False)
+    Shipping_label_refunds = models.CharField(max_length=45, default="0", null=False)
+    carrier_shipping_label_adjustments = models.CharField(max_length=45, default="0", null=False)
+    Adjustments = models.CharField(max_length=45, default="0", null=False)
+    Refund_administration_fees = models.CharField(max_length=45, default="0", null=False)
+    refund_for_advertiser = models.CharField(max_length=45, default="0", null=False)
+    Service_fees = models.CharField(max_length=45, default="0", null=False)
+    cost_of_advertising = models.CharField(max_length=45, default="0", null=False)
+    expense_subtotal_debits = models.CharField(max_length=45, default="0", null=False)
+    expense_subtotal_credits = models.CharField(max_length=45, default="0", null=False)
+    Income = models.CharField(max_length=45, default="0", null=False)
+    Expenses = models.CharField(max_length=45, default="0", null=False)
+    Charges_to_credit_card = models.CharField(max_length=45, default="0", null=False)
+    transfers_to_bank_account_sum = models.CharField(max_length=45, default="0", null=False)
+    Failed_transfers_to_bank_account = models.CharField(max_length=45, default="0", null=False)
+    summaries_income = models.CharField(max_length=45, default="0", null=False)
+    summaries_expenses = models.CharField(max_length=45, default="0", null=False)
+    Transfers = models.CharField(max_length=45, default="0", null=False)
+    summaries_transfers = models.CharField(max_length=45, default="0", null=False)
+    subtotal_transfers = models.CharField(max_length=45, default="0", null=False)
+    year = models.CharField(max_length=45, default="0", null=False)
+    month =models.CharField(max_length=45, default="0", null=False)
+
+    class Meta:
+        db_table = "statement_view_month"
+
+    def __unicode__(self):
+        return self.store_name
+
+
+    #   `begin_date_str` varchar(45) DEFAULT NULL,
+    #   `end_date_str` varchar(45) DEFAULT NULL,
+    #   PRIMARY KEY (`id`)

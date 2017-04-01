@@ -17,6 +17,7 @@ def generate_data_range_reports(request):
     return_dict = {}
     try:
         return_dict = StatementViewData(username, post_dict, return_dict).write_recorde_generate_report(action_statue="1")
+        # StatementViewData(username, post_dict, return_dict).request_report()
         data_range_reports_tasks.delay(username, post_dict, return_dict)
     except Exception, e:
         print "data_range report tasks Error: %s" % str(e)
