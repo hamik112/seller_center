@@ -29,8 +29,8 @@ class Command(BaseCommand):
 def handle_data(*args):
     print '++++++++++++++++++++++++++++++++++++'
     conn = MySQLdb.connect(
-        host=mysql_setting.get('HOST'),
-        port=int(mysql_setting.get('PORT')),
+        host=mysql_setting.get('HOST') if mysql_setting.get('HOST') else '127.0.0.1',
+        port=int(mysql_setting.get('PORT')) if mysql_setting.get('PORT') else 3306,
         user=mysql_setting.get('USER'),
         passwd=mysql_setting.get('PASSWORD'),
         db=mysql_setting.get('NAME'),
