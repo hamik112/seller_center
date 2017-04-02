@@ -30,12 +30,17 @@ def handle_data(*args):
     print '++++++++++++++++++++++++++++++++++++'
     conn = MySQLdb.connect(
         host=mysql_setting.get('HOST'),
-        port=mysql_setting.get('PORT'),
+        port=int(mysql_setting.get('PORT')),
         user=mysql_setting.get('USER'),
         passwd=mysql_setting.get('PASSWORD'),
         db=mysql_setting.get('NAME'),
         charset="utf8"
     )
+    print mysql_setting.get('HOST')
+    print mysql_setting.get('PORT')
+    print mysql_setting.get('USER')
+    print mysql_setting.get('PASSWORD')
+    print mysql_setting.get('NAME')
     cur = conn.cursor()
     stores  = FilenameToStorename.objects.filter(serial_number='ABC-58')
     Shipping_label_purchases = 0
