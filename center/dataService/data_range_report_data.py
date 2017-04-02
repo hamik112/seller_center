@@ -1,12 +1,13 @@
 #!/usr/bin/env python 
 # encoding:utf-8
 
-
+import logging
 from center.tasks import data_range_reports_tasks
 from center.dataService.statement_view_data import StatementViewData
 from center.models import GenerateReport
 
 
+log = logging.getLogger("tasks")
 
 def generate_data_range_reports(request):
     """使用tasks任务去生成pdf，因为量大，时间长"""
@@ -20,6 +21,7 @@ def generate_data_range_reports(request):
         # StatementViewData(username, post_dict, return_dict).request_report()
         data_range_reports_tasks.delay(username, post_dict, return_dict)
     except Exception, e:
+        log.info(str(e))
         print "data_range report tasks Error: %s" % str(e)
         statusCode = ""
     return {"statusCode":statusCode}
