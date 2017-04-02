@@ -8,6 +8,7 @@ from center.models import GenerateReport
 
 
 log = logging.getLogger("tasks")
+log_error = logging.getLogger("error")
 
 def generate_data_range_reports(request):
     """使用tasks任务去生成pdf，因为量大，时间长"""
@@ -17,11 +18,13 @@ def generate_data_range_reports(request):
     print "*"*100
     return_dict = {}
     try:
+        log_error.info('*'*10)
         return_dict = StatementViewData(username, post_dict, return_dict).write_recorde_generate_report(action_statue="1")
         # StatementViewData(username, post_dict, return_dict).request_report()
         data_range_reports_tasks.delay(username, post_dict, return_dict)
     except Exception, e:
         log.info(str(e))
+        log_error.info(str(e))
         print "data_range report tasks Error: %s" % str(e)
         statusCode = ""
     return {"statusCode":statusCode}
