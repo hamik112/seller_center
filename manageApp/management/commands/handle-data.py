@@ -12,15 +12,13 @@ from datetime import datetime,timedelta
 import dateutil
 import calendar
 
+from SellerCenter.settings import DATABASES
 from manageApp.models import FilenameToStorename,StatementViewMonth
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-host = '127.0.0.1'
-user = 'root'
-passwd = 'x'
-db = 'seller_center'
+mysql_setting = DATABASES.get('default')
 class Command(BaseCommand):
     def handle(self, *args, **options):
         print "start"
@@ -31,11 +29,11 @@ class Command(BaseCommand):
 def handle_data(*args):
     print '++++++++++++++++++++++++++++++++++++'
     conn = MySQLdb.connect(
-        host=host,
-        port=3306,
-        user=user,
-        passwd=passwd,
-        db=db,
+        host=mysql_setting.get('HOST'),
+        port=mysql_setting.get('PORT'),
+        user=mysql_setting.get('USER'),
+        passwd=mysql_setting.get('PASSWORD'),
+        db=mysql_setting.get('NAME'),
         charset="utf8"
     )
     cur = conn.cursor()
