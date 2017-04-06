@@ -21,6 +21,7 @@ def write_file_other_handle(file_list):
     try:
         for fileobj in file_list:
             fname = fileobj.name
+            xuhao = fname.split('.')[0]
             filename = str(time.time()).replace(".", "") + "_" + fname
             file_path = os.path.join(get_path_other(UPLOAD_PATH), filename)
             with open(file_path, "wb+") as f:
@@ -30,7 +31,7 @@ def write_file_other_handle(file_list):
             result_filepath = os.path.join(get_path_other(UPLOAD_PATH), result_filename)
             db_file_name = result_filename.split('_')[1]+'_'+result_filename.split('_')[2]
             obj = FileUploadOther.objects.create(file_name = db_file_name,file_path=result_filepath,status ='0')
-            deal_file.delay(file_path,fname,result_filepath,obj)
+            deal_file.delay(file_path,xuhao,result_filepath,obj)
     except Exception,e:
         raise e
 def get_path_other(path):

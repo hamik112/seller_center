@@ -264,10 +264,10 @@ def deal_file(filepath,code,result_filepath,obj):
                     li.append('kongyun')
             else:
                 li.append('')
-            li.append(code)
-            if r.get(code):
+
+            if r.get('xh_'+code):
                 li.append(code)
-                li.append(r.get(code))
+                li.append(r.get('xh_'+code))
 
         data_count=len(data_list)
         order_id_list_len=data_count*3
