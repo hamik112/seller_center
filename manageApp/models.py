@@ -211,3 +211,12 @@ class StatementViewMonth(models.Model):
     #   `begin_date_str` varchar(45) DEFAULT NULL,
     #   `end_date_str` varchar(45) DEFAULT NULL,
     #   PRIMARY KEY (`id`)
+
+class FileUploadOther(models.Model):
+    id = models.AutoField(primary_key=True, null=False)
+    file_name = models.CharField(max_length=100, default="", null=True)
+    file_path = models.CharField(max_length=250, default="", null=True)
+    status = models.CharField(max_length=2,default='0',null=False)
+
+    class Meta:
+        db_table = "file_upload_other"
