@@ -331,7 +331,7 @@ def deal_file(filepath,code,result_filepath,obj):
                     ss+=1
                     r.set(old_li3,li[3])
                 li[12]=(round(li[12]*1.01,2))
-                li[21]=(float(li[12])+float(li[13])+float(li[14])+float(li[15])+float(li[16])+float(li[17])+float(li[18])+float(li[19])+float(20))
+                li[21]=(float(li[12])+float(li[13])+float(li[14])+float(li[15])+float(li[16])+float(li[17])+float(li[18])+float(li[19])+float(li[20]))
                 if li[22]:
                     li[4]=r.hget('asin_'+li[23],'newoutsku')
                 if len(li)==25:

@@ -161,7 +161,11 @@
             align: 'center',
             valign: 'middle',
             formatter:function (data,value,index) {
-                return '<button class="btn btn-primary" onclick="ajax_download('+value.id+')">下载</button>';
+                var status = value.status;
+                if (status == 1)
+                    return '<button class="btn btn-primary" onclick="ajax_download('+value.id+')">下载</button>';
+                else
+                    return '<button class="btn btn-primary" disabled="disabled" onclick="ajax_download('+value.id+')">下载</button>';
             }
         }
     ]
