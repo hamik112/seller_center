@@ -320,13 +320,13 @@ def deal_file(filepath,code,result_filepath,obj):
             li[26]:wangguandaima
             """
             if li[3]:
-                if li[2] == 'Chargeback Refund' or li[2] == 'A-to-z Guarantee Claim' or li[2] == 'order' or li[2] == 'refund':
+                if li[2].lower() == 'chargeback refund' or li[2].lower() == 'a-to-z guarantee claim' or li[2].lower() == 'order' or li[2].lower() == 'refund':
                     if r.get(timenum+'addr_' + li[3]):
                         li[9] = eval(r.get(timenum+'addr_' + li[3]))[0]
                         li[10] = eval(r.get(timenum+'addr_' + li[3]))[1]
                         li[11] = eval(r.get(timenum+'addr_' + li[3]))[2]
                     else:
-                        r.set('addr_' + li[3], str(address_list[address_i]))
+                        r.set(timenum+'addr_' + li[3], str(address_list[address_i]))
                         li[9] = address_list[address_i][0]
                         li[10] = address_list[address_i][1]
                         li[11] = address_list[address_i][2]
@@ -367,14 +367,13 @@ def deal_file(filepath,code,result_filepath,obj):
                 table.write(j, t, li[t])
                 t += 1
             j += 1
-        os.system("redis-cli KEYS '"+timenum+"addr_*' | xargs redis-cli DEL")
-        os.system("redis-cli KEYS '" + timenum + "orderid_*' | xargs redis-cli DEL")
+        os.popen("redis-cli KEYS '"+timenum+"addr_*' | xargs redis-cli DEL")
+        os.popen("redis-cli KEYS '" + timenum + "orderid_*' | xargs redis-cli DEL")
         j = 0
         file.save(result_filepath)
         obj.status = 1
         obj.save()
     except Exception,e:
-        print datetime.datetime.now()
         obj.status = 2
         obj.save()
         raise e
