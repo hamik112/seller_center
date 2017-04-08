@@ -1,6 +1,8 @@
 # encoding:utf-8
 import  json
 import  datetime
+from django.utils import timezone
+import pytz
 
 from django.http import StreamingHttpResponse
 # from django.http import JsonResponse
@@ -13,7 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from center.dataService.data_format import file_iterator, file_iterator_all_statement
-from center.dataService.get_storename import get_storename
+from center.dataService.get_storename import get_storename,get_serial_number,get_store
 from center.dataService.summary_pdf_data import SummaryPdfData
 from center.dataService.transaction_view import TrasactionView
 from  center.dataService.all_statements import AllStatementsList
@@ -268,15 +270,92 @@ def date_range_reports(request):
 @login_required(login_url="/amazon-login/")
 def statement_view(request):
     email = request.user.username
-    store_name = get_storename(email)
+    serial_number = get_serial_number(email)
+    store = get_store(email)
+    # store_name = get_storename(email)
     # result_dict = StatementViewData(request).test_return()
     groupid = request.GET.get("groupId", "")
-    print "groupid: ", groupid
-    stv = StatementView()
-    
-    result_dict = {"unsuccessful_charges": 700, "seller_repayment":800}
-    
-    
+    result_dict = {"unsuccessful_charges": 0}
+    dateGroups = []
+    tz = pytz.utc
+    start_date = datetime.datetime.strptime(store.payment_time.split('+')[0], '%Y-%m-%d %H:%M:%S').replace(tzinfo=tz)
+    end_date = start_date + datetime.timedelta(days=14)
+    now_date = timezone.now()
+    print now_date
+    while end_date < now_date:
+        start_date_str = start_date.strftime('%b %d, %Y')
+        end_date_str = end_date.strftime('%b %d, %Y')
+        date_group_item = start_date_str + " - "+end_date_str
+        if date_group_item == groupid:
+            curent_date_group_item_end = end_date_str
+            dateGroups.insert(0, {"value": date_group_item,'selected':True})
+        else:
+            dateGroups.insert(0, {"value": date_group_item})
+        start_date = end_date
+        end_date = start_date + datetime.timedelta(days=14)
+    current_date_group = start_date.strftime('%b %d, %Y') + " - " + now_date.strftime('%b %d, %Y')
+    if groupid:
+        start_time = datetime.datetime.strptime(groupid.split('-')[0].strip(),'%b %d, %Y')
+        end_time = datetime.datetime.strptime(groupid.split('-')[1].strip(),'%b %d, %Y')
+    else:
+        return render(request, 'statement_view.html', locals())
+    stvs = StatementView.objects.filter(serial_number=serial_number,date_time__range=(start_time, end_time))
+
+    product_charges_order = 0.0
+    promo_rebates_order = 0.0
+    amazon_fees_order = 0.0
+    other_order = 0.0
+
+    product_charges_refunds = 0.0
+    promo_rebates_refunds = 0.0
+    amazon_fees_refunds = 0.0
+    other_refunds = 0.0
+
+    fba_inventory_fee = 0.0
+    cost_of_advertising = 0.0
+    fba_fee = 0.0
+    other = 0.0
+
+    for stv in stvs:
+        if stv.type =="Order":
+            product_charges_order += float(stv.product_sales)
+            promo_rebates_order += float(stv.promotional_rebates)
+            amazon_fees_order += float(stv.selling_fees)+float(stv.fba_fees)+float(stv.other_transaction_fees)
+            other_order += float(stv.shipping_credits)+float(stv.gift_wrap_credits)
+        elif stv.type == "Refunds":
+            product_charges_refunds += float(stv.product_sales)
+            promo_rebates_refunds += float(stv.promotional_rebates)
+            amazon_fees_refunds += float(stv.selling_fees) + float(stv.fba_fees) + float(stv.other_transaction_fees)
+            other_refunds += float(stv.shipping_credits) + float(stv.gift_wrap_credits)
+        elif stv.type == "FBA Inventory Fee":
+            fba_inventory_fee += float(stv.total)
+        elif stv.type == "Service Fee":
+            if stv.description == "Cost of Advertising":
+                cost_of_advertising += float(stv.total)
+            else:
+                fba_fee += float(stv.total)
+        else:
+            other += float(stv.total)
+
+    order = {'product_charges':{'value':product_charges_order,'flag':product_charges_order>=0},
+             'promo_rebates':{'value':promo_rebates_order,'flag':promo_rebates_order>=0},
+             'amazon_fees':{'value':amazon_fees_order,'flag':amazon_fees_order>=0},
+             'other':{'value':other_order,'flag':other_order>=0},
+             'sub_total':product_charges_order+promo_rebates_order+amazon_fees_order+other_order}
+    refunds = {'product_charges':{'value':product_charges_refunds,'flag':product_charges_refunds>=0},
+               'promo_rebates':{'value':promo_rebates_refunds,'flag':promo_rebates_refunds>=0},
+               'amazon_fees':{'value':amazon_fees_refunds,'flag':amazon_fees_refunds>=0},
+               'other':{'value':other_refunds,'flag':other_refunds>=0},
+               'sub_total':product_charges_refunds+promo_rebates_refunds+amazon_fees_refunds+other_refunds}
+    selling_fee = {'fba_fee':{'value':fba_fee,'flag':fba_fee>=0},
+                   'cost_of_advertising':{'value':cost_of_advertising,'flag':cost_of_advertising>=0},
+                   'fba_inventory_fee':{'value':fba_inventory_fee,'flag':fba_inventory_fee>=0},
+                   'sub_total':fba_fee+cost_of_advertising+fba_inventory_fee}
+    other = {'other':other,'flag':other>=0}
+    result_dict.update({"seller_repayment":order.get('sub_total')+refunds.get('sub_total')+selling_fee.get('sub_total')+other.get('other')})
+    result_dict.update({"all_seller_repayment":result_dict.get('seller_repayment')+result_dict.get('unsuccessful_charges')})
+    result_dict.update({"change_date":end_date.strftime('%b %d, %Y')})
+
     return  render(request, 'statement_view.html', locals())
 
 

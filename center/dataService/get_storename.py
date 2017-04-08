@@ -19,3 +19,10 @@ def get_serial_number(email):
         serial_number = ""
     print serial_number
     return serial_number
+
+def get_store(email):
+    try:
+        store = FilenameToStorename.objects.filter(email=email).first()
+    except Exception, e:
+        store = ""
+    return store

@@ -6,6 +6,7 @@ import redis
 import xlrd
 import xlwt
 import random
+import os
 reload(sys)
 sys.setdefaultencoding("utf-8")
 
@@ -13,6 +14,7 @@ import  logging
 from celery import  task
 from celery.utils.log import get_task_logger
 import datetime
+import time
 
 from manageApp.models import  StatementView, FilenameToStorename
 from center.models import InventoryReportsData
@@ -219,7 +221,7 @@ def read_excel(file_name):
 @task(max_retries=3,default_retry_delay=1 * 6)
 def deal_file(filepath,code,result_filepath,obj):
     try:
-        print datetime.datetime.now()
+        timenum = str(time.time()).replace('.','')
         r = redis.Redis(host='127.0.0.1', port='6379')
         # data = read_excel('/tmp/source_data.xls' )
         data = read_excel(filepath)
@@ -230,9 +232,7 @@ def deal_file(filepath,code,result_filepath,obj):
         data_head[7].append('xuhao')
         data_head[7].append('wangguan')
         data_list = data[0]['values'][8:]
-        i=0;
         for li in data_list:
-            print i
             """
             li[0]:date/time
             li[1]:settlement id
@@ -271,7 +271,6 @@ def deal_file(filepath,code,result_filepath,obj):
             if r.get('xh_'+code):
                 li.append(code)
                 li.append(r.get('xh_'+code))
-            i=i+1
         data_count = len(data_list)
         order_id_list_len = data_count * 3
         order_id_list = []
@@ -322,24 +321,24 @@ def deal_file(filepath,code,result_filepath,obj):
             """
             if li[3]:
                 if li[2] == 'Chargeback Refund' or li[2] == 'A-to-z Guarantee Claim' or li[2] == 'order' or li[2] == 'refund':
-                    if r.get('addr_' + li[3]):
-                        li[9] = eval(r.get('addr_' + li[3]))[0]
-                        li[10] = eval(r.get('addr_' + li[3]))[1]
-                        li[11] = eval(r.get('addr_' + li[3]))[2]
+                    if r.get(timenum+'addr_' + li[3]):
+                        li[9] = eval(r.get(timenum+'addr_' + li[3]))[0]
+                        li[10] = eval(r.get(timenum+'addr_' + li[3]))[1]
+                        li[11] = eval(r.get(timenum+'addr_' + li[3]))[2]
                     else:
                         r.set('addr_' + li[3], str(address_list[address_i]))
                         li[9] = address_list[address_i][0]
                         li[10] = address_list[address_i][1]
                         li[11] = address_list[address_i][2]
-                if r.get('orderid_'+li[3]):
-                    li[3] = r.get('orderid_'+li[3])
+                if r.get(timenum+'orderid_'+li[3]):
+                    li[3] = r.get(timenum+'orderid_'+li[3])
                 else:
                     old_li3 = li[3]
                     li[3] = li[3][:4] + str(order_list[ss]) + '-'
                     ss += 1
                     li[3] += str(order_list[ss])
                     ss += 1
-                    r.set('orderid_'+old_li3, li[3])
+                    r.set(timenum+'orderid_'+old_li3, li[3])
                 li[12] = (round(li[12] * 1.01, 2))
                 li[21] = (
                 float(li[12]) + float(li[13]) + float(li[14]) + float(li[15]) + float(li[16]) + float(li[17]) + float(
@@ -368,7 +367,8 @@ def deal_file(filepath,code,result_filepath,obj):
                 table.write(j, t, li[t])
                 t += 1
             j += 1
-        print datetime.datetime.now()
+        os.system("redis-cli KEYS '"+timenum+"addr_*' | xargs redis-cli DEL")
+        os.system("redis-cli KEYS '" + timenum + "orderid_*' | xargs redis-cli DEL")
         j = 0
         file.save(result_filepath)
         obj.status = 1
