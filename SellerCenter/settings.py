@@ -144,8 +144,8 @@ DATABASES = {
         "NAME": "seller_center",
         "USER": "root",
         "PASSWORD": "admin",
-        "HOST": "",
-        "PORT": ""
+        "HOST": "127.0.0.1",
+        "PORT": "3306"
     }
 }
         
@@ -171,6 +171,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/var/run/seller_center_static/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "center/static/"),
     os.path.join(BASE_DIR, "manageApp/static/"),
