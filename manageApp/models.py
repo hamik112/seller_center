@@ -220,3 +220,27 @@ class FileUploadOther(models.Model):
 
     class Meta:
         db_table = "file_upload_other"
+
+
+class SkuProduct(models.Model):
+    sku = models.CharField(max_length=20,db_index=True, help_text=u'sku编码')
+    purchase_price = models.FloatField(help_text=u'采购家,最近一次采购价格,或者开发默认填写的采购价')
+    starmerx_price = models.FloatField(help_text=u'产品近十次的加权平均采购价')
+
+    class Meta:
+        managed = False
+        db_table = 'sysproduct_sku_product'
+
+    def get_price(self):
+        return self.purchase_price or self.starmerx_price
+    def get_weight(self):
+        return self.real_gross_weight or self.gross_weight
+    def get_attr_info(self):
+        try:
+            attr_info = eval(self.attr_info)
+            if isinstance(attr_info,dict):
+                return attr_info
+            else:
+                return {}
+        except:
+            return {}

@@ -16,7 +16,7 @@ from celery.utils.log import get_task_logger
 import datetime
 import time
 
-from manageApp.models import  StatementView, FilenameToStorename
+from manageApp.models import  StatementView, FilenameToStorename,SkuProduct
 from center.models import InventoryReportsData
 from manageApp.dataService.tasks_util import update_file_statue, str_to_datetime
 from manageApp.dataService.tasks_util import inventory_update_file_statue
@@ -231,6 +231,8 @@ def deal_file(filepath,code,result_filepath,obj):
         data_head[7].append('hky')
         data_head[7].append('xuhao')
         data_head[7].append('wangguan')
+        data_head[7].append('sku_price')
+        data_head[7].append('sku_total_price')
         data_list = data[0]['values'][8:]
         for li in data_list:
             """
@@ -268,9 +270,28 @@ def deal_file(filepath,code,result_filepath,obj):
                     li.append('kongyun')
             else:
                 li.append('')
+            try:
+                sku_obj=SkuProduct.objects.filter(sku=internal_sku).first()
+                sku_price=sku_obj.get_price()
+            except:
+                sku_price = ''
             if r.get('xh_'+code):
                 li.append(code)
                 li.append(r.get('xh_'+code))
+                li.append(sku_price)
+                try:
+                    li.append(sku_price*int(li[6]))
+                except:
+                    li.append('')
+            else:
+                li.append('')
+                li.append('')
+                li.append(sku_price)
+                try:
+                    li.append(sku_price*int(li[6]))
+                except:
+                    li.append('')
+
         data_count = len(data_list)
         order_id_list_len = data_count * 3
         order_id_list = []
