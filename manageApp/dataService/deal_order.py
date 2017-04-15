@@ -116,7 +116,7 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         redis_open_time_arr = r.get('lcc_' + code).split(' ')
         if not redis_open_time_arr:
             print code+"不存在";
-            return
+            raise Exception('店铺信息不存在!')
 
         FBA_long_fee_first_time = datetime.datetime(year=int(year),month=2,day=random.randint(20,25),
                                              hour=random.randint(6,12),minute=random.randint(0,59))
