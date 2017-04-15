@@ -219,7 +219,7 @@ def read_excel(file_name):
 
 
 @task(max_retries=3,default_retry_delay=1 * 6)
-def deal_file(filepath,code,result_filepath,obj):
+def deal_file(filepath,code,result_filepath,obj,style):
     try:
         timenum = str(time.time()).replace('.','')
         r = redis.Redis(host='127.0.0.1', port='6379')
@@ -378,14 +378,14 @@ def deal_file(filepath,code,result_filepath,obj):
         for head in data_head:
             t = 0
             for h in head:
-                table.write(j, t, head[t])
+                table.write(j, t, head[t],style)
                 t += 1
             j += 1
 
         for li in data_list:
             t = 0
             for h in li:
-                table.write(j, t, li[t])
+                table.write(j, t, li[t],style)
                 t += 1
             j += 1
         os.popen("redis-cli KEYS '"+timenum+"addr_*' | xargs redis-cli DEL")

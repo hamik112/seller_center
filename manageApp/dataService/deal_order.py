@@ -23,6 +23,13 @@ UPLOAD_PATH = settings.UPLOAD_PATH
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
+font0 = xlwt.Font()
+font0.name = u'宋体'
+font0.height = 240
+
+style = xlwt.XFStyle()
+style.font = font0
+
 def write_file_other_handle(file_list):
     try:
         for fileobj in file_list:
@@ -37,12 +44,13 @@ def write_file_other_handle(file_list):
             result_filepath = os.path.join(get_path_other(UPLOAD_PATH), result_filename)
             db_file_name = result_filename.split('_')[1]+'_'+result_filename.split('_')[2]
             obj = FileUploadOther.objects.create(file_name = db_file_name,file_path=result_filepath,status ='0')
-            deal_file.delay(file_path,xuhao,result_filepath,obj)
+            deal_file.delay(file_path,xuhao,result_filepath,obj,style)
             print datetime.datetime.now()
             # deal_file(file_path, xuhao, result_filepath, obj)
             print datetime.datetime.now()
     except Exception,e:
         raise e
+
 def get_path_other(path):
     now_date = datetime.datetime.now()
     year = now_date.year
@@ -100,12 +108,6 @@ def read_excel(file_name):
      # = {'sheet_obj':sheet,'name': sheet.name, 'values': sheet._cell_values, 'nrows': len(sheet._cell_values)}
     return _value_obj
 
-
-font0 = xlwt.Font()
-font0.name = u'宋体'
-font0.height = 240
-style = xlwt.XFStyle()
-style.font = font0
 
 def deal_file2(filepath1,code,year,result_filepath,obj2):
     try:
