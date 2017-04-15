@@ -32,14 +32,14 @@
 
 
 {% block active_list %}
-        <li class="active"><a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span></a></li>
-        <li  ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a></li>
+        <li ><a href="/manage/files-list/"   class="J_pro"><i class="fa fa-link"></i> <span>文件列表</span></a></li>
+        <li ><a href="/manage/"><i class="fa fa-link"></i> <span>文件上传</span></a></li>
         <li ><a href="/manage/filename-to-storename/"   class="J_pro"><i class="fa fa-link"></i> <span>文件名对应店铺</span></a></li>
         <li ><a href="/manage/inventory-report-import/"   class="J_pro"><i class="fa fa-link"></i> <span>InventoryReport导入</span></a></li>
         <li ><a href="/manage/other-handle-import/"   class="J_pro"><i class="fa fa-link"></i> <span>other导入</span></a></li>
         <li ><a href="/manage/other-handle-upload/"   class="J_pro"><i class="fa fa-link"></i> <span>other下载</span></a></li>
         <li ><a href="/manage/other-handle-import2/"   class="J_pro"><i class="fa fa-link"></i> <span>other导入(2)</span></a></li>
-        <li ><a href="/manage/other-handle-upload2/"   class="J_pro"><i class="fa fa-link"></i> <span>other下载(2)</span></a></li>
+        <li class="active"><a href="/manage/other-handle-upload2/"   class="J_pro"><i class="fa fa-link"></i> <span>other下载(2)</span></a></li>
 {% endblock %}
 
 
@@ -88,7 +88,7 @@
 {% block footer %}
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.js"></script>
 
 <!-- Latest compiled and minified Locales -->
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-zh-CN.min.js"></script>
@@ -100,122 +100,94 @@
 
 
 <script>
+    $(function (){
+        initTable();
+    });
     var csrf_token  = $("[name='csrfmiddlewaretoken']").val();
     var $table = $('#list-files-table-id');
     var $remove = $('#remove');
     selections = [];
 
- function initTable() {
+    function initTable() {
     $table.bootstrapTable({
-        url: '/manage/list-files-json/',
+        url: '/manage/other-handle-upload2/',
         toolbar: '#toolbar',               //工具按钮用哪个容器
+        method:'POST',
         search: true,
         strictSearch: true,
         showRefresh: true,
         showToggle: true,
         striped: true,                    //是否显示行间隔色
-        hideColumn: 'file_path',
 
-    
         sortable: true,                   //是否启用排序
-        sortOrder: "trade_id",            //排序方式
         pageNumber: 1,                    //初始化加载第一页，默认第一页
         pageSize: 10,                     //每页的记录行数（*）
         pageList: [10, 20, 100,150, 500], //可供选择的每页的行数（*）
         dataType: "json",
         queryParamsType: "",
-        //queryParams: {"is_query": "1", "platform":'amazon'},
         pagination: true,
         singleSelect: false,
         sidePagination: "server",         //服务器分页
         columns: [
-        [
-                    {
-                        field: 'state',
-                        checkbox: true,
-                        rowspan: 2,
-                        align: 'center',
-                        valign: 'middle'
-                    },
-                     {
-                        title: 'Item Detail',
-                        colspan: 7,
-                        align: 'center'
-                    }
-        ],
-        [{
-           field: 'id',
-           title: 'id',
-           align: 'center',
-           valign: 'middle'
-        },{
-            field: 'serial_number',
-            title: '店铺代号',
+        {
+            field: '',
+            checkbox: true,
             align: 'center',
             valign: 'middle'
         },{
-            field: 'filename',
-            title: '文件名',
-            align: 'center',
-            valign:'middle',
-            formatter: function (value, row, index) {
-                fvalue = value.split("__");
-                filename = fvalue[fvalue.length-1];
-                html_str = "<a href=javascript:ajax_download('"+filename+"')>"+filename+"</a>";
-                return html_str;
-            }
-        },{
-            field: 'uploadtime',
-            title: '上传时间',
-            align: 'center',
-            valign: 'middle'
-        },{
-            field: 'file_statue',
-            title: "状态",
-            align: 'center',
-            valign:'middle',
-            formatter: function (value, row, index) {
-                if (value == '0'){
-                    htm_str =  "<span >正常</span>";
-                }else if(value == '1'){
-                  htm_str =  "<span style='color:green'>正在更新..</span>";
-                }else if(value == '2') {
-                    htm_str =  "<span style='color:blue'>已更新</span>";
-                }else{
-                    htm_str =  "<a onclick=javascript:error_detail(this); ><span style='color:red'>异常</span></a>";
-                }
-                return htm_str;
-            }
-        },{
-            field: "file_path",
-            title: 'statement更新',
+            field: 'file_name',
+            title: '文件名称',
             align: 'center',
             valign: 'middle',
-            formatter:function (value, row, index) {
-                filename = value.split("/");
-                filename = filename[filename.length-1].replace(" ","");
-                html_str = "<button class='btn btn-primary' onclick=javascript:statement_update_file(\'"+filename+"\');>更新</button>";
+            formatter:function (data,value,index) {
+                var filename = data;
+                html_str = "<a href=javascript:ajax_download('"+value.id+"')>"+filename+"</a>";
                 return html_str;
             }
-        },
-    ],]
+        },{
+            field: 'status',
+            title: '处理进度',
+            align: 'center',
+            valign:'middle',
+            formatter: function (data) {
+                if (data == 0){
+                    return '<span class="label label-info">正在处理...</span>';
+                }else if(data == 1){
+                    return '<span class="label label-success">成功</span>';
+                }else {
+                    return '<span class="label label-danger">失败</span>';
+                }
+            }
+        },{
+            field: "",
+            title: '下载',
+            align: 'center',
+            valign: 'middle',
+            formatter:function (data,value,index) {
+                var status = value.status;
+                if (status == 1)
+                    return '<button class="btn btn-primary" onclick="ajax_download('+value.id+')">下载</button>';
+                else
+                    return '<button class="btn btn-primary" disabled="disabled" onclick="ajax_download('+value.id+')">下载</button>';
+            }
+        }
+    ]
     });
    }
 
-
-    function ajax_download(filename){
+    function ajax_download(id){
         var form=$("<form>");//定义一个form表单
         form.attr("style","display:none");
         form.attr("target","");
-        form.attr("method","get");
-        form.attr("action","/manage/ajax-download-filename/");
+        form.attr("method","post");
+        form.attr("action","/manage/other-handle-ajax-upload2/");
         var input1=$("<input>");
         input1.attr("type","hidden");
-        input1.attr("name","filename");
-        input1.attr("value",filename);
+        input1.attr("name","fileid");
+        input1.attr("value",id);
         $("body").append(form);//将表单放置在web中
         form.append(input1);
-        form.submit();//表单提交 
+        form.submit();//表单提交
     }
 
 
@@ -247,23 +219,12 @@
         });
     }
 
-
-    function totalTextFormatter(data) {
-        return 'Total';
-    }
-
-
-
-
-
-
     function  delete_file(ids) {
         post_dict = {"ids": ids,
-            "action_type": "delete",
             "csrfmiddlewaretoken": csrf_token};
         console.log(post_dict);
         $.ajax({
-            url: "/manage/files-list/",
+            url: "/manage/other-handle-file-delet2/",
             type: "POST",
             data: post_dict,
             dataType: "json",
@@ -273,7 +234,7 @@
             },
             success: function (sdata) {
                 console.log(sdata);
-                if (sdata.statue == '0'){
+                if (sdata){
                     showBody();
                     alert("删除文件成功!");
                 }else{
@@ -293,86 +254,15 @@
             }
         });
     }
-
-    function  statement_update_file(filename) {
-        var post_dict = {"filename": filename,
-            "action_type": "update_statement",
-            "csrfmiddlewaretoken": csrf_token};
-        console.log(post_dict);
-        $.ajax({
-           url: "/manage/files-list/",
-            type: "POST",
-            data: post_dict,
-            dataType: "json",
-            beforeSend:function(XMLHttpRequest){
-               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
-               showMask();
-            },
-            success: function (sdata) {
-                console.log(sdata)
-                 showBody();
-                if (sdata.statue == '0'){
-{#                    alert("更新成功!");#}
-                    location.reload()
-                }else{
-                    alert("更新失败, "+sdata.msg);
-                }
-            }, error: function (edata) {
-                console.log(edata);
-                showBody();
-                alert("更新失败!" + edata.msg);
-            }
-        });
-    }
-
-
-    function error_detail(thisobj) {
-        line_id = $(thisobj).parent("td").parent("tr").children("td:first").text();
-        $.ajax({
-            url: "/manage/get-update-error-msg/",
-            type: "GET",
-            data: {"uid":line_id},
-            dateType:"json",
-            beforeSend:function(XMLHttpRequest){
-               $("#loading").html("<img src='/static/admin/img/loading.gif' />");
-               showMask();
-            },
-            success: function (sdata) {
-                 showBody();
-                sdata = JSON.parse(sdata)
-                if (sdata.statue == '0' || sdata.statue == 0){
-                    if (sdata.msg.length == 0){
-                        alert("没有异常信息!");
-                    }else {
-                        alert("异常信息是: " + sdata.msg);
-                    }
-                }else{
-                    alert("查看失败:  "+sdata.msg);
-                }
-            }, error: function (edata) {
-                console.log(edata);
-                showBody();
-                alert("查看失败!" + edata);
-            }
-        })
-    }
-    function showMask(){
+     function showMask(){
         $('body').css("overflow","hidden")
-{#        $("#cover").show();#}
         $("#cover").css("display", "block");
     }
     function showBody() {
         $('body').css("overflow","visible");
         $("#cover").css("display", "None");
         $("#loading").empty();
-{#        $("#cover").show();#}
     }
-
-
-
-$(function (){
-    initTable();
-});
     </script>
 
 
