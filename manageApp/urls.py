@@ -22,9 +22,14 @@ urlpatterns = patterns('',
             url(r'^other-handle-import/$', 'manageApp.views.other_handle_import', name="other_handle_import"),
             url(r'^other-handle-upload/$', 'manageApp.views.other_handle_upload', name="other_handle_upload"),
             url(r'^other-handle-upload-data/$', 'manageApp.views.other_handle_upload_data', name="other_handle_upload_data"),
-            url(r'^other_handle_ajax_upload/$', 'manageApp.views.other_handle_ajax_upload', name="other_handle_ajax_upload"),
+            url(r'^other-handle-ajax-upload/$', 'manageApp.views.other_handle_ajax_upload', name="other_handle_ajax_upload"),
             url(r'^other-handle-file-delet/$', 'manageApp.views.other_handle_file_delet',name="other_handle_file_delet"),
 
+
+            url(r'^other-handle-import2/$', 'manageApp.views.other_handle_import2',name="other_handle_import2"),
+            url(r'^other-handle-upload2/$', 'manageApp.views.other_handle_upload2', name="other_handle_upload2"),
+            url(r'^other-handle-ajax-upload2/$', 'manageApp.views.other_handle_ajax_upload2', name="other_handle_ajax_upload2"),
+            url(r'^other-handle-file-delet2/$', 'manageApp.views.other_handle_file_delet2', name="other_handle_file_delet2"),
 
                        )
 

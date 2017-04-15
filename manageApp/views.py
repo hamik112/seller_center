@@ -16,7 +16,7 @@ from center.dataService.data_format import file_iterator
 from manageApp.dataService.JSON_serial import json_serial
 from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 from manageApp.dataService.dataImport import get_update_error_str
-from manageApp.dataService.deal_order import write_file_other_handle
+from manageApp.dataService.deal_order import write_file_other_handle,write_file_other_handle2
 from manageApp.dataService.filename_to_storename import FilenameStoreName
 from manageApp.dataService.upload_file import FileUpload, list_files, delete_file, download_file
 from manageApp.dataService.upload_file import InventoryUpload, inventory_list_files
@@ -227,7 +227,7 @@ def other_handle_upload(request):
 @login_required(login_url="/manage/user-login")
 def other_handle_upload_data(request):
     params = request.GET.copy()
-    objs = FileUploadOther.objects.all().order_by('-id')
+    objs = FileUploadOther.objects.filter(type=0).order_by('-id')
     pageSize = params.get("pageSize", "10")
     pageNumber = params.get("pageNumber", "1")
     searchText = params.get("searchText", "")
@@ -262,6 +262,74 @@ def other_handle_ajax_upload(request):
 @user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
 @login_required(login_url="/manage/user-login")
 def other_handle_file_delet(request):
+    post_dict = request.POST.copy()
+    dele_id = post_dict.getlist("ids[]", "")
+    try:
+        FileUploadOther.objects.filter(id__in=dele_id).delete()
+        return HttpResponse(1)
+    except Exception,e:
+        return HttpResponse(0)
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def other_handle_import2(request):
+    if request.method == "POST":
+        print "post"
+        ufiles = request.FILES.getlist("file[]", "")
+        try:
+            write_file_other_handle2(ufiles)
+        except Exception,e:
+            print str(e)
+            return HttpResponse(0)
+        return HttpResponse(1)
+    else:
+        print "get"
+        return render(request, "other_handle_import2.html", locals())
+
+@csrf_exempt
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def other_handle_upload2(request):
+    if request.method == "POST":
+        params = request.GET.copy()
+        objs = FileUploadOther.objects.filter(type=2).order_by('-id')
+        pageSize = params.get("pageSize", "10")
+        pageNumber = params.get("pageNumber", "1")
+        searchText = params.get("searchText", "")
+        if int(pageSize) < 0:
+            pageSize = 12
+        else:
+            pageSize = int(pageSize)
+        if int(pageNumber) < 1:
+            pageNumber = 1
+        else:
+            pageNumber = int(pageNumber)
+
+        if searchText:
+            objs = objs.filter(file_name__icontains=searchText)
+        try:
+            return HttpResponse(
+                json_encode({"rows": objs[(pageNumber - 1) * pageSize: pageNumber * pageSize], "total": objs.count()}))
+        except Exception, e:
+            print str(e)
+            return HttpResponse()
+    else:
+        return render(request, "other_handle_upload2.html", locals())
+
+@csrf_exempt
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def other_handle_ajax_upload2(request):
+    file_id = request.POST.get('fileid')
+    obj = FileUploadOther.objects.get(id=file_id)
+    response = StreamingHttpResponse(file_iterator(obj.file_path))
+    response['Content-Type'] = 'application/octet-stream'
+    response['Content-Disposition'] = 'attachment;filename="%s"' % str(obj.file_name)
+    return response
+
+@user_passes_test(lambda u:u.is_staff, login_url="/manage/user-login")
+@login_required(login_url="/manage/user-login")
+def other_handle_file_delet2(request):
     post_dict = request.POST.copy()
     dele_id = post_dict.getlist("ids[]", "")
     try:

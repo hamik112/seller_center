@@ -217,6 +217,7 @@ class FileUploadOther(models.Model):
     file_name = models.CharField(max_length=100, default="", null=True)
     file_path = models.CharField(max_length=250, default="", null=True)
     status = models.CharField(max_length=2,default='0',null=False)
+    type = models.IntegerField(default=0,null=False)
 
     class Meta:
         db_table = "file_upload_other"
