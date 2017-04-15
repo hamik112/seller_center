@@ -98,8 +98,9 @@ def read_excel(file_name):
         if not old_month:
             old_month = current_month
         if old_month != current_month:
-            _value_item.update({old_month:item})
+            _value_item.update({old_month: item})
             item = []
+            item.append(data)
             old_month = current_month
         else:
             item.append(data)
@@ -113,37 +114,38 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
     try:
         old_month = None
         r = redis.Redis(host='127.0.0.1', port='6379')
-        redis_open_time_arr = r.get('lcc_' + code).split(' ')
-        if not redis_open_time_arr:
-            print code+"不存在";
+        redis_open_time = r.get('lcc_' + code)
+        if not redis_open_time:
+            print code + "不存在";
             raise Exception('店铺信息不存在!')
+        redis_open_time_arr = redis_open_time.split(' ')
 
-        FBA_long_fee_first_time = datetime.datetime(year=int(year),month=2,day=random.randint(20,25),
-                                             hour=random.randint(6,12),minute=random.randint(0,59))
-        FBA_long_fee_second_time = datetime.datetime(year=int(year), month=8, day=18,
+        FBA_long_fee_first_time = datetime.datetime(year=int(year), month=2, day=random.randint(20, 25),
                                                     hour=random.randint(6, 12), minute=random.randint(0, 59))
+        FBA_long_fee_second_time = datetime.datetime(year=int(year), month=8, day=18,
+                                                     hour=random.randint(6, 12), minute=random.randint(0, 59))
         data = read_excel(filepath1)
         data_head = data.get('head')
         datas = data.get('data')
         for month in datas:
-            open_time_str = "%s %s:%s:%s AM" % (
-            redis_open_time_arr[0], random.randint(6, 12), random.randint(0, 59), random.randint(0, 59))
             month_data = datas.get(month)
+            open_time_str = "%s %s:%s:%s AM" % (
+                redis_open_time_arr[0], random.randint(6, 12), random.randint(0, 59), random.randint(0, 59))
             open_time_str_arr2 = open_time_str.split('-')
             open_time_str_arr2[0] = str(year)
             open_time_str_arr2[1] = str(month)
             open_time = datetime.datetime.strptime('-'.join(open_time_str_arr2), '%Y-%m-%d %I:%M:%S %p')
 
             random_day = random.randint(6, 11)
-            fba_fee_time = datetime.datetime(year=int(year),month=int(month),day=random_day,
-                                             hour=random.randint(6,12),minute=random.randint(0,59),
+            fba_fee_time = datetime.datetime(year=int(year), month=int(month), day=random_day,
+                                             hour=random.randint(6, 12), minute=random.randint(0, 59),
                                              )
             print fba_fee_time
             flag1 = False
             flag2 = False
             flag3 = False
             insert_obj = []
-            for index,da in enumerate(month_data):
+            for index, da in enumerate(month_data):
                 in_time_str = da[0]
                 in_time_arr = re.split(r'\s+', in_time_str)
                 if in_time_arr[3].startswith('0'):
@@ -154,54 +156,58 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                 in_time = datetime.datetime.strptime(' '.join(in_time_arr[0:5]), '%b %d, %Y %I:%M:%S %p')
                 PDTorPST = in_time_arr[5]
                 if open_time < in_time and not flag1:
-                    insert_data1 = [tripZero(open_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST, str(int(da[1])), 'Service Fee',
+                    insert_data1 = [tripZero(open_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
+                                    str(int(da[1])), 'Service Fee',
                                     '', '', 'Subscription Fee', '', '', '', '', '', '', 0, 0, 0,
                                     0, 0, 0, 0, 0, -39.99, -39.99]
-                    insert_obj.append({'index': index, 'data': insert_data1,'date':open_time})
+                    insert_obj.append({'index': index, 'data': insert_data1, 'date': open_time})
                     flag1 = True
                 if fba_fee_time < in_time and not flag2:
                     fee = round(random.uniform(50, 400), 2)
-                    insert_data2 = [tripZero(fba_fee_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST, str(int(da[1])), 'FBA Inventory Fee', '', '',
+                    insert_data2 = [tripZero(fba_fee_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
+                                    str(int(da[1])), 'FBA Inventory Fee', '', '',
                                     'FBA Inventory Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
                                     0, 0, '-' + str(fee), '-' + str(fee)]
-                    insert_obj.append({'index': index, 'data': insert_data2,'date':fba_fee_time})
+                    insert_obj.append({'index': index, 'data': insert_data2, 'date': fba_fee_time})
                     flag2 = True
                 if str(month) == '2':
-                    if FBA_long_fee_first_time <in_time and not flag3:
+                    if FBA_long_fee_first_time < in_time and not flag3:
                         FBA_long_fee = round(random.uniform(300, 600), 2)
-                        insert_data3 = [tripZero(FBA_long_fee_first_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                                        str(int(da[1])), 'FBA Inventory Fee', '', '',
-                                        'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                                        0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
-                        insert_obj.append({'index': index, 'data': insert_data2, 'date': FBA_long_fee_first_time})
+                        insert_data3 = [
+                            tripZero(FBA_long_fee_first_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
+                            str(int(da[1])), 'FBA Inventory Fee', '', '',
+                            'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
+                            0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
+                        insert_obj.append({'index': index, 'data': insert_data3, 'date': FBA_long_fee_first_time})
                         flag3 = True
                 if str(month) == "8":
                     if FBA_long_fee_second_time < in_time and not flag3:
                         FBA_long_fee = round(random.uniform(300, 600), 2)
-                        insert_data3 = [tripZero(FBA_long_fee_second_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                                        str(int(da[1])), 'FBA Inventory Fee', '', '',
-                                        'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                                        0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
+                        insert_data3 = [
+                            tripZero(FBA_long_fee_second_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
+                            str(int(da[1])), 'FBA Inventory Fee', '', '',
+                            'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
+                            0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
                         insert_obj.append({'index': index, 'data': insert_data3, 'date': FBA_long_fee_second_time})
                         flag3 = True
                 if flag1 and flag2 and flag3:
                     break;
-            insert_obj.sort(key=lambda x: x['date'],reverse=True)
+            insert_obj.sort(key=lambda x: x['date'], reverse=True)
             for obj in insert_obj:
                 month_data.insert(obj['index'], obj['data'])
             datas[month] = month_data
         file = xlwt.Workbook()
-        table = file.add_sheet('info', cell_overwrite_ok=True)
+        table = file.add_sheet('Sheet1', cell_overwrite_ok=True)
         j = 0
         for head in data_head:
-            for t,h in enumerate(head):
-                table.write(j, t, h,style)
+            for t, h in enumerate(head):
+                table.write(j, t, h, style)
             j += 1
         for month in datas:
             data_list = datas.get(month)
             for li in data_list:
-                for t,h in enumerate(li):
-                    table.write(j, t, h,style)
+                for t, h in enumerate(li):
+                    table.write(j, t, h, style)
                 j += 1
         file.save(result_filepath)
         obj2.status = 1
