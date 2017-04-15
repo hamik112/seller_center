@@ -100,6 +100,13 @@ def read_excel(file_name):
      # = {'sheet_obj':sheet,'name': sheet.name, 'values': sheet._cell_values, 'nrows': len(sheet._cell_values)}
     return _value_obj
 
+
+font0 = xlwt.Font()
+font0.name = u'宋体'
+font0.height = 240
+style = xlwt.XFStyle()
+style.font = font0
+
 def deal_file2(filepath1,code,year,result_filepath,obj2):
     try:
         old_month = None
@@ -108,7 +115,6 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         if not redis_open_time_arr:
             print code+"不存在";
             return
-        open_time_str = "%s %s:%s:%s AM" % (redis_open_time_arr[0], random.randint(6, 12), random.randint(0, 59), random.randint(0, 59))
 
         FBA_long_fee_first_time = datetime.datetime(year=int(year),month=2,day=random.randint(20,25),
                                              hour=random.randint(6,12),minute=random.randint(0,59))
@@ -118,6 +124,8 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         data_head = data.get('head')
         datas = data.get('data')
         for month in datas:
+            open_time_str = "%s %s:%s:%s AM" % (
+            redis_open_time_arr[0], random.randint(6, 12), random.randint(0, 59), random.randint(0, 59))
             month_data = datas.get(month)
             open_time_str_arr2 = open_time_str.split('-')
             open_time_str_arr2[0] = str(year)
@@ -185,13 +193,13 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         j = 0
         for head in data_head:
             for t,h in enumerate(head):
-                table.write(j, t, h)
+                table.write(j, t, h,style)
             j += 1
         for month in datas:
             data_list = datas.get(month)
             for li in data_list:
                 for t,h in enumerate(li):
-                    table.write(j, t, h)
+                    table.write(j, t, h,style)
                 j += 1
         file.save(result_filepath)
         obj2.status = 1
