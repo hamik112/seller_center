@@ -167,7 +167,7 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                     insert_data2 = [tripZero(fba_fee_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
                                     int(da[1]), 'FBA Inventory Fee', '', '',
                                     'FBA Inventory Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                                    0, 0, '-' + fee, '-' + fee]
+                                    0, 0, fee, fee]
                     insert_obj.append({'index': index, 'data': insert_data2, 'date': fba_fee_time})
                     flag2 = True
                 if str(month) == '2':
@@ -213,7 +213,7 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         obj2.status = 1
         obj2.save()
     except Exception,e:
-        obj2.status = 0
+        obj2.status = 2
         obj2.save()
         raise e
 
