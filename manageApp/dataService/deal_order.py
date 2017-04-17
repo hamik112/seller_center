@@ -157,7 +157,7 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                 PDTorPST = in_time_arr[5]
                 if open_time < in_time and not flag1:
                     insert_data1 = [tripZero(open_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                                    str(int(da[1])), 'Service Fee',
+                                    int(da[1]), 'Service Fee',
                                     '', '', 'Subscription Fee', '', '', '', '', '', '', 0, 0, 0,
                                     0, 0, 0, 0, 0, -39.99, -39.99]
                     insert_obj.append({'index': index, 'data': insert_data1, 'date': open_time})
@@ -165,9 +165,9 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                 if fba_fee_time < in_time and not flag2:
                     fee = round(random.uniform(50, 400), 2)
                     insert_data2 = [tripZero(fba_fee_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                                    str(int(da[1])), 'FBA Inventory Fee', '', '',
+                                    int(da[1]), 'FBA Inventory Fee', '', '',
                                     'FBA Inventory Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                                    0, 0, '-' + str(fee), '-' + str(fee)]
+                                    0, 0, '-' + fee, '-' + fee]
                     insert_obj.append({'index': index, 'data': insert_data2, 'date': fba_fee_time})
                     flag2 = True
                 if str(month) == '2':
@@ -175,9 +175,9 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                         FBA_long_fee = round(random.uniform(300, 600), 2)
                         insert_data3 = [
                             tripZero(FBA_long_fee_first_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                            str(int(da[1])), 'FBA Inventory Fee', '', '',
+                            int(da[1]), 'FBA Inventory Fee', '', '',
                             'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                            0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
+                            0, 0, FBA_long_fee, FBA_long_fee]
                         insert_obj.append({'index': index, 'data': insert_data3, 'date': FBA_long_fee_first_time})
                         flag3 = True
                 if str(month) == "8":
@@ -185,9 +185,9 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
                         FBA_long_fee = round(random.uniform(300, 600), 2)
                         insert_data3 = [
                             tripZero(FBA_long_fee_second_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
-                            str(int(da[1])), 'FBA Inventory Fee', '', '',
+                            int(da[1]), 'FBA Inventory Fee', '', '',
                             'FBA Long-Term Storage Fee', '', '', '', '', '', '', 0, 0, 0, 0, 0, 0,
-                            0, 0, '-' + str(FBA_long_fee), '-' + str(FBA_long_fee)]
+                            0, 0, FBA_long_fee, FBA_long_fee]
                         insert_obj.append({'index': index, 'data': insert_data3, 'date': FBA_long_fee_second_time})
                         flag3 = True
                 if flag1 and flag2 and flag3:
