@@ -144,7 +144,7 @@ def import_one_file_to_statement_view(file_path, filename):
                 dict_name = name.replace(" ", "_")
                 print "name:", name
                 if name == "total":
-                    tmp_dict[dict_name] = data_line[header_dict.get(name)].replace(',','')
+                    tmp_dict[dict_name] = str(data_line[header_dict.get(name)]).replace(',','')
                 else:
                     tmp_dict[dict_name] = data_line[header_dict.get(name)]
 
