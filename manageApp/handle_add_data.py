@@ -13,9 +13,16 @@ import xlwt
 def tripZero(strs):
     """踢除日的0前缀"""
     first_arr = strs.split(',')
-    second_arr = re.split(r'\s+',first_arr[0])
+    second_arr = re.split(r'\s+', first_arr[0])
     second_arr[1] = str(int(second_arr[1]))
     first_arr[0] = ' '.join(second_arr)
+
+    second_arr_2 = re.split(r'\s+', first_arr[1])
+    third_arr = re.split(r':', second_arr_2[2])
+    third_arr[0] = str(int(third_arr[0]))
+    second_arr_2[2] = ':'.join(third_arr)
+    first_arr[1] = ' '.join(second_arr_2)
+
     return ','.join(first_arr)
 
 def reversed_cmp(x, y):
@@ -74,7 +81,6 @@ def write_to_excel(data_head,datas,result_filepath):
     style = xlwt.XFStyle()
     style.font = font0
     file = xlwt.Workbook()
-    file = xlwt.Workbook()
     table = file.add_sheet('Sheet1', cell_overwrite_ok=True)
     j = 0
     for head in data_head:
@@ -116,7 +122,8 @@ def hanled(filepath1,code,result_filepath):
         insert_obj = []
         j = 0
         PDTorPST = 'PDT'
-        settlement_id = datas[0][1];
+        settlement_id = datas[0][1]
+        old_order_id = None
         proportion_obj = eval(proportion)
         for y_m in proportion_obj:
             if not y_m:
@@ -136,12 +143,19 @@ def hanled(filepath1,code,result_filepath):
             year = key.split('-')[0]
             month = key.split('-')[1]
             for index, item_time in enumerate(month_use_time):
+                new_order_id = datas[j][3]
                 open_time_str_arr2[0] = str(year)
                 open_time_str_arr2[1] = str(month)
                 open_time = datetime.datetime.strptime('-'.join(open_time_str_arr2), '%Y-%m-%d %I:%M:%S %p')
                 if j > len(datas) - 1:
                     break
-                datas[j][0] = tripZero(item_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST
+                if old_order_id != new_order_id:
+                    datas[j][0] = tripZero(item_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST
+                else:
+                    if j <= 0:
+                        datas[j][0] = datas[j][0]
+                    else:
+                        datas[j][0] = datas[j - 1][0]
                 # 添加service Fee
                 if open_time < item_time and flag1:
                     insert_data1 = [tripZero(open_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST,
@@ -196,10 +210,12 @@ def hanled(filepath1,code,result_filepath):
                             0, 0, FBA_long_fee, FBA_long_fee]
                         insert_obj.append({'index': j, 'data': insert_data3, 'date': FBA_long_fee_second_time})
                         flag3 = False
+                old_order_id = new_order_id
                 j += 1
         insert_obj.sort(key=lambda x: x['date'], reverse=True)
         for obj in insert_obj:
             datas.insert(obj['index'], obj['data'])
+
         write_to_excel(data_head, datas, result_filepath)
     except Exception,e:
         raise e

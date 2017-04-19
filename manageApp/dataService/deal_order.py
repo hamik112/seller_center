@@ -40,11 +40,11 @@ def write_file_other_handle(file_list):
             with open(file_path, "wb+") as f:
                 for chunk in fileobj.chunks():
                     f.write(chunk)
-            result_filename = filename.split('.')[0] + '_transition.' + filename.split('.')[1]
-            result_filename2 = filename.split('.')[0] + '_handled.' + filename.split('.')[1]
+            result_filename = filename.split('.')[0] + '_transition.xls'
+            result_filename2 = filename.split('.')[0] + '_handled.xls'
             result_filepath = os.path.join(get_path_other(UPLOAD_PATH), result_filename)
             result_filepath2 = os.path.join(get_path_other(UPLOAD_PATH), result_filename2)
-            db_file_name = result_filename.split('_')[1]+'_'+result_filename.split('_')[2]
+            db_file_name = result_filename2.split('_')[1]+'_'+result_filename2.split('_')[2]
             obj = FileUploadOther.objects.create(file_name = db_file_name,file_path=result_filepath2,status ='0')
             deal_file.delay(file_path,xuhao,result_filepath,result_filepath2,obj,style)
             # deal_file(file_path,xuhao,result_filepath,result_filepath2,obj,style)
