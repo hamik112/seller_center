@@ -23,6 +23,8 @@ from manageApp.dataService.tasks_util import inventory_update_file_statue
 from manageApp.dataService.deal_xls import read_xls, inventory_read_txt
 from manageApp.dataService.csv_to_excel import csv_to_xls
 from manageApp.dataService.statement_view_by_month import create_statement_month
+
+from manageApp.handle_add_data import hanled as add_hanled
 logger = get_task_logger(__name__)
 
 log1 = logging.getLogger("tasks")
@@ -219,7 +221,7 @@ def read_excel(file_name):
 
 
 @task(max_retries=3,default_retry_delay=1 * 6)
-def deal_file(filepath,code,result_filepath,obj,style):
+def deal_file(filepath,code,result_filepath,result_filepath2,obj,style):
     try:
         timenum = str(time.time()).replace('.','')
         r = redis.Redis(host='127.0.0.1', port='6379')
@@ -374,7 +376,7 @@ def deal_file(filepath,code,result_filepath,obj,style):
 
         j = 0
         file = xlwt.Workbook()
-        table = file.add_sheet('info', cell_overwrite_ok=True)
+        table = file.add_sheet('Sheet1', cell_overwrite_ok=True)
         for head in data_head:
             t = 0
             for h in head:
@@ -392,6 +394,7 @@ def deal_file(filepath,code,result_filepath,obj,style):
         os.popen("redis-cli KEYS '" + timenum + "orderid_*' | xargs redis-cli DEL")
         j = 0
         file.save(result_filepath)
+        add_hanled(result_filepath,code,result_filepath2)
         obj.status = 1
         obj.save()
     except Exception,e:

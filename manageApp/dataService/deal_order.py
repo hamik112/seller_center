@@ -40,14 +40,14 @@ def write_file_other_handle(file_list):
             with open(file_path, "wb+") as f:
                 for chunk in fileobj.chunks():
                     f.write(chunk)
-            result_filename = filename.split('.')[0] + '_handled.' + filename.split('.')[1]
+            result_filename = filename.split('.')[0] + '_transition.' + filename.split('.')[1]
+            result_filename2 = filename.split('.')[0] + '_handled.' + filename.split('.')[1]
             result_filepath = os.path.join(get_path_other(UPLOAD_PATH), result_filename)
+            result_filepath2 = os.path.join(get_path_other(UPLOAD_PATH), result_filename2)
             db_file_name = result_filename.split('_')[1]+'_'+result_filename.split('_')[2]
-            obj = FileUploadOther.objects.create(file_name = db_file_name,file_path=result_filepath,status ='0')
-            deal_file.delay(file_path,xuhao,result_filepath,obj,style)
-            print datetime.datetime.now()
-            # deal_file(file_path, xuhao, result_filepath, obj)
-            print datetime.datetime.now()
+            obj = FileUploadOther.objects.create(file_name = db_file_name,file_path=result_filepath2,status ='0')
+            deal_file.delay(file_path,xuhao,result_filepath,result_filepath2,obj,style)
+            # deal_file(file_path,xuhao,result_filepath,result_filepath2,obj,style)
     except Exception,e:
         raise e
 
@@ -64,6 +64,10 @@ def get_path_other(path):
     return third_path
 
 
+
+
+
+##以下不会用到，备用
 def tripZero(strs):
     """踢除日的0前缀"""
     first_arr = strs.split(',')
@@ -71,10 +75,6 @@ def tripZero(strs):
     second_arr[1] = str(int(second_arr[1]))
     first_arr[0] = ' '.join(second_arr)
     return ','.join(first_arr)
-
-
-
-
 def read_excel(file_name):
     """读取excel表格"""
 
@@ -108,8 +108,6 @@ def read_excel(file_name):
     _value_obj.update({'data':_value_item})
      # = {'sheet_obj':sheet,'name': sheet.name, 'values': sheet._cell_values, 'nrows': len(sheet._cell_values)}
     return _value_obj
-
-
 def deal_file2(filepath1,code,year,result_filepath,obj2):
     try:
         old_month = None
@@ -216,8 +214,6 @@ def deal_file2(filepath1,code,year,result_filepath,obj2):
         obj2.status = 2
         obj2.save()
         raise e
-
-
 def write_file_other_handle2(file_list):
     try:
         for fileobj in file_list:
@@ -238,8 +234,6 @@ def write_file_other_handle2(file_list):
             deal_file2(file_path, code,year, result_filepath, obj)
     except Exception,e:
         raise e
-
-
 def get_path_other2(path):
     now_date = datetime.datetime.now()
     year = now_date.year
