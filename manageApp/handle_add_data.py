@@ -146,12 +146,12 @@ def hanled(filepath1,code,result_filepath):
             year = key.split('-')[0]
             month = key.split('-')[1]
             for index, item_time in enumerate(month_use_time):
+                if j > len(datas) - 1:
+                    break
                 new_order_id = datas[j][3]
                 open_time_str_arr2[0] = str(year)
                 open_time_str_arr2[1] = str(month)
                 open_time = datetime.datetime.strptime('-'.join(open_time_str_arr2), '%Y-%m-%d %I:%M:%S %p')
-                if j > len(datas) - 1:
-                    break
                 if old_order_id != new_order_id:
                     datas[j][0] = tripZero(item_time.strftime('%b %d, %Y %I:%M:%S %p')) + ' ' + PDTorPST
                 else:
