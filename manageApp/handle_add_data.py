@@ -130,7 +130,10 @@ def hanled(filepath1,code,result_filepath):
                 break
             y_year = y_m.split('-')[0]
             y_month = y_m.split('-')[1]
-            number = math.ceil(int(float(proportion_obj.get(y_m)) / 100 * len(datas)))
+            proportion_float = proportion_obj.get(y_m)
+            if not proportion_float:
+                proportion_float= 0.0
+            number = int(math.ceil(float(proportion_float) / 100 * len(datas)))
             base_time = create_set.get(int(y_year)).get(int(y_month))
             my_group_number = random_my_num(int(number), len(base_time))
             use_time.update({y_m: [base_time[index_0] for index_0 in my_group_number]})

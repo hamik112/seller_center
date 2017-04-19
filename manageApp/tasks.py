@@ -15,6 +15,8 @@ from celery import  task
 from celery.utils.log import get_task_logger
 import datetime
 import time
+import csv
+from openpyxl import load_workbook
 
 from manageApp.models import  StatementView, FilenameToStorename,SkuProduct
 from center.models import InventoryReportsData
@@ -209,15 +211,30 @@ def inventory_import(file_path, filename):
     inventory_update_file_statue(filename, 2)
     return {"status": 0, "msg": ""}
 
+def read_csv(file_name):
+    csvfile = open(file_name, 'rb')
+    reader = csv.reader(csvfile,)
+    return [row for row in reader]
+def read_excel_xlsx(fil_name):
+    wb = load_workbook(fil_name)
+    sheet_names = wb.get_sheet_names()
+    ws = wb.get_sheet_by_name(sheet_names[0])
+    rows_num = len(ws.rows)
+    cols_num = len(ws.columns)
+    datas = []
+    for row in range(1,rows_num+1):
+        data_items = []
+        for col in range(1,cols_num+1):
+            data_items.append(ws.cell(row=row, column=col).value)
+        datas.append(data_items)
+    return datas
 
 def read_excel(file_name):
     """读取excel表格"""
 
     data = xlrd.open_workbook(file_name)
-    sheets = data.sheets()
-    _value_list = [{'name': sheet.name, 'values': sheet._cell_values, 'nrows': len(sheet._cell_values)} for sheet in
-                   sheets]
-    return _value_list
+    sheet = data.sheets()[0]
+    return  sheet._cell_values
 
 
 @task(max_retries=3,default_retry_delay=1 * 6)
@@ -225,9 +242,16 @@ def deal_file(filepath,code,result_filepath,result_filepath2,obj,style):
     try:
         timenum = str(time.time()).replace('.','')
         r = redis.Redis(host='127.0.0.1', port='6379')
-        # data = read_excel('/tmp/source_data.xls' )
-        data = read_excel(filepath)
-        data_head = data[0]['values'][:8]
+        file_type = filepath.split('.')[1]
+        if file_type == 'xls':
+            datas = read_excel(filepath)
+        elif file_type == 'xlsx':
+            datas = read_excel_xlsx(filepath)
+        elif file_type == "csv":
+            datas = read_csv(filepath)
+        else:
+            raise Exception('file type is bad')
+        data_head = datas[:8]
         data_head[7].append('internal_sku')
         data_head[7].append('asin')
         data_head[7].append('hky')
@@ -235,7 +259,7 @@ def deal_file(filepath,code,result_filepath,result_filepath2,obj,style):
         data_head[7].append('wangguan')
         data_head[7].append('sku_price')
         data_head[7].append('sku_total_price')
-        data_list = data[0]['values'][8:]
+        data_list = datas[8:]
         for li in data_list:
             """
             li[0]:date/time
