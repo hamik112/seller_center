@@ -7,7 +7,7 @@ from manageApp.models import FilenameToStorename,StatementViewMonth
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-def create_statement_month(serial_number,obj,statement_datas):
+def create_statement_month(serial_number,obj):
     stores  = FilenameToStorename.objects.filter(serial_number=serial_number).first()
     if not stores:
         return None

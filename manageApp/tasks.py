@@ -191,7 +191,7 @@ def import_one_file_to_statement_view(file_path, filename):
     object_month.update({month: stvs})
     object_year.update({year: object_month})
     update_file_statue(filename, 2)
-    create_statement_month(serial_number,stvs,)
+    create_statement_month(serial_number,stvs)
     return {"statue": 0, "msg": ""}
 
 
