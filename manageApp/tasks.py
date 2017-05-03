@@ -132,6 +132,10 @@ def import_one_file_to_statement_view(file_path, filename):
     stvs = []
     year = None
     month = None
+    object_year = {}
+    object_month = {}
+    old_year = None
+    old_month = None
     for data_line in datas_list:
         log1.info("current: "+ str(n))
         n += 1
@@ -144,6 +148,9 @@ def import_one_file_to_statement_view(file_path, filename):
                 tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
                 year = str_to_datetime(data_line[header_dict.get("date_time")]).year
                 month = str_to_datetime(data_line[header_dict.get("date_time")]).month
+                if old_year == None:
+                    old_year = year
+                    old_month = month
             else:
                 dict_name = name.replace(" ", "_")
                 print "name:", name
@@ -158,7 +165,17 @@ def import_one_file_to_statement_view(file_path, filename):
         tmp_dict["area"] = area
         try:
             stv = StatementView(**tmp_dict)
-            stvs.append(stv)
+            if old_month!=month:
+                object_month.update({old_month:stvs})
+                stvs = []
+                stvs.append(stv)
+                old_month = month
+                if old_year!=year:
+                    object_year.update({old_year:object_month})
+                    object_month = {}
+                    old_year = year
+            else:
+                stvs.append(stv)
             stv.save()
         except Exception, e:
             print str(e)
@@ -171,8 +188,10 @@ def import_one_file_to_statement_view(file_path, filename):
                 update_file_statue(filename, -1, error_msg=msg)
                 return {"statue": -1, "msg": str(e)}
     log1.info(str(n))
+    object_month.update({month: stvs})
+    object_year.update({year: object_month})
     update_file_statue(filename, 2)
-    create_statement_month(serial_number,year,month,stvs,)
+    create_statement_month(serial_number,stvs,)
     return {"statue": 0, "msg": ""}
 
 
