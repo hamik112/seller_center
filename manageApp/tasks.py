@@ -176,6 +176,7 @@ def import_one_file_to_statement_view(file_path, filename):
                     old_year = year
             else:
                 stvs.append(stv)
+
             stv.save()
         except Exception, e:
             print str(e)
@@ -191,6 +192,7 @@ def import_one_file_to_statement_view(file_path, filename):
     object_month.update({month: stvs})
     object_year.update({year: object_month})
     update_file_statue(filename, 2)
+    print object_year
     create_statement_month(serial_number,object_year)
     return {"statue": 0, "msg": ""}
 
