@@ -32,10 +32,8 @@ logger = get_task_logger(__name__)
 log1 = logging.getLogger("tasks")
 
 
-@task(max_retries=3,default_retry_delay=1 * 6)
+# @task(max_retries=3,default_retry_delay=1 * 6)
 def import_one_file_to_statement_view(file_path, filename):
-    logger.info("running ...")
-    print file_path, filename
     if filename.endswith(".csv"):
         file_path = csv_to_xls(file_path)
     try:
@@ -127,8 +125,6 @@ def import_one_file_to_statement_view(file_path, filename):
         area  = filename.split(".")[0].split("-")[-1]
     except Exception, e:
         area = ""
-    log1.info(len(value_list))
-    n = 0
     stvs = []
     year = None
     month = None
@@ -137,62 +133,54 @@ def import_one_file_to_statement_view(file_path, filename):
     old_year = None
     old_month = None
     for data_line in datas_list:
-        log1.info("current: "+ str(n))
-        n += 1
-        tmp_dict = {"filename": filename}
-        for name in need_header_list:
-            # if name == u"店铺" or name == "店铺":
-            #     tmp_dict["store_name"] = data_line[header_dict.get(name)]
-            if name == "date_time":
-                print data_line[header_dict.get("date_time")]
-                tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
-                year = str_to_datetime(data_line[header_dict.get("date_time")]).year
-                month = str_to_datetime(data_line[header_dict.get("date_time")]).month
-                if old_year == None:
-                    old_year = year
-                    old_month = month
-            else:
-                dict_name = name.replace(" ", "_")
-                print "name:", name
-                if name == "total":
-                    tmp_dict[dict_name] = str(data_line[header_dict.get(name)]).replace(',','')
-                else:
-                    tmp_dict[dict_name] = data_line[header_dict.get(name)]
-
-
-        tmp_dict["serial_number"] = serial_number
-        tmp_dict["store_name"] = store_name
-        tmp_dict["area"] = area
         try:
-            stv = StatementView(**tmp_dict)
-            if old_month!=month:
-                object_month.update({old_month:stvs})
-                stvs = []
-                stvs.append(stv)
-                old_month = month
-                if old_year!=year:
-                    object_year.update({old_year:object_month})
-                    object_month = {}
-                    old_year = year
-            else:
-                stvs.append(stv)
-
-            stv.save()
-        except Exception, e:
-            print str(e)
-            log1.info(str(e))
+            tmp_dict = {"filename": filename}
+            for name in need_header_list:
+                if name == "date_time":
+                    tmp_dict["date_time"] = str_to_datetime(data_line[header_dict.get("date_time")])
+                    year = str_to_datetime(data_line[header_dict.get("date_time")]).year
+                    month = str_to_datetime(data_line[header_dict.get("date_time")]).month
+                    if old_year == None:
+                        old_year = year
+                        old_month = month
+                else:
+                    dict_name = name.replace(" ", "_")
+                    if name == "total":
+                        tmp_dict[dict_name] = str(data_line[header_dict.get(name)]).replace(',','')
+                    else:
+                        tmp_dict[dict_name] = data_line[header_dict.get(name)]
+            tmp_dict["serial_number"] = serial_number
+            tmp_dict["store_name"] = store_name
+            tmp_dict["area"] = area
             try:
-                StatementView.objects.filter(order_id=tmp_dict.get("order_id", "")).update(**tmp_dict)
+                stv = StatementView(**tmp_dict)
+                stv.save()
+                if old_month!=month:
+                    object_month.update({old_month:stvs})
+                    stvs = []
+                    stvs.append(stv)
+                    old_month = month
+                    if old_year!=year:
+                        object_year.update({old_year:object_month})
+                        object_month = {}
+                        old_year = year
+                else:
+                    stvs.append(stv)
             except Exception, e:
-                msg = "存在重复记录, order_id是:"+str(tmp_dict.get("order_id", ""))
-                log1.error(msg)
-                update_file_statue(filename, -1, error_msg=msg)
-                return {"statue": -1, "msg": str(e)}
-    log1.info(str(n))
+                print str(e)
+                log1.info(str(e))
+                try:
+                    StatementView.objects.filter(order_id=tmp_dict.get("order_id", "")).update(**tmp_dict)
+                except Exception, e:
+                    msg = "存在重复记录, order_id是:"+str(tmp_dict.get("order_id", ""))
+                    log1.error(msg)
+                    update_file_statue(filename, -1, error_msg=msg)
+                    return {"statue": -1, "msg": str(e)}
+        except:
+            pass
     object_month.update({month: stvs})
     object_year.update({year: object_month})
     update_file_statue(filename, 2)
-    print object_year
     create_statement_month(serial_number,object_year)
     return {"statue": 0, "msg": ""}
 

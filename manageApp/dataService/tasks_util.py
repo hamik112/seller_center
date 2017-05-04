@@ -3,6 +3,7 @@
 
 import  datetime
 from manageApp.models import UploadFileRecorde, InventoryUploadRecorde
+import re
 
 
 
@@ -23,14 +24,20 @@ def get_update_file_statue(filename):
         file_statue = ""
     return file_statue
 
-
+#Mar 5, 2016 7:53:41 AM PST
 def str_to_datetime( date_str):
-    time_zone = date_str.split(" ")[-1]
     try:
-        dt = datetime.datetime.strptime(date_str, "%b %d, %Y %I:%M:%S %p " + time_zone)
+        data_time_arr = re.split(r'\s+', date_str)
+        time_zone = data_time_arr[-1]
+        if data_time_arr[3].startswith('0'):
+            arr_33 = data_time_arr[3].split(':')
+            arr_33[0] = u'12'
+            arr_33_str = ':'.join(arr_33)
+            data_time_arr[3] = arr_33_str
+        dt = datetime.datetime.strptime(' '.join(data_time_arr), "%b %d, %Y %I:%M:%S %p " + time_zone)
     except Exception, e:
         print e
-        dt = datetime.datetime.now()
+        raise e
     return dt
 
 
