@@ -32,7 +32,7 @@ logger = get_task_logger(__name__)
 log1 = logging.getLogger("tasks")
 
 
-# @task(max_retries=3,default_retry_delay=1 * 6)
+@task(max_retries=3,default_retry_delay=1 * 6)
 def import_one_file_to_statement_view(file_path, filename):
     if filename.endswith(".csv"):
         file_path = csv_to_xls(file_path)
