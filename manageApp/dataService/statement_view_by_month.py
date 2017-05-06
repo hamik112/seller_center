@@ -11,45 +11,44 @@ def create_statement_month(serial_number,obj):
     stores  = FilenameToStorename.objects.filter(serial_number=serial_number).first()
     if not stores:
         return None
-    Shipping_label_purchases = 0
-    Shipping_label_refunds = 0
-    carrier_shipping_label_adjustments = 0
-    Adjustments = 0
-    Refund_administration_fees = 0
-    refund_for_advertiser = 0
-    Failed_transfers_to_bank_account = 0
-    serial_number = stores.serial_number
-    legal_name = stores.manager
-    product_sales = 0.0
-    FBA_product_sales=0.0
-    shipping_credits = 0.0
-    gift_wrap_credits = 0.0
-    promotional_rebates=0.0
-    seller_fulfilled_selling_fees = 0.0
-    FBA_selling_fees = 0.0
-    fba_transaction_fees = 0.0
-    other_transaction_fees = 0.0
-    product_refund = 0.0
-    FBA_product_refund = 0.0
-    shipping_credits_refund = 0.0
-    gift_wrap_credits_refund = 0.0
-    promotional_rebates_refund = 0.0
-    selling_fee_refund = 0.0
-    fba_transaction_fee_refunds = 0.0
-    other_transaction_fee_refunds = 0.0
-    FBA_invenbry_credit = 0.0
-    chargebacks = 0.0
-    FBA_inventory_inbound_services_fees = 0.0
-    Service_fees = 0.0
-    cost_of_advertising = 0.0
-    a_to_z_guarantee_chaims = 0.0
-    Charges_to_credit_card = 0.0
-    transfers_to_bank_account_sum = 0.0
-
     for year in obj:
         obj_month = obj.get(year)
         for month in obj_month:
             statement_datas = obj_month.get(month)
+            Shipping_label_purchases = 0
+            Shipping_label_refunds = 0
+            carrier_shipping_label_adjustments = 0
+            Adjustments = 0
+            Refund_administration_fees = 0
+            refund_for_advertiser = 0
+            Failed_transfers_to_bank_account = 0
+            serial_number = stores.serial_number
+            legal_name = stores.manager
+            product_sales = 0.0
+            FBA_product_sales = 0.0
+            shipping_credits = 0.0
+            gift_wrap_credits = 0.0
+            promotional_rebates = 0.0
+            seller_fulfilled_selling_fees = 0.0
+            FBA_selling_fees = 0.0
+            fba_transaction_fees = 0.0
+            other_transaction_fees = 0.0
+            product_refund = 0.0
+            FBA_product_refund = 0.0
+            shipping_credits_refund = 0.0
+            gift_wrap_credits_refund = 0.0
+            promotional_rebates_refund = 0.0
+            selling_fee_refund = 0.0
+            fba_transaction_fee_refunds = 0.0
+            other_transaction_fee_refunds = 0.0
+            FBA_invenbry_credit = 0.0
+            chargebacks = 0.0
+            FBA_inventory_inbound_services_fees = 0.0
+            Service_fees = 0.0
+            cost_of_advertising = 0.0
+            a_to_z_guarantee_chaims = 0.0
+            Charges_to_credit_card = 0.0
+            transfers_to_bank_account_sum = 0.0
             for row in statement_datas:
                 type = row.type
                 fulfillment_field = row.fulfillment
