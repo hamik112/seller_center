@@ -139,7 +139,7 @@ def create_statement_month(serial_number,obj):
                     Charges_to_credit_card += float9
                 elif type == "Transfer":
                     transfers_to_bank_account_sum += float9
-
+            print product_sales,product_sales
             expense_subtotal_debits = seller_fulfilled_selling_fees+FBA_selling_fees+fba_transaction_fees+other_transaction_fees+\
                                       FBA_inventory_inbound_services_fees+Shipping_label_purchases+Service_fees+\
                                       Refund_administration_fees+cost_of_advertising
