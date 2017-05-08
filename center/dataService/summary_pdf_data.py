@@ -737,181 +737,406 @@ def generate_dict_cc(**param_dict):
     # print username, month, year, begin_date, end_date
     parmas = {"month":month, "year":year, "begin_date":begin_date, "end_date":end_date}
     store = FilenameToStorename.objects.filter(email=username).first()
-    svm = StatementViewMonth.objects.filter(year=year,month=month,serial_number=store.serial_number).first()
-    storename = store.storename
-    product_sales_number = number_format(svm.product_sales)
-    product_sales = {'number_length': oredits_number_len(product_sales_number),
-                     'number': product_sales_number}
 
-    product_refund_number = number_format(svm.product_refund)
-    product_refund = {'number_length': debits_number_len(product_refund_number),
-                      'number': product_refund_number}
+    timeRangeType = param_dict.get('timeRangeType','')
+    product_sales_number = 0.0
+    product_refund_number = 0.0
+    FBA_product_sales_number = 0.0
+    FBA_product_refund_number = 0.0
+    FBA_invenbry_credit_number = 0.0
+    shipping_credits_number = 0.0
+    shipping_credits_refund_number = 0.0
+    gift_wrap_credits_number = 0.0
+    gift_wrap_credits_refund_number = 0.0
+    promotional_rebates_number = 0.0
+    promotional_rebates_refund_number = 0.0
+    a_to_z_guarantee_chaims_number = 0.0
+    chargebacks_number = 0.0
+    income_subtotal_debits_number = 0.0
+    income_subtotal_credits_number = 0.0
+    seller_fulfilled_selling_fees_number = 0.0
+    FBA_selling_fees_number = 0.0
+    selling_fee_refund_number = 0.0
+    fba_transaction_fee_number = 0.0
+    fba_transaction_fee_refunds_number = 0.0
+    other_transaction_fees_number = 0.0
+    other_transaction_fee_refunds_number = 0.0
+    FBA_inventory_inbound_services_fees_number = 0.0
+    Shipping_label_purchases_number = 0.0
+    Shipping_label_refunds_number = 0.0
+    carrier_shipping_label_adjustments_number = 0.0
+    Service_fees_number = 0.0
+    Adjustments_number = 0.0
+    Refund_administration_fees_number = 0.0
+    cost_of_advertising_number = 0.0
+    refund_for_advertiser_number = 0.0
+    expense_subtotal_debits_number = 0.0
+    expense_subtotal_credits_number = 0.0
+    Income_number = 0.0
+    summaries_income_number = 0.0
+    Expenses_number = 0.0
+    summaries_expenses_number = 0.0
+    Charges_to_credit_card_number = 0.0
+    transfers_to_bank_account_sum_number = 0.0
+    Failed_transfers_to_bank_account_number = 0.0
+    Transfers_number = 0.0
+    subtotal_transfers_number = 0.0
+    summaries_transfers_number = 0.0
 
-    FBA_product_sales_number = number_format(svm.FBA_product_sales)
-    FBA_product_sales = {'number_length': oredits_number_len(FBA_product_sales_number),
-                         'number': FBA_product_sales_number}
+    if timeRangeType == "Monthly":
+        svm = StatementViewMonth.objects.filter(year=year,month=month,serial_number=store.serial_number).first()
+        storename = store.storename
+        product_sales_number = number_format(svm.product_sales)
+        product_sales = {'number_length': oredits_number_len(product_sales_number),
+                         'number': product_sales_number}
 
-    FBA_product_refund_number = number_format(svm.FBA_product_refund)
-    FBA_product_refund = {'number_length': debits_number_len(FBA_product_refund_number),
-                          'number': FBA_product_refund_number}
+        product_refund_number = number_format(svm.product_refund)
+        product_refund = {'number_length': debits_number_len(product_refund_number),
+                          'number': product_refund_number}
 
-    FBA_invenbry_credit_number = number_format(svm.FBA_invenbry_credit)
-    FBA_invenbry_credit = {'number_length': oredits_number_len(FBA_invenbry_credit_number),
-                           'number':FBA_invenbry_credit_number }
+        FBA_product_sales_number = number_format(svm.FBA_product_sales)
+        FBA_product_sales = {'number_length': oredits_number_len(FBA_product_sales_number),
+                             'number': FBA_product_sales_number}
 
-    shipping_credits_number = number_format(svm.shipping_credits)
-    shipping_credits = {'number_length': oredits_number_len(shipping_credits_number),
-                        'number':shipping_credits_number }
+        FBA_product_refund_number = number_format(svm.FBA_product_refund)
+        FBA_product_refund = {'number_length': debits_number_len(FBA_product_refund_number),
+                              'number': FBA_product_refund_number}
 
-    shipping_credits_refund_number = number_format(svm.shipping_credits_refund)
-    shipping_credits_refund = {'number_length': debits_number_len(shipping_credits_refund_number),
-                               'number': shipping_credits_refund_number}
+        FBA_invenbry_credit_number = number_format(svm.FBA_invenbry_credit)
+        FBA_invenbry_credit = {'number_length': oredits_number_len(FBA_invenbry_credit_number),
+                               'number':FBA_invenbry_credit_number }
 
-    gift_wrap_credits_number = number_format(svm.gift_wrap_credits)
-    gift_wrap_credits = {'number_length': oredits_number_len(gift_wrap_credits_number),
-                         'number': gift_wrap_credits_number}
+        shipping_credits_number = number_format(svm.shipping_credits)
+        shipping_credits = {'number_length': oredits_number_len(shipping_credits_number),
+                            'number':shipping_credits_number }
 
-    gift_wrap_credits_refund_number = number_format(svm.gift_wrap_credits_refund)
-    gift_wrap_credits_refund = {'number_length': debits_number_len(gift_wrap_credits_refund_number),
-                                'number': gift_wrap_credits_refund_number}
+        shipping_credits_refund_number = number_format(svm.shipping_credits_refund)
+        shipping_credits_refund = {'number_length': debits_number_len(shipping_credits_refund_number),
+                                   'number': shipping_credits_refund_number}
 
-    promotional_rebates_number = format(svm.promotional_rebates)
-    promotional_rebates = {'number_length': debits_number_len(promotional_rebates_number),
-                           'number': promotional_rebates_number}
+        gift_wrap_credits_number = number_format(svm.gift_wrap_credits)
+        gift_wrap_credits = {'number_length': oredits_number_len(gift_wrap_credits_number),
+                             'number': gift_wrap_credits_number}
 
-    promotional_rebates_refund_number = number_format(svm.promotional_rebates_refund)
-    promotional_rebates_refund = {'number_length': oredits_number_len(promotional_rebates_refund_number),
-                                  'number': promotional_rebates_refund_number}
+        gift_wrap_credits_refund_number = number_format(svm.gift_wrap_credits_refund)
+        gift_wrap_credits_refund = {'number_length': debits_number_len(gift_wrap_credits_refund_number),
+                                    'number': gift_wrap_credits_refund_number}
 
-    a_to_z_guarantee_chaims_number = number_format(svm.a_to_z_guarantee_chaims)
-    a_to_z_guarantee_chaims = {'number_length': debits_number_len(a_to_z_guarantee_chaims_number),
-                               'number': a_to_z_guarantee_chaims_number}
+        promotional_rebates_number = format(svm.promotional_rebates)
+        promotional_rebates = {'number_length': debits_number_len(promotional_rebates_number),
+                               'number': promotional_rebates_number}
 
-    chargebacks_number = number_format(svm.chargebacks)
-    chargebacks = {'number_length': debits_number_len(chargebacks_number),
-                   'number': chargebacks_number}
+        promotional_rebates_refund_number = number_format(svm.promotional_rebates_refund)
+        promotional_rebates_refund = {'number_length': oredits_number_len(promotional_rebates_refund_number),
+                                      'number': promotional_rebates_refund_number}
 
-    income_subtotal_debits_number = number_format(svm.income_subtotal_debits)
-    income_subtotal_debits = {'number_length': debits_number_len(income_subtotal_debits_number),
-                              'number': income_subtotal_debits_number}
+        a_to_z_guarantee_chaims_number = number_format(svm.a_to_z_guarantee_chaims)
+        a_to_z_guarantee_chaims = {'number_length': debits_number_len(a_to_z_guarantee_chaims_number),
+                                   'number': a_to_z_guarantee_chaims_number}
 
-    income_subtotal_credits_number = number_format(svm.income_subtotal_credits)
-    income_subtotal_credits = {'number_length': oredits_number_len(income_subtotal_credits_number),
-                               'number': income_subtotal_credits_number}
+        chargebacks_number = number_format(svm.chargebacks)
+        chargebacks = {'number_length': debits_number_len(chargebacks_number),
+                       'number': chargebacks_number}
 
-    seller_fulfilled_selling_fees_number = number_format(svm.seller_fulfilled_selling_fees)
-    seller_fulfilled_selling_fees = {'number_length': expense_debits_len(seller_fulfilled_selling_fees_number),
-                                     'number': seller_fulfilled_selling_fees_number}
+        income_subtotal_debits_number = number_format(svm.income_subtotal_debits)
+        income_subtotal_debits = {'number_length': debits_number_len(income_subtotal_debits_number),
+                                  'number': income_subtotal_debits_number}
 
-    FBA_selling_fees_number = number_format(svm.FBA_selling_fees)
-    FBA_selling_fees = {'number_length': expense_debits_len(FBA_selling_fees_number),
-                        'number': FBA_selling_fees_number}
+        income_subtotal_credits_number = number_format(svm.income_subtotal_credits)
+        income_subtotal_credits = {'number_length': oredits_number_len(income_subtotal_credits_number),
+                                   'number': income_subtotal_credits_number}
 
-    selling_fee_refund_number = number_format(svm.selling_fee_refund)
-    selling_fee_refund = {'number_length': expend_credicts_len(selling_fee_refund_number),
-                          'number': selling_fee_refund_number}
+        seller_fulfilled_selling_fees_number = number_format(svm.seller_fulfilled_selling_fees)
+        seller_fulfilled_selling_fees = {'number_length': expense_debits_len(seller_fulfilled_selling_fees_number),
+                                         'number': seller_fulfilled_selling_fees_number}
 
-    fba_transaction_fee_number =  number_format(svm.fba_transaction_fees)
-    fba_transaction_fees = {'number_length': expense_debits_len(fba_transaction_fee_number),
-                            'number':fba_transaction_fee_number}
+        FBA_selling_fees_number = number_format(svm.FBA_selling_fees)
+        FBA_selling_fees = {'number_length': expense_debits_len(FBA_selling_fees_number),
+                            'number': FBA_selling_fees_number}
 
-    fba_transaction_fee_refunds_number =  number_format(svm.fba_transaction_fee_refunds)
-    fba_transaction_fee_refunds = {'number_length': expend_credicts_len(fba_transaction_fee_refunds_number),
-                                   'number':fba_transaction_fee_refunds_number}
+        selling_fee_refund_number = number_format(svm.selling_fee_refund)
+        selling_fee_refund = {'number_length': expend_credicts_len(selling_fee_refund_number),
+                              'number': selling_fee_refund_number}
 
-    other_transaction_fees_number = number_format(svm.other_transaction_fees)
-    other_transaction_fees = {'number_length': expense_debits_len(other_transaction_fees_number),
-                              'number': other_transaction_fees_number}
+        fba_transaction_fee_number =  number_format(svm.fba_transaction_fees)
+        fba_transaction_fees = {'number_length': expense_debits_len(fba_transaction_fee_number),
+                                'number':fba_transaction_fee_number}
 
-    other_transaction_fee_refunds_number= number_format(svm.other_transaction_fee_refunds)
-    other_transaction_fee_refunds = {'number_length': expend_credicts_len(other_transaction_fee_refunds_number),
-                                     'number': other_transaction_fee_refunds_number}
+        fba_transaction_fee_refunds_number =  number_format(svm.fba_transaction_fee_refunds)
+        fba_transaction_fee_refunds = {'number_length': expend_credicts_len(fba_transaction_fee_refunds_number),
+                                       'number':fba_transaction_fee_refunds_number}
 
-    FBA_inventory_inbound_services_fees_number = number_format(svm.FBA_inventory_inbound_services_fees)
-    FBA_inventory_inbound_services_fees = {'number_length': expense_debits_len(FBA_inventory_inbound_services_fees_number),
-                                           'number':FBA_inventory_inbound_services_fees_number }
+        other_transaction_fees_number = number_format(svm.other_transaction_fees)
+        other_transaction_fees = {'number_length': expense_debits_len(other_transaction_fees_number),
+                                  'number': other_transaction_fees_number}
 
-    Shipping_label_purchases_number = number_format(svm.Shipping_label_purchases)
-    Shipping_label_purchases = {'number_length': expense_debits_len(Shipping_label_purchases_number),
-                                'number':Shipping_label_purchases_number }
+        other_transaction_fee_refunds_number= number_format(svm.other_transaction_fee_refunds)
+        other_transaction_fee_refunds = {'number_length': expend_credicts_len(other_transaction_fee_refunds_number),
+                                         'number': other_transaction_fee_refunds_number}
 
-    Shipping_label_refunds_number = number_format(svm.Shipping_label_refunds)
-    Shipping_label_refunds = {'number_length': expend_credicts_len(Shipping_label_refunds_number),
-                              'number': Shipping_label_refunds_number}
+        FBA_inventory_inbound_services_fees_number = number_format(svm.FBA_inventory_inbound_services_fees)
+        FBA_inventory_inbound_services_fees = {'number_length': expense_debits_len(FBA_inventory_inbound_services_fees_number),
+                                               'number':FBA_inventory_inbound_services_fees_number }
 
-    carrier_shipping_label_adjustments_number = number_format(svm.carrier_shipping_label_adjustments)
-    carrier_shipping_label_adjustments = {'number_length': expend_credicts_len(carrier_shipping_label_adjustments_number),
-                                          'number': carrier_shipping_label_adjustments_number}
+        Shipping_label_purchases_number = number_format(svm.Shipping_label_purchases)
+        Shipping_label_purchases = {'number_length': expense_debits_len(Shipping_label_purchases_number),
+                                    'number':Shipping_label_purchases_number }
 
-    Service_fees_number = number_format(svm.Service_fees)
-    Service_fees = {'number_length': expense_debits_len(Service_fees_number),
-                    'number':Service_fees_number}
+        Shipping_label_refunds_number = number_format(svm.Shipping_label_refunds)
+        Shipping_label_refunds = {'number_length': expend_credicts_len(Shipping_label_refunds_number),
+                                  'number': Shipping_label_refunds_number}
 
-    Adjustments_number = number_format(svm.Adjustments)
-    Adjustments = {'number_length': expend_credicts_len(Adjustments_number),
-                   'number':Adjustments_number}
+        carrier_shipping_label_adjustments_number = number_format(svm.carrier_shipping_label_adjustments)
+        carrier_shipping_label_adjustments = {'number_length': expend_credicts_len(carrier_shipping_label_adjustments_number),
+                                              'number': carrier_shipping_label_adjustments_number}
 
-    Refund_administration_fees_number = number_format(svm.Refund_administration_fees)
-    Refund_administration_fees = {'number_length': expense_debits_len(Refund_administration_fees_number),
-                                  'number': Refund_administration_fees_number}
+        Service_fees_number = number_format(svm.Service_fees)
+        Service_fees = {'number_length': expense_debits_len(Service_fees_number),
+                        'number':Service_fees_number}
 
-    cost_of_advertising_number = number_format(svm.cost_of_advertising)
-    cost_of_advertising = {'number_length': expense_debits_len(cost_of_advertising_number),
-                           'number': cost_of_advertising_number}
+        Adjustments_number = number_format(svm.Adjustments)
+        Adjustments = {'number_length': expend_credicts_len(Adjustments_number),
+                       'number':Adjustments_number}
 
-    refund_for_advertiser_number =  number_format(svm.refund_for_advertiser)
-    refund_for_advertiser = {'number_length': expend_credicts_len(refund_for_advertiser_number),
-                             'number':refund_for_advertiser_number}
+        Refund_administration_fees_number = number_format(svm.Refund_administration_fees)
+        Refund_administration_fees = {'number_length': expense_debits_len(Refund_administration_fees_number),
+                                      'number': Refund_administration_fees_number}
 
-    expense_subtotal_debits_number = number_format(svm.expense_subtotal_debits)
-    expense_subtotal_debits = {'number_length': expense_debits_len(expense_subtotal_debits_number),
-                               'number': expense_subtotal_debits_number}
+        cost_of_advertising_number = number_format(svm.cost_of_advertising)
+        cost_of_advertising = {'number_length': expense_debits_len(cost_of_advertising_number),
+                               'number': cost_of_advertising_number}
 
-    expense_subtotal_credits_number = number_format(svm.expense_subtotal_credits)
-    expense_subtotal_credits = {'number_length': expend_credicts_len(expense_subtotal_credits_number),
-                                'number': expense_subtotal_credits_number}
+        refund_for_advertiser_number =  number_format(svm.refund_for_advertiser)
+        refund_for_advertiser = {'number_length': expend_credicts_len(refund_for_advertiser_number),
+                                 'number':refund_for_advertiser_number}
 
-    Income_number = number_format(svm.Income)
-    Income = {'number_length': Income_len(Income_number),
-              'number':Income_number}
+        expense_subtotal_debits_number = number_format(svm.expense_subtotal_debits)
+        expense_subtotal_debits = {'number_length': expense_debits_len(expense_subtotal_debits_number),
+                                   'number': expense_subtotal_debits_number}
 
-    summaries_income_number = number_format(svm.summaries_income)
-    summaries_income = {'number_length': expend_credicts_len(summaries_income_number),
-                        'number':summaries_income_number }
+        expense_subtotal_credits_number = number_format(svm.expense_subtotal_credits)
+        expense_subtotal_credits = {'number_length': expend_credicts_len(expense_subtotal_credits_number),
+                                    'number': expense_subtotal_credits_number}
 
-    Expenses_number = number_format(svm.Expenses)
-    Expenses = {'number_length': Expenses_len(Expenses_number),
-                'number': Expenses_number}
+        Income_number = number_format(svm.Income)
+        Income = {'number_length': Income_len(Income_number),
+                  'number':Income_number}
 
-    summaries_expenses_number = number_format(svm.summaries_expenses)
-    summaries_expenses = {'number_length': expend_credicts_len(summaries_expenses_number),
-                          'number': summaries_expenses_number}
+        summaries_income_number = number_format(svm.summaries_income)
+        summaries_income = {'number_length': expend_credicts_len(summaries_income_number),
+                            'number':summaries_income_number }
 
-    Charges_to_credit_card_number = number_format(svm.Charges_to_credit_card)
-    Charges_to_credit_card = {'number_length': oredits_number_len(Charges_to_credit_card_number),
-                              'number':Charges_to_credit_card_number}
+        Expenses_number = number_format(svm.Expenses)
+        Expenses = {'number_length': Expenses_len(Expenses_number),
+                    'number': Expenses_number}
 
-    transfers_to_bank_account_sum_number = number_format(svm.transfers_to_bank_account_sum)
-    transfers_to_bank_account_sum = {'number_length': debits_number_len(transfers_to_bank_account_sum_number),
-                                     'number': transfers_to_bank_account_sum_number}
+        summaries_expenses_number = number_format(svm.summaries_expenses)
+        summaries_expenses = {'number_length': expend_credicts_len(summaries_expenses_number),
+                              'number': summaries_expenses_number}
 
-    Failed_transfers_to_bank_account_number = number_format(svm.Failed_transfers_to_bank_account)
-    Failed_transfers_to_bank_account = {'number_length': debits_number_len(Failed_transfers_to_bank_account_number),
-                                        'number': Failed_transfers_to_bank_account_number}
+        Charges_to_credit_card_number = number_format(svm.Charges_to_credit_card)
+        Charges_to_credit_card = {'number_length': oredits_number_len(Charges_to_credit_card_number),
+                                  'number':Charges_to_credit_card_number}
 
-    Transfers_number = number_format(svm.Transfers)
-    Transfers = {'number_length': Income_len(Transfers_number),
-                 'number': Transfers_number}
+        transfers_to_bank_account_sum_number = number_format(svm.transfers_to_bank_account_sum)
+        transfers_to_bank_account_sum = {'number_length': debits_number_len(transfers_to_bank_account_sum_number),
+                                         'number': transfers_to_bank_account_sum_number}
 
-    subtotal_transfers_number = number_format(svm.subtotal_transfers)
-    subtotal_transfers = {'number_length': oredits_number_len(subtotal_transfers_number),
-                          'number': subtotal_transfers_number}
+        Failed_transfers_to_bank_account_number = number_format(svm.Failed_transfers_to_bank_account)
+        Failed_transfers_to_bank_account = {'number_length': debits_number_len(Failed_transfers_to_bank_account_number),
+                                            'number': Failed_transfers_to_bank_account_number}
 
-    summaries_transfers_number = number_format(svm.summaries_transfers)
-    summaries_transfers = {'number_length': expend_credicts_len(summaries_transfers_number),
-                           'number':summaries_transfers_number}
-    legal_name = store.manager
+        Transfers_number = number_format(svm.Transfers)
+        Transfers = {'number_length': Income_len(Transfers_number),
+                     'number': Transfers_number}
 
+        subtotal_transfers_number = number_format(svm.subtotal_transfers)
+        subtotal_transfers = {'number_length': oredits_number_len(subtotal_transfers_number),
+                              'number': subtotal_transfers_number}
+
+        summaries_transfers_number = number_format(svm.summaries_transfers)
+        summaries_transfers = {'number_length': expend_credicts_len(summaries_transfers_number),
+                               'number':summaries_transfers_number}
+        legal_name = store.manager
+    else:
+        svms = StatementViewMonth.objects.filter(year=year, serial_number=store.serial_number)
+
+        for svm in svms:
+            storename = store.storename
+            product_sales_number += number_format(svm.product_sales)
+            product_sales = {'number_length': oredits_number_len(product_sales_number),
+                             'number': product_sales_number}
+
+            product_refund_number += number_format(svm.product_refund)
+            product_refund = {'number_length': debits_number_len(product_refund_number),
+                              'number': product_refund_number}
+
+            FBA_product_sales_number += number_format(svm.FBA_product_sales)
+            FBA_product_sales = {'number_length': oredits_number_len(FBA_product_sales_number),
+                                 'number': FBA_product_sales_number}
+
+            FBA_product_refund_number += number_format(svm.FBA_product_refund)
+            FBA_product_refund = {'number_length': debits_number_len(FBA_product_refund_number),
+                                  'number': FBA_product_refund_number}
+
+            FBA_invenbry_credit_number += number_format(svm.FBA_invenbry_credit)
+            FBA_invenbry_credit = {'number_length': oredits_number_len(FBA_invenbry_credit_number),
+                                   'number': FBA_invenbry_credit_number}
+
+            shipping_credits_number += number_format(svm.shipping_credits)
+            shipping_credits = {'number_length': oredits_number_len(shipping_credits_number),
+                                'number': shipping_credits_number}
+
+            shipping_credits_refund_number += number_format(svm.shipping_credits_refund)
+            shipping_credits_refund = {'number_length': debits_number_len(shipping_credits_refund_number),
+                                       'number': shipping_credits_refund_number}
+
+            gift_wrap_credits_number += number_format(svm.gift_wrap_credits)
+            gift_wrap_credits = {'number_length': oredits_number_len(gift_wrap_credits_number),
+                                 'number': gift_wrap_credits_number}
+
+            gift_wrap_credits_refund_number += number_format(svm.gift_wrap_credits_refund)
+            gift_wrap_credits_refund = {'number_length': debits_number_len(gift_wrap_credits_refund_number),
+                                        'number': gift_wrap_credits_refund_number}
+
+            promotional_rebates_number += format(svm.promotional_rebates)
+            promotional_rebates = {'number_length': debits_number_len(promotional_rebates_number),
+                                   'number': promotional_rebates_number}
+
+            promotional_rebates_refund_number += number_format(svm.promotional_rebates_refund)
+            promotional_rebates_refund = {'number_length': oredits_number_len(promotional_rebates_refund_number),
+                                          'number': promotional_rebates_refund_number}
+
+            a_to_z_guarantee_chaims_number += number_format(svm.a_to_z_guarantee_chaims)
+            a_to_z_guarantee_chaims = {'number_length': debits_number_len(a_to_z_guarantee_chaims_number),
+                                       'number': a_to_z_guarantee_chaims_number}
+
+            chargebacks_number += number_format(svm.chargebacks)
+            chargebacks = {'number_length': debits_number_len(chargebacks_number),
+                           'number': chargebacks_number}
+
+            income_subtotal_debits_number += number_format(svm.income_subtotal_debits)
+            income_subtotal_debits = {'number_length': debits_number_len(income_subtotal_debits_number),
+                                      'number': income_subtotal_debits_number}
+
+            income_subtotal_credits_number += number_format(svm.income_subtotal_credits)
+            income_subtotal_credits = {'number_length': oredits_number_len(income_subtotal_credits_number),
+                                       'number': income_subtotal_credits_number}
+
+            seller_fulfilled_selling_fees_number += number_format(svm.seller_fulfilled_selling_fees)
+            seller_fulfilled_selling_fees = {'number_length': expense_debits_len(seller_fulfilled_selling_fees_number),
+                                             'number': seller_fulfilled_selling_fees_number}
+
+            FBA_selling_fees_number += number_format(svm.FBA_selling_fees)
+            FBA_selling_fees = {'number_length': expense_debits_len(FBA_selling_fees_number),
+                                'number': FBA_selling_fees_number}
+
+            selling_fee_refund_number += number_format(svm.selling_fee_refund)
+            selling_fee_refund = {'number_length': expend_credicts_len(selling_fee_refund_number),
+                                  'number': selling_fee_refund_number}
+
+            fba_transaction_fee_number += number_format(svm.fba_transaction_fees)
+            fba_transaction_fees = {'number_length': expense_debits_len(fba_transaction_fee_number),
+                                    'number': fba_transaction_fee_number}
+
+            fba_transaction_fee_refunds_number += number_format(svm.fba_transaction_fee_refunds)
+            fba_transaction_fee_refunds = {'number_length': expend_credicts_len(fba_transaction_fee_refunds_number),
+                                           'number': fba_transaction_fee_refunds_number}
+
+            other_transaction_fees_number += number_format(svm.other_transaction_fees)
+            other_transaction_fees = {'number_length': expense_debits_len(other_transaction_fees_number),
+                                      'number': other_transaction_fees_number}
+
+            other_transaction_fee_refunds_number += number_format(svm.other_transaction_fee_refunds)
+            other_transaction_fee_refunds = {'number_length': expend_credicts_len(other_transaction_fee_refunds_number),
+                                             'number': other_transaction_fee_refunds_number}
+
+            FBA_inventory_inbound_services_fees_number += number_format(svm.FBA_inventory_inbound_services_fees)
+            FBA_inventory_inbound_services_fees = {
+                'number_length': expense_debits_len(FBA_inventory_inbound_services_fees_number),
+                'number': FBA_inventory_inbound_services_fees_number}
+
+            Shipping_label_purchases_number += number_format(svm.Shipping_label_purchases)
+            Shipping_label_purchases = {'number_length': expense_debits_len(Shipping_label_purchases_number),
+                                        'number': Shipping_label_purchases_number}
+
+            Shipping_label_refunds_number += number_format(svm.Shipping_label_refunds)
+            Shipping_label_refunds = {'number_length': expend_credicts_len(Shipping_label_refunds_number),
+                                      'number': Shipping_label_refunds_number}
+
+            carrier_shipping_label_adjustments_number += number_format(svm.carrier_shipping_label_adjustments)
+            carrier_shipping_label_adjustments = {
+                'number_length': expend_credicts_len(carrier_shipping_label_adjustments_number),
+                'number': carrier_shipping_label_adjustments_number}
+
+            Service_fees_number += number_format(svm.Service_fees)
+            Service_fees = {'number_length': expense_debits_len(Service_fees_number),
+                            'number': Service_fees_number}
+
+            Adjustments_number += number_format(svm.Adjustments)
+            Adjustments = {'number_length': expend_credicts_len(Adjustments_number),
+                           'number': Adjustments_number}
+
+            Refund_administration_fees_number += number_format(svm.Refund_administration_fees)
+            Refund_administration_fees = {'number_length': expense_debits_len(Refund_administration_fees_number),
+                                          'number': Refund_administration_fees_number}
+
+            cost_of_advertising_number += number_format(svm.cost_of_advertising)
+            cost_of_advertising = {'number_length': expense_debits_len(cost_of_advertising_number),
+                                   'number': cost_of_advertising_number}
+
+            refund_for_advertiser_number += number_format(svm.refund_for_advertiser)
+            refund_for_advertiser = {'number_length': expend_credicts_len(refund_for_advertiser_number),
+                                     'number': refund_for_advertiser_number}
+
+            expense_subtotal_debits_number += number_format(svm.expense_subtotal_debits)
+            expense_subtotal_debits = {'number_length': expense_debits_len(expense_subtotal_debits_number),
+                                       'number': expense_subtotal_debits_number}
+
+            expense_subtotal_credits_number += number_format(svm.expense_subtotal_credits)
+            expense_subtotal_credits = {'number_length': expend_credicts_len(expense_subtotal_credits_number),
+                                        'number': expense_subtotal_credits_number}
+
+            Income_number += number_format(svm.Income)
+            Income = {'number_length': Income_len(Income_number),
+                      'number': Income_number}
+
+            summaries_income_number += number_format(svm.summaries_income)
+            summaries_income = {'number_length': expend_credicts_len(summaries_income_number),
+                                'number': summaries_income_number}
+
+            Expenses_number += number_format(svm.Expenses)
+            Expenses = {'number_length': Expenses_len(Expenses_number),
+                        'number': Expenses_number}
+
+            summaries_expenses_number += number_format(svm.summaries_expenses)
+            summaries_expenses = {'number_length': expend_credicts_len(summaries_expenses_number),
+                                  'number': summaries_expenses_number}
+
+            Charges_to_credit_card_number += number_format(svm.Charges_to_credit_card)
+            Charges_to_credit_card = {'number_length': oredits_number_len(Charges_to_credit_card_number),
+                                      'number': Charges_to_credit_card_number}
+
+            transfers_to_bank_account_sum_number += number_format(svm.transfers_to_bank_account_sum)
+            transfers_to_bank_account_sum = {'number_length': debits_number_len(transfers_to_bank_account_sum_number),
+                                             'number': transfers_to_bank_account_sum_number}
+
+            Failed_transfers_to_bank_account_number += number_format(svm.Failed_transfers_to_bank_account)
+            Failed_transfers_to_bank_account = {'number_length': debits_number_len(Failed_transfers_to_bank_account_number),
+                                                'number': Failed_transfers_to_bank_account_number}
+
+            Transfers_number += number_format(svm.Transfers)
+            Transfers = {'number_length': Income_len(Transfers_number),
+                         'number': Transfers_number}
+
+            subtotal_transfers_number += number_format(svm.subtotal_transfers)
+            subtotal_transfers = {'number_length': oredits_number_len(subtotal_transfers_number),
+                                  'number': subtotal_transfers_number}
+
+            summaries_transfers_number += number_format(svm.summaries_transfers)
+            summaries_transfers = {'number_length': expend_credicts_len(summaries_transfers_number),
+                                   'number': summaries_transfers_number}
+            legal_name = store.manager
 
     return {"storename":storename,"legal_name": legal_name,"begin_date_str": begin_date_str, "end_date_str":end_date_str,
             "summaries_income": summaries_income,

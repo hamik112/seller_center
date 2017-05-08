@@ -104,7 +104,7 @@ class StatementViewData(object):
                 "end_item":end_item, "total_page": total_page, "next_page":next_page}
 
     def request_report(self):
-        if self.post_dict.get("reportType", "") == "Summary":    # 导出pdf
+        if self.reportType == "Summary":    # 导出pdf
             # cur_path = self.request.get_host()
             # pdf_url = "http://" + cur_path + "/summary-pdf/?"
             # pdf_url  +=  "year="+self.year+"&month="+self.month + \
@@ -232,7 +232,7 @@ class StatementViewData(object):
         params = {"username":self.username,"month":self.month,"year":self.year,
                   "begin_date_str":str(self.begin_date_str),
                   "end_date_str": str(self.end_date_str),
-                  "filename":output_file_name}
+                  "filename":output_file_name,'timeRangeType':self.timeRangeType}
         try:
             print "params = " , params
             output_file_create = create_pdf_from_html(**params)
