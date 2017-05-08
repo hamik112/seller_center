@@ -3,7 +3,7 @@ import  time
 import  os
 from django.conf import  settings
 from django.db.models import Q
-from manageApp.models import  UploadFileRecorde, StatementView, InventoryUploadRecorde
+from manageApp.models import  UploadFileRecorde, StatementView, InventoryUploadRecorde,StatementViewMonth
 from manageApp.dataService.dataImport import  StatementViewImport, InventoryReportImport
 from manageApp.dataService.tasks_util import update_file_statue
 from center.models import InventoryReportsData
@@ -179,9 +179,12 @@ def delete_file(ids, inventory=None):
         id_list = ids #删除上传记录的时候，传递的是id列表
         try:
             file_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("filename",flat=True)
+            file_list_serial_number = UploadFileRecorde.objects.filter(id__in=id_list).values_list("serial_number", flat=True)
             file_path_list = UploadFileRecorde.objects.filter(id__in=id_list).values_list("file_path",flat=True)
+
             if file_list and file_path_list:
                 StatementView.objects.filter(filename__in=file_list).delete()
+                StatementViewMonth.objects.filter(serial_number__in=file_list_serial_number).delete()
                 UploadFileRecorde.objects.filter(id__in=id_list).delete()
             for file_path in file_path_list:
                 os.remove(file_path)
