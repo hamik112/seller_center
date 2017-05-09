@@ -70,3 +70,14 @@ def json_encode(data):
 
     ret = _any(data)
     return json.dumps(ret)
+
+
+def str_to_float(string):
+    if not string:
+        return 0.0
+    else:
+        try:
+            string = str(string)
+            return float(string.replace(',',''))
+        except:
+            return 0.0
