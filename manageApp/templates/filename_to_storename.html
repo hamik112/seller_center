@@ -516,9 +516,10 @@ function initTable(){
         var password = $("[name='password']").val()
         var manager = $("[name='manager']").val();
         var csrf_token = $("[name='csrfmiddlewaretoken']").val();
+        var payment_time = $("[name='payment_time']").val();
         post_dict = {"action_type":action_type, "serial_number": serial_number,
             "storename":storename, "email": email, "is_update": is_update,"manager":manager,
-            "password": password, "csrfmiddlewaretoken":csrf_token};
+            "password": password,'payment_time':payment_time,"csrfmiddlewaretoken":csrf_token};
         $.ajax({
             url: "/manage/filename-to-storename/",
             type: "POST",
