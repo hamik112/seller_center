@@ -117,6 +117,7 @@ class FilenameStoreName(object):
 
     def add_line(self, update=None, **params):
         # print "update: ",update
+        params['payment_time'] = datetime.datetime.strptime(params.get('payment_time'),'%Y-%m-%d').replace(tzinfo=pytz.UTC)
         fts = FilenameToStorename(**params)
         statue, msg = 0, ""
         params["password"] = "starmerx"
